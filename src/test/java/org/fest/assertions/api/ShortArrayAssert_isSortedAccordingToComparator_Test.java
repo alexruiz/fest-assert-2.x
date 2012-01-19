@@ -33,7 +33,6 @@ import org.fest.assertions.internal.ShortArrays;
  */
 public class ShortArrayAssert_isSortedAccordingToComparator_Test {
 
-  @SuppressWarnings("unchecked")
   private Comparator<? extends Short> comparator = mock(Comparator.class);
 
   @Test

@@ -33,7 +33,6 @@ import org.fest.assertions.internal.CharArrays;
  */
 public class CharArrayAssert_isSortedAccordingToComparator_Test {
 
-  @SuppressWarnings("unchecked")
   private Comparator<? extends Character> comparator = mock(Comparator.class);
 
   @Test

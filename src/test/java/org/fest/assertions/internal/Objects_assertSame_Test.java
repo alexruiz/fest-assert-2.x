@@ -51,7 +51,9 @@ public class Objects_assertSame_Test {
     try {
       objects.assertSame(info, a, e);
       fail();
-    } catch (AssertionError err) {}
+    } catch (AssertionError err) {
+    	/* we will check this exception just after this block */
+    }
     verify(failures).failure(info, shouldBeSame(a, e));
   }
 }

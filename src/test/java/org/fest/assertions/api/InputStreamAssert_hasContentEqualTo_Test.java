@@ -14,7 +14,6 @@
  */
 package org.fest.assertions.api;
 
-import static junit.framework.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 

@@ -32,12 +32,14 @@ public class Join_constructor_with_Collection_Test {
 
   @Rule public ExpectedException thrown = none();
 
+  @SuppressWarnings("unused")
   @Test public void should_throw_error_if_Collection_is_null() {
     thrown.expectNullPointerException("The given conditions should not be null");
     Collection<Condition<Object>> conditions = null;
     new ConcreteJoin(conditions);
   }
 
+  @SuppressWarnings("unused")
   @Test public void should_throw_error_if_Collection_contains_nulls() {
     thrown.expectNullPointerException("The given conditions should not have null entries");
     Collection<Condition<Object>> conditions = new ArrayList<Condition<Object>>();

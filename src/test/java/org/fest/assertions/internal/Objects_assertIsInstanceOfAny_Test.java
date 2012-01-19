@@ -84,7 +84,9 @@ public class Objects_assertIsInstanceOfAny_Test {
     try {
       objects.assertIsInstanceOfAny(info, actual, types);
       fail();
-    } catch (AssertionError err) {}
+    } catch (AssertionError err) {
+    	/* we will check this exception just after this block */
+    }
     verify(failures).failure(info, shouldBeInstanceOfAny(actual, types));
   }
 }

@@ -42,6 +42,7 @@ public class Condition_constructor_with_description_Test {
     assertSame(d, condition.description);
   }
 
+  @SuppressWarnings("unused")
   @Test public void should_throw_error_if_description_is_null() {
     thrown.expectNullPointerException(descriptionIsNull());
     new Condition<Object>((Description) null) {

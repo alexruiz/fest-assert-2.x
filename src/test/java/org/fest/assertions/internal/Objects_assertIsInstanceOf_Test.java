@@ -68,7 +68,9 @@ public class Objects_assertIsInstanceOf_Test {
     try {
       objects.assertIsInstanceOf(info, actual, String.class);
       fail();
-    } catch (AssertionError err) {}
+    } catch (AssertionError err) {
+    	/* we will check this exception just after this block */
+    }
     verify(failures).failure(info, shouldBeInstance(actual, String.class));
   }
 }

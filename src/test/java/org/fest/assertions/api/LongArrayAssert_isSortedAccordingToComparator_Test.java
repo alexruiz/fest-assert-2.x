@@ -33,7 +33,6 @@ import org.fest.assertions.internal.LongArrays;
  */
 public class LongArrayAssert_isSortedAccordingToComparator_Test {
 
-  @SuppressWarnings("unchecked")
   private Comparator<? extends Long> comparator = mock(Comparator.class);
 
   @Test

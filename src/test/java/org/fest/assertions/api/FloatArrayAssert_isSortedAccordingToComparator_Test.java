@@ -33,7 +33,6 @@ import org.fest.assertions.internal.FloatArrays;
  */
 public class FloatArrayAssert_isSortedAccordingToComparator_Test {
 
-  @SuppressWarnings("unchecked")
   private Comparator<? extends Float> comparator = mock(Comparator.class);
 
   @Test
