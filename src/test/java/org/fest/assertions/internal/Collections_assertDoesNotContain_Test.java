@@ -33,7 +33,7 @@ import org.fest.assertions.test.ExpectedException;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link Collections#assertDoesNotContain(AssertionInfo, Collection, Object[])}</code>.
+ * Tests for <code>{@link Iterables#assertDoesNotContain(AssertionInfo, Collection, Object[])}</code>.
  *
  * @author Alex Ruiz
  */
@@ -44,7 +44,7 @@ public class Collections_assertDoesNotContain_Test {
   @Rule public ExpectedException thrown = none();
 
   private Failures failures;
-  private Collections collections;
+  private Iterables collections;
 
   @BeforeClass public static void setUpOnce() {
     actual = list("Luke", "Yoda", "Leia");
@@ -52,7 +52,7 @@ public class Collections_assertDoesNotContain_Test {
 
   @Before public void setUp() {
     failures = spy(new Failures());
-    collections = new Collections();
+    collections = new Iterables();
     collections.failures = failures;
   }
 
@@ -64,9 +64,8 @@ public class Collections_assertDoesNotContain_Test {
     collections.assertDoesNotContain(someInfo(), actual, array("Han", "Han", "Anakin"));
   }
 
-  @Test public void should_throw_error_if_array_of_values_to_look_for_is_empty() {
-    thrown.expectIllegalArgumentException(valuesToLookForIsEmpty());
-    collections.assertDoesNotContain(someInfo(), actual, emptyArray());
+  @Test public void should_pass_if_actual_and_expected_are_empty() {
+    collections.assertDoesNotContain(someInfo(), list(), emptyArray());
   }
 
   @Test public void should_throw_error_if_array_of_values_to_look_for_is_null() {
@@ -90,4 +89,17 @@ public class Collections_assertDoesNotContain_Test {
     }
     failBecauseExpectedAssertionErrorWasNotThrown();
   }
+  
+  @Test public void should_pass_if_actual_is_not_empty_and_expected_is_empty() {
+	AssertionInfo info = someInfo();
+	Object[] expected = emptyArray();
+    collections.assertDoesNotContain(info, actual, expected);
+  }
+
+  @Test public void should_pass_if_actual_is_empty_and_expected_is_not() {
+	AssertionInfo info = someInfo();
+	List<String> actual = list();
+    collections.assertDoesNotContain(info, actual, array("Luke"));
+  }
+
 }

@@ -20,22 +20,22 @@ import static org.mockito.Mockito.*;
 
 import org.junit.*;
 
-import org.fest.assertions.internal.Collections;
+import org.fest.assertions.internal.Iterables;
 
 /**
- * Tests for <code>{@link AbstractCollectionAssert#containsNull()}</code>.
+ * Tests for <code>{@link AbstractIterableAssert#containsNull()}</code>.
  *
  * @author Joel Costigliola
  */
 public class AbstractCollectionAssert_containsNull_Test {
 
-  private Collections collections;
+  private Iterables collections;
   private ConcreteCollectionAssert assertions;
 
   @Before public void setUp() {
-    collections = mock(Collections.class);
+    collections = mock(Iterables.class);
     assertions = new ConcreteCollectionAssert(emptyList());
-    assertions.collections = collections;
+    assertions.iterables = collections;
   }
 
   @Test public void should_verify_that_actual_contains_null() {

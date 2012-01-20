@@ -25,9 +25,9 @@ import java.util.Collection;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public class CollectionAssert extends AbstractCollectionAssert<CollectionAssert, Collection<?>>  {
+public class IterableAssert extends AbstractIterableAssert<IterableAssert, Iterable<?>>  {
 
-  protected CollectionAssert(Collection<?> actual) {
-    super(actual, CollectionAssert.class);
+  protected IterableAssert(Iterable<?> actual) {
+    super(actual, IterableAssert.class);
   }
 }

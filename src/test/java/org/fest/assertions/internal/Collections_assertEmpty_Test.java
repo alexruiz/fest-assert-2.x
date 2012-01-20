@@ -30,7 +30,7 @@ import org.fest.assertions.test.ExpectedException;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link Collections#assertEmpty(AssertionInfo, Collection)}</code>.
+ * Tests for <code>{@link Iterables#assertEmpty(AssertionInfo, Collection)}</code>.
  *
  * @author Alex Ruiz
  */
@@ -39,11 +39,11 @@ public class Collections_assertEmpty_Test {
   @Rule public ExpectedException thrown = none();
 
   private Failures failures;
-  private Collections collections;
+  private Iterables collections;
 
   @Before public void setUp() {
     failures = spy(new Failures());
-    collections = new Collections();
+    collections = new Iterables();
     collections.failures = failures;
   }
 

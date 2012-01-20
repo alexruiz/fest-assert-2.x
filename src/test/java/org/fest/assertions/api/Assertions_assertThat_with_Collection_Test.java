@@ -30,13 +30,13 @@ import org.junit.Test;
 public class Assertions_assertThat_with_Collection_Test {
 
   @Test public void should_create_Assert() {
-    CollectionAssert assertions = Assertions.assertThat(emptySet());
+    IterableAssert assertions = Assertions.assertThat(emptySet());
     assertNotNull(assertions);
   }
 
   @Test public void should_pass_actual() {
     Collection<String> names = set("Luke");
-    CollectionAssert assertions = Assertions.assertThat(names);
+    IterableAssert assertions = Assertions.assertThat(names);
     assertSame(names, assertions.actual);
   }
 }

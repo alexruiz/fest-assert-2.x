@@ -27,7 +27,7 @@ import org.fest.assertions.core.AssertionInfo;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link Collections#assertNullOrEmpty(AssertionInfo, Collection)}</code>.
+ * Tests for <code>{@link Iterables#assertNullOrEmpty(AssertionInfo, Collection)}</code>.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
@@ -35,11 +35,11 @@ import org.junit.*;
 public class Collections_assertNullOrEmpty_Test {
 
   private Failures failures;
-  private Collections collections;
+  private Iterables collections;
 
   @Before public void setUp() {
     failures = spy(new Failures());
-    collections = new Collections();
+    collections = new Iterables();
     collections.failures = failures;
   }
 

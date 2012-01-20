@@ -31,7 +31,7 @@ import org.fest.assertions.core.AssertionInfo;
 import org.fest.assertions.test.ExpectedException;
 
 /**
- * Tests for <code>{@link Collections#assertDoesNotContainNull(AssertionInfo, Collection)}</code>.
+ * Tests for <code>{@link Iterables#assertDoesNotContainNull(AssertionInfo, Collection)}</code>.
  * 
  * @author Joel Costigliola
  */

@@ -19,23 +19,23 @@ import static junit.framework.Assert.assertSame;
 import static org.fest.util.Arrays.array;
 import static org.mockito.Mockito.*;
 
-import org.fest.assertions.internal.Collections;
+import org.fest.assertions.internal.Iterables;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link AbstractCollectionAssert#endsWith(Object...)}</code>.
+ * Tests for <code>{@link AbstractIterableAssert#endsWith(Object...)}</code>.
  *
  * @author Alex Ruiz
  */
 public class AbstractCollectionAssert_endsWith_Test {
 
-  private Collections collections;
+  private Iterables collections;
   private ConcreteCollectionAssert assertions;
 
   @Before public void setUp() {
-    collections = mock(Collections.class);
+    collections = mock(Iterables.class);
     assertions = new ConcreteCollectionAssert(emptyList());
-    assertions.collections = collections;
+    assertions.iterables = collections;
   }
 
   @Test public void should_verify_that_actual_ends_with_sequence() {

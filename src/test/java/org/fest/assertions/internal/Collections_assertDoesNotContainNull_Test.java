@@ -31,7 +31,7 @@ import org.fest.assertions.core.AssertionInfo;
 import org.fest.assertions.test.ExpectedException;
 
 /**
- * Tests for <code>{@link Collections#assertDoesNotContainNull(AssertionInfo, Collection)}</code>.
+ * Tests for <code>{@link Iterables#assertDoesNotContainNull(AssertionInfo, Collection)}</code>.
  *
  * @author Joel Costigliola
  */
@@ -41,12 +41,12 @@ public class Collections_assertDoesNotContainNull_Test {
 
   private List<String> actual;
   private Failures failures;
-  private Collections collections;
+  private Iterables collections;
 
   @Before public void setUp() {
     actual = list("Luke", "Yoda");
     failures = spy(new Failures());
-    collections = new Collections();
+    collections = new Iterables();
     collections.failures = failures;
   }
 

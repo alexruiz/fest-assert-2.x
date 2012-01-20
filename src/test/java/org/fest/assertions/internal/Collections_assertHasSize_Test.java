@@ -29,7 +29,7 @@ import org.fest.assertions.test.ExpectedException;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link Collections#assertHasSize(AssertionInfo, Collection, int)}</code>.
+ * Tests for <code>{@link Iterables#assertHasSize(AssertionInfo, Collection, int)}</code>.
  *
  * @author Alex Ruiz
  */
@@ -38,11 +38,11 @@ public class Collections_assertHasSize_Test {
   @Rule public ExpectedException thrown = none();
 
   private Failures failures;
-  private Collections collections;
+  private Iterables collections;
 
   @Before public void setUp() {
     failures = spy(new Failures());
-    collections = new Collections();
+    collections = new Iterables();
     collections.failures = failures;
   }
 

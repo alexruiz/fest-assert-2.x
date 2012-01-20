@@ -26,13 +26,14 @@ import static org.fest.util.Collections.list;
 import static org.mockito.Mockito.*;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.fest.assertions.core.AssertionInfo;
 import org.fest.assertions.test.ExpectedException;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link Collections#assertContainsSequence(AssertionInfo, Collection, Object[])}</code>.
+ * Tests for <code>{@link Iterables#assertContainsSequence(AssertionInfo, Collection, Object[])}</code>.
  *
  * @author Alex Ruiz
  */
@@ -43,7 +44,7 @@ public class Collections_assertContainsSequence_Test {
   @Rule public ExpectedException thrown = none();
 
   private Failures failures;
-  private Collections collections;
+  private Iterables collections;
 
   @BeforeClass public static void setUpOnce() {
     actual = list("Yoda", "Luke", "Leia", "Obi-Wan");
@@ -51,7 +52,7 @@ public class Collections_assertContainsSequence_Test {
 
   @Before public void setUp() {
     failures = spy(new Failures());
-    collections = new Collections();
+    collections = new Iterables();
     collections.failures = failures;
   }
 
@@ -60,9 +61,8 @@ public class Collections_assertContainsSequence_Test {
     collections.assertContainsSequence(someInfo(), actual, null);
   }
 
-  @Test public void should_throw_error_if_sequence_is_empty() {
-    thrown.expectIllegalArgumentException(valuesToLookForIsEmpty());
-    collections.assertContainsSequence(someInfo(), actual, emptyArray());
+  @Test public void should_pass_if_actual_and_expected_are_empty() {
+    collections.assertContainsSequence(someInfo(), list(), emptyArray());
   }
 
   @Test public void should_fail_if_actual_is_null() {
@@ -117,4 +117,23 @@ public class Collections_assertContainsSequence_Test {
   @Test public void should_pass_if_actual_and_sequence_are_equal() {
     collections.assertContainsSequence(someInfo(), actual, array("Yoda", "Luke", "Leia", "Obi-Wan"));
   }
+  
+  @Test public void should_pass_if_actual_is_not_empty_and_expected_is_empty() {
+	AssertionInfo info = someInfo();
+	collections.assertContainsSequence(info, actual, emptyArray());
+  }
+
+  @Test public void should_fail_if_actual_is_empty_and_expected_is_not() {
+	AssertionInfo info = someInfo();
+	List<String> actual = list();
+	Object[] sequence = { "Luke", "Leia", "Han" };
+	try {
+	  collections.assertContainsSequence(info, actual, sequence);
+	} catch (AssertionError e) {
+	  verify(failures).failure(info, shouldContainSequence(actual, sequence));
+	  return;
+	}
+	failBecauseExpectedAssertionErrorWasNotThrown();
+   }
+  
 }
