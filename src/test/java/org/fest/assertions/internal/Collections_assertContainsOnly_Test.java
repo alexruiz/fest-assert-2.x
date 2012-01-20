@@ -33,7 +33,7 @@ import org.fest.assertions.test.ExpectedException;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link Collections#assertContainsOnly(AssertionInfo, Collection, Object[])}</code>.
+ * Tests for <code>{@link Iterables#assertContainsOnly(AssertionInfo, Collection, Object[])}</code>.
  *
  * @author Alex Ruiz
  */
@@ -44,12 +44,12 @@ public class Collections_assertContainsOnly_Test {
 
   private List<String> actual;
   private Failures failures;
-  private Collections collections;
+  private Iterables collections;
 
   @Before public void setUp() {
     actual = list("Luke", "Yoda", "Leia");
     failures = spy(new Failures());
-    collections = new Collections();
+    collections = new Iterables();
     collections.failures = failures;
   }
 
@@ -70,11 +70,35 @@ public class Collections_assertContainsOnly_Test {
     collections.assertContainsOnly(someInfo(), actual, array("Luke", "Luke", "Luke", "Yoda", "Leia"));
   }
 
-  @Test public void should_throw_error_if_array_of_values_to_look_for_is_empty() {
-    thrown.expectIllegalArgumentException(valuesToLookForIsEmpty());
-    collections.assertContainsOnly(someInfo(), actual, emptyArray());
+  @Test public void should_pass_if_actual_and_expected_are_empty() {
+    collections.assertContainsOnly(someInfo(), emptyList(), emptyArray());
   }
 
+  @Test public void should_fail_if_actual_is_not_empty_and_expected_is_empty() {
+	AssertionInfo info = someInfo();
+	Object[] expected = emptyArray();
+	try {
+      collections.assertContainsOnly(info, actual, expected);
+    } catch (AssertionError e) {
+      verify(failures).failure(info, shouldContainOnly(actual, expected, set(), set("Luke", "Yoda", "Leia")));
+      return;
+    }
+    failBecauseExpectedAssertionErrorWasNotThrown();
+  }
+
+  @Test public void should_fail_if_actual_is_empty_and_expected_is_not() {
+	AssertionInfo info = someInfo();
+	List<String> actual = list();
+	String[] expected = array("Luke");
+	try {
+      collections.assertContainsOnly(info, actual, expected);
+    } catch (AssertionError e) {
+      verify(failures).failure(info, shouldContainOnly(actual, expected, set("Luke"), set()));
+      return;
+    }
+    failBecauseExpectedAssertionErrorWasNotThrown();
+  }
+  
   @Test public void should_throw_error_if_array_of_values_to_look_for_is_null() {
     thrown.expectNullPointerException(valuesToLookForIsNull());
     collections.assertContainsOnly(someInfo(), emptyList(), null);

@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.fest.assertions.internal.Lists;
 
 /**
- * Tests for <code>{@link AbstractCollectionAssert#isSorted()}</code>.
+ * Tests for <code>{@link AbstractIterableAssert#isSorted()}</code>.
  *
  * @author Joel Costigliola
  */

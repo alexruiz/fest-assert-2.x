@@ -19,7 +19,7 @@ import java.util.Collection;
 /**
  * @author Alex Ruiz
  */
-public class ConcreteCollectionAssert extends AbstractCollectionAssert<ConcreteCollectionAssert, Collection<?>> {
+public class ConcreteCollectionAssert extends AbstractIterableAssert<ConcreteCollectionAssert, Collection<?>> {
 
   public ConcreteCollectionAssert(Collection<?> actual) {
     super(actual, ConcreteCollectionAssert.class);

@@ -33,7 +33,6 @@ import org.fest.assertions.internal.BooleanArrays;
  */
 public class BooleanArrayAssert_isSortedAccordingToComparator_Test {
 
-  @SuppressWarnings("unchecked")
   private Comparator<? extends Boolean> comparator = mock(Comparator.class);
 
   @Test

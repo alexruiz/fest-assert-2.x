@@ -18,23 +18,23 @@ import static java.util.Collections.emptyList;
 import static junit.framework.Assert.assertSame;
 import static org.mockito.Mockito.*;
 
-import org.fest.assertions.internal.Collections;
+import org.fest.assertions.internal.Iterables;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link AbstractCollectionAssert#containsOnly(Object...)}</code>.
+ * Tests for <code>{@link AbstractIterableAssert#containsOnly(Object...)}</code>.
  *
  * @author Alex Ruiz
  */
 public class AbstractCollectionAssert_containsOnly_Test {
 
-  private Collections collections;
+  private Iterables collections;
   private ConcreteCollectionAssert assertions;
 
   @Before public void setUp() {
-    collections = mock(Collections.class);
+    collections = mock(Iterables.class);
     assertions = new ConcreteCollectionAssert(emptyList());
-    assertions.collections = collections;
+    assertions.iterables = collections;
   }
 
   @Test public void should_verify_that_actual_contains_given_values_only() {

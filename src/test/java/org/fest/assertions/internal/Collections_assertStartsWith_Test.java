@@ -26,13 +26,14 @@ import static org.fest.util.Collections.list;
 import static org.mockito.Mockito.*;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.fest.assertions.core.AssertionInfo;
 import org.fest.assertions.test.ExpectedException;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link Collections#assertStartsWith(AssertionInfo, Collection, Object[])}</code>.
+ * Tests for <code>{@link Iterables#assertStartsWith(AssertionInfo, Collection, Object[])}</code>.
  *
  * @author Alex Ruiz
  */
@@ -43,7 +44,7 @@ public class Collections_assertStartsWith_Test {
   @Rule public ExpectedException thrown = none();
 
   private Failures failures;
-  private Collections collections;
+  private Iterables collections;
 
   @BeforeClass public static void setUpOnce() {
     actual = list("Yoda", "Luke", "Leia", "Obi-Wan");
@@ -51,7 +52,7 @@ public class Collections_assertStartsWith_Test {
 
   @Before public void setUp() {
     failures = spy(new Failures());
-    collections = new Collections();
+    collections = new Iterables();
     collections.failures = failures;
   }
 
@@ -60,9 +61,8 @@ public class Collections_assertStartsWith_Test {
     collections.assertStartsWith(someInfo(), actual, null);
   }
 
-  @Test public void should_throw_error_if_sequence_is_empty() {
-    thrown.expectIllegalArgumentException(valuesToLookForIsEmpty());
-    collections.assertStartsWith(someInfo(), actual, emptyArray());
+  @Test public void should_pass_if_actual_and_expected_are_empty() {
+    collections.assertStartsWith(someInfo(), list(), emptyArray());
   }
 
   @Test public void should_fail_if_actual_is_null() {
@@ -116,5 +116,24 @@ public class Collections_assertStartsWith_Test {
 
   @Test public void should_pass_if_actual_and_sequence_are_equal() {
     collections.assertStartsWith(someInfo(), actual, array("Yoda", "Luke", "Leia", "Obi-Wan"));
+  }
+  
+  @Test public void should_pass_if_actual_is_not_empty_and_expected_is_empty() {
+	AssertionInfo info = someInfo();
+	Object[] sequence = emptyArray();
+    collections.assertStartsWith(info, actual, sequence);
+  }
+
+  @Test public void should_fail_if_actual_is_empty_and_expected_is_not() {
+	AssertionInfo info = someInfo();
+	List<String> actual = list();
+	String[] sequence = array("Luke");
+	try {
+      collections.assertStartsWith(info, actual, sequence);
+    } catch (AssertionError e) {
+    	verify(failures).failure(info, shouldStartWith(actual, sequence));
+      return;
+    }
+    failBecauseExpectedAssertionErrorWasNotThrown();
   }
 }

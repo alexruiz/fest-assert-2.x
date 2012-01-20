@@ -32,7 +32,7 @@ import org.fest.assertions.test.ExpectedException;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link Collections#assertContains(AssertionInfo, Collection, Object[])}</code>.
+ * Tests for <code>{@link Iterables#assertContains(AssertionInfo, Collection, Object[])}</code>.
  *
  * @author Alex Ruiz
  */
@@ -42,12 +42,12 @@ public class Collections_assertContains_Test {
 
   private List<String> actual;
   private Failures failures;
-  private Collections collections;
+  private Iterables collections;
 
   @Before public void setUp() {
     actual = list("Luke", "Yoda", "Leia");
     failures = spy(new Failures());
-    collections = new Collections();
+    collections = new Iterables();
     collections.failures = failures;
   }
 
@@ -72,9 +72,8 @@ public class Collections_assertContains_Test {
     collections.assertContains(someInfo(), actual, array("Luke", "Luke"));
   }
 
-  @Test public void should_throw_error_if_array_of_values_to_look_for_is_empty() {
-    thrown.expectIllegalArgumentException(valuesToLookForIsEmpty());
-    collections.assertContains(someInfo(), actual, emptyArray());
+  @Test public void should_pass_if_actual_and_expected_are_empty() {
+    collections.assertContains(someInfo(), list(), emptyArray());
   }
 
   @Test public void should_throw_error_if_array_of_values_to_look_for_is_null() {
@@ -98,4 +97,24 @@ public class Collections_assertContains_Test {
     }
     failBecauseExpectedAssertionErrorWasNotThrown();
   }
+  
+  @Test public void should_pass_if_actual_is_not_empty_and_expected_is_empty() {
+	AssertionInfo info = someInfo();
+	Object[] expected = emptyArray();
+    collections.assertContains(info, actual, expected);
+  }
+
+  @Test public void should_fail_if_actual_is_empty_and_expected_is_not() {
+	AssertionInfo info = someInfo();
+	List<String> actual = list();
+	String[] expected = array("Luke");
+	try {
+      collections.assertContains(info, actual, expected);
+    } catch (AssertionError e) {
+      verify(failures).failure(info, shouldContain(actual, expected, set("Luke")));
+      return;
+    }
+    failBecauseExpectedAssertionErrorWasNotThrown();
+  }
+  
 }

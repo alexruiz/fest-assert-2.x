@@ -286,7 +286,6 @@ class Arrays {
     }
   }
 
-  @SuppressWarnings("unchecked")
   private static <T> List<T> asList(Object array) {
     if (array == null) return null;
     if (!isArray(array)) throw new IllegalArgumentException("The object should be an array");

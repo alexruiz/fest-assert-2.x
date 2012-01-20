@@ -35,7 +35,9 @@ class ConstructorInvoker {
     } finally {
       try {
         setAccessible(constructor, accessible);
-      } catch (RuntimeException e) {}
+      } catch (RuntimeException e) {
+    	  /* if can't fail because we've done the same 4 lines before */
+      }
     }
   }
 

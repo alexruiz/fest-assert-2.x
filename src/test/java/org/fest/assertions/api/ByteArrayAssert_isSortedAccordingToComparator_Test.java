@@ -33,7 +33,6 @@ import org.fest.assertions.internal.ByteArrays;
  */
 public class ByteArrayAssert_isSortedAccordingToComparator_Test {
 
-  @SuppressWarnings("unchecked")
   private Comparator<? extends Byte> comparator = mock(Comparator.class);
 
   @Test

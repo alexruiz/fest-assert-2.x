@@ -33,7 +33,6 @@ import org.fest.assertions.internal.DoubleArrays;
  */
 public class DoubleArrayAssert_isSortedAccordingToComparator_Test {
 
-  @SuppressWarnings("unchecked")
   private Comparator<? extends Double> comparator = mock(Comparator.class);
 
   @Test

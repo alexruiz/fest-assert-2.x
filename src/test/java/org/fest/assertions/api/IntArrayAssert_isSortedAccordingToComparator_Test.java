@@ -33,7 +33,6 @@ import org.fest.assertions.internal.IntArrays;
  */
 public class IntArrayAssert_isSortedAccordingToComparator_Test {
 
-  @SuppressWarnings("unchecked")
   private Comparator<? extends Integer> comparator = mock(Comparator.class);
 
   @Test

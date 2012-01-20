@@ -17,7 +17,7 @@ package org.fest.assertions.api;
 import java.util.Collection;
 
 import org.fest.assertions.core.ObjectEnumerableAssert;
-import org.fest.assertions.internal.Collections;
+import org.fest.assertions.internal.Iterables;
 import org.fest.util.VisibleForTesting;
 
 /**
@@ -31,88 +31,88 @@ import org.fest.util.VisibleForTesting;
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public abstract class AbstractCollectionAssert<S, A extends Collection<?>> extends AbstractAssert<S, A> implements
+public abstract class AbstractIterableAssert<S, A extends Iterable<?>> extends AbstractAssert<S, A> implements
     ObjectEnumerableAssert<S> {
 
-  @VisibleForTesting Collections collections = Collections.instance();
+  @VisibleForTesting Iterables iterables = Iterables.instance();
 
-  protected AbstractCollectionAssert(A actual, Class<S> selfType) {
+  protected AbstractIterableAssert(A actual, Class<S> selfType) {
     super(actual, selfType);
   }
 
   /** {@inheritDoc} */
   public final void isNullOrEmpty() {
-    collections.assertNullOrEmpty(info, actual);
+    iterables.assertNullOrEmpty(info, actual);
   }
 
   /** {@inheritDoc} */
   public final void isEmpty() {
-    collections.assertEmpty(info, actual);
+    iterables.assertEmpty(info, actual);
   }
 
   /** {@inheritDoc} */
   public final S isNotEmpty() {
-    collections.assertNotEmpty(info, actual);
+    iterables.assertNotEmpty(info, actual);
     return myself;
   }
 
   /** {@inheritDoc} */
   public final S hasSize(int expected) {
-    collections.assertHasSize(info, actual, expected);
+    iterables.assertHasSize(info, actual, expected);
     return myself;
   }
 
   /** {@inheritDoc} */
   public final S contains(Object... values) {
-    collections.assertContains(info, actual, values);
+    iterables.assertContains(info, actual, values);
     return myself;
   }
 
   /** {@inheritDoc} */
   public final S containsOnly(Object... values) {
-    collections.assertContainsOnly(info, actual, values);
+    iterables.assertContainsOnly(info, actual, values);
     return myself;
   }
 
   /** {@inheritDoc} */
   public final S containsSequence(Object... sequence) {
-    collections.assertContainsSequence(info, actual, sequence);
+    iterables.assertContainsSequence(info, actual, sequence);
     return myself;
   }
 
   /** {@inheritDoc} */
   public final S doesNotContain(Object... values) {
-    collections.assertDoesNotContain(info, actual, values);
+    iterables.assertDoesNotContain(info, actual, values);
     return myself;
   }
 
   /** {@inheritDoc} */
   public final S doesNotHaveDuplicates() {
-    collections.assertDoesNotHaveDuplicates(info, actual);
+    iterables.assertDoesNotHaveDuplicates(info, actual);
     return myself;
   }
 
   /** {@inheritDoc} */
   public final S startsWith(Object... sequence) {
-    collections.assertStartsWith(info, actual, sequence);
+    iterables.assertStartsWith(info, actual, sequence);
     return myself;
   }
 
   /** {@inheritDoc} */
   public final S endsWith(Object... sequence) {
-    collections.assertEndsWith(info, actual, sequence);
+    iterables.assertEndsWith(info, actual, sequence);
     return myself;
   }
 
   /** {@inheritDoc} */
   public S containsNull() {
-    collections.assertContainsNull(info, actual);
+    iterables.assertContainsNull(info, actual);
     return myself;
   }
 
   /** {@inheritDoc} */
   public S doesNotContainNull() {
-    collections.assertDoesNotContainNull(info, actual);
+    iterables.assertDoesNotContainNull(info, actual);
     return myself;
   }
 }
