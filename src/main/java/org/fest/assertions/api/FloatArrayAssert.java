@@ -30,6 +30,7 @@ import org.fest.util.*;
  * @author Yvonne Wang
  * @author Alex Ruiz
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class FloatArrayAssert extends AbstractAssert<FloatArrayAssert, float[]> implements
     EnumerableAssert<FloatArrayAssert>, ArraySortedAssert<FloatArrayAssert, Float> {
@@ -199,13 +200,13 @@ public class FloatArrayAssert extends AbstractAssert<FloatArrayAssert, float[]> 
   }
 
   /** {@inheritDoc} */
-  public FloatArrayAssert isSortedAccordingTo(Comparator<? extends Float> comparator) {
+  public FloatArrayAssert isSortedAccordingTo(Comparator<? super Float> comparator) {
     arrays.assertIsSortedAccordingToComparator(info, actual, comparator);
     return this;
   }
 
   @Override
-  public FloatArrayAssert usingComparator(Comparator<?> customComparator) {
+  public FloatArrayAssert usingComparator(Comparator<? super float[]> customComparator) {
     super.usingComparator(customComparator);
     this.arrays = new FloatArrays(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;

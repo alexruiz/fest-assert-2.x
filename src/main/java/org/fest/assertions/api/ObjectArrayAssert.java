@@ -35,9 +35,10 @@ import org.fest.util.VisibleForTesting;
  * @author Alex Ruiz
  * @author Joel Costigliola
  * @author Nicolas François
+ * @author Mikhail Mazursky
  */
 public class ObjectArrayAssert extends AbstractAssert<ObjectArrayAssert, Object[]> implements
-    ObjectEnumerableAssert<ObjectArrayAssert>, IndexedObjectEnumerableAssert, ArraySortedAssert<ObjectArrayAssert, Object> {
+    ObjectEnumerableAssert<ObjectArrayAssert, Object>, IndexedObjectEnumerableAssert<Object>, ArraySortedAssert<ObjectArrayAssert, Object> {
 
   @VisibleForTesting
   ObjectArrays arrays = ObjectArrays.instance();
@@ -249,13 +250,13 @@ public class ObjectArrayAssert extends AbstractAssert<ObjectArrayAssert, Object[
   }
 
   /** {@inheritDoc} */
-  public ObjectArrayAssert isSortedAccordingTo(Comparator<? extends Object> comparator) {
+  public ObjectArrayAssert isSortedAccordingTo(Comparator<? super Object> comparator) {
     arrays.assertIsSortedAccordingToComparator(info, actual, comparator);
     return this;
   }
 
   @Override
-  public ObjectArrayAssert usingComparator(Comparator<?> customComparator) {
+  public ObjectArrayAssert usingComparator(Comparator<? super Object[]> customComparator) {
     super.usingComparator(customComparator);
     this.arrays = new ObjectArrays(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;

@@ -20,10 +20,13 @@ import static org.fest.assertions.test.ObjectArrayFactory.emptyArray;
 import static org.fest.util.Arrays.array;
 
 import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.util.Comparator;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import org.fest.assertions.internal.ObjectArrays;
 
@@ -34,7 +37,13 @@ import org.fest.assertions.internal.ObjectArrays;
  */
 public class ObjectArrayAssert_isSortedAccordingToComparator_Test {
 
-  private Comparator<?> mockComparator = mock(Comparator.class);
+  @Mock
+  private Comparator<Object> mockComparator;
+
+  @Before
+  public void before(){
+    initMocks(this);
+  }
 
   @Test
   public void should_verify_that_assertIsSortedAccordingToComparator_is_called() {

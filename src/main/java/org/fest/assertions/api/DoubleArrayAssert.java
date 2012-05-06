@@ -30,6 +30,7 @@ import org.fest.util.*;
  * @author Yvonne Wang
  * @author Alex Ruiz
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class DoubleArrayAssert extends AbstractAssert<DoubleArrayAssert, double[]> implements
     EnumerableAssert<DoubleArrayAssert>, ArraySortedAssert<DoubleArrayAssert, Double> {
@@ -199,13 +200,13 @@ public class DoubleArrayAssert extends AbstractAssert<DoubleArrayAssert, double[
   }
 
   /** {@inheritDoc} */
-  public DoubleArrayAssert isSortedAccordingTo(Comparator<? extends Double> comparator) {
+  public DoubleArrayAssert isSortedAccordingTo(Comparator<? super Double> comparator) {
     arrays.assertIsSortedAccordingToComparator(info, actual, comparator);
     return this;
   }
   
   @Override
-  public DoubleArrayAssert usingComparator(Comparator<?> customComparator) {
+  public DoubleArrayAssert usingComparator(Comparator<? super double[]> customComparator) {
     super.usingComparator(customComparator);
     this.arrays = new DoubleArrays(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;

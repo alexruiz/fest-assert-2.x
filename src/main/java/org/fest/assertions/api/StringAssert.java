@@ -33,6 +33,7 @@ import org.fest.util.VisibleForTesting;
  * @author David DIDIER
  * @author Alex Ruiz
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class StringAssert extends AbstractAssert<StringAssert, String> implements EnumerableAssert<StringAssert> {
 
@@ -194,7 +195,7 @@ public class StringAssert extends AbstractAssert<StringAssert, String> implement
   }
 
   @Override
-  public StringAssert usingComparator(Comparator<?> customComparator) {
+  public StringAssert usingComparator(Comparator<? super String> customComparator) {
     super.usingComparator(customComparator);
     this.strings = new Strings(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;

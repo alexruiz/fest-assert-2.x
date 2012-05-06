@@ -32,6 +32,7 @@ import org.fest.util.VisibleForTesting;
  * @author Yvonne Wang
  * @author Alex Ruiz
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> implements
     EnumerableAssert<LongArrayAssert>, ArraySortedAssert<LongArrayAssert, Long> {
@@ -201,13 +202,13 @@ public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> imp
   }
 
   /** {@inheritDoc} */
-  public LongArrayAssert isSortedAccordingTo(Comparator<? extends Long> comparator) {
+  public LongArrayAssert isSortedAccordingTo(Comparator<? super Long> comparator) {
     arrays.assertIsSortedAccordingToComparator(info, actual, comparator);
     return this;
   }
 
   @Override
-  public LongArrayAssert usingComparator(Comparator<?> customComparator) {
+  public LongArrayAssert usingComparator(Comparator<? super long[]> customComparator) {
     super.usingComparator(customComparator);
     this.arrays = new LongArrays(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;

@@ -32,6 +32,7 @@ import org.fest.util.VisibleForTesting;
  * @author Yvonne Wang
  * @author Alex Ruiz
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class ShortArrayAssert extends AbstractAssert<ShortArrayAssert, short[]> implements
     EnumerableAssert<ShortArrayAssert>, ArraySortedAssert<ShortArrayAssert, Short> {
@@ -201,13 +202,13 @@ public class ShortArrayAssert extends AbstractAssert<ShortArrayAssert, short[]> 
   }
 
   /** {@inheritDoc} */
-  public ShortArrayAssert isSortedAccordingTo(Comparator<? extends Short> comparator) {
+  public ShortArrayAssert isSortedAccordingTo(Comparator<? super Short> comparator) {
     arrays.assertIsSortedAccordingToComparator(info, actual, comparator);
     return this;
   }
 
   @Override
-  public ShortArrayAssert usingComparator(Comparator<?> customComparator) {
+  public ShortArrayAssert usingComparator(Comparator<? super short[]> customComparator) {
     super.usingComparator(customComparator);
     this.arrays = new ShortArrays(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;

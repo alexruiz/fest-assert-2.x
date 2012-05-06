@@ -178,7 +178,7 @@ public abstract class AbstractAssert<S extends AbstractAssert<S, A>, A> implemen
   }
 
   /** {@inheritDoc} */
-  public S usingComparator(Comparator<?> customComparator) {  
+  public S usingComparator(Comparator<? super A> customComparator) {  
     // using a specific strategy to compare actual with other objects.
     this.objects = new Objects(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;

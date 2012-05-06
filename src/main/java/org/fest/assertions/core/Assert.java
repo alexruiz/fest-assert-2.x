@@ -26,6 +26,7 @@ import java.util.Comparator;
  * @author Yvonne Wang
  * @author Alex Ruiz
  * @author Nicolas François
+ * @author Mikhail Mazursky
  */
 public interface Assert<S, A> extends Descriptable<S>, ExtensionPoints<S, A> {
 
@@ -149,7 +150,7 @@ public interface Assert<S, A> extends Descriptable<S>, ExtensionPoints<S, A> {
    * @throws NullPointerException if the given comparator is {@code null}.
    * @return {@code this} assertion object.
    */
-  S usingComparator(Comparator<?> customComparator);
+  S usingComparator(Comparator<? super A> customComparator);
 
   /**
    * Revert to standard comparison for incoming assertion checks.<br>

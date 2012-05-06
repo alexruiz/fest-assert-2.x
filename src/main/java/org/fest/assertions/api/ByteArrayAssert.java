@@ -32,10 +32,11 @@ import org.fest.util.VisibleForTesting;
  * @author Yvonne Wang
  * @author Alex Ruiz
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class ByteArrayAssert extends AbstractAssert<ByteArrayAssert, byte[]> implements
     EnumerableAssert<ByteArrayAssert>, ArraySortedAssert<ByteArrayAssert, Byte> {
-  
+
   @VisibleForTesting
   ByteArrays arrays = ByteArrays.instance();
 
@@ -201,13 +202,13 @@ public class ByteArrayAssert extends AbstractAssert<ByteArrayAssert, byte[]> imp
   }
 
   /** {@inheritDoc} */
-  public ByteArrayAssert isSortedAccordingTo(Comparator<? extends Byte> comparator) {
+  public ByteArrayAssert isSortedAccordingTo(Comparator<? super Byte> comparator) {
     arrays.assertIsSortedAccordingToComparator(info, actual, comparator);
     return this;
   }
 
   @Override
-  public ByteArrayAssert usingComparator(Comparator<?> customComparator) {
+  public ByteArrayAssert usingComparator(Comparator<? super byte[]> customComparator) {
     super.usingComparator(customComparator);
     this.arrays = new ByteArrays(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;

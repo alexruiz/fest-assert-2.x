@@ -15,14 +15,16 @@
 package org.fest.assertions.api;
 
 import static junit.framework.Assert.assertSame;
-
 import static org.fest.assertions.test.ObjectArrayFactory.emptyArray;
+import static org.mockito.MockitoAnnotations.initMocks;
 
-import org.junit.Test;
+import java.util.Comparator;
 
 import org.fest.assertions.internal.ObjectArrays;
 import org.fest.assertions.internal.Objects;
-import org.fest.assertions.util.CaseInsensitiveStringComparator;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
 
 /**
  * Tests for <code>{@link ObjectArrayAssert#usingComparator(java.util.Comparator)}</code> and
@@ -34,6 +36,14 @@ public class ObjectArrayAssert_usingComparator_Test {
 
   private ObjectArrayAssert assertions = new ObjectArrayAssert(emptyArray());
 
+  @Mock
+  private Comparator<Object[]> comparator;
+
+  @Before
+  public void before(){
+    initMocks(this);
+  }
+
   @Test
   public void using_default_comparator_test() {
     assertions.usingDefaultComparator();
@@ -43,8 +53,8 @@ public class ObjectArrayAssert_usingComparator_Test {
   
   @Test
   public void using_custom_comparator_test() {
-    assertions.usingComparator(CaseInsensitiveStringComparator.instance);
-    assertSame(assertions.objects.getComparator(), CaseInsensitiveStringComparator.instance);
-    assertSame(assertions.arrays.getComparator(), CaseInsensitiveStringComparator.instance);
+    assertions.usingComparator(comparator);
+    assertSame(assertions.objects.getComparator(), comparator);
+    assertSame(assertions.arrays.getComparator(), comparator);
   }
 }

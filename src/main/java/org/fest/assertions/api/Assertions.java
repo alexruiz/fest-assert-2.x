@@ -53,6 +53,7 @@ import org.fest.assertions.util.ImageReader;
  * @author Ted Young
  * @author Joel Costigliola
  * @author Matthieu Baechler
+ * @author Mikhail Mazursky
  */
 public class Assertions {
 
@@ -161,8 +162,8 @@ public class Assertions {
    * @param actual the actual value.
    * @return the created assertion object.
    */
-  public static IterableAssert assertThat(Iterable<?> actual) {
-    return new IterableAssert(actual);
+  public static <T> IterableAssert<T> assertThat(Iterable<T> actual) {
+    return new IterableAssert<T>(actual);
   }
 
   /**
@@ -269,8 +270,8 @@ public class Assertions {
    * @param actual the actual value.
    * @return the created assertion object.
    */
-  public static ListAssert assertThat(List<?> actual) {
-    return new ListAssert(actual);
+  public static <T> ListAssert<T> assertThat(List<T> actual) {
+    return new ListAssert<T>(actual);
   }
 
   /**

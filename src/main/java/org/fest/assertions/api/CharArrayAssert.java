@@ -32,6 +32,7 @@ import org.fest.util.VisibleForTesting;
  * @author Yvonne Wang
  * @author Alex Ruiz
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class CharArrayAssert extends AbstractAssert<CharArrayAssert, char[]> implements
     EnumerableAssert<CharArrayAssert>, ArraySortedAssert<CharArrayAssert, Character> {
@@ -201,13 +202,13 @@ public class CharArrayAssert extends AbstractAssert<CharArrayAssert, char[]> imp
   }
 
   /** {@inheritDoc} */
-  public CharArrayAssert isSortedAccordingTo(Comparator<? extends Character> comparator) {
+  public CharArrayAssert isSortedAccordingTo(Comparator<? super Character> comparator) {
     arrays.assertIsSortedAccordingToComparator(info, actual, comparator);
     return this;
   }
 
   @Override
-  public CharArrayAssert usingComparator(Comparator<?> customComparator) {
+  public CharArrayAssert usingComparator(Comparator<? super char[]> customComparator) {
     super.usingComparator(customComparator);
     this.arrays = new CharArrays(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;
