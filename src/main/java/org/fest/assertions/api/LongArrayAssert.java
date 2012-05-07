@@ -35,7 +35,7 @@ import org.fest.util.VisibleForTesting;
  * @author Mikhail Mazursky
  */
 public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> implements
-    EnumerableAssert<LongArrayAssert>, ArraySortedAssert<LongArrayAssert, Long> {
+    EnumerableAssert<LongArrayAssert, Long>, ArraySortedAssert<LongArrayAssert, Long> {
 
   @VisibleForTesting
   LongArrays arrays = LongArrays.instance();
@@ -207,16 +207,14 @@ public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> imp
     return this;
   }
 
-  @Override
-  public LongArrayAssert usingComparator(Comparator<? super long[]> customComparator) {
-    super.usingComparator(customComparator);
+  /** {@inheritDoc} */
+  public LongArrayAssert usingElementComparator(Comparator<? super Long> customComparator) {
     this.arrays = new LongArrays(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;
   }
-  
-  @Override
-  public LongArrayAssert usingDefaultComparator() {
-    super.usingDefaultComparator();
+
+  /** {@inheritDoc} */
+  public LongArrayAssert usingDefaultElementComparator() {
     this.arrays = LongArrays.instance();
     return myself;
   }

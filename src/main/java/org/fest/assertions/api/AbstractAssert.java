@@ -190,13 +190,13 @@ public abstract class AbstractAssert<S extends AbstractAssert<S, A>, A> implemen
     this.objects = Objects.instance();
     return myself;
   }
-  
+
   /** {@inheritDoc} */
   @Override 
   public final boolean equals(Object obj) {
     throw new UnsupportedOperationException("'equals' is not supported...maybe you intended to call 'isEqualTo'");
   }  
-  
+
   /**
    * Always returns 1.
    * @return 1.

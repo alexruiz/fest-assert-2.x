@@ -35,7 +35,7 @@ import org.fest.util.VisibleForTesting;
  * @author Mikhail Mazursky
  */
 public class CharArrayAssert extends AbstractAssert<CharArrayAssert, char[]> implements
-    EnumerableAssert<CharArrayAssert>, ArraySortedAssert<CharArrayAssert, Character> {
+    EnumerableAssert<CharArrayAssert, Character>, ArraySortedAssert<CharArrayAssert, Character> {
 
   @VisibleForTesting
   CharArrays arrays = CharArrays.instance();
@@ -207,16 +207,14 @@ public class CharArrayAssert extends AbstractAssert<CharArrayAssert, char[]> imp
     return this;
   }
 
-  @Override
-  public CharArrayAssert usingComparator(Comparator<? super char[]> customComparator) {
-    super.usingComparator(customComparator);
+  /** {@inheritDoc} */
+  public CharArrayAssert usingElementComparator(Comparator<? super Character> customComparator) {
     this.arrays = new CharArrays(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;
   }
-  
-  @Override
-  public CharArrayAssert usingDefaultComparator() {
-    super.usingDefaultComparator();
+
+  /** {@inheritDoc} */
+  public CharArrayAssert usingDefaultElementComparator() {
     this.arrays = CharArrays.instance();
     return myself;
   }

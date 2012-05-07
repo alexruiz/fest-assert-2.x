@@ -29,13 +29,14 @@ import org.mockito.Mock;
  * <code>{@link ObjectAssert#usingDefaultComparator()}</code>.
  * 
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class ObjectAssert_usingComparator_Test {
 
-  private ObjectAssert assertions = new ObjectAssert(5L);
+  private ObjectAssert<Long> assertions = new ObjectAssert<Long>(5L);
 
   @Mock
-  private Comparator<Object> comparator;
+  private Comparator<Long> comparator;
 
   @Before
   public void before(){

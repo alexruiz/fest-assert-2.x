@@ -101,15 +101,15 @@ public class ListAssert<T> extends AbstractIterableAssert<ListAssert<T>, List<T>
   }
 
   @Override
-  public ListAssert<T> usingComparator(Comparator<? super List<T>> customComparator) {
-    super.usingComparator(customComparator);
+  public ListAssert<T> usingElementComparator(Comparator<? super T> customComparator) {
+    super.usingElementComparator(customComparator);
     this.lists = new Lists(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;
   }
 
   @Override
-  public ListAssert<T> usingDefaultComparator() {
-    super.usingDefaultComparator();
+  public ListAssert<T> usingDefaultElementComparator() {
+    super.usingDefaultElementComparator();
     this.lists = Lists.instance();
     return myself;
   }

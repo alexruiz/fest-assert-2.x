@@ -16,10 +16,12 @@ package org.fest.assertions.api;
 
 import java.util.Comparator;
 
-import org.fest.assertions.core.*;
+import org.fest.assertions.core.ArraySortedAssert;
+import org.fest.assertions.core.EnumerableAssert;
 import org.fest.assertions.data.Index;
 import org.fest.assertions.internal.FloatArrays;
-import org.fest.util.*;
+import org.fest.util.ComparatorBasedComparisonStrategy;
+import org.fest.util.VisibleForTesting;
 
 /**
  * Assertion methods for arrays of {@code float}s.
@@ -33,7 +35,7 @@ import org.fest.util.*;
  * @author Mikhail Mazursky
  */
 public class FloatArrayAssert extends AbstractAssert<FloatArrayAssert, float[]> implements
-    EnumerableAssert<FloatArrayAssert>, ArraySortedAssert<FloatArrayAssert, Float> {
+    EnumerableAssert<FloatArrayAssert, Float>, ArraySortedAssert<FloatArrayAssert, Float> {
 
   @VisibleForTesting
   FloatArrays arrays = FloatArrays.instance();
@@ -205,16 +207,14 @@ public class FloatArrayAssert extends AbstractAssert<FloatArrayAssert, float[]> 
     return this;
   }
 
-  @Override
-  public FloatArrayAssert usingComparator(Comparator<? super float[]> customComparator) {
-    super.usingComparator(customComparator);
+  /** {@inheritDoc} */
+  public FloatArrayAssert usingElementComparator(Comparator<? super Float> customComparator) {
     this.arrays = new FloatArrays(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;
   }
-  
-  @Override
-  public FloatArrayAssert usingDefaultComparator() {
-    super.usingDefaultComparator();
+
+  /** {@inheritDoc} */
+  public FloatArrayAssert usingDefaultElementComparator() {
     this.arrays = FloatArrays.instance();
     return myself;
   }

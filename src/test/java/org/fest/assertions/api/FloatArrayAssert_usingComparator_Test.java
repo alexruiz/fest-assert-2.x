@@ -33,17 +33,21 @@ import org.fest.assertions.internal.Objects;
  * <code>{@link FloatArrayAssert#usingDefaultComparator()}</code>.
  * 
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class FloatArrayAssert_usingComparator_Test {
 
-  private FloatArrayAssert assertions = new FloatArrayAssert(emptyArray());
+  private FloatArrayAssert assertions;
 
+  @Mock
+  private Comparator<Float> elementComparator;
   @Mock
   private Comparator<float[]> comparator;
 
   @Before
   public void before(){
     initMocks(this);
+    assertions = new FloatArrayAssert(emptyArray());
   }
 
   @Test
@@ -58,6 +62,14 @@ public class FloatArrayAssert_usingComparator_Test {
     // in that, we don't care of the comparator, the point to check is that we switch correctly of comparator
     assertions.usingComparator(comparator);
     assertSame(assertions.objects.getComparator(), comparator);
-    assertSame(assertions.arrays.getComparator(), comparator);
+    assertSame(assertions.arrays, FloatArrays.instance());
+  }
+
+  @Test
+  public void using_custom_element_comparator_test() {
+    // in that, we don't care of the comparator, the point to check is that we can't use a comparator
+    assertions.usingElementComparator(elementComparator);
+    assertSame(assertions.objects, Objects.instance());
+    assertSame(assertions.arrays.getComparator(), elementComparator);
   }
 }

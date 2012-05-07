@@ -31,17 +31,21 @@ import org.mockito.Mock;
  * <code>{@link ByteArrayAssert#usingDefaultComparator()}</code>.
  * 
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class ByteArrayAssert_usingComparator_Test {
 
-  private ByteArrayAssert assertions = new ByteArrayAssert(emptyArray());
+  private ByteArrayAssert assertions;
 
+  @Mock
+  private Comparator<Byte> elementComparator;
   @Mock
   private Comparator<byte[]> comparator;
 
   @Before
   public void before(){
     initMocks(this);
+    assertions = new ByteArrayAssert(emptyArray());
   }
 
   @Test
@@ -50,12 +54,20 @@ public class ByteArrayAssert_usingComparator_Test {
     assertSame(assertions.objects, Objects.instance());
     assertSame(assertions.arrays, ByteArrays.instance());
   }
-  
+
   @Test
   public void using_custom_comparator_test() {
     // in that, we don't care of the comparator, the point to check is that we switch correctly of comparator
     assertions.usingComparator(comparator);
     assertSame(assertions.objects.getComparator(), comparator);
-    assertSame(assertions.arrays.getComparator(), comparator);
+    assertSame(assertions.arrays, ByteArrays.instance());
+  }
+
+  @Test
+  public void using_custom_element_comparator_test() {
+    // in that, we don't care of the comparator, the point to check is that we can't use a comparator
+    assertions.usingElementComparator(elementComparator);
+    assertSame(assertions.objects, Objects.instance());
+    assertSame(assertions.arrays.getComparator(), elementComparator);
   }
 }

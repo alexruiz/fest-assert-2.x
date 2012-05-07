@@ -36,6 +36,7 @@ import org.fest.assertions.test.ExpectedException;
  * <code>{@link BooleanArrayAssert#usingDefaultComparator()}</code>.
  * 
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class BooleanArrayAssert_usingComparator_Test {
 
@@ -44,6 +45,8 @@ public class BooleanArrayAssert_usingComparator_Test {
 
   private BooleanArrayAssert assertions = new BooleanArrayAssert(emptyArray());
 
+  @Mock
+  private Comparator<Boolean> elementComparator;
   @Mock
   private Comparator<boolean[]> comparator;
 
@@ -61,9 +64,16 @@ public class BooleanArrayAssert_usingComparator_Test {
 
   @Test
   public void using_custom_comparator_test() {
-    thrown.expect(UnsupportedOperationException.class);
     // in that, we don't care of the comparator, the point to check is that we can't use a comparator
     assertions.usingComparator(comparator);
+    assertSame(assertions.objects.getComparator(), comparator);
+    assertSame(assertions.arrays, BooleanArrays.instance());
   }
-  
+
+  @Test
+  public void using_custom_element_comparator_test() {
+    thrown.expect(UnsupportedOperationException.class);
+    // in that, we don't care of the comparator, the point to check is that we can't use a comparator
+    assertions.usingElementComparator(elementComparator);
+  }
 }

@@ -14,6 +14,7 @@
  */
 package org.fest.assertions.core;
 
+
 /**
  * Assertions methods applicable to groups of objects (e.g. arrays or collections.)
  * @param <S> the "self" type of this assertion class. Please read &quot;<a href="http://bit.ly/anMa4g"
@@ -26,7 +27,7 @@ package org.fest.assertions.core;
  * @author Nicolas François
  * @author Mikhail Mazursky
  */
-public interface ObjectEnumerableAssert<S, T> extends EnumerableAssert<S> {
+public interface ObjectEnumerableAssert<S, T> extends EnumerableAssert<S, T> {
 
   /**
    * Verifies that the actual group contains the given values, in any order.
@@ -280,5 +281,4 @@ public interface ObjectEnumerableAssert<S, T> extends EnumerableAssert<S> {
    * This method is an alias {@link #areNotExactly(int, Condition)}.
    */
   <E> S doNotHaveExactly(int n, Condition<E> condition);
-
 }

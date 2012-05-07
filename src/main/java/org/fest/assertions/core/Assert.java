@@ -159,7 +159,7 @@ public interface Assert<S, A> extends Descriptable<S>, ExtensionPoints<S, A> {
    * @return {@code this} assertion object.
    */
   S usingDefaultComparator();
-  
+
   /**
    * Throws <code>{@link UnsupportedOperationException}</code> if called. It is easy to accidentally call
    * <code>{@link #equals(Object)}</code> instead of <code>isEqualTo</code>.

@@ -31,17 +31,21 @@ import org.mockito.Mock;
  * <code>{@link DoubleArrayAssert#usingDefaultComparator()}</code>.
  * 
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class DoubleArrayAssert_usingComparator_Test {
 
-  private DoubleArrayAssert assertions = new DoubleArrayAssert(emptyArray());
+  private DoubleArrayAssert assertions;
 
+  @Mock
+  private Comparator<Double> elementComparator;
   @Mock
   private Comparator<double[]> comparator;
 
   @Before
   public void before(){
     initMocks(this);
+    assertions = new DoubleArrayAssert(emptyArray());
   }
 
   @Test
@@ -56,6 +60,14 @@ public class DoubleArrayAssert_usingComparator_Test {
     // in that, we don't care of the comparator, the point to check is that we switch correctly of comparator
     assertions.usingComparator(comparator);
     assertSame(assertions.objects.getComparator(), comparator);
-    assertSame(assertions.arrays.getComparator(), comparator);
+    assertSame(assertions.arrays, DoubleArrays.instance());
+  }
+
+  @Test
+  public void using_custom_element_comparator_test() {
+    // in that, we don't care of the comparator, the point to check is that we can't use a comparator
+    assertions.usingElementComparator(elementComparator);
+    assertSame(assertions.objects, Objects.instance());
+    assertSame(assertions.arrays.getComparator(), elementComparator);
   }
 }

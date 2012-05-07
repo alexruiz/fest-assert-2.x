@@ -34,7 +34,7 @@ import org.fest.util.VisibleForTesting;
  * @author Joel Costigliola
  * @author Mikhail Mazursky
  */
-public class IntArrayAssert extends AbstractAssert<IntArrayAssert, int[]> implements EnumerableAssert<IntArrayAssert>,
+public class IntArrayAssert extends AbstractAssert<IntArrayAssert, int[]> implements EnumerableAssert<IntArrayAssert, Integer>,
     ArraySortedAssert<IntArrayAssert, Integer> {
 
   @VisibleForTesting
@@ -207,16 +207,14 @@ public class IntArrayAssert extends AbstractAssert<IntArrayAssert, int[]> implem
     return this;
   }
 
-  @Override
-  public IntArrayAssert usingComparator(Comparator<? super int[]> customComparator) {
-    super.usingComparator(customComparator);
+  /** {@inheritDoc} */
+  public IntArrayAssert usingElementComparator(Comparator<? super Integer> customComparator) {
     this.arrays = new IntArrays(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;
   }
-  
-  @Override
-  public IntArrayAssert usingDefaultComparator() {
-    super.usingDefaultComparator();
+
+  /** {@inheritDoc} */
+  public IntArrayAssert usingDefaultElementComparator() {
     this.arrays = IntArrays.instance();
     return myself;
   }

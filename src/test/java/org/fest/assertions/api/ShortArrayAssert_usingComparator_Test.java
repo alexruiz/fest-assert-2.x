@@ -31,17 +31,21 @@ import org.mockito.Mock;
  * <code>{@link ShortArrayAssert#usingDefaultComparator()}</code>.
  * 
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class ShortArrayAssert_usingComparator_Test {
 
-  private ShortArrayAssert assertions = new ShortArrayAssert(emptyArray());
+  private ShortArrayAssert assertions;
 
+  @Mock
+  private Comparator<Short> elementComparator;
   @Mock
   private Comparator<short[]> comparator;
 
   @Before
   public void before(){
     initMocks(this);
+    assertions = new ShortArrayAssert(emptyArray());
   }
 
   @Test
@@ -56,6 +60,14 @@ public class ShortArrayAssert_usingComparator_Test {
     // in that test, the comparator type is not important, we only check that we correctly switch of comparator
     assertions.usingComparator(comparator);
     assertSame(assertions.objects.getComparator(), comparator);
-    assertSame(assertions.arrays.getComparator(), comparator);
+    assertSame(assertions.arrays, ShortArrays.instance());
+  }
+
+  @Test
+  public void using_custom_element_comparator_test() {
+    // in that, we don't care of the comparator, the point to check is that we can't use a comparator
+    assertions.usingElementComparator(elementComparator);
+    assertSame(assertions.objects, Objects.instance());
+    assertSame(assertions.arrays.getComparator(), elementComparator);
   }
 }

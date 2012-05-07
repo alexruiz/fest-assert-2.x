@@ -247,16 +247,12 @@ public abstract class AbstractIterableAssert<S extends AbstractIterableAssert<S,
     return myself;
   }
 
-  @Override
-  public S usingComparator(Comparator<? super A> customComparator) {
-    super.usingComparator(customComparator);
+  public S usingElementComparator(Comparator<? super T> customComparator) {
     this.iterables = new Iterables(new ComparatorBasedComparisonStrategy(customComparator));
     return myself;
   }
 
-  @Override
-  public S usingDefaultComparator() {
-    super.usingDefaultComparator();
+  public S usingDefaultElementComparator() {
     this.iterables = Iterables.instance();
     return myself;
   }

@@ -31,17 +31,21 @@ import org.mockito.Mock;
  * <code>{@link LongArrayAssert#usingDefaultComparator()}</code>.
  * 
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class LongArrayAssert_usingComparator_Test {
 
-  private LongArrayAssert assertions = new LongArrayAssert(emptyArray());
+  private LongArrayAssert assertions;
 
+  @Mock
+  private Comparator<Long> elementComparator;
   @Mock
   private Comparator<long[]> comparator;
 
   @Before
   public void before(){
     initMocks(this);
+    assertions = new LongArrayAssert(emptyArray());
   }
 
   @Test
@@ -50,12 +54,20 @@ public class LongArrayAssert_usingComparator_Test {
     assertSame(assertions.objects, Objects.instance());
     assertSame(assertions.arrays, LongArrays.instance());
   }
-  
+
   @Test
   public void using_custom_comparator_test() {
     // in that, we don't care of the comparator, the point to check is that we switch correctly of comparator
     assertions.usingComparator(comparator);
     assertSame(assertions.objects.getComparator(), comparator);
-    assertSame(assertions.arrays.getComparator(), comparator);
+    assertSame(assertions.arrays, LongArrays.instance());
+  }
+
+  @Test
+  public void using_custom_element_comparator_test() {
+    // in that, we don't care of the comparator, the point to check is that we can't use a comparator
+    assertions.usingElementComparator(elementComparator);
+    assertSame(assertions.objects, Objects.instance());
+    assertSame(assertions.arrays.getComparator(), elementComparator);
   }
 }

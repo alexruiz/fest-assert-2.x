@@ -34,6 +34,7 @@ import org.fest.assertions.internal.ObjectArrays;
  * Tests for <code>{@link ObjectArrayAssert#isSortedAccordingTo(Comparator)}</code>.
  * 
  * @author Joel Costigliola
+ * @author Mikhail Mazursky
  */
 public class ObjectArrayAssert_isSortedAccordingToComparator_Test {
 
@@ -48,7 +49,7 @@ public class ObjectArrayAssert_isSortedAccordingToComparator_Test {
   @Test
   public void should_verify_that_assertIsSortedAccordingToComparator_is_called() {
     ObjectArrays arrays = mock(ObjectArrays.class);
-    ObjectArrayAssert assertions = new ObjectArrayAssert(emptyArray());
+    ObjectArrayAssert<Object> assertions = new ObjectArrayAssert<Object>(emptyArray());
     assertions.arrays = arrays;
     assertions.isSortedAccordingTo(mockComparator);
     verify(arrays).assertIsSortedAccordingToComparator(assertions.info, assertions.actual,
@@ -57,7 +58,7 @@ public class ObjectArrayAssert_isSortedAccordingToComparator_Test {
 
   @Test
   public void should_return_this() {
-    ObjectArrayAssert objectArrayAssert = new ObjectArrayAssert(array("b", "a"));
+    ObjectArrayAssert<Object> objectArrayAssert = new ObjectArrayAssert<Object>(array("b", "a"));
     assertSame(objectArrayAssert, objectArrayAssert.isSortedAccordingTo(mockComparator));
   }
 }

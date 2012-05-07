@@ -34,7 +34,7 @@ import org.fest.util.VisibleForTesting;
  * @author Mikhail Mazursky
  */
 public class BooleanArrayAssert extends AbstractAssert<BooleanArrayAssert, boolean[]> implements
-    EnumerableAssert<BooleanArrayAssert>, ArraySortedAssert<BooleanArrayAssert, Boolean> {
+    EnumerableAssert<BooleanArrayAssert, Boolean>, ArraySortedAssert<BooleanArrayAssert, Boolean> {
 
   @VisibleForTesting
   BooleanArrays arrays = BooleanArrays.instance();
@@ -206,8 +206,13 @@ public class BooleanArrayAssert extends AbstractAssert<BooleanArrayAssert, boole
     return this;
   }
 
-  @Override
-  public BooleanArrayAssert usingComparator(Comparator<? super boolean[]> customComparator) {
-    throw new UnsupportedOperationException("custom Comparator is not supported for Boolean array comparison");
+  /** {@inheritDoc} */
+  public BooleanArrayAssert usingElementComparator(Comparator<? super Boolean> customComparator) {
+    throw new UnsupportedOperationException("custom element Comparator is not supported for Boolean array comparison");
+  }
+
+  /** {@inheritDoc} */
+  public BooleanArrayAssert usingDefaultElementComparator() {
+    throw new UnsupportedOperationException("custom element Comparator is not supported for Boolean array comparison");
   }
 }
