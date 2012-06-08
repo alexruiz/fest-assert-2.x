@@ -16,22 +16,27 @@ package org.fest.assertions.internal;
 
 import static org.fest.assertions.error.ShouldNotContain.shouldNotContain;
 import static org.fest.assertions.error.ShouldContain.shouldContain;
+import static org.fest.assertions.error.ShouldHaveSameSizeAs.shouldHaveSameSizeAs;
 import static org.fest.assertions.error.ShouldHaveSize.shouldHaveSize;
 import static org.fest.assertions.error.ShouldNotBeEmpty.shouldNotBeEmpty;
 import static org.fest.assertions.error.ShouldBeEmpty.shouldBeEmpty;
 import static org.fest.assertions.error.ShouldBeNullOrEmpty.shouldBeNullOrEmpty;
+import static org.fest.assertions.internal.CommonErrors.arrayOfValuesToLookForIsNull;
 import static org.fest.util.Objects.areEqual;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 import org.fest.assertions.core.AssertionInfo;
 import org.fest.assertions.data.MapEntry;
+import org.fest.util.Collections;
 import org.fest.util.VisibleForTesting;
 
 /**
  * Reusable assertions for <code>{@link Map}</code>s.
  *
  * @author Alex Ruiz
+ * @author Nicolas François
  */
 public class Maps {
 
@@ -100,7 +105,43 @@ public class Maps {
     if (sizeOfActual == expectedSize) return;
     throw failures.failure(info, shouldHaveSize(actual, sizeOfActual, expectedSize));
   }
-
+  
+  /**
+   * Asserts that the number of entries in the given {@code Map} has the same size as the other {@code Iterable}.
+   * @param info contains information about the assertion.
+   * @param actual the given {@code Map}.
+   * @param other the group to compare 
+   * @throws AssertionError if the given {@code Map} is {@code null}.
+   * @throws AssertionError if the given {@code Iterable} is {@code null}. 
+   * @throws AssertionError if the number of entries in the given {@code Map} does not have the same size.
+   */
+  public void assertHasSameSizeAs(AssertionInfo info, Map<?, ?> map, Iterable<?> other) {
+	assertNotNull(info, map);
+	if(other == null) throw new NullPointerException("The iterable to look for should not be null");
+	int sizeOfActual = map.size();
+	int sizeOfOther = Collections.sizeOf(other);
+	if(sizeOfActual == sizeOfOther) return;
+	throw failures.failure(info, shouldHaveSameSizeAs(map, sizeOfActual, sizeOfOther));
+  }
+  
+  /**
+   * Asserts that the number of entries in the given {@code Map} has the same size as the other array.
+   * @param info contains information about the assertion.
+   * @param actual the given {@code Map}.
+   * @param other the group to compare 
+   * @throws AssertionError if the given {@code Map} is {@code null}.
+   * @throws AssertionError if the given array is {@code null}. 
+   * @throws AssertionError if the number of entries in the given {@code Map} does not have the same size.
+   */
+  public void assertHasSameSizeAs(AssertionInfo info, Map<?, ?> map, Object[] other) {
+	assertNotNull(info, map);
+	if(other == null) throw arrayOfValuesToLookForIsNull();
+	int sizeOfActual = map.size();
+	int sizeOfOther = Array.getLength(other);
+	if(sizeOfActual == sizeOfOther) return;
+	throw failures.failure(info, shouldHaveSameSizeAs(map, sizeOfActual, sizeOfOther));	
+  }
+  
   /**
    * Asserts that the given {@code Map} contains the given entries, in any order.
    * @param info contains information about the assertion.
