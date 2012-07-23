@@ -15,8 +15,7 @@
 package org.fest.assertions.internal;
 
 import static junit.framework.Assert.assertEquals;
-import static org.fest.assertions.internal.BinaryDiffResult.SUCCESS;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,12 +55,12 @@ public class BinaryDiff_diff_File_byteArray_Test {
   }
 
   @Test
-  public void should_return_success_if_file_and_array_have_equal_content() throws IOException {
+  public void should_return_no_diff_if_file_and_array_have_equal_content() throws IOException {
     writer.write(actual, "test");
     // Note: writer inserts a \n after each line so we need it in our expected content
     expected = "test\n".getBytes();
     BinaryDiffResult result = binaryDiff.diff(actual, expected);
-    assertSame(SUCCESS, result);
+    assertTrue(result.hasNoDiff());
   }
   
   @Test

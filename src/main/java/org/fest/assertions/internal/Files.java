@@ -23,7 +23,6 @@ import static org.fest.assertions.error.ShouldHaveBinaryContent.shouldHaveBinary
 import static org.fest.assertions.error.ShouldHaveContent.shouldHaveContent;
 import static org.fest.assertions.error.ShouldHaveEqualContent.shouldHaveEqualContent;
 import static org.fest.assertions.error.ShouldNotExist.shouldNotExist;
-import static org.fest.assertions.internal.BinaryDiffResult.SUCCESS;
 
 import java.io.File;
 import java.io.IOException;
@@ -106,7 +105,7 @@ public class Files {
     assertIsFile(info, actual);
     try {
       BinaryDiffResult result = binaryDiff.diff(actual, expected);
-      if (result == SUCCESS) return;
+      if (result.hasNoDiff()) return;
       throw failures.failure(info, shouldHaveBinaryContent(actual, result));
     } catch (IOException e) {
       String msg = String.format("Unable to verify binary contents of file:<%s>", actual);
