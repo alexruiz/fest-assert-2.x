@@ -20,7 +20,6 @@ import static org.junit.Assert.assertSame;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 
 import org.fest.assertions.test.TextFileWriter;
 import org.junit.Before;
@@ -60,7 +59,7 @@ public class BinaryDiff_diff_File_byteArray_Test {
   public void should_return_success_if_file_and_array_have_equal_content() throws IOException {
     writer.write(actual, "test");
     // Note: writer inserts a \n after each line so we need it in our expected content
-    expected = "test\n".getBytes(Charset.defaultCharset());
+    expected = "test\n".getBytes();
     BinaryDiffResult result = binaryDiff.diff(actual, expected);
     assertSame(SUCCESS, result);
   }
@@ -68,7 +67,7 @@ public class BinaryDiff_diff_File_byteArray_Test {
   @Test
   public void should_return_diff_if_inputstreams_differ_on_one_byte() throws IOException {
     writer.write(actual, "test");
-    expected = "fest\n".getBytes(Charset.defaultCharset());
+    expected = "fest\n".getBytes();
     BinaryDiffResult result = binaryDiff.diff(actual, expected);
     assertEquals(0, result.offset);
     assertEquals("0x74", result.actual);
@@ -78,7 +77,7 @@ public class BinaryDiff_diff_File_byteArray_Test {
   @Test
   public void should_return_diff_if_actual_is_shorter() throws IOException {
     writer.write(actual, "foo");
-    expected = "foo\nbar".getBytes(Charset.defaultCharset());
+    expected = "foo\nbar".getBytes();
     BinaryDiffResult result = binaryDiff.diff(actual, expected);
     assertEquals(4, result.offset);
     assertEquals("EOF", result.actual);
@@ -88,7 +87,7 @@ public class BinaryDiff_diff_File_byteArray_Test {
   @Test
   public void should_return_diff_if_expected_is_shorter() throws IOException {
     writer.write(actual, "foobar");
-    expected = "foo".getBytes(Charset.defaultCharset());
+    expected = "foo".getBytes();
     BinaryDiffResult result = binaryDiff.diff(actual, expected);
     assertEquals(3, result.offset);
     assertEquals("0x62", result.actual);
