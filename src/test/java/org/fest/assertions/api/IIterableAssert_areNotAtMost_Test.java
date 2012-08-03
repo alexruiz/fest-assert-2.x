@@ -27,7 +27,7 @@ import org.junit.Test;
  * 
  * @author Nicolas François
  */
-public class IIterableAssert_areNotAtMost_Test extends AbstractTest_for_IterableAssert {
+public class IIterableAssert_areNotAtMost_Test extends IterableAssertTest {
 
   private static Condition<Object> condition;
 
@@ -47,5 +47,13 @@ public class IIterableAssert_areNotAtMost_Test extends AbstractTest_for_Iterable
     ConcreteIterableAssert<Object> returned = assertions.haveAtMost(2, condition);
     assertSame(assertions, returned);
   }
+
+  @Override
+  protected ConcreteIterableAssert<Object> invoke_api_method() {
+    return null;
+  }
+
+  @Override
+  protected void verify_internal_effects() {}
 
 }
