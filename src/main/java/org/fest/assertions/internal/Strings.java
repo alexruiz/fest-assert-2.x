@@ -19,6 +19,7 @@ import static org.fest.assertions.error.ShouldBeEqualIgnoringCase.shouldBeEqual;
 import static org.fest.assertions.error.ShouldBeNullOrEmpty.shouldBeNullOrEmpty;
 import static org.fest.assertions.error.ShouldContainString.shouldContain;
 import static org.fest.assertions.error.ShouldContainString.shouldContainIgnoringCase;
+import static org.fest.assertions.error.ShouldContainsOnlyOnce.shouldContainsOnlyOnce;
 import static org.fest.assertions.error.ShouldEndWith.shouldEndWith;
 import static org.fest.assertions.error.ShouldHaveSameSizeAs.shouldHaveSameSizeAs;
 import static org.fest.assertions.error.ShouldHaveSize.shouldHaveSize;
@@ -247,6 +248,30 @@ public class Strings {
   private boolean areEqualIgnoringCase(String actual, String expected) {
     if (actual == null) return expected == null;
     return actual.equalsIgnoreCase(expected);
+  } 
+  
+  /**
+   * Verifies that actual {@code String}s contains only once the pattern {@code String}.
+   * @param info contains information about the assertion.
+   * @param actual the actual {@code String}.
+   * @param pattern the given {@code String}.
+   * @throws AssertionError if the actual {@code String}s does not contains only once the given {@code String}.
+   */
+  public void assertContainsOnlyOnce(AssertionInfo info, String actual, String pattern) {
+	if (actual == null || pattern == null) throw failures.failure(info, shouldContainsOnlyOnce(actual, pattern, 0));
+    int occurences = containsOnlyOnce(actual, pattern);
+    if (occurences == 1) return;
+    throw failures.failure(info, shouldContainsOnlyOnce(actual, pattern, occurences));
+  }
+
+  private int containsOnlyOnce(String actual, String pattern) {
+	int occurences = 0;
+    for (int i = 0; i <= (actual.length() - pattern.length()); i ++) {
+        if (actual.substring(i, i + pattern.length()).equals(pattern)) {
+        	occurences ++;
+        }
+    }
+    return occurences;
   }
 
   /**
