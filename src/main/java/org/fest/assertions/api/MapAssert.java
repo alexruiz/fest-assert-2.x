@@ -151,6 +151,30 @@ public class MapAssert<K, V> extends AbstractAssert<MapAssert<K, V>, Map<K, V>> 
     return this;
   }
 
+  /**
+   * Verifies that the actual map contains an entry with the given key/value pair.
+   * @param key of the entry that should be in actual map.
+   * @param value of the entry that should be in actual map.
+   * @throws AssertionError if the actual map is {@code null}.
+   * @throws AssertionError if the actual map does not contain an entry with the given key/value pair.
+   */
+  public MapAssert<K, V> containsEntry(K key, V value) {
+    maps.assertContains(info, actual, new MapEntry[]{ MapEntry.entry(key, value)});
+    return this;
+  }
+
+  /**
+   * Verifies that the actual map does not contain an entry with the given key/value pair.
+   * @param key of the entry that should not be in actual map.
+   * @param value of the entry that should not be in actual map.
+   * @throws AssertionError if the actual map is {@code null}.
+   * @throws AssertionError if the actual map contains an entry with the given key/value pair.
+   */
+  public MapAssert<K, V> doesNotContainEntry(K key, V value) {
+    maps.assertDoesNotContain(info, actual, new MapEntry[]{ MapEntry.entry(key, value)});
+    return this;
+  }
+
   /** {@inheritDoc} */
   public MapAssert<K, V> usingElementComparator(Comparator<? super MapEntry> customComparator) {
     throw new UnsupportedOperationException("custom element Comparator is not supported for MapEntry comparison");
