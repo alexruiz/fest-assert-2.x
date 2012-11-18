@@ -14,14 +14,6 @@
  */
 package org.fest.assertions.api;
 
-import java.io.File;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.nio.charset.Charset;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 import org.fest.assertions.api.filter.Filters;
 import org.fest.assertions.condition.AllOf;
 import org.fest.assertions.condition.AnyOf;
@@ -34,6 +26,16 @@ import org.fest.assertions.data.Offset;
 import org.fest.assertions.groups.Properties;
 import org.fest.util.Files;
 import org.fest.util.FilesException;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
+
+import java.io.File;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.nio.charset.Charset;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Entry point for assertion methods for different data types. Each method in this class is a static factory for the type-specific
@@ -365,6 +367,14 @@ public class Assertions {
    */
   public static DateAssert assertThat(Date actual) {
     return new DateAssert(actual);
+  }
+
+  public static DateTimeAssert assertThat(DateTime date) {
+    return new DateTimeAssert(DateTimeAssert.class, date);
+  }
+
+  public static LocalDateTimeAssert assertThat(LocalDateTime localDateTime) {
+    return new LocalDateTimeAssert(LocalDateTimeAssert.class, localDateTime);
   }
 
   /**
