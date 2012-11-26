@@ -3,7 +3,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>fest-assert-core</artifactId>
-  <version>2.0M9-SNAPSHOT</version>
+  <version>2.0.0-SNAPSHOT</version>
   <name>FEST Fluent Assertions (Core)</name>
   <description>'Flexible' or 'fluent' assertions for testing</description>
   <inceptionYear>2007</inceptionYear>
@@ -30,11 +30,15 @@
     <system>github</system>
     <url>https://github.com/alexruiz/fest-assert-2.x/issues</url>
   </issueManagement>
+  <properties>
+    <fest-util.version>1.2.4-SNAPSHOT</fest-util.version>
+    <fest-util.osgi.version>1.2.4</fest-util.osgi.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.easytesting</groupId>
       <artifactId>fest-util</artifactId>
-      <version>1.2.3</version>
+      <version>${fest-util.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -55,4 +59,43 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>maven-bundle-plugin</artifactId>
+            <version>2.3.7</version>
+            <extensions>true</extensions>
+            <configuration>
+                <instructions>
+                    <Import-Package>!*</Import-Package>
+                    <Require-Bundle>org.easytesting.fest-util;bundle-version="${fest-util.osgi.version}"
+                    </Require-Bundle>
+                    <Export-Package>!.,
+                      !org.fest.assertions.internal,
+                      org.fest.assertions.*
+                    </Export-Package>
+                    <Bundle-RequiredExecutionEnvironment>JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
+                </instructions>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>bundle-manifest</id>
+                    <phase>process-classes</phase>
+                    <goals>
+                        <goal>manifest</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                </archive>
+            </configuration>
+        </plugin>
+    </plugins>
+  </build>
 </project>
