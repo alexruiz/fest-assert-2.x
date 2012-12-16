@@ -16,10 +16,10 @@ package org.fest.assertions.internal.maps;
 
 import static org.fest.assertions.data.MapEntry.entry;
 import static org.fest.assertions.error.ShouldHaveSize.shouldHaveSize;
-import static org.fest.util.FailureMessages.actualIsNull;
-import static org.fest.assertions.test.Maps.mapOf;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.Maps.newMap;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -41,7 +41,7 @@ public class Maps_assertHasSize_Test extends MapsBaseTest {
 
   @Test
   public void should_pass_if_size_of_actual_is_equal_to_expected_size() {
-    Map<?, ?> actual = mapOf(entry("name", "Yoda"), entry("job", "Yedi Master"));
+    Map<?, ?> actual = newMap(entry("name", "Yoda"), entry("job", "Yedi Master"));
     maps.assertHasSize(someInfo(), actual, 2);
   }
 
@@ -54,13 +54,13 @@ public class Maps_assertHasSize_Test extends MapsBaseTest {
   @Test
   public void should_fail_if_size_of_actual_is_not_equal_to_expected_size() {
     AssertionInfo info = someInfo();
-    Map<?, ?> actual = mapOf(entry("name", "Yoda"), entry("job", "Yedi Master"));
+    Map<?, ?> actual = newMap(entry("name", "Yoda"), entry("job", "Yedi Master"));
     try {
       maps.assertHasSize(info, actual, 8);
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldHaveSize(actual, actual.size(), 8));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

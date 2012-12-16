@@ -48,10 +48,10 @@ public class IntArrays {
 
   @VisibleForTesting
   IntArrays() {
-    this(StandardComparisonStrategy.instance());
+    this(EqualityComparison.instance());
   }
 
-  public IntArrays(ComparisonStrategy comparisonStrategy) {
+  public IntArrays(Comparison comparisonStrategy) {
     this.arrays = new Arrays(comparisonStrategy);
   }
 

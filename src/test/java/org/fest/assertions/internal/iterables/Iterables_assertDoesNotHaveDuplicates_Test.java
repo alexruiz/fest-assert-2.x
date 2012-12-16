@@ -16,10 +16,10 @@ package org.fest.assertions.internal.iterables;
 
 import static java.util.Collections.emptyList;
 import static org.fest.assertions.error.ShouldNotHaveDuplicates.shouldNotHaveDuplicates;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Sets.newLinkedHashSet;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.util.Lists.newArrayList;
 import static org.mockito.Mockito.verify;
 
@@ -68,7 +68,7 @@ public class Iterables_assertDoesNotHaveDuplicates_Test extends IterablesBaseTes
       verify(failures).failure(info, shouldNotHaveDuplicates(actual, duplicates));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   // ------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ public class Iterables_assertDoesNotHaveDuplicates_Test extends IterablesBaseTes
       verify(failures).failure(info, shouldNotHaveDuplicates(actual, duplicates, comparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

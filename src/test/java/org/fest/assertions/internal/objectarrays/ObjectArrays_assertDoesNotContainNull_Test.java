@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.objectarrays;
 
 import static org.fest.assertions.error.ShouldNotContainNull.shouldNotContainNull;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Arrays.array;
 
 import static org.mockito.Mockito.verify;
@@ -69,7 +69,7 @@ public class ObjectArrays_assertDoesNotContainNull_Test extends ObjectArraysBase
       verify(failures).failure(info, shouldNotContainNull(actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -99,6 +99,6 @@ public class ObjectArrays_assertDoesNotContainNull_Test extends ObjectArraysBase
       verify(failures).failure(info, shouldNotContainNull(actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

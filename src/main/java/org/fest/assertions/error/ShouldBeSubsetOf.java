@@ -28,11 +28,11 @@ public class ShouldBeSubsetOf extends BasicErrorMessageFactory {
    * Creates a new <code>{@link ShouldBeSubsetOf}</code>
    * @param actual the actual set
    * @param values the expected superset
-   * @param comparisonStrategy the <code>{@link ComparisonStrategy}</code> used
+   * @param comparisonStrategy the <code>{@link Comparison}</code> used
    * @return the created <code>{@link ErrorMessageFactory}</code>
    */
   public static ErrorMessageFactory shouldBeSubsetOf(Object actual, Object values, Iterable<?> unexpected,
-      ComparisonStrategy comparisonStrategy) {
+      Comparison comparisonStrategy) {
     return new ShouldBeSubsetOf(actual, values, unexpected, comparisonStrategy);
   }
 
@@ -43,10 +43,10 @@ public class ShouldBeSubsetOf extends BasicErrorMessageFactory {
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldBeSubsetOf(Object actual, Object values, Iterable<?> unexpected) {
-    return new ShouldBeSubsetOf(actual, values, unexpected, StandardComparisonStrategy.instance());
+    return new ShouldBeSubsetOf(actual, values, unexpected, EqualityComparison.instance());
   }
 
-  private ShouldBeSubsetOf(Object actual, Object values, Iterable<?> unexpected, ComparisonStrategy comparisonStrategy) {
+  private ShouldBeSubsetOf(Object actual, Object values, Iterable<?> unexpected, Comparison comparisonStrategy) {
     super("expecting%s:\n<%s>\n to be subset of\n<%s>\n but found those extra elements:\n<%s>", comparisonStrategy, actual,
         values, unexpected);
   }

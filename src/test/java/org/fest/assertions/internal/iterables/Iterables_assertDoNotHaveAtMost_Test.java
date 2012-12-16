@@ -16,7 +16,7 @@ package org.fest.assertions.internal.iterables;
 
 import static org.fest.assertions.error.ElementsShouldNotHaveAtMost.elementsShouldNotHaveAtMost;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Lists.newArrayList;
 
 import static org.mockito.Mockito.verify;
@@ -24,12 +24,12 @@ import static org.mockito.Mockito.verify;
 import org.junit.Test;
 
 import org.fest.assertions.core.AssertionInfo;
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.assertions.internal.Iterables;
 import org.fest.assertions.internal.IterablesWithConditionsBaseTest;
 
 /**
- * Tests for <code>{@link Iterables#assertDoNotHaveAtMost(AssertionInfo, Iterable, Condition, int)}</code> .
+ * Tests for <code>{@link Iterables#assertDoNotHaveAtMost(AssertionInfo, Iterable, Matcher, int)}</code> .
  * 
  * @author Nicolas François
  * @author Mikhail Mazursky
@@ -71,7 +71,7 @@ public class Iterables_assertDoNotHaveAtMost_Test extends IterablesWithCondition
       verify(failures).failure(info, elementsShouldNotHaveAtMost(actual, 2, jediPower));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

@@ -221,7 +221,7 @@ public class ShortArrayAssert extends AbstractAssert<ShortArrayAssert, short[]> 
 
   /** {@inheritDoc} */
   public ShortArrayAssert usingElementComparator(Comparator<? super Short> customComparator) {
-    this.arrays = new ShortArrays(new ComparatorBasedComparisonStrategy(customComparator));
+    this.arrays = new ShortArrays(new ComparatorComparison(customComparator));
     return myself;
   }
 

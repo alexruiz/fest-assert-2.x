@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.fest.assertions.api.Fail;
 
 /**
- * Tests for <code>{@link ShouldBeEqual}</code> related to AssertionError stack trace filtering.
+ * Tests for <code>{@link NotEqualErrorFactory}</code> related to AssertionError stack trace filtering.
  * 
  * @author Joel Costigliola
  */

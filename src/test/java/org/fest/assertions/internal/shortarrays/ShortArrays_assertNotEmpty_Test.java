@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.shortarrays;
 
 import static org.fest.assertions.error.ShouldNotBeEmpty.shouldNotBeEmpty;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ShortArrays.*;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -51,11 +51,11 @@ public class ShortArrays_assertNotEmpty_Test extends ShortArraysBaseTest {
       verify(failures).failure(info, shouldNotBeEmpty());
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_is_not_empty() {
-    arrays.assertNotEmpty(someInfo(), arrayOf(8));
+    arrays.assertNotEmpty(someInfo(), newArray(8));
   }
 }

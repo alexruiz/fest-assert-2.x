@@ -14,11 +14,11 @@
  */
 package org.fest.assertions.internal.booleanarrays;
 
-import static org.fest.assertions.error.ShouldBeEmpty.shouldBeEmpty;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.error.NotEmptyErrorMessageFactory.shouldBeEmpty;
 import static org.fest.assertions.test.BooleanArrays.emptyArray;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -52,7 +52,7 @@ public class BooleanArrays_assertEmpty_Test extends BooleanArraysBaseTest {
       verify(failures).failure(info, shouldBeEmpty(actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

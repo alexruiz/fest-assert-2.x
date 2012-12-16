@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.dates;
 
 import static org.fest.assertions.error.ShouldBeInSameSecond.shouldBeInSameSecond;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.dateToCompareActualWithIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -52,7 +52,7 @@ public class Dates_assertIsInSameSecondAs_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldBeInSameSecond(actual, other));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -84,7 +84,7 @@ public class Dates_assertIsInSameSecondAs_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldBeInSameSecond(actual, other));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

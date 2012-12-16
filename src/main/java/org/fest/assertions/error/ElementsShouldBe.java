@@ -14,7 +14,7 @@
  */
 package org.fest.assertions.error;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 
 /**
  * Creates an error message indicating that an assertion that verifies that each element of a group satisfies a {@code Condition}
@@ -32,11 +32,11 @@ public class ElementsShouldBe extends BasicErrorMessageFactory {
    * @param condition the {@code Condition}.
    * @return the created {@code ErrorMessageFactory}.
    */
-  public static ErrorMessageFactory elementsShouldBe(Object actual, Object notSatisfies, Condition<?> condition) {
+  public static ErrorMessageFactory elementsShouldBe(Object actual, Object notSatisfies, Matcher<?> condition) {
     return new ElementsShouldBe(actual, notSatisfies, condition);
   }
 
-  private ElementsShouldBe(Object actual, Object notSatisfies, Condition<?> condition) {
+  private ElementsShouldBe(Object actual, Object notSatisfies, Matcher<?> condition) {
     super("expecting elements:\n<%s>\n of \n<%s>\n to be <%s>", notSatisfies, actual, condition);
   }
 

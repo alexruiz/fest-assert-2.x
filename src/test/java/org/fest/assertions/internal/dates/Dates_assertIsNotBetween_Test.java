@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.dates;
 
 import static org.fest.assertions.error.ShouldNotBeBetween.shouldNotBeBetween;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -55,7 +55,7 @@ public class Dates_assertIsNotBetween_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldNotBeBetween(actual, start, end, inclusiveStart, inclusiveEnd));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -72,7 +72,7 @@ public class Dates_assertIsNotBetween_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldNotBeBetween(actual, start, end, inclusiveStart, inclusiveEnd));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -89,7 +89,7 @@ public class Dates_assertIsNotBetween_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldNotBeBetween(actual, start, end, inclusiveStart, inclusiveEnd));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -154,7 +154,7 @@ public class Dates_assertIsNotBetween_Test extends DatesBaseTest {
           shouldNotBeBetween(actual, start, end, inclusiveStart, inclusiveEnd, yearAndMonthComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -172,7 +172,7 @@ public class Dates_assertIsNotBetween_Test extends DatesBaseTest {
           shouldNotBeBetween(actual, start, end, inclusiveStart, inclusiveEnd, yearAndMonthComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -190,7 +190,7 @@ public class Dates_assertIsNotBetween_Test extends DatesBaseTest {
           shouldNotBeBetween(actual, start, end, inclusiveStart, inclusiveEnd, yearAndMonthComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

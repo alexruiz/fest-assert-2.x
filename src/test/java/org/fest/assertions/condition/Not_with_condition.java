@@ -17,12 +17,12 @@ package org.fest.assertions.condition;
 import static junit.framework.Assert.assertEquals;
 import static org.fest.assertions.condition.Not.not;
 
-import org.fest.assertions.core.Condition;
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.Matcher;
+import org.fest.assertions.core.TestMatcher;
 import org.junit.Test;
 
 /**
- * Tests for <code>{@link Not#not(Condition)}</code>.
+ * Tests for <code>{@link Not#not(Matcher)}</code>.
  * 
  * @author Nicolas François
  */
@@ -30,8 +30,8 @@ public class Not_with_condition {
 
   @Test
   public void should_create_new_notOf_with_passed_Conditions() {
-    TestCondition<Object> condition = new TestCondition<Object>();
-    Condition<Object> created = not(condition);
+    TestMatcher<Object> condition = new TestMatcher<Object>();
+    Matcher<Object> created = not(condition);
     assertEquals(Not.class, created.getClass());
     Not<Object> not = (Not<Object>) created;
     assertEquals(condition, not.condition);

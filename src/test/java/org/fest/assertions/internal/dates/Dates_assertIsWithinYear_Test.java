@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.dates;
 
 import static org.fest.assertions.error.ShouldBeWithin.shouldBeWithin;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -46,7 +46,7 @@ public class Dates_assertIsWithinYear_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldBeWithin(actual, "year", year));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -70,7 +70,7 @@ public class Dates_assertIsWithinYear_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldBeWithin(actual, "year", year));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

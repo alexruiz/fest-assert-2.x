@@ -14,7 +14,7 @@
  */
 package org.fest.assertions.error;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 
 /**
  * Creates an error message indicating that an assertion that verifies elements of a group satisfies exactly n times a
@@ -33,11 +33,11 @@ public class ElementsShouldBeExactly extends BasicErrorMessageFactory {
    * @param condition the {@code Condition}.
    * @return the created {@code ErrorMessageFactory}.
    */
-  public static ErrorMessageFactory elementsShouldBeExactly(Object actual, int times, Condition<?> condition) {
+  public static ErrorMessageFactory elementsShouldBeExactly(Object actual, int times, Matcher<?> condition) {
     return new ElementsShouldBeExactly(actual, times, condition);
   }
 
-  private ElementsShouldBeExactly(Object actual, int times, Condition<?> condition) {
+  private ElementsShouldBeExactly(Object actual, int times, Matcher<?> condition) {
     super("expecting elements:\n<%s>\n to be exactly %s times <%s>", actual, times, condition);
   }
 }

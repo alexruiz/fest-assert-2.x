@@ -14,7 +14,7 @@
  */
 package org.fest.assertions.api.doublearray;
 
-import static org.fest.assertions.test.DoubleArrays.arrayOf;
+import static org.fest.assertions.test.DoubleArrays.newArray;
 import static org.mockito.Mockito.verify;
 
 import org.fest.assertions.api.DoubleArrayAssert;
@@ -34,6 +34,6 @@ public class DoubleArrayAssert_containsSequence_Test extends DoubleArrayAssertBa
 
   @Override
   protected void verify_internal_effects() {
-    verify(arrays).assertContainsSequence(getInfo(assertions), getActual(assertions), arrayOf(6d, 8d));
+    verify(arrays).assertContainsSequence(getInfo(assertions), getActual(assertions), newArray(6d, 8d));
   }
 }

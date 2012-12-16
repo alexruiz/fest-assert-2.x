@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.dates;
 
 import static org.fest.assertions.error.ShouldBeCloseTo.shouldBeCloseTo;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.dateToCompareActualWithIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -59,7 +59,7 @@ public class Dates_assertIsCloseTo_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldBeCloseTo(actual, other, delta, 101));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -88,7 +88,7 @@ public class Dates_assertIsCloseTo_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldBeCloseTo(actual, other, delta, 101));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

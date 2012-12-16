@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.floatarrays;
 
 import static org.fest.assertions.error.ShouldContain.shouldContain;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.FloatArrays.*;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Sets.newLinkedHashSet;
 
 import static org.mockito.Mockito.verify;
@@ -40,28 +40,28 @@ public class FloatArrays_assertContains_Test extends FloatArraysBaseTest {
 
   @Test
   public void should_pass_if_actual_contains_given_values() {
-    arrays.assertContains(someInfo(), actual, arrayOf(6f));
+    arrays.assertContains(someInfo(), actual, newArray(6f));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_in_different_order() {
-    arrays.assertContains(someInfo(), actual, arrayOf(8f, 10f));
+    arrays.assertContains(someInfo(), actual, newArray(8f, 10f));
   }
 
   @Test
   public void should_pass_if_actual_contains_all_given_values() {
-    arrays.assertContains(someInfo(), actual, arrayOf(6f, 8f, 10f));
+    arrays.assertContains(someInfo(), actual, newArray(6f, 8f, 10f));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_more_than_once() {
-    actual = arrayOf(6f, 8f, 10f, 10f, 8f);
-    arrays.assertContains(someInfo(), actual, arrayOf(8f));
+    actual = newArray(6f, 8f, 10f, 10f, 8f);
+    arrays.assertContains(someInfo(), actual, newArray(8f));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_even_if_duplicated() {
-    arrays.assertContains(someInfo(), actual, arrayOf(6f, 6f));
+    arrays.assertContains(someInfo(), actual, newArray(6f, 6f));
   }
 
   @Test
@@ -79,7 +79,7 @@ public class FloatArrays_assertContains_Test extends FloatArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertContains(someInfo(), null, arrayOf(8f));
+    arrays.assertContains(someInfo(), null, newArray(8f));
   }
 
   @Test
@@ -92,33 +92,33 @@ public class FloatArrays_assertContains_Test extends FloatArraysBaseTest {
       verify(failures).failure(info, shouldContain(actual, expected, newLinkedHashSet(9f)));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContains(someInfo(), actual, arrayOf(6f));
+    arraysWithCustomComparisonStrategy.assertContains(someInfo(), actual, newArray(6f));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_in_different_order_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContains(someInfo(), actual, arrayOf(-8f, 10f));
+    arraysWithCustomComparisonStrategy.assertContains(someInfo(), actual, newArray(-8f, 10f));
   }
 
   @Test
   public void should_pass_if_actual_contains_all_given_values_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContains(someInfo(), actual, arrayOf(6f, -8f, 10f));
+    arraysWithCustomComparisonStrategy.assertContains(someInfo(), actual, newArray(6f, -8f, 10f));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_more_than_once_according_to_custom_comparison_strategy() {
-    actual = arrayOf(6f, -8f, 10f, 10f, -8f);
-    arraysWithCustomComparisonStrategy.assertContains(someInfo(), actual, arrayOf(-8f));
+    actual = newArray(6f, -8f, 10f, 10f, -8f);
+    arraysWithCustomComparisonStrategy.assertContains(someInfo(), actual, newArray(-8f));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_even_if_duplicated_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContains(someInfo(), actual, arrayOf(6f, 6f));
+    arraysWithCustomComparisonStrategy.assertContains(someInfo(), actual, newArray(6f, 6f));
   }
 
   @Test
@@ -136,7 +136,7 @@ public class FloatArrays_assertContains_Test extends FloatArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null_whatever_custom_comparison_strategy_is() {
     thrown.expectAssertionError(actualIsNull());
-    arraysWithCustomComparisonStrategy.assertContains(someInfo(), null, arrayOf(-8f));
+    arraysWithCustomComparisonStrategy.assertContains(someInfo(), null, newArray(-8f));
   }
 
   @Test
@@ -149,6 +149,6 @@ public class FloatArrays_assertContains_Test extends FloatArraysBaseTest {
       verify(failures).failure(info, shouldContain(actual, expected, newLinkedHashSet(9f), absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

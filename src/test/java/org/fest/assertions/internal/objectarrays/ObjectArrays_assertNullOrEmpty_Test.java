@@ -14,10 +14,10 @@
  */
 package org.fest.assertions.internal.objectarrays;
 
-import static org.fest.assertions.error.ShouldBeNullOrEmpty.shouldBeNullOrEmpty;
+import static org.fest.assertions.error.NotNullOrEmptyErrorMessageFactory.shouldBeNullOrEmpty;
 import static org.fest.assertions.test.ObjectArrays.emptyArray;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -45,7 +45,7 @@ public class ObjectArrays_assertNullOrEmpty_Test extends ObjectArraysBaseTest {
       verify(failures).failure(info, shouldBeNullOrEmpty(actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.longarrays;
 
 import static org.fest.assertions.error.ShouldHaveSize.shouldHaveSize;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -50,7 +50,7 @@ public class LongArrays_assertHasSize_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldHaveSize(actual, actual.length, 2));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

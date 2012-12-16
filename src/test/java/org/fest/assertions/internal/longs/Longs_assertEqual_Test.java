@@ -14,10 +14,10 @@
  */
 package org.fest.assertions.internal.longs;
 
-import static org.fest.assertions.error.ShouldBeEqual.shouldBeEqual;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.error.NotEqualErrorFactory.shouldBeEqual;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -55,7 +55,7 @@ public class Longs_assertEqual_Test extends LongsBaseTest {
       verify(failures).failure(info, shouldBeEqual(6L, 8L));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -78,6 +78,6 @@ public class Longs_assertEqual_Test extends LongsBaseTest {
       verify(failures).failure(info, shouldBeEqual(6L, 8L, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

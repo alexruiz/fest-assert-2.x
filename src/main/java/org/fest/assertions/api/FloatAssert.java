@@ -155,7 +155,7 @@ public class FloatAssert extends AbstractComparableAssert<FloatAssert, Float> im
    * @throws AssertionError if the actual value is greater than the given one.
    */
   public FloatAssert isLessThanOrEqualTo(float other) {
-    floats.assertLessThanOrEqualTo(info, actual, other);
+    floats.assertNotGreaterThan(info, actual, other);
     return this;
   }
 
@@ -179,14 +179,14 @@ public class FloatAssert extends AbstractComparableAssert<FloatAssert, Float> im
    * @throws AssertionError if the actual value is less than the given one.
    */
   public FloatAssert isGreaterThanOrEqualTo(float other) {
-    floats.assertGreaterThanOrEqualTo(info, actual, other);
+    floats.assertNotLessThan(info, actual, other);
     return this;
   }
 
   @Override
   public FloatAssert usingComparator(Comparator<? super Float> customComparator) {
     super.usingComparator(customComparator);
-    this.floats = new Floats(new ComparatorBasedComparisonStrategy(customComparator));
+    this.floats = new Floats(new ComparatorComparison(customComparator));
     return myself;
   }
 

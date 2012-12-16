@@ -14,11 +14,11 @@
  */
 package org.fest.assertions.internal.doublearrays;
 
-import static org.fest.assertions.error.ShouldBeEmpty.shouldBeEmpty;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.error.NotEmptyErrorMessageFactory.shouldBeEmpty;
 import static org.fest.assertions.test.DoubleArrays.emptyArray;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -52,7 +52,7 @@ public class DoubleArrays_assertEmpty_Test extends DoubleArraysBaseTest {
       verify(failures).failure(info, shouldBeEmpty(actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

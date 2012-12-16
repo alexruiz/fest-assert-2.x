@@ -28,10 +28,10 @@ public class ShouldBeInThePast extends BasicErrorMessageFactory {
   /**
    * Creates a new </code>{@link ShouldBeInThePast}</code>.
    * @param actual the actual value in the failed assertion.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
-  public static ErrorMessageFactory shouldBeInThePast(Date actual, ComparisonStrategy comparisonStrategy) {
+  public static ErrorMessageFactory shouldBeInThePast(Date actual, Comparison comparisonStrategy) {
     return new ShouldBeInThePast(actual, comparisonStrategy);
   }
 
@@ -41,10 +41,10 @@ public class ShouldBeInThePast extends BasicErrorMessageFactory {
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldBeInThePast(Date actual) {
-    return new ShouldBeInThePast(actual, StandardComparisonStrategy.instance());
+    return new ShouldBeInThePast(actual, EqualityComparison.instance());
   }
 
-  private ShouldBeInThePast(Date actual, ComparisonStrategy comparisonStrategy) {
+  private ShouldBeInThePast(Date actual, Comparison comparisonStrategy) {
     super("expected:<%s> to be in the past%s but was not.", actual, comparisonStrategy);
   }
 }

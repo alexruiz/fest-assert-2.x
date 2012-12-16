@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.intarrays;
 
 import static org.fest.assertions.error.ShouldNotContain.shouldNotContain;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.IntArrays.*;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Sets.newLinkedHashSet;
 
 import static org.mockito.Mockito.verify;
@@ -40,12 +40,12 @@ public class IntArrays_assertDoesNotContain_Test extends IntArraysBaseTest {
 
   @Test
   public void should_pass_if_actual_does_not_contain_given_values() {
-    arrays.assertDoesNotContain(someInfo(), actual, arrayOf(12));
+    arrays.assertDoesNotContain(someInfo(), actual, newArray(12));
   }
 
   @Test
   public void should_pass_if_actual_does_not_contain_given_values_even_if_duplicated() {
-    arrays.assertDoesNotContain(someInfo(), actual, arrayOf(12, 12, 20));
+    arrays.assertDoesNotContain(someInfo(), actual, newArray(12, 12, 20));
   }
 
   @Test
@@ -63,7 +63,7 @@ public class IntArrays_assertDoesNotContain_Test extends IntArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertDoesNotContain(someInfo(), null, arrayOf(8));
+    arrays.assertDoesNotContain(someInfo(), null, newArray(8));
   }
 
   @Test
@@ -76,17 +76,17 @@ public class IntArrays_assertDoesNotContain_Test extends IntArraysBaseTest {
       verify(failures).failure(info, shouldNotContain(actual, expected, newLinkedHashSet(6, 8)));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_does_not_contain_given_values_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertDoesNotContain(someInfo(), actual, arrayOf(12));
+    arraysWithCustomComparisonStrategy.assertDoesNotContain(someInfo(), actual, newArray(12));
   }
 
   @Test
   public void should_pass_if_actual_does_not_contain_given_values_even_if_duplicated_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertDoesNotContain(someInfo(), actual, arrayOf(12, 12, 20));
+    arraysWithCustomComparisonStrategy.assertDoesNotContain(someInfo(), actual, newArray(12, 12, 20));
   }
 
   @Test
@@ -104,7 +104,7 @@ public class IntArrays_assertDoesNotContain_Test extends IntArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null_whatever_custom_comparison_strategy_is() {
     thrown.expectAssertionError(actualIsNull());
-    arraysWithCustomComparisonStrategy.assertDoesNotContain(someInfo(), null, arrayOf(-8));
+    arraysWithCustomComparisonStrategy.assertDoesNotContain(someInfo(), null, newArray(-8));
   }
 
   @Test
@@ -117,6 +117,6 @@ public class IntArrays_assertDoesNotContain_Test extends IntArraysBaseTest {
       verify(failures).failure(info, shouldNotContain(actual, expected, newLinkedHashSet(6, -8), absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

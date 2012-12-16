@@ -47,10 +47,10 @@ public class ShortArrays {
 
   @VisibleForTesting
   ShortArrays() {
-    this(StandardComparisonStrategy.instance());
+    this(EqualityComparison.instance());
   }
 
-  public ShortArrays(ComparisonStrategy comparisonStrategy) {
+  public ShortArrays(Comparison comparisonStrategy) {
     this.arrays = new Arrays(comparisonStrategy);
   }
 

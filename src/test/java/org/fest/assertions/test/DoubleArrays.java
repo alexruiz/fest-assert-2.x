@@ -20,7 +20,7 @@ package org.fest.assertions.test;
 public final class DoubleArrays {
   private static final double[] EMPTY = {};
 
-  public static double[] arrayOf(double... values) {
+  public static double[] newArray(double...values) {
     return values;
   }
 

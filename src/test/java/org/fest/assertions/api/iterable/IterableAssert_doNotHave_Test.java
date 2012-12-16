@@ -19,22 +19,22 @@ import static org.mockito.Mockito.verify;
 import org.fest.assertions.api.AbstractIterableAssert;
 import org.fest.assertions.api.ConcreteIterableAssert;
 import org.fest.assertions.api.IterableAssertBaseTest;
-import org.fest.assertions.core.Condition;
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.Matcher;
+import org.fest.assertions.core.TestMatcher;
 import org.junit.BeforeClass;
 
 /**
- * Tests for <code>{@link AbstractIterableAssert#doNotHave(org.fest.assertions.core.Condition)}</code>.
+ * Tests for <code>{@link AbstractIterableAssert#doNotHave(org.fest.assertions.core.Matcher)}</code>.
  * 
  * @author Nicolas François
  */
 public class IterableAssert_doNotHave_Test extends IterableAssertBaseTest {
 
-  private static Condition<Object> condition;
+  private static Matcher<Object> condition;
 
   @BeforeClass
   public static void beforeOnce() {
-    condition = new TestCondition<Object>();
+    condition = new TestMatcher<Object>();
   }
 
   @Override

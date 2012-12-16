@@ -157,7 +157,7 @@ public class DoubleAssert extends AbstractComparableAssert<DoubleAssert, Double>
    * @throws AssertionError if the actual value is greater than the given one.
    */
   public DoubleAssert isLessThanOrEqualTo(double other) {
-    doubles.assertLessThanOrEqualTo(info, actual, other);
+    doubles.assertNotGreaterThan(info, actual, other);
     return this;
   }
 
@@ -181,14 +181,14 @@ public class DoubleAssert extends AbstractComparableAssert<DoubleAssert, Double>
    * @throws AssertionError if the actual value is less than the given one.
    */
   public DoubleAssert isGreaterThanOrEqualTo(double other) {
-    doubles.assertGreaterThanOrEqualTo(info, actual, other);
+    doubles.assertNotLessThan(info, actual, other);
     return this;
   }
 
   @Override
   public DoubleAssert usingComparator(Comparator<? super Double> customComparator) {
     super.usingComparator(customComparator);
-    this.doubles = new Doubles(new ComparatorBasedComparisonStrategy(customComparator));
+    this.doubles = new Doubles(new ComparatorComparison(customComparator));
     return myself;
   }
 

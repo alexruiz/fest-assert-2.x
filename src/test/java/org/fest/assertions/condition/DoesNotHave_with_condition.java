@@ -20,11 +20,11 @@ import static org.fest.assertions.condition.DoesNotHave.doesNotHave;
 
 import org.junit.Test;
 
-import org.fest.assertions.core.Condition;
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.Matcher;
+import org.fest.assertions.core.TestMatcher;
 
 /**
- * Tests for <code>{@link DoesNotHave#doesNotHave(Condition)}</code>.
+ * Tests for <code>{@link DoesNotHave#doesNotHave(Matcher)}</code>.
  * 
  * @author Nicolas François
  */
@@ -32,8 +32,8 @@ public class DoesNotHave_with_condition {
 
   @Test
   public void should_create_new_doesNotHave_with_passed_Condition() {
-    TestCondition<Object> condition = new TestCondition<Object>();
-    Condition<Object> created = doesNotHave(condition);
+    TestMatcher<Object> condition = new TestMatcher<Object>();
+    Matcher<Object> created = doesNotHave(condition);
     assertEquals(DoesNotHave.class, created.getClass());
     DoesNotHave<Object> doesNotHave = (DoesNotHave<Object>) created;
     assertEquals(condition, doesNotHave.condition);

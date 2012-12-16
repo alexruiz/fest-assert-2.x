@@ -15,16 +15,17 @@
 package org.fest.assertions.condition;
 
 import static junit.framework.Assert.assertEquals;
-import static org.fest.assertions.test.ExpectedException.none;
+
+import static org.fest.test.ExpectedException.none;
 import static org.fest.util.Arrays.array;
 import static org.fest.util.Lists.newArrayList;
 
 import org.fest.assertions.core.*;
-import org.fest.assertions.test.ExpectedException;
+import org.fest.test.ExpectedException;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link AnyOf#anyOf(Condition...)}</code>.
+ * Tests for <code>{@link AnyOf#anyOf(Matcher...)}</code>.
  * 
  * @author Yvonne Wang
  */
@@ -36,8 +37,8 @@ public class AnyOf_anyOf_with_array_Test {
   @SuppressWarnings("unchecked")
   @Test
   public void should_create_new_AnyOf_with_passed_Conditions() {
-    Condition<Object>[] conditions = array(new TestCondition<Object>(), new TestCondition<Object>());
-    Condition<Object> created = AnyOf.anyOf(conditions);
+    Matcher<Object>[] conditions = array(new TestMatcher<Object>(), new TestMatcher<Object>());
+    Matcher<Object> created = AnyOf.anyOf(conditions);
     assertEquals(AnyOf.class, created.getClass());
     AnyOf<Object> anyOf = (AnyOf<Object>) created;
     assertEquals(newArrayList(conditions), anyOf.conditions);

@@ -21,21 +21,21 @@ import org.junit.BeforeClass;
 import org.fest.assertions.api.AbstractIterableAssert;
 import org.fest.assertions.api.ConcreteIterableAssert;
 import org.fest.assertions.api.IterableAssertBaseTest;
-import org.fest.assertions.core.Condition;
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.Matcher;
+import org.fest.assertions.core.TestMatcher;
 
 /**
- * Tests for <code>{@link AbstractIterableAssert#areAtMost(Condition, int)}</code>.
+ * Tests for <code>{@link AbstractIterableAssert#areAtMost(Matcher, int)}</code>.
  * 
  * @author Nicolas François
  */
 public class IterableAssert_haveAtMost_Test extends IterableAssertBaseTest {
 
-  private static Condition<Object> condition;
+  private static Matcher<Object> condition;
 
   @BeforeClass
   public static void beforeOnce() {
-    condition = new TestCondition<Object>();
+    condition = new TestMatcher<Object>();
   }
 
   @Override

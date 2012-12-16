@@ -17,7 +17,7 @@ package org.fest.assertions.api;
 import java.util.Comparator;
 import java.util.List;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.assertions.core.IndexedObjectEnumerableAssert;
 import org.fest.assertions.data.Index;
 import org.fest.assertions.internal.*;
@@ -71,7 +71,7 @@ public class ListAssert<T> extends AbstractIterableAssert<ListAssert<T>, List<T>
    * @throws AssertionError if the value in the given {@code List} at the given index does not satisfy the given {@code Condition}
    *           .
    */
-  public ListAssert<T> has(Condition<? super T> condition, Index index) {
+  public ListAssert<T> has(Matcher<? super T> condition, Index index) {
     lists.assertHas(info, actual, condition, index);
     return this;
   }
@@ -89,7 +89,7 @@ public class ListAssert<T> extends AbstractIterableAssert<ListAssert<T>, List<T>
    * @throws AssertionError if the value in the given {@code List} at the given index does not satisfy the given {@code Condition}
    *           .
    */
-  public ListAssert<T> is(Condition<? super T> condition, Index index) {
+  public ListAssert<T> is(Matcher<? super T> condition, Index index) {
     lists.assertIs(info, actual, condition, index);
     return this;
   }
@@ -140,7 +140,7 @@ public class ListAssert<T> extends AbstractIterableAssert<ListAssert<T>, List<T>
   @Override
   public ListAssert<T> usingElementComparator(Comparator<? super T> customComparator) {
     super.usingElementComparator(customComparator);
-    this.lists = new Lists(new ComparatorBasedComparisonStrategy(customComparator));
+    this.lists = new Lists(new ComparatorComparison(customComparator));
     return myself;
   }
 

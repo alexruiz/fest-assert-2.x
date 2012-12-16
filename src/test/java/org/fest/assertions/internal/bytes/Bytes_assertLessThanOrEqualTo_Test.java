@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.bytes;
 
 import static org.fest.assertions.error.ShouldBeLessOrEqual.shouldBeLessOrEqual;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -28,7 +28,7 @@ import org.fest.assertions.internal.Bytes;
 import org.fest.assertions.internal.BytesBaseTest;
 
 /**
- * Tests for <code>{@link Bytes#assertLessThanOrEqualTo(AssertionInfo, Byte, byte)}</code>.
+ * Tests for <code>{@link Bytes#assertNotGreaterThan(AssertionInfo, Byte, byte)}</code>.
  * 
  * @author Alex Ruiz
  * @author Joel Costigliola
@@ -38,56 +38,56 @@ public class Bytes_assertLessThanOrEqualTo_Test extends BytesBaseTest {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    bytes.assertLessThanOrEqualTo(someInfo(), null, (byte) 8);
+    bytes.assertNotGreaterThan(someInfo(), null, (byte) 8);
   }
 
   @Test
   public void should_pass_if_actual_is_less_than_other() {
-    bytes.assertLessThanOrEqualTo(someInfo(), (byte) 6, (byte) 8);
+    bytes.assertNotGreaterThan(someInfo(), (byte) 6, (byte) 8);
   }
 
   @Test
   public void should_pass_if_actual_is_equal_to_other() {
-    bytes.assertLessThanOrEqualTo(someInfo(), (byte) 6, (byte) 6);
+    bytes.assertNotGreaterThan(someInfo(), (byte) 6, (byte) 6);
   }
 
   @Test
   public void should_fail_if_actual_is_greater_than_other() {
     AssertionInfo info = someInfo();
     try {
-      bytes.assertLessThanOrEqualTo(info, (byte) 8, (byte) 6);
+      bytes.assertNotGreaterThan(info, (byte) 8, (byte) 6);
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldBeLessOrEqual((byte) 8, (byte) 6));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_fail_if_actual_is_null_whatever_custom_comparison_strategy_is() {
     thrown.expectAssertionError(actualIsNull());
-    bytesWithAbsValueComparisonStrategy.assertLessThanOrEqualTo(someInfo(), null, (byte) 8);
+    bytesWithAbsValueComparisonStrategy.assertNotGreaterThan(someInfo(), null, (byte) 8);
   }
 
   @Test
   public void should_pass_if_actual_is_less_than_other_according_to_custom_comparison_strategy() {
-    bytesWithAbsValueComparisonStrategy.assertLessThanOrEqualTo(someInfo(), (byte) 6, (byte) -8);
+    bytesWithAbsValueComparisonStrategy.assertNotGreaterThan(someInfo(), (byte) 6, (byte) -8);
   }
 
   @Test
   public void should_pass_if_actual_is_equal_to_other_according_to_custom_comparison_strategy() {
-    bytesWithAbsValueComparisonStrategy.assertLessThanOrEqualTo(someInfo(), (byte) 6, (byte) -6);
+    bytesWithAbsValueComparisonStrategy.assertNotGreaterThan(someInfo(), (byte) 6, (byte) -6);
   }
 
   @Test
   public void should_fail_if_actual_is_greater_than_other_according_to_custom_comparison_strategy() {
     AssertionInfo info = someInfo();
     try {
-      bytesWithAbsValueComparisonStrategy.assertLessThanOrEqualTo(info, (byte) -8, (byte) 6);
+      bytesWithAbsValueComparisonStrategy.assertNotGreaterThan(info, (byte) -8, (byte) 6);
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldBeLessOrEqual((byte) -8, (byte) 6, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

@@ -16,10 +16,10 @@ package org.fest.assertions.internal.shortarrays;
 
 import static org.fest.assertions.data.Index.atIndex;
 import static org.fest.assertions.error.ShouldNotContainAtIndex.shouldNotContainAtIndex;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ShortArrays.emptyArray;
 import static org.fest.assertions.test.TestData.*;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -76,7 +76,7 @@ public class ShortArrays_assertDoesNotContain_at_Index_Test extends ShortArraysB
       verify(failures).failure(info, shouldNotContainAtIndex(actual, value, index));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -117,6 +117,6 @@ public class ShortArrays_assertDoesNotContain_at_Index_Test extends ShortArraysB
       verify(failures).failure(info, shouldNotContainAtIndex(actual, value, index, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

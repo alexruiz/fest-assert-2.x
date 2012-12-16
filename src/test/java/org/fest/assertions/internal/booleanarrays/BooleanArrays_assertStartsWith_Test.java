@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.booleanarrays;
 
 import static org.fest.assertions.error.ShouldStartWith.shouldStartWith;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.BooleanArrays.*;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -52,7 +52,7 @@ public class BooleanArrays_assertStartsWith_Test extends BooleanArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertStartsWith(someInfo(), null, arrayOf(true));
+    arrays.assertStartsWith(someInfo(), null, newArray(true));
   }
 
   @Test
@@ -65,7 +65,7 @@ public class BooleanArrays_assertStartsWith_Test extends BooleanArraysBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -78,7 +78,7 @@ public class BooleanArrays_assertStartsWith_Test extends BooleanArraysBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -91,7 +91,7 @@ public class BooleanArrays_assertStartsWith_Test extends BooleanArraysBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   private void verifyFailureThrownWhenSequenceNotFound(AssertionInfo info, boolean[] sequence) {
@@ -100,12 +100,12 @@ public class BooleanArrays_assertStartsWith_Test extends BooleanArraysBaseTest {
 
   @Test
   public void should_pass_if_actual_starts_with_sequence() {
-    arrays.assertStartsWith(someInfo(), actual, arrayOf(true, false));
+    arrays.assertStartsWith(someInfo(), actual, newArray(true, false));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal() {
-    actual = arrayOf(true, false, false, true);
-    arrays.assertStartsWith(someInfo(), actual, arrayOf(true, false, false, true));
+    actual = newArray(true, false, false, true);
+    arrays.assertStartsWith(someInfo(), actual, newArray(true, false, false, true));
   }
 }

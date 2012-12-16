@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.booleanarrays;
 
 import static org.fest.assertions.error.ShouldBeSorted.shouldBeSorted;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.BooleanArrays.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -55,7 +55,7 @@ public class BooleanArrays_assertIsSorted_Test extends BooleanArraysBaseTest {
 
   @Test
   public void should_pass_if_actual_contains_only_one_element() {
-    arrays.assertIsSorted(someInfo(), arrayOf(true));
+    arrays.assertIsSorted(someInfo(), newArray(true));
   }
 
   @Test
@@ -67,14 +67,14 @@ public class BooleanArrays_assertIsSorted_Test extends BooleanArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_not_sorted_in_ascending_order() {
     AssertionInfo info = someInfo();
-    actual = arrayOf(false, true, false);
+    actual = newArray(false, true, false);
     try {
       arrays.assertIsSorted(info, actual);
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldBeSorted(1, actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

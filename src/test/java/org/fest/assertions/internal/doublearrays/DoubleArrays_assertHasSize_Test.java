@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.doublearrays;
 
 import static org.fest.assertions.error.ShouldHaveSize.shouldHaveSize;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -50,7 +50,7 @@ public class DoubleArrays_assertHasSize_Test extends DoubleArraysBaseTest {
       verify(failures).failure(info, shouldHaveSize(actual, actual.length, 2));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

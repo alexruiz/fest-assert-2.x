@@ -20,7 +20,7 @@ package org.fest.assertions.test;
 public final class BooleanArrays {
   private static final boolean[] EMPTY = {};
 
-  public static boolean[] arrayOf(boolean... values) {
+  public static boolean[] newArray(boolean...values) {
     return values;
   }
 

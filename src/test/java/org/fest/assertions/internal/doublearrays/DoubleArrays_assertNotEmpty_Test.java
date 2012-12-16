@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.doublearrays;
 
 import static org.fest.assertions.error.ShouldNotBeEmpty.shouldNotBeEmpty;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.DoubleArrays.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -51,11 +51,11 @@ public class DoubleArrays_assertNotEmpty_Test extends DoubleArraysBaseTest {
       verify(failures).failure(info, shouldNotBeEmpty());
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_is_not_empty() {
-    arrays.assertNotEmpty(someInfo(), arrayOf(8d));
+    arrays.assertNotEmpty(someInfo(), newArray(8d));
   }
 }

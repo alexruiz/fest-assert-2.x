@@ -35,8 +35,8 @@ public class Floats extends RealNumbers<Float> {
   private static final Floats INSTANCE = new Floats();
 
   /**
-   * Returns the singleton instance of this class based on {@link StandardComparisonStrategy}.
-   * @return the singleton instance of this class based on {@link StandardComparisonStrategy}.
+   * Returns the singleton instance of this class based on {@link EqualityComparison}.
+   * @return the singleton instance of this class based on {@link EqualityComparison}.
    */
   public static Floats instance() {
     return INSTANCE;
@@ -47,7 +47,7 @@ public class Floats extends RealNumbers<Float> {
     super();
   }
 
-  public Floats(ComparisonStrategy comparisonStrategy) {
+  public Floats(Comparison comparisonStrategy) {
     super(comparisonStrategy);
   }
 

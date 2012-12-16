@@ -28,11 +28,11 @@ public class CharacterAssert_isLessThanOrEqualTo_char_Test extends CharacterAsse
 
   @Override
   protected CharacterAssert invoke_api_method() {
-    return assertions.isLessThanOrEqualTo('b');
+    return assertions.isNotGreaterThan('b');
   }
 
   @Override
   protected void verify_internal_effects() {
-    verify(characters).assertLessThanOrEqualTo(getInfo(assertions), getActual(assertions), 'b');
+    verify(characters).assertNotGreaterThan(getInfo(assertions), getActual(assertions), 'b');
   }
 }

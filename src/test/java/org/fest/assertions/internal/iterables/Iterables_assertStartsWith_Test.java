@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.iterables;
 
 import static org.fest.assertions.error.ShouldStartWith.shouldStartWith;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ObjectArrays.emptyArray;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Arrays.array;
 import static org.fest.util.Lists.newArrayList;
 
@@ -71,7 +71,7 @@ public class Iterables_assertStartsWith_Test extends IterablesBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -84,7 +84,7 @@ public class Iterables_assertStartsWith_Test extends IterablesBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -97,7 +97,7 @@ public class Iterables_assertStartsWith_Test extends IterablesBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   private void verifyFailureThrownWhenSequenceNotFound(AssertionInfo info, Object[] sequence) {
@@ -128,7 +128,7 @@ public class Iterables_assertStartsWith_Test extends IterablesBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence, comparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -141,7 +141,7 @@ public class Iterables_assertStartsWith_Test extends IterablesBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence, comparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

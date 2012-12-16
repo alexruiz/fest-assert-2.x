@@ -18,7 +18,7 @@ import java.util.Comparator;
 
 import org.fest.assertions.core.ArraySortedAssert;
 import org.fest.assertions.core.AssertionInfo;
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.assertions.data.Index;
 import org.fest.util.VisibleForTesting;
 
@@ -46,10 +46,10 @@ public class ObjectArrays {
 
   @VisibleForTesting
   ObjectArrays() {
-    this(StandardComparisonStrategy.instance());
+    this(EqualityComparison.instance());
   }
 
-  public ObjectArrays(ComparisonStrategy comparisonStrategy) {
+  public ObjectArrays(Comparison comparisonStrategy) {
     this.arrays = new Arrays(comparisonStrategy);
   }
 
@@ -62,7 +62,7 @@ public class ObjectArrays {
   Failures failures = Failures.instance();
 
   @VisibleForTesting
-  Conditions conditions = Conditions.instance();
+  Matchers conditions = Matchers.instance();
 
   /**
    * Asserts that the given array is {@code null} or empty.
@@ -296,7 +296,7 @@ public class ObjectArrays {
    * @throws NullPointerException if the given condition is {@code null}.
    * @throws AssertionError if one or more element not satisfy the given condition.
    */
-  public <E> void assertAre(AssertionInfo info, E[] actual, Condition<? super E> condition) {
+  public <E> void assertAre(AssertionInfo info, E[] actual, Matcher<? super E> condition) {
     arrays.assertAre(info, failures, conditions, actual, condition);
   }
 
@@ -308,7 +308,7 @@ public class ObjectArrays {
    * @throws NullPointerException if the given condition is {@code null}.
    * @throws AssertionError if one or more element satisfy the given condition.
    */
-  public <E> void assertAreNot(AssertionInfo info, E[] actual, Condition<? super E> condition) {
+  public <E> void assertAreNot(AssertionInfo info, E[] actual, Matcher<? super E> condition) {
     arrays.assertAreNot(info, failures, conditions, actual, condition);
   }
 
@@ -320,7 +320,7 @@ public class ObjectArrays {
    * @throws NullPointerException if the given condition is {@code null}.
    * @throws AssertionError if one or more element not satisfy the given condition.
    */
-  public <E> void assertHave(AssertionInfo info, E[] actual, Condition<? super E> condition) {
+  public <E> void assertHave(AssertionInfo info, E[] actual, Matcher<? super E> condition) {
     arrays.assertHave(info, failures, conditions, actual, condition);
   }
 
@@ -332,7 +332,7 @@ public class ObjectArrays {
    * @throws NullPointerException if the given condition is {@code null}.
    * @throws AssertionError if one or more element satisfy the given condition.
    */
-  public <E> void assertDoNotHave(AssertionInfo info, E[] actual, Condition<? super E> condition) {
+  public <E> void assertDoNotHave(AssertionInfo info, E[] actual, Matcher<? super E> condition) {
     arrays.assertHaveNot(info, failures, conditions, actual, condition);
   }
 
@@ -345,7 +345,7 @@ public class ObjectArrays {
    * @throws NullPointerException if the given condition is {@code null}.
    * @throws AssertionError if the number of elements satisfying the given condition is &lt; n.
    */
-  public <E> void assertAreAtLeast(AssertionInfo info, E[] actual, int n, Condition<? super E> condition) {
+  public <E> void assertAreAtLeast(AssertionInfo info, E[] actual, int n, Matcher<? super E> condition) {
     arrays.assertAreAtLeast(info, failures, conditions, actual, n, condition);
   }
 
@@ -358,7 +358,7 @@ public class ObjectArrays {
    * @throws NullPointerException if the given condition is {@code null}.
    * @throws AssertionError if the number of elements not satisfying the given condition is &lt; n.
    */
-  public <E> void assertAreNotAtLeast(AssertionInfo info, E[] actual, int n, Condition<? super E> condition) {
+  public <E> void assertAreNotAtLeast(AssertionInfo info, E[] actual, int n, Matcher<? super E> condition) {
     arrays.assertAreNotAtLeast(info, failures, conditions, actual, n, condition);
   }
 
@@ -371,7 +371,7 @@ public class ObjectArrays {
    * @throws NullPointerException if the given condition is {@code null}.
    * @throws AssertionError if the number of elements satisfying the given condition is &gt; n.
    */
-  public <E> void assertAreAtMost(AssertionInfo info, E[] actual, int n, Condition<? super E> condition) {
+  public <E> void assertAreAtMost(AssertionInfo info, E[] actual, int n, Matcher<? super E> condition) {
     arrays.assertAreAtMost(info, failures, conditions, actual, n, condition);
   }
 
@@ -384,7 +384,7 @@ public class ObjectArrays {
    * @throws NullPointerException if the given condition is {@code null}.
    * @throws AssertionError if the number of elements not satisfying the given condition is &gt; n.
    */
-  public <E> void assertAreNotAtMost(AssertionInfo info, E[] actual, int n, Condition<? super E> condition) {
+  public <E> void assertAreNotAtMost(AssertionInfo info, E[] actual, int n, Matcher<? super E> condition) {
     arrays.assertAreNotAtMost(info, failures, conditions, actual, n, condition);
   }
 
@@ -397,7 +397,7 @@ public class ObjectArrays {
    * @throws NullPointerException if the given condition is {@code null}.
    * @throws AssertionError if the number of elements satisfying the given condition is &ne; n.
    */
-  public <E> void assertAreExactly(AssertionInfo info, E[] actual, int n, Condition<? super E> condition) {
+  public <E> void assertAreExactly(AssertionInfo info, E[] actual, int n, Matcher<? super E> condition) {
     arrays.assertAreExactly(info, failures, conditions, actual, n, condition);
   }
 
@@ -411,55 +411,55 @@ public class ObjectArrays {
    * @throws NullPointerException if the given condition is {@code null}.
    * @throws AssertionError if the number of elements not satisfying the given condition is &ne; n.
    */
-  public <E> void assertAreNotExactly(AssertionInfo info, E[] actual, int n, Condition<? super E> condition) {
+  public <E> void assertAreNotExactly(AssertionInfo info, E[] actual, int n, Matcher<? super E> condition) {
     arrays.assertAreNotExactly(info, failures, conditions, actual, n, condition);
   }
 
   /**
-   * An alias method of {@link #assertAreAtLeast(AssertionInfo, Object[], int, Condition)} to provide a richer fluent api (same
+   * An alias method of {@link #assertAreAtLeast(AssertionInfo, Object[], int, Matcher)} to provide a richer fluent api (same
    * logic, only error message differs).
    */
-  public <E> void assertHaveAtLeast(AssertionInfo info, E[] actual, int times, Condition<? super E> condition) {
+  public <E> void assertHaveAtLeast(AssertionInfo info, E[] actual, int times, Matcher<? super E> condition) {
     arrays.assertHaveAtLeast(info, failures, conditions, actual, times, condition);
   }
 
   /**
-   * An alias method of {@link #assertAreNotAtLeast(AssertionInfo, Object[], int, Condition)} to provide a richer fluent api (same
+   * An alias method of {@link #assertAreNotAtLeast(AssertionInfo, Object[], int, Matcher)} to provide a richer fluent api (same
    * logic, only error message differs).
    */
-  public <E> void assertDoNotHaveAtLeast(AssertionInfo info, E[] actual, int times, Condition<? super E> condition) {
+  public <E> void assertDoNotHaveAtLeast(AssertionInfo info, E[] actual, int times, Matcher<? super E> condition) {
     arrays.assertDoNotHaveAtLeast(info, failures, conditions, actual, times, condition);
   }
 
   /**
-   * An alias method of {@link #assertAreAtMost(AssertionInfo, Object[], int, Condition)} to provide a richer fluent api (same
+   * An alias method of {@link #assertAreAtMost(AssertionInfo, Object[], int, Matcher)} to provide a richer fluent api (same
    * logic, only error message differs).
    */
-  public <E> void assertHaveAtMost(AssertionInfo info, E[] actual, int times, Condition<? super E> condition) {
+  public <E> void assertHaveAtMost(AssertionInfo info, E[] actual, int times, Matcher<? super E> condition) {
     arrays.assertHaveAtMost(info, failures, conditions, actual, times, condition);
   }
 
   /**
-   * An alias method of {@link #assertAreNotAtMost(AssertionInfo, Object[], int, Condition)} to provide a richer fluent api (same
+   * An alias method of {@link #assertAreNotAtMost(AssertionInfo, Object[], int, Matcher)} to provide a richer fluent api (same
    * logic, only error message differs).
    */
-  public <E> void assertDoNotHaveAtMost(AssertionInfo info, E[] actual, int times, Condition<? super E> condition) {
+  public <E> void assertDoNotHaveAtMost(AssertionInfo info, E[] actual, int times, Matcher<? super E> condition) {
     arrays.assertDoNotHaveAtMost(info, failures, conditions, actual, times, condition);
   }
 
   /**
-   * An alias method of {@link #assertAreExactly(AssertionInfo, Object[], int, Condition)} to provide a richer fluent api (same
+   * An alias method of {@link #assertAreExactly(AssertionInfo, Object[], int, Matcher)} to provide a richer fluent api (same
    * logic, only error message differs).
    */
-  public <E> void assertHaveExactly(AssertionInfo info, E[] actual, int times, Condition<? super E> condition) {
+  public <E> void assertHaveExactly(AssertionInfo info, E[] actual, int times, Matcher<? super E> condition) {
     arrays.assertHaveExactly(info, failures, conditions, actual, times, condition);
   }
 
   /**
-   * An alias method of {@link #assertAreNotExactly(AssertionInfo, Object[], int, Condition)} to provide a richer fluent api (same
+   * An alias method of {@link #assertAreNotExactly(AssertionInfo, Object[], int, Matcher)} to provide a richer fluent api (same
    * logic, only error message differs).
    */
-  public <E> void assertDoNotHaveExactly(AssertionInfo info, E[] actual, int times, Condition<? super E> condition) {
+  public <E> void assertDoNotHaveExactly(AssertionInfo info, E[] actual, int times, Matcher<? super E> condition) {
     arrays.assertDoNotHaveExactly(info, failures, conditions, actual, times, condition);
   }
 

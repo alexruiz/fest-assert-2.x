@@ -45,7 +45,7 @@ public class Characters extends Comparables {
     super();
   }
 
-  public Characters(ComparisonStrategy comparisonStrategy) {
+  public Characters(Comparison comparisonStrategy) {
     super(comparisonStrategy);
   }
 

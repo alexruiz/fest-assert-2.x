@@ -4,11 +4,11 @@ import static java.util.Collections.emptyList;
 
 import static org.fest.assertions.data.Index.atIndex;
 import static org.fest.assertions.error.ShouldHaveAtIndex.shouldHaveAtIndex;
-import static org.fest.util.FailureMessages.actualIsEmpty;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsEmpty;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someIndex;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Lists.newArrayList;
 
 import static org.mockito.Mockito.verify;
@@ -19,25 +19,25 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.fest.assertions.core.AssertionInfo;
-import org.fest.assertions.core.Condition;
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.Matcher;
+import org.fest.assertions.core.TestMatcher;
 import org.fest.assertions.data.Index;
 import org.fest.assertions.internal.Lists;
 import org.fest.assertions.internal.ListsBaseTest;
 
 /**
- * Tests for <code>{@link Lists#assertHas(AssertionInfo, List, Condition, Index)}</code>.
+ * Tests for <code>{@link Lists#assertHas(AssertionInfo, List, Matcher, Index)}</code>.
  * 
  * @author Bo Gotthardt
  */
 public class Lists_assertHas_Test extends ListsBaseTest {
 
-  private static TestCondition<String> condition;
+  private static TestMatcher<String> condition;
   private static List<String> actual = newArrayList("Yoda", "Luke", "Leia");
 
   @BeforeClass
   public static void setUpOnce() {
-    condition = new TestCondition<String>();
+    condition = new TestMatcher<String>();
   }
 
   @Test
@@ -82,7 +82,7 @@ public class Lists_assertHas_Test extends ListsBaseTest {
       verify(failures).failure(info, shouldHaveAtIndex(actual, condition, index, "Luke"));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

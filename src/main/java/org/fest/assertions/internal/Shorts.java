@@ -39,7 +39,7 @@ public class Shorts extends Numbers<Short> {
     super();
   }
 
-  public Shorts(ComparisonStrategy comparisonStrategy) {
+  public Shorts(Comparison comparisonStrategy) {
     super(comparisonStrategy);
   }
 

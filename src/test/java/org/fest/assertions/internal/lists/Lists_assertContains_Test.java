@@ -18,9 +18,9 @@ import static java.util.Collections.emptyList;
 
 import static org.fest.assertions.data.Index.atIndex;
 import static org.fest.assertions.error.ShouldContainAtIndex.shouldContainAtIndex;
-import static org.fest.util.FailureMessages.*;
+import static org.fest.assertions.test.FailureMessages.*;
 import static org.fest.assertions.test.TestData.*;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Lists.newArrayList;
 
 import static org.mockito.Mockito.verify;
@@ -78,7 +78,7 @@ public class Lists_assertContains_Test extends ListsBaseTest {
       verify(failures).failure(info, shouldContainAtIndex(actual, "Han", index, "Luke"));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -103,7 +103,7 @@ public class Lists_assertContains_Test extends ListsBaseTest {
       verify(failures).failure(info, shouldContainAtIndex(actual, "Han", index, "Luke", comparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

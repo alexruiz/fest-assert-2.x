@@ -47,10 +47,10 @@ public class ByteArrays {
 
   @VisibleForTesting
   ByteArrays() {
-    this(StandardComparisonStrategy.instance());
+    this(EqualityComparison.instance());
   }
 
-  public ByteArrays(ComparisonStrategy comparisonStrategy) {
+  public ByteArrays(Comparison comparisonStrategy) {
     this.arrays = new Arrays(comparisonStrategy);
   }
 

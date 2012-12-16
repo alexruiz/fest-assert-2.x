@@ -1,8 +1,8 @@
 package org.fest.assertions.internal;
 
 import static org.fest.assertions.data.MapEntry.entry;
-import static org.fest.assertions.test.ExpectedException.none;
-import static org.fest.assertions.test.Maps.mapOf;
+import static org.fest.assertions.test.Maps.newMap;
+import static org.fest.test.ExpectedException.none;
 
 import static org.mockito.Mockito.spy;
 
@@ -11,7 +11,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Rule;
 
-import org.fest.assertions.test.ExpectedException;
+import org.fest.test.ExpectedException;
 
 /**
  * Base class for {@link Maps} unit tests
@@ -32,7 +32,7 @@ public class MapsBaseTest {
   @SuppressWarnings("unchecked")
   @Before
   public void setUp() {
-    actual = (Map<String, String>) mapOf(entry("name", "Yoda"), entry("color", "green"));
+    actual = (Map<String, String>) newMap(entry("name", "Yoda"), entry("color", "green"));
     failures = spy(new Failures());
     maps = new Maps();
     maps.failures = failures;

@@ -16,11 +16,11 @@ package org.fest.assertions.internal.longarrays;
 
 import static org.fest.assertions.data.Index.atIndex;
 import static org.fest.assertions.error.ShouldNotContainAtIndex.shouldNotContainAtIndex;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.LongArrays.emptyArray;
 import static org.fest.assertions.test.TestData.someIndex;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -76,7 +76,7 @@ public class LongArrays_assertDoesNotContain_at_Index_Test extends LongArraysBas
       verify(failures).failure(info, shouldNotContainAtIndex(actual, 6L, index));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -116,6 +116,6 @@ public class LongArrays_assertDoesNotContain_at_Index_Test extends LongArraysBas
       verify(failures).failure(info, shouldNotContainAtIndex(actual, 6L, index, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

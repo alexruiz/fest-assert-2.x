@@ -16,18 +16,18 @@ package org.fest.assertions.condition;
 
 import java.util.Collection;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 
 /**
  * @author Yvonne Wang
  */
 public class ConcreteJoin extends Join<Object> {
 
-  public ConcreteJoin(Condition<Object>... conditions) {
+  public ConcreteJoin(Matcher<Object>... conditions) {
     super(conditions);
   }
 
-  public ConcreteJoin(Collection<Condition<Object>> conditions) {
+  public ConcreteJoin(Collection<Matcher<Object>> conditions) {
     super(conditions);
   }
 

@@ -30,8 +30,8 @@ import static org.fest.assertions.error.ElementsShouldNotHave.elementsShouldNotH
 import static org.fest.assertions.error.ElementsShouldNotHaveAtLeast.elementsShouldNotHaveAtLeast;
 import static org.fest.assertions.error.ElementsShouldNotHaveAtMost.elementsShouldNotHaveAtMost;
 import static org.fest.assertions.error.ElementsShouldNotHaveExactly.elementsShouldNotHaveExactly;
-import static org.fest.assertions.error.ShouldBeEmpty.shouldBeEmpty;
-import static org.fest.assertions.error.ShouldBeNullOrEmpty.shouldBeNullOrEmpty;
+import static org.fest.assertions.error.NotEmptyErrorMessageFactory.shouldBeEmpty;
+import static org.fest.assertions.error.NotNullOrEmptyErrorMessageFactory.shouldBeNullOrEmpty;
 import static org.fest.assertions.error.ShouldBeSubsetOf.shouldBeSubsetOf;
 import static org.fest.assertions.error.ShouldContain.shouldContain;
 import static org.fest.assertions.error.ShouldContainExactly.shouldContainExactly;
@@ -60,7 +60,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.fest.assertions.core.AssertionInfo;
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.util.VisibleForTesting;
 
 /**
@@ -77,35 +77,35 @@ public class Iterables {
   private static final Iterables INSTANCE = new Iterables();
 
   /**
-   * Returns the singleton instance of this class based on {@link StandardComparisonStrategy}.
+   * Returns the singleton instance of this class based on {@link EqualityComparison}.
    * 
-   * @return the singleton instance of this class based on {@link StandardComparisonStrategy}.
+   * @return the singleton instance of this class based on {@link EqualityComparison}.
    */
   public static Iterables instance() {
     return INSTANCE;
   }
 
-  private final ComparisonStrategy comparisonStrategy;
+  private final Comparison comparisonStrategy;
 
   @VisibleForTesting
   Failures failures = Failures.instance();
 
   @VisibleForTesting
-  Conditions conditions = Conditions.instance();
+  Matchers conditions = Matchers.instance();
 
   @VisibleForTesting
   Iterables() {
-    this(StandardComparisonStrategy.instance());
+    this(EqualityComparison.instance());
   }
 
-  public Iterables(ComparisonStrategy comparisonStrategy) {
+  public Iterables(Comparison comparisonStrategy) {
     this.comparisonStrategy = comparisonStrategy;
   }
 
   @VisibleForTesting
   public Comparator<?> getComparator() {
-    if (comparisonStrategy instanceof ComparatorBasedComparisonStrategy) {
-      return ((ComparatorBasedComparisonStrategy) comparisonStrategy).getComparator();
+    if (comparisonStrategy instanceof ComparatorComparison) {
+      return ((ComparatorComparison) comparisonStrategy).getComparator();
     }
     return null;
   }
@@ -245,14 +245,14 @@ public class Iterables {
   }
 
   /**
-   * Delegates to {@link ComparisonStrategy#iterableContains(Iterable, Object)}
+   * Delegates to {@link Comparison#iterableContains(Iterable, Object)}
    */
   private boolean iterableContains(Iterable<?> actual, Object value) {
     return comparisonStrategy.iterableContains(actual, value);
   }
 
   /**
-   * Delegates to {@link ComparisonStrategy#iterableRemoves(Iterable, Object)}
+   * Delegates to {@link Comparison#iterableRemoves(Iterable, Object)}
    */
   private void iterableRemoves(Iterable<?> actual, Object value) {
     comparisonStrategy.iterableRemoves(actual, value);
@@ -415,7 +415,7 @@ public class Iterables {
   }
 
   /**
-   * Delegates to {@link ComparisonStrategy#areEqual(Object, Object)}
+   * Delegates to {@link Comparison#areEqual(Object, Object)}
    */
   private boolean areEqual(Object actual, Object other) {
     return comparisonStrategy.areEqual(actual, other);
@@ -580,7 +580,7 @@ public class Iterables {
    * @throws AssertionError if a element cannot be cast to E.
    * @throws AssertionError if one or more element not satisfy the given condition.
    */
-  public <E> void assertAre(AssertionInfo info, Iterable<? extends E> actual, Condition<? super E> condition) {
+  public <E> void assertAre(AssertionInfo info, Iterable<? extends E> actual, Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -604,7 +604,7 @@ public class Iterables {
    * @throws AssertionError if a element cannot be cast to E.
    * @throws AssertionError if one or more element satisfy the given condition.
    */
-  public <E> void assertAreNot(AssertionInfo info, Iterable<? extends E> actual, Condition<? super E> condition) {
+  public <E> void assertAreNot(AssertionInfo info, Iterable<? extends E> actual, Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -628,7 +628,7 @@ public class Iterables {
    * @throws AssertionError if a element cannot be cast to E.
    * @throws AssertionError if one or more element not satisfy the given condition.
    */
-  public <E> void assertHave(AssertionInfo info, Iterable<? extends E> actual, Condition<? super E> condition) {
+  public <E> void assertHave(AssertionInfo info, Iterable<? extends E> actual, Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -652,7 +652,7 @@ public class Iterables {
    * @throws AssertionError if a element cannot be cast to E.
    * @throws AssertionError if one or more element satisfy the given condition.
    */
-  public <E> void assertDoNotHave(AssertionInfo info, Iterable<? extends E> actual, Condition<? super E> condition) {
+  public <E> void assertDoNotHave(AssertionInfo info, Iterable<? extends E> actual, Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -679,7 +679,7 @@ public class Iterables {
    * @throws AssertionError if the number of elements satisfying the given condition is &lt; n.
    */
   public <E> void assertAreAtLeast(AssertionInfo info, Iterable<? extends E> actual, int n,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -706,7 +706,7 @@ public class Iterables {
    * @throws AssertionError if the number of elements not satisfying the given condition is &lt; n.
    */
   public <E> void assertAreNotAtLeast(AssertionInfo info, Iterable<? extends E> actual, int n,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -733,7 +733,7 @@ public class Iterables {
    * @throws AssertionError if the number of elements satisfying the given condition is &gt; n.
    */
   public <E> void assertAreAtMost(AssertionInfo info, Iterable<? extends E> actual, int n,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -760,7 +760,7 @@ public class Iterables {
    * @throws AssertionError if the number of elements not satisfying the given condition is &gt; n.
    */
   public <E> void assertAreNotAtMost(AssertionInfo info, Iterable<? extends E> actual, int n,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -787,7 +787,7 @@ public class Iterables {
    * @throws AssertionError if the number of elements satisfying the given condition is &ne; n.
    */
   public <E> void assertAreExactly(AssertionInfo info, Iterable<? extends E> actual, int n,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -814,7 +814,7 @@ public class Iterables {
    * @throws AssertionError if the number of elements not satisfying the given condition is &ne; n.
    */
   public <E> void assertAreNotExactly(AssertionInfo info, Iterable<? extends E> actual, int n,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -829,11 +829,11 @@ public class Iterables {
   }
 
   /**
-   * An alias method of {@link #assertAreAtLeast(AssertionInfo, Iterable, int, Condition)} to provide a richer fluent
+   * An alias method of {@link #assertAreAtLeast(AssertionInfo, Iterable, int, Matcher)} to provide a richer fluent
    * api (same logic, only error message differs).
    */
   public <E> void assertHaveAtLeast(AssertionInfo info, Iterable<? extends E> actual, int times,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -848,11 +848,11 @@ public class Iterables {
   }
 
   /**
-   * An alias method of {@link #assertAreNotAtLeast(AssertionInfo, Iterable, int, Condition)} to provide a richer fluent
+   * An alias method of {@link #assertAreNotAtLeast(AssertionInfo, Iterable, int, Matcher)} to provide a richer fluent
    * api (same logic, only error message differs).
    */
   public <E> void assertDoNotHaveAtLeast(AssertionInfo info, Iterable<? extends E> actual, int times,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -867,11 +867,11 @@ public class Iterables {
   }
 
   /**
-   * An alias method of {@link #assertAreAtMost(AssertionInfo, Iterable, int, Condition)} to provide a richer fluent api
+   * An alias method of {@link #assertAreAtMost(AssertionInfo, Iterable, int, Matcher)} to provide a richer fluent api
    * (same logic, only error message differs).
    */
   public <E> void assertHaveAtMost(AssertionInfo info, Iterable<? extends E> actual, int times,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -886,11 +886,11 @@ public class Iterables {
   }
 
   /**
-   * An alias method of {@link #assertAreNotAtMost(AssertionInfo, Iterable, int, Condition)} to provide a richer fluent
+   * An alias method of {@link #assertAreNotAtMost(AssertionInfo, Iterable, int, Matcher)} to provide a richer fluent
    * api (same logic, only error message differs).
    */
   public <E> void assertDoNotHaveAtMost(AssertionInfo info, Iterable<? extends E> actual, int times,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -905,11 +905,11 @@ public class Iterables {
   }
 
   /**
-   * An alias method of {@link #assertAreExactly(AssertionInfo, Iterable, int, Condition)} to provide a richer fluent
+   * An alias method of {@link #assertAreExactly(AssertionInfo, Iterable, int, Matcher)} to provide a richer fluent
    * api (same logic, only error message differs).
    */
   public <E> void assertHaveExactly(AssertionInfo info, Iterable<? extends E> actual, int times,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -924,11 +924,11 @@ public class Iterables {
   }
 
   /**
-   * An alias method of {@link #assertAreNotExactly(AssertionInfo, Iterable, int, Condition)} to provide a richer fluent
+   * An alias method of {@link #assertAreNotExactly(AssertionInfo, Iterable, int, Matcher)} to provide a richer fluent
    * api (same logic, only error message differs).
    */
   public <E> void assertDoNotHaveExactly(AssertionInfo info, Iterable<? extends E> actual, int times,
-      Condition<? super E> condition) {
+      Matcher<? super E> condition) {
     assertNotNull(info, actual);
     conditions.assertIsNotNull(condition);
     try {
@@ -1019,7 +1019,7 @@ public class Iterables {
     return failures.failure(info, shouldEndWith(actual, sequence, comparisonStrategy));
   }
 
-  private <E> List<E> notSatisfiesCondition(Iterable<? extends E> actual, Condition<? super E> condition) {
+  private <E> List<E> notSatisfiesCondition(Iterable<? extends E> actual, Matcher<? super E> condition) {
     List<E> notSatisfiesCondition = new LinkedList<E>();
     for (E o : actual) {
       if (!condition.matches(o)) {
@@ -1029,7 +1029,7 @@ public class Iterables {
     return notSatisfiesCondition;
   }
 
-  private <E> List<E> satisfiesCondition(Iterable<? extends E> actual, Condition<? super E> condition) {
+  private <E> List<E> satisfiesCondition(Iterable<? extends E> actual, Matcher<? super E> condition) {
     List<E> satisfiesCondition = new LinkedList<E>();
     for (E o : actual) {
       if (condition.matches(o)) {

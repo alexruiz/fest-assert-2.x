@@ -14,8 +14,8 @@
  */
 package org.fest.assertions.api.filter;
 
-import org.fest.assertions.core.Condition;
-import org.fest.test.Player;
+import org.fest.assertions.core.Matcher;
+import org.fest.assertions.test.Player;
 
 /**
  * 
@@ -23,7 +23,7 @@ import org.fest.test.Player;
  * 
  * @author Joel Costigliola
  */
-public class PotentialMvpCondition extends Condition<Player> {
+public class PotentialMvpCondition extends Matcher<Player> {
 
   public PotentialMvpCondition() {
     super("is a potential MVP");

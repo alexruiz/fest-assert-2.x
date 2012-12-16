@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.bytearrays;
 
 import static org.fest.assertions.error.ShouldHaveSameSizeAs.shouldHaveSameSizeAs;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Lists.newArrayList;
 
 import static org.mockito.Mockito.verify;
@@ -54,7 +54,7 @@ public class ByteArrays_assertHasSameSizeAs_with_Iterable_Test extends ByteArray
       verify(failures).failure(info, shouldHaveSameSizeAs(actual, actual.length, other.size()));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

@@ -16,7 +16,7 @@ package org.fest.assertions.internal.iterables;
 
 import static org.fest.assertions.error.ElementsShouldNotHave.elementsShouldNotHave;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Lists.newArrayList;
 
 import static org.mockito.Mockito.verify;
@@ -63,7 +63,7 @@ public class Iterables_assertDoNotHave_Test extends IterablesWithConditionsBaseT
       verify(failures).failure(info, elementsShouldNotHave(actual, newArrayList("Yoda"), jediPower));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

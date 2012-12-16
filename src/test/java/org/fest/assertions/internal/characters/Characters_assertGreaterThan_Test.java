@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.characters;
 
 import static org.fest.assertions.error.ShouldBeGreater.shouldBeGreater;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -55,7 +55,7 @@ public class Characters_assertGreaterThan_Test extends CharactersBaseTest {
       verify(failures).failure(someInfo, shouldBeGreater('b', 'b'));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -67,7 +67,7 @@ public class Characters_assertGreaterThan_Test extends CharactersBaseTest {
       verify(failures).failure(info, shouldBeGreater('a', 'b'));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   // ------------------------------------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ public class Characters_assertGreaterThan_Test extends CharactersBaseTest {
       verify(failures).failure(someInfo, shouldBeGreater('B', 'b', caseInsensitiveComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -100,7 +100,7 @@ public class Characters_assertGreaterThan_Test extends CharactersBaseTest {
       verify(failures).failure(info, shouldBeGreater('A', 'b', caseInsensitiveComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

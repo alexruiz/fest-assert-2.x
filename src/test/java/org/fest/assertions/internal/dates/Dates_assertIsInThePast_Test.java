@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.dates;
 
 import static org.fest.assertions.error.ShouldBeInThePast.shouldBeInThePast;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Dates.monthOf;
 
 import static org.mockito.Mockito.verify;
@@ -48,7 +48,7 @@ public class Dates_assertIsInThePast_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldBeInThePast(actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -61,7 +61,7 @@ public class Dates_assertIsInThePast_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldBeInThePast(actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -86,7 +86,7 @@ public class Dates_assertIsInThePast_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldBeInThePast(actual, yearAndMonthComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -107,7 +107,7 @@ public class Dates_assertIsInThePast_Test extends DatesBaseTest {
       verify(failures).failure(info, shouldBeInThePast(actual, yearAndMonthComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

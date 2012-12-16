@@ -17,10 +17,10 @@ package org.fest.assertions.internal.floats;
 import static org.fest.assertions.api.Assertions.*;
 import static org.fest.assertions.data.Offset.offset;
 import static org.fest.assertions.error.ShouldBeEqualWithinOffset.shouldBeEqual;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.offsetIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -65,7 +65,7 @@ public class Floats_assertEqual_float_with_offset_Test extends FloatsBaseTest {
       verify(failures).failure(info, shouldBeEqual(6f, 8f, offset, 2f));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -112,7 +112,7 @@ public class Floats_assertEqual_float_with_offset_Test extends FloatsBaseTest {
       verify(failures).failure(info, shouldBeEqual(6f, 8f, offset, 2f));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

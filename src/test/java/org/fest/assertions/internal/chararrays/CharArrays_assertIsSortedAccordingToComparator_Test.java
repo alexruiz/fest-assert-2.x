@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.chararrays;
 
 import static org.fest.assertions.error.ShouldBeSorted.shouldBeSortedAccordingToGivenComparator;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.CharArrays.emptyArray;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -91,7 +91,7 @@ public class CharArrays_assertIsSortedAccordingToComparator_Test extends CharArr
       verify(failures).failure(info, shouldBeSortedAccordingToGivenComparator(2, actual, charDescendingOrderComparator));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

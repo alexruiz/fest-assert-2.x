@@ -28,11 +28,11 @@ public class IntegerAssert_isLessThanOrEqualTo_int_Test extends IntegerAssertBas
 
   @Override
   protected IntegerAssert invoke_api_method() {
-    return assertions.isLessThanOrEqualTo(8);
+    return assertions.isNotGreaterThan(8);
   }
 
   @Override
   protected void verify_internal_effects() {
-    verify(integers).assertLessThanOrEqualTo(getInfo(assertions), getActual(assertions), 8);
+    verify(integers).assertNotGreaterThan(getInfo(assertions), getActual(assertions), 8);
   }
 }

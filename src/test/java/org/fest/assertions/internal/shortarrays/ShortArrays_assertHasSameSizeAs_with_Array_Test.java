@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.shortarrays;
 
 import static org.fest.assertions.error.ShouldHaveSameSizeAs.shouldHaveSameSizeAs;
-import static org.fest.assertions.test.ShortArrays.arrayOf;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.ShortArrays.newArray;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Arrays.array;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.mockito.Mockito.verify;
 
 import org.fest.assertions.core.AssertionInfo;
@@ -39,7 +39,7 @@ public class ShortArrays_assertHasSameSizeAs_with_Array_Test extends ShortArrays
   public static void setUpOnce() {
     // don't use a static import here, it leads to a compilation error with oracle jdk 1.7.0_05 compiler due to the
     // other array static import.
-    actual = arrayOf(6, 8);
+    actual = newArray(6, 8);
   }
 
   @Test
@@ -58,7 +58,7 @@ public class ShortArrays_assertHasSameSizeAs_with_Array_Test extends ShortArrays
       verify(failures).failure(info, shouldHaveSameSizeAs(actual, actual.length, other.length));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.chararrays;
 
 import static org.fest.assertions.error.ShouldNotHaveDuplicates.shouldNotHaveDuplicates;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.CharArrays.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Sets.newLinkedHashSet;
 
 import static org.mockito.Mockito.verify;
@@ -39,7 +39,7 @@ public class CharArrays_assertDoesNotHaveDuplicates_Test extends CharArraysBaseT
 
   @Override
   protected void initActualArray() {
-    actual = arrayOf('a', 'b');
+    actual = newArray('a', 'b');
   }
 
   @Test
@@ -61,14 +61,14 @@ public class CharArrays_assertDoesNotHaveDuplicates_Test extends CharArraysBaseT
   @Test
   public void should_fail_if_actual_contains_duplicates() {
     AssertionInfo info = someInfo();
-    actual = arrayOf('a', 'b', 'a', 'b');
+    actual = newArray('a', 'b', 'a', 'b');
     try {
       arrays.assertDoesNotHaveDuplicates(info, actual);
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldNotHaveDuplicates(actual, newLinkedHashSet('a', 'b')));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -90,13 +90,13 @@ public class CharArrays_assertDoesNotHaveDuplicates_Test extends CharArraysBaseT
   @Test
   public void should_fail_if_actual_contains_duplicates_according_to_custom_comparison_strategy() {
     AssertionInfo info = someInfo();
-    actual = arrayOf('A', 'b', 'A', 'b');
+    actual = newArray('A', 'b', 'A', 'b');
     try {
       arraysWithCustomComparisonStrategy.assertDoesNotHaveDuplicates(info, actual);
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldNotHaveDuplicates(actual, newLinkedHashSet('A', 'b'), caseInsensitiveComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

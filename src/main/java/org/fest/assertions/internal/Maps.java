@@ -14,8 +14,8 @@
  */
 package org.fest.assertions.internal;
 
-import static org.fest.assertions.error.ShouldBeEmpty.shouldBeEmpty;
-import static org.fest.assertions.error.ShouldBeNullOrEmpty.shouldBeNullOrEmpty;
+import static org.fest.assertions.error.NotEmptyErrorMessageFactory.shouldBeEmpty;
+import static org.fest.assertions.error.NotNullOrEmptyErrorMessageFactory.shouldBeNullOrEmpty;
 import static org.fest.assertions.error.ShouldContain.shouldContain;
 import static org.fest.assertions.error.ShouldContainKey.shouldContainKey;
 import static org.fest.assertions.error.ShouldContainValue.shouldContainValue;

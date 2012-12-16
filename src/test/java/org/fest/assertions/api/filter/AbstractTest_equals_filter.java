@@ -7,7 +7,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import org.fest.test.Player;
+import org.fest.assertions.test.Player;
 import org.fest.util.IntrospectionError;
 
 public abstract class AbstractTest_equals_filter extends AbstractTest_filter {

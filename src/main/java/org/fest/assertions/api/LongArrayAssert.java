@@ -221,7 +221,7 @@ public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> imp
 
   /** {@inheritDoc} */
   public LongArrayAssert usingElementComparator(Comparator<? super Long> customComparator) {
-    this.arrays = new LongArrays(new ComparatorBasedComparisonStrategy(customComparator));
+    this.arrays = new LongArrays(new ComparatorComparison(customComparator));
     return myself;
   }
 

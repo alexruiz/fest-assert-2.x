@@ -20,7 +20,7 @@ package org.fest.assertions.test;
 public final class FloatArrays {
   private static final float[] EMPTY = {};
 
-  public static float[] arrayOf(float... values) {
+  public static float[] newArray(float...values) {
     return values;
   }
 

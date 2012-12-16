@@ -20,7 +20,7 @@ package org.fest.assertions.test;
 public final class ByteArrays {
   private static final byte[] EMPTY = {};
 
-  public static byte[] arrayOf(int... values) {
+  public static byte[] newArray(int...values) {
     int size = values.length;
     byte[] array = new byte[size];
     for (int i = 0; i < size; i++) {

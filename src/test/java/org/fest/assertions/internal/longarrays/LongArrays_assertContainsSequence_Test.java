@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.longarrays;
 
 import static org.fest.assertions.error.ShouldContainSequence.shouldContainSequence;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.LongArrays.*;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -39,13 +39,13 @@ public class LongArrays_assertContainsSequence_Test extends LongArraysBaseTest {
 
   @Override
   protected void initActualArray() {
-    actual = arrayOf(6L, 8L, 10L, 12L);
+    actual = newArray(6L, 8L, 10L, 12L);
   }
 
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertContainsSequence(someInfo(), null, arrayOf(8L));
+    arrays.assertContainsSequence(someInfo(), null, newArray(8L));
   }
 
   @Test
@@ -70,7 +70,7 @@ public class LongArrays_assertContainsSequence_Test extends LongArraysBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -83,7 +83,7 @@ public class LongArrays_assertContainsSequence_Test extends LongArraysBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -96,7 +96,7 @@ public class LongArrays_assertContainsSequence_Test extends LongArraysBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   private void verifyFailureThrownWhenSequenceNotFound(AssertionInfo info, long[] sequence) {
@@ -105,18 +105,18 @@ public class LongArrays_assertContainsSequence_Test extends LongArraysBaseTest {
 
   @Test
   public void should_pass_if_actual_contains_sequence() {
-    arrays.assertContainsSequence(someInfo(), actual, arrayOf(6L, 8L));
+    arrays.assertContainsSequence(someInfo(), actual, newArray(6L, 8L));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal() {
-    arrays.assertContainsSequence(someInfo(), actual, arrayOf(6L, 8L, 10L, 12L));
+    arrays.assertContainsSequence(someInfo(), actual, newArray(6L, 8L, 10L, 12L));
   }
 
   @Test
   public void should_fail_if_actual_is_null_whatever_custom_comparison_strategy_is() {
     thrown.expectAssertionError(actualIsNull());
-    arraysWithCustomComparisonStrategy.assertContainsSequence(someInfo(), null, arrayOf(-8L));
+    arraysWithCustomComparisonStrategy.assertContainsSequence(someInfo(), null, newArray(-8L));
   }
 
   @Test
@@ -141,7 +141,7 @@ public class LongArrays_assertContainsSequence_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldContainSequence(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -154,7 +154,7 @@ public class LongArrays_assertContainsSequence_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldContainSequence(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -167,16 +167,16 @@ public class LongArrays_assertContainsSequence_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldContainSequence(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_contains_sequence_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContainsSequence(someInfo(), actual, arrayOf(6L, -8L));
+    arraysWithCustomComparisonStrategy.assertContainsSequence(someInfo(), actual, newArray(6L, -8L));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContainsSequence(someInfo(), actual, arrayOf(6L, -8L, 10L, 12L));
+    arraysWithCustomComparisonStrategy.assertContainsSequence(someInfo(), actual, newArray(6L, -8L, 10L, 12L));
   }
 }

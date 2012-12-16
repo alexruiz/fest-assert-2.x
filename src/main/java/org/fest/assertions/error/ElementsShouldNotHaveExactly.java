@@ -14,7 +14,7 @@
  */
 package org.fest.assertions.error;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 
 /**
  * Creates an error message indicating that an assertion that not verifies elements of a group satisfies exactly n times a
@@ -33,11 +33,11 @@ public class ElementsShouldNotHaveExactly extends BasicErrorMessageFactory {
    * @param condition the {@code Condition}.
    * @return the created {@code ErrorMessageFactory}.
    */
-  public static <E> ErrorMessageFactory elementsShouldNotHaveExactly(Object actual, int times, Condition<?> condition) {
+  public static <E> ErrorMessageFactory elementsShouldNotHaveExactly(Object actual, int times, Matcher<?> condition) {
     return new ElementsShouldNotHaveExactly(actual, times, condition);
   }
 
-  private ElementsShouldNotHaveExactly(Object actual, int times, Condition<?> condition) {
+  private ElementsShouldNotHaveExactly(Object actual, int times, Matcher<?> condition) {
     super("expecting elements:\n<%s>\n not to have exactly %s times <%s>", actual, times, condition);
   }
 }

@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.bytes;
 
 import static org.fest.assertions.error.ShouldBeLess.shouldBeLess;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -55,7 +55,7 @@ public class Bytes_assertLessThan_Test extends BytesBaseTest {
       verify(failures).failure(info, shouldBeLess((byte) 6, (byte) 6));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -67,7 +67,7 @@ public class Bytes_assertLessThan_Test extends BytesBaseTest {
       verify(failures).failure(info, shouldBeLess((byte) 8, (byte) 6));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -90,7 +90,7 @@ public class Bytes_assertLessThan_Test extends BytesBaseTest {
       verify(failures).failure(info, shouldBeLess((byte) 6, (byte) -6, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -102,6 +102,6 @@ public class Bytes_assertLessThan_Test extends BytesBaseTest {
       verify(failures).failure(info, shouldBeLess((byte) -8, (byte) 6, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

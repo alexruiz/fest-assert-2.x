@@ -21,8 +21,8 @@ import static org.fest.assertions.condition.Not.not;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.fest.assertions.core.Condition;
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.Matcher;
+import org.fest.assertions.core.TestMatcher;
 
 /**
  * Tests for <code>{@link Not#matches(Object)}</code>.
@@ -31,12 +31,12 @@ import org.fest.assertions.core.TestCondition;
  */
 public class Not_matches_Test {
 
-  private TestCondition<Object> condition;
-  private Condition<Object> not;
+  private TestMatcher<Object> condition;
+  private Matcher<Object> not;
 
   @Before
   public void setUp() {
-    condition = new TestCondition<Object>();
+    condition = new TestMatcher<Object>();
     not = not(condition);
   }
 

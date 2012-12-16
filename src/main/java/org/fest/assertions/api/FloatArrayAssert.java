@@ -221,7 +221,7 @@ public class FloatArrayAssert extends AbstractAssert<FloatArrayAssert, float[]> 
 
   /** {@inheritDoc} */
   public FloatArrayAssert usingElementComparator(Comparator<? super Float> customComparator) {
-    this.arrays = new FloatArrays(new ComparatorBasedComparisonStrategy(customComparator));
+    this.arrays = new FloatArrays(new ComparatorComparison(customComparator));
     return myself;
   }
 

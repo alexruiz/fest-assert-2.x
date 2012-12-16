@@ -16,7 +16,7 @@ package org.fest.assertions.internal.iterables;
 
 import static org.fest.assertions.error.ElementsShouldNotBeExactly.elementsShouldNotBeExactly;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Lists.newArrayList;
 
 import static org.mockito.Mockito.verify;
@@ -24,12 +24,12 @@ import static org.mockito.Mockito.verify;
 import org.junit.Test;
 
 import org.fest.assertions.core.AssertionInfo;
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.assertions.internal.Iterables;
 import org.fest.assertions.internal.IterablesWithConditionsBaseTest;
 
 /**
- * Tests for <code>{@link Iterables#assertAreNotExactly(AssertionInfo, Iterable, Condition, int)}</code> .
+ * Tests for <code>{@link Iterables#assertAreNotExactly(AssertionInfo, Iterable, Matcher, int)}</code> .
  * 
  * @author Nicolas François
  * @author Mikhail Mazursky
@@ -64,7 +64,7 @@ public class Iterables_assertAreNotExactly_Test extends IterablesWithConditionsB
       verify(failures).failure(info, elementsShouldNotBeExactly(actual, 2, jedi));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -79,7 +79,7 @@ public class Iterables_assertAreNotExactly_Test extends IterablesWithConditionsB
       verify(failures).failure(info, elementsShouldNotBeExactly(actual, 2, jedi));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

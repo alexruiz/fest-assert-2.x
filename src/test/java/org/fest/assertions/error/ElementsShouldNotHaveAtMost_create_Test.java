@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.TestMatcher;
 import org.fest.assertions.description.Description;
 import org.fest.assertions.description.TextDescription;
 
@@ -37,7 +37,7 @@ public class ElementsShouldNotHaveAtMost_create_Test {
 
   @Before
   public void setUp() {
-    factory = elementsShouldNotHaveAtMost(newArrayList("Yoda", "Luke", "Obiwan"), 2, new TestCondition<String>("Jedi power"));
+    factory = elementsShouldNotHaveAtMost(newArrayList("Yoda", "Luke", "Obiwan"), 2, new TestMatcher<String>("Jedi power"));
   }
 
   @Test

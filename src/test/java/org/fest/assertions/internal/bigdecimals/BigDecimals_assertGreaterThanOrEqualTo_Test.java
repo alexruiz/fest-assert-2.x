@@ -17,9 +17,9 @@ package org.fest.assertions.internal.bigdecimals;
 import static java.math.BigDecimal.*;
 
 import static org.fest.assertions.error.ShouldBeGreaterOrEqual.shouldBeGreaterOrEqual;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -32,7 +32,7 @@ import org.fest.assertions.internal.BigDecimals;
 import org.fest.assertions.internal.BigDecimalsBaseTest;
 
 /**
- * Tests for <code>{@link BigDecimals#assertGreaterThanOrEqualTo(AssertionInfo, BigDecimal, bigdecimal)}</code>.
+ * Tests for <code>{@link BigDecimals#assertNotLessThan(AssertionInfo, BigDecimal, bigdecimal)}</code>.
  * 
  * @author Joel Costigliola
  */
@@ -41,29 +41,29 @@ public class BigDecimals_assertGreaterThanOrEqualTo_Test extends BigDecimalsBase
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    bigDecimals.assertGreaterThanOrEqualTo(someInfo(), null, ONE);
+    bigDecimals.assertNotLessThan(someInfo(), null, ONE);
   }
 
   @Test
   public void should_pass_if_actual_is_greater_than_other() {
-    bigDecimals.assertGreaterThanOrEqualTo(someInfo(), TEN, ONE);
+    bigDecimals.assertNotLessThan(someInfo(), TEN, ONE);
   }
 
   @Test
   public void should_pass_if_actual_is_equal_to_other() {
-    bigDecimals.assertGreaterThanOrEqualTo(someInfo(), ONE, ONE);
+    bigDecimals.assertNotLessThan(someInfo(), ONE, ONE);
   }
 
   @Test
   public void should_fail_if_actual_is_less_than_other() {
     AssertionInfo info = someInfo();
     try {
-      bigDecimals.assertGreaterThanOrEqualTo(info, ONE, TEN);
+      bigDecimals.assertNotLessThan(info, ONE, TEN);
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldBeGreaterOrEqual(ONE, TEN));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   // ------------------------------------------------------------------------------------------------------------------
@@ -72,24 +72,24 @@ public class BigDecimals_assertGreaterThanOrEqualTo_Test extends BigDecimalsBase
 
   @Test
   public void should_pass_if_actual_is_greater_than_other_according_to_custom_comparison_strategy() {
-    bigDecimalsWithAbsValueComparisonStrategy.assertGreaterThanOrEqualTo(someInfo(), TEN.negate(), ONE);
+    bigDecimalsWithAbsValueComparisonStrategy.assertNotLessThan(someInfo(), TEN.negate(), ONE);
   }
 
   @Test
   public void should_pass_if_actual_is_equal_to_other_according_to_custom_comparison_strategy() {
-    bigDecimalsWithAbsValueComparisonStrategy.assertGreaterThanOrEqualTo(someInfo(), ONE.negate(), ONE);
+    bigDecimalsWithAbsValueComparisonStrategy.assertNotLessThan(someInfo(), ONE.negate(), ONE);
   }
 
   @Test
   public void should_fail_if_actual_is_less_than_other_according_to_custom_comparison_strategy() {
     AssertionInfo info = someInfo();
     try {
-      bigDecimalsWithAbsValueComparisonStrategy.assertGreaterThanOrEqualTo(info, ONE, TEN.negate());
+      bigDecimalsWithAbsValueComparisonStrategy.assertNotLessThan(info, ONE, TEN.negate());
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldBeGreaterOrEqual(ONE, TEN.negate(), absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

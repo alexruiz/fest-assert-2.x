@@ -24,7 +24,7 @@ import org.junit.Test;
 
 import org.fest.assertions.description.Description;
 import org.fest.assertions.description.TextDescription;
-import org.fest.assertions.internal.ComparatorBasedComparisonStrategy;
+import org.fest.assertions.internal.ComparatorComparison;
 import org.fest.assertions.util.CaseInsensitiveStringComparator;
 
 /**
@@ -45,7 +45,7 @@ public class ShouldContainAtIndex_create_Test {
   @Test
   public void should_create_error_message_with_custom_comparison_strategy() {
     ErrorMessageFactory factory = shouldContainAtIndex(newArrayList("Yoda", "Luke"), "Leia", atIndex(1), "Luke",
-        new ComparatorBasedComparisonStrategy(CaseInsensitiveStringComparator.instance));
+        new ComparatorComparison(CaseInsensitiveStringComparator.instance));
     String message = factory.create(new TextDescription("Test"));
     assertEquals("[Test] expecting:<'Leia'> at index <1> but found <'Luke'> in:\n" + " <['Yoda', 'Luke']>\n"
         + " according to 'CaseInsensitiveStringComparator' comparator", message);

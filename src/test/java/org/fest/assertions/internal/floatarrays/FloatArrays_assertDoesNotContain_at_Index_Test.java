@@ -16,10 +16,10 @@ package org.fest.assertions.internal.floatarrays;
 
 import static org.fest.assertions.data.Index.atIndex;
 import static org.fest.assertions.error.ShouldNotContainAtIndex.shouldNotContainAtIndex;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.FloatArrays.emptyArray;
 import static org.fest.assertions.test.TestData.*;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -75,7 +75,7 @@ public class FloatArrays_assertDoesNotContain_at_Index_Test extends FloatArraysB
       verify(failures).failure(info, shouldNotContainAtIndex(actual, 6f, index));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -115,6 +115,6 @@ public class FloatArrays_assertDoesNotContain_at_Index_Test extends FloatArraysB
       verify(failures).failure(info, shouldNotContainAtIndex(actual, 6f, index, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

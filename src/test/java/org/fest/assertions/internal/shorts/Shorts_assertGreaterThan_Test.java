@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.shorts;
 
 import static org.fest.assertions.error.ShouldBeGreater.shouldBeGreater;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -55,7 +55,7 @@ public class Shorts_assertGreaterThan_Test extends ShortsBaseTest {
       verify(failures).failure(info, shouldBeGreater((short) 6, (short) 6));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -67,7 +67,7 @@ public class Shorts_assertGreaterThan_Test extends ShortsBaseTest {
       verify(failures).failure(info, shouldBeGreater((short) 6, (short) 8));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   // ------------------------------------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ public class Shorts_assertGreaterThan_Test extends ShortsBaseTest {
       verify(failures).failure(info, shouldBeGreater((short) -6, (short) 6, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -100,7 +100,7 @@ public class Shorts_assertGreaterThan_Test extends ShortsBaseTest {
       verify(failures).failure(info, shouldBeGreater((short) -6, (short) 8, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

@@ -16,10 +16,10 @@ package org.fest.assertions.internal.iterables;
 
 import static java.util.Collections.emptyList;
 
-import static org.fest.assertions.error.ShouldBeEmpty.shouldBeEmpty;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.error.NotEmptyErrorMessageFactory.shouldBeEmpty;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Lists.newArrayList;
 
 import static org.mockito.Mockito.verify;
@@ -61,7 +61,7 @@ public class Iterables_assertEmpty_Test extends IterablesBaseTest {
       verify(failures).failure(info, shouldBeEmpty(actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -85,6 +85,6 @@ public class Iterables_assertEmpty_Test extends IterablesBaseTest {
       verify(failures).failure(info, shouldBeEmpty(actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

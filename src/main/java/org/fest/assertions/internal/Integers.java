@@ -27,8 +27,8 @@ public class Integers extends Numbers<Integer> {
   private static final Integers INSTANCE = new Integers();
 
   /**
-   * Returns the singleton instance of this class based on {@link StandardComparisonStrategy}.
-   * @return the singleton instance of this class based on {@link StandardComparisonStrategy}.
+   * Returns the singleton instance of this class based on {@link EqualityComparison}.
+   * @return the singleton instance of this class based on {@link EqualityComparison}.
    */
   public static Integers instance() {
     return INSTANCE;
@@ -39,7 +39,7 @@ public class Integers extends Numbers<Integer> {
     super();
   }
 
-  public Integers(ComparisonStrategy comparisonStrategy) {
+  public Integers(Comparison comparisonStrategy) {
     super(comparisonStrategy);
   }
 

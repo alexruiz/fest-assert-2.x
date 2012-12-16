@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.TestMatcher;
 import org.fest.assertions.description.Description;
 import org.fest.assertions.description.TextDescription;
 
@@ -37,7 +37,7 @@ public class ElementsShouldNotBeAtLeast_create_Test {
 
   @Before
   public void setUp() {
-    factory = elementsShouldNotBeAtLeast(newArrayList("Yoda", "Luke", "Leia"), 2, new TestCondition<String>("Not a Jedi"));
+    factory = elementsShouldNotBeAtLeast(newArrayList("Yoda", "Luke", "Leia"), 2, new TestMatcher<String>("Not a Jedi"));
   }
 
   @Test

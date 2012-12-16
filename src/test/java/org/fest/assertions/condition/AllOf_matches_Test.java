@@ -27,15 +27,15 @@ import org.junit.*;
  */
 public class AllOf_matches_Test {
 
-  private TestCondition<Object> condition1;
-  private TestCondition<Object> condition2;
-  private Condition<Object> allOf;
+  private TestMatcher<Object> condition1;
+  private TestMatcher<Object> condition2;
+  private Matcher<Object> allOf;
 
   @SuppressWarnings("unchecked")
   @Before
   public void setUp() {
-    condition1 = new TestCondition<Object>();
-    condition2 = new TestCondition<Object>();
+    condition1 = new TestMatcher<Object>();
+    condition2 = new TestMatcher<Object>();
     allOf = allOf(condition1, condition2);
   }
 

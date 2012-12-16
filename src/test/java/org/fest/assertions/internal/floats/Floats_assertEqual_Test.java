@@ -14,10 +14,10 @@
  */
 package org.fest.assertions.internal.floats;
 
-import static org.fest.assertions.error.ShouldBeEqual.shouldBeEqual;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.error.NotEqualErrorFactory.shouldBeEqual;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -55,7 +55,7 @@ public class Floats_assertEqual_Test extends FloatsBaseTest {
       verify(failures).failure(info, shouldBeEqual(6f, 8f));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -78,6 +78,6 @@ public class Floats_assertEqual_Test extends FloatsBaseTest {
       verify(failures).failure(info, shouldBeEqual(6f, -8f, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

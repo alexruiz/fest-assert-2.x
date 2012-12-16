@@ -20,7 +20,7 @@ package org.fest.assertions.test;
 public final class ObjectArrays {
   private static final Object[] EMPTY = {};
 
-  public static Object[] arrayOf(Object... values) {
+  public static Object[] newArray(Object...values) {
     return values;
   }
 

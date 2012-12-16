@@ -58,18 +58,18 @@ public class Dates {
 
   @VisibleForTesting
   Dates() {
-    this(StandardComparisonStrategy.instance());
+    this(EqualityComparison.instance());
   }
 
-  private ComparisonStrategy comparisonStrategy;
+  private Comparison comparisonStrategy;
 
-  public Dates(ComparisonStrategy comparisonStrategy) {
+  public Dates(Comparison comparisonStrategy) {
     this.comparisonStrategy = comparisonStrategy;
   }
 
   @VisibleForTesting
   public Comparator<?> getComparator() {
-    if (comparisonStrategy instanceof ComparatorBasedComparisonStrategy) { return ((ComparatorBasedComparisonStrategy) comparisonStrategy)
+    if (comparisonStrategy instanceof ComparatorComparison) { return ((ComparatorComparison) comparisonStrategy)
         .getComparator(); }
     return null;
   }

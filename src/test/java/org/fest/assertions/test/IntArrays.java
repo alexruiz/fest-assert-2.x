@@ -20,7 +20,7 @@ package org.fest.assertions.test;
 public final class IntArrays {
   private static final int[] EMPTY = {};
 
-  public static int[] arrayOf(int... values) {
+  public static int[] newArray(int...values) {
     return values;
   }
 

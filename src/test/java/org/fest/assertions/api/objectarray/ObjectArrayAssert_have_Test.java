@@ -18,23 +18,23 @@ import static org.mockito.Mockito.verify;
 
 import org.fest.assertions.api.ObjectArrayAssert;
 import org.fest.assertions.api.ObjectArrayAssertBaseTest;
-import org.fest.assertions.core.Condition;
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.Matcher;
+import org.fest.assertions.core.TestMatcher;
 import org.junit.Before;
 
 /**
- * Tests for <code>{@link ObjectArrayAssert#doNotHave(org.fest.assertions.core.Condition)}</code>.
+ * Tests for <code>{@link ObjectArrayAssert#doNotHave(org.fest.assertions.core.Matcher)}</code>.
  * 
  * @author Nicolas François
  * @author Mikhail Mazursky
  */
 public class ObjectArrayAssert_have_Test extends ObjectArrayAssertBaseTest {
 
-  private static Condition<Object> condition;
+  private static Matcher<Object> condition;
 
   @Before
   public void before() {
-    condition = new TestCondition<Object>();
+    condition = new TestMatcher<Object>();
   }
 
   @Override

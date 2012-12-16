@@ -47,10 +47,10 @@ public class DoubleArrays {
 
   @VisibleForTesting
   DoubleArrays() {
-    this(StandardComparisonStrategy.instance());
+    this(EqualityComparison.instance());
   }
 
-  public DoubleArrays(ComparisonStrategy comparisonStrategy) {
+  public DoubleArrays(Comparison comparisonStrategy) {
     this.arrays = new Arrays(comparisonStrategy);
   }
 

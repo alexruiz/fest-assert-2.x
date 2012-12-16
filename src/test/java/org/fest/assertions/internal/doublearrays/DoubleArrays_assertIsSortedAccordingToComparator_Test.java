@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.doublearrays;
 
 import static org.fest.assertions.error.ShouldBeSorted.shouldBeSortedAccordingToGivenComparator;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.DoubleArrays.emptyArray;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -91,7 +91,7 @@ public class DoubleArrays_assertIsSortedAccordingToComparator_Test extends Doubl
       verify(failures).failure(info, shouldBeSortedAccordingToGivenComparator(2, actual, doubleDescendingOrderComparator));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

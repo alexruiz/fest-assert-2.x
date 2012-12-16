@@ -16,11 +16,11 @@ package org.fest.assertions.internal.booleanarrays;
 
 import static org.fest.assertions.data.Index.atIndex;
 import static org.fest.assertions.error.ShouldNotContainAtIndex.shouldNotContainAtIndex;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.BooleanArrays.emptyArray;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someIndex;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -77,6 +77,6 @@ public class BooleanArrays_assertDoesNotContain_at_Index_Test extends BooleanArr
       verify(failures).failure(info, shouldNotContainAtIndex(actual, value, index));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

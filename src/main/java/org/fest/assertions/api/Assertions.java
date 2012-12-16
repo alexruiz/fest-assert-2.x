@@ -1,21 +1,20 @@
 /*
  * Created on Sep 30, 2010
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
  * License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
  * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
- * 
+ *
  * Copyright @2010-2011 the original author or authors.
  */
 package org.fest.assertions.api;
 
 import java.io.File;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.util.Date;
@@ -27,20 +26,20 @@ import org.fest.assertions.condition.AllOf;
 import org.fest.assertions.condition.AnyOf;
 import org.fest.assertions.condition.DoesNotHave;
 import org.fest.assertions.condition.Not;
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.assertions.data.Index;
 import org.fest.assertions.data.MapEntry;
 import org.fest.assertions.data.Offset;
 import org.fest.assertions.groups.Properties;
 import org.fest.util.Files;
-import org.fest.util.FilesException;
+import org.fest.util.IORuntimeException;
 
 /**
  * Entry point for assertion methods for different data types. Each method in this class is a static factory for the type-specific
  * assertion objects. The purpose of this class is to make test code more readable.
  * <p>
  * For example:
- * 
+ *
  * <pre>
  * int removed = employees.removeFired();
  * {@link Assertions#assertThat(int) assertThat}(removed).{@link IntegerAssert#isZero isZero}();
@@ -49,7 +48,7 @@ import org.fest.util.FilesException;
  * {@link Assertions#assertThat(Iterable) assertThat}(newEmployees).{@link IterableAssert#hasSize(int) hasSize}(6);
  * </pre>
  * </p>
- * 
+ *
  * @author Alex Ruiz
  * @author Yvonne Wang
  * @author David DIDIER
@@ -197,15 +196,6 @@ public class Assertions {
   }
 
   /**
-   * Creates a new instance of <code>{@link InputStreamAssert}</code>.
-   * @param actual the actual value.
-   * @return the created assertion object.
-   */
-  public static InputStreamAssert assertThat(InputStream actual) {
-    return new InputStreamAssert(actual);
-  }
-
-  /**
    * Creates a new instance of <code>{@link FloatAssert}</code>.
    * @param actual the actual value.
    * @return the created assertion object.
@@ -300,8 +290,8 @@ public class Assertions {
    * @param actual the actual value.
    * @return the created assertion object.
    */
-  public static <T> ObjectAssert<T> assertThat(T actual) {
-    return new ObjectAssert<T>(actual);
+  public static  ObjectAssert assertThat(Object actual) {
+    return new ObjectAssert(actual);
   }
 
   /**
@@ -367,15 +357,6 @@ public class Assertions {
     return new DateAssert(actual);
   }
 
-  /**
-   * Creates a new instance of <code>{@link ThrowableAssert}</code>.
-   * @param actual the actual value.
-   * @return the created assertion Throwable.
-   */
-  public static ThrowableAssert assertThat(Throwable actual) {
-    return new ThrowableAssert(actual);
-  }
-
   // -------------------------------------------------------------------------------------------------
   // fail methods : not assertions but here to have a single entry point to all Fest Assert features.
   // -------------------------------------------------------------------------------------------------
@@ -421,18 +402,18 @@ public class Assertions {
    * Assert features (but you can use {@link Properties} if you prefer).
    * <p>
    * Typical usage is to chain <code>extractProperty</code> with <code>from</code> method, see examples below :
-   * 
+   *
    * <pre>
    * // extract simple property values having a java standard type (here String)
    * assertThat(extractProperty("name", String.class).from(fellowshipOfTheRing))
    *           .contains("Boromir", "Gandalf", "Frodo", "Legolas")
    *           .doesNotContain("Sauron", "Elrond");
-   *                                                              
+   *
    * // extracting property works also with user's types (here Race)
    * assertThat(extractProperty("race", String.class).from(fellowshipOfTheRing))
    *           .contains(HOBBIT, ELF)
    *           .doesNotContain(ORC);
-   * 
+   *
    * // extract nested property on Race
    * assertThat(extractProperty("race.name", String.class).from(fellowshipOfTheRing))
    *           .contains("Hobbit", "Elf")
@@ -448,18 +429,18 @@ public class Assertions {
    * Assert features (but you can use {@link Properties} if you prefer).
    * <p>
    * Typical usage is to chain <code>extractProperty</code> with <code>from</code> method, see examples below :
-   * 
+   *
    * <pre>
-   * // extract simple property values, as no type has been defined the extracted property will be considered as Object 
-   * // to define the real property type (here String) use extractProperty("name", String.class) instead. 
+   * // extract simple property values, as no type has been defined the extracted property will be considered as Object
+   * // to define the real property type (here String) use extractProperty("name", String.class) instead.
    * assertThat(extractProperty("name").from(fellowshipOfTheRing))
    *           .contains("Boromir", "Gandalf", "Frodo", "Legolas")
    *           .doesNotContain("Sauron", "Elrond");
-   *                                                              
+   *
    * // extracting property works also with user's types (here Race), even though it will be considered as Object
-   * // to define the real property type (here String) use extractProperty("name", Race.class) instead. 
+   * // to define the real property type (here String) use extractProperty("name", Race.class) instead.
    * assertThat(extractProperty("race").from(fellowshipOfTheRing)).contains(HOBBIT, ELF).doesNotContain(ORC);
-   * 
+   *
    * // extract nested property on Race
    * assertThat(extractProperty("race.name").from(fellowshipOfTheRing)).contains("Hobbit", "Elf").doesNotContain("Orc");
    * </pre>
@@ -477,7 +458,7 @@ public class Assertions {
    * Assert features (but you can use {@link MapEntry} if you prefer).
    * <p>
    * Typical usage is to call <code>entry</code> in MapAssert <code>contains</code> assertion, see examples below :
-   * 
+   *
    * <pre>
    * assertThat(ringBearers).contains(entry(oneRing, frodo), entry(nenya, galadriel));
    * </pre>
@@ -491,7 +472,7 @@ public class Assertions {
    * (but you can use {@link Index} if you prefer).
    * <p>
    * Typical usage :
-   * 
+   *
    * <pre>
    * List<Ring> elvesRings = newArrayList(vilya, nenya, narya);
    * assertThat(elvesRings).contains(vilya, atIndex(0)).contains(nenya, atIndex(1)).contains(narya, atIndex(2));
@@ -506,7 +487,7 @@ public class Assertions {
    * features (but you can use {@link Offset} if you prefer).
    * <p>
    * Typical usage :
-   * 
+   *
    * <pre>
    * assertThat(8.1).isEqualTo(8.0, offset(0.1));
    * </pre>
@@ -520,7 +501,7 @@ public class Assertions {
    * features (but you can use {@link Offset} if you prefer).
    * <p>
    * Typical usage :
-   * 
+   *
    * <pre>
    * assertThat(8.2f).isEqualTo(8.0f, offset(0.2f));
    * </pre>
@@ -541,7 +522,7 @@ public class Assertions {
    * @throws NullPointerException if the given array is {@code null}.
    * @throws NullPointerException if any of the elements in the given array is {@code null}.
    */
-  public static <T> Condition<T> allOf(Condition<? super T>... conditions) {
+  public static <T> Matcher<T> allOf(Matcher<? super T>... conditions) {
     return AllOf.allOf(conditions);
   }
 
@@ -553,21 +534,21 @@ public class Assertions {
    * @throws NullPointerException if the given iterable is {@code null}.
    * @throws NullPointerException if any of the elements in the given iterable is {@code null}.
    */
-  public static <T> Condition<T> allOf(Iterable<? extends Condition<? super T>> conditions) {
+  public static <T> Matcher<T> allOf(Iterable<? extends Matcher<? super T>> conditions) {
     return AllOf.allOf(conditions);
   }
 
   /**
-   * Only delegate to {@link AnyOf#anyOf(Condition...)} so that Assertions offers a full feature entry point to all Fest Assert
+   * Only delegate to {@link AnyOf#anyOf(Matcher...)} so that Assertions offers a full feature entry point to all Fest Assert
    * features (but you can use {@link AnyOf} if you prefer).
    * <p>
-   * Typical usage (<code>jedi</code> and <code>sith</code> are {@link Condition}) :
-   * 
+   * Typical usage (<code>jedi</code> and <code>sith</code> are {@link Matcher}) :
+   *
    * <pre>
    * assertThat("Vader").is(anyOf(jedi, sith));
    * </pre>
    */
-  public static <T> Condition<T> anyOf(Condition<? super T>... conditions) {
+  public static <T> Matcher<T> anyOf(Matcher<? super T>... conditions) {
     return AnyOf.anyOf(conditions);
   }
 
@@ -579,27 +560,27 @@ public class Assertions {
    * @throws NullPointerException if the given iterable is {@code null}.
    * @throws NullPointerException if any of the elements in the given iterable is {@code null}.
    */
-  public static <T> Condition<T> anyOf(Iterable<? extends Condition<? super T>> conditions) {
+  public static <T> Matcher<T> anyOf(Iterable<? extends Matcher<? super T>> conditions) {
     return AnyOf.anyOf(conditions);
   }
 
   /**
    * Creates a new </code>{@link DoesNotHave}</code>.
-   * 
+   *
    * @param condition the condition to inverse.
    * @return The Not condition created.
    */
-  public static <T> DoesNotHave<T> doesNotHave(Condition<? super T> condition) {
+  public static <T> DoesNotHave<T> doesNotHave(Matcher<? super T> condition) {
     return DoesNotHave.doesNotHave(condition);
   }
 
   /**
    * Creates a new </code>{@link Not}</code>.
-   * 
+   *
    * @param condition the condition to inverse.
    * @return The Not condition created.
    */
-  public static <T> Not<T> not(Condition<? super T> condition) {
+  public static <T> Not<T> not(Matcher<? super T> condition) {
     return Not.not(condition);
   }
 
@@ -613,12 +594,12 @@ public class Assertions {
    * <p>
    * Note that the given array is not modified, the filters are performed on an {@link Iterable} copy of the array.
    * <p>
-   * Typical usage with {@link Condition} :
-   * 
+   * Typical usage with {@link Matcher} :
+   *
    * <pre>
    * assertThat(filter(players).being(potentialMVP).get()).containsOnly(james, rose);</pre>
    * and with filter language based on java bean property :
-   * 
+   *
    * <pre>
    * assertThat(filter(players).with("pointsPerGame").greaterThan(20)
    *                           .and("assistsPerGame").greaterThan(7)
@@ -634,12 +615,12 @@ public class Assertions {
    * <p>
    * Note that the given {@link Iterable} is not modified, the filters are performed on a copy.
    * <p>
-   * Typical usage with {@link Condition} :
-   * 
+   * Typical usage with {@link Matcher} :
+   *
    * <pre>
    * assertThat(filter(players).being(potentialMVP).get()).containsOnly(james, rose);</pre>
    * and with filter language based on java bean property :
-   * 
+   *
    * <pre>
    * assertThat(filter(players).with("pointsPerGame").greaterThan(20)
    *                           .and("assistsPerGame").greaterThan(7)
@@ -663,7 +644,7 @@ public class Assertions {
    * @param charset the character set to use.
    * @return the content of the file.
    * @throws NullPointerException if the given charset is {@code null}.
-   * @throws FilesException if an I/O exception occurs.
+   * @throws IORuntimeException if an I/O exception occurs.
    */
   public static String contentOf(File file, Charset charset) {
     return Files.contentOf(file, charset);
@@ -679,7 +660,7 @@ public class Assertions {
    * @param charsetName the name of the character set to use.
    * @return the content of the file.
    * @throws IllegalArgumentException if the given character set is not supported on this platform.
-   * @throws FilesException if an I/O exception occurs.
+   * @throws IORuntimeException if an I/O exception occurs.
    */
   public static String contentOf(File file, String charsetName) {
     return Files.contentOf(file, charsetName);
@@ -693,7 +674,7 @@ public class Assertions {
    * </p>
    * @param file the file.
    * @return the content of the file.
-   * @throws FilesException if an I/O exception occurs.
+   * @throws IORuntimeException if an I/O exception occurs.
    */
   public static String contentOf(File file) {
     return Files.contentOf(file, Charset.defaultCharset());

@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.doubles;
 
 import static org.fest.assertions.error.ShouldBeLess.shouldBeLess;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -55,7 +55,7 @@ public class Doubles_assertLessThan_Test extends DoublesBaseTest {
       verify(failures).failure(info, shouldBeLess(6d, 6d));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -67,7 +67,7 @@ public class Doubles_assertLessThan_Test extends DoublesBaseTest {
       verify(failures).failure(info, shouldBeLess(8d, 6d));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -90,7 +90,7 @@ public class Doubles_assertLessThan_Test extends DoublesBaseTest {
       verify(failures).failure(info, shouldBeLess(6d, -6d, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -102,6 +102,6 @@ public class Doubles_assertLessThan_Test extends DoublesBaseTest {
       verify(failures).failure(info, shouldBeLess(-8d, 6d, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

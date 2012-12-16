@@ -86,7 +86,7 @@ public class CharacterAssert extends AbstractComparableAssert<CharacterAssert, C
    * @throws AssertionError if the actual value is greater than the given one.
    */
   public CharacterAssert isLessThanOrEqualTo(char other) {
-    characters.assertLessThanOrEqualTo(info, actual, other);
+    characters.assertNotGreaterThan(info, actual, other);
     return this;
   }
 
@@ -110,7 +110,7 @@ public class CharacterAssert extends AbstractComparableAssert<CharacterAssert, C
    * @throws AssertionError if the actual value is less than the given one.
    */
   public CharacterAssert isGreaterThanOrEqualTo(char other) {
-    characters.assertGreaterThanOrEqualTo(info, actual, other);
+    characters.assertNotLessThan(info, actual, other);
     return this;
   }
 
@@ -139,7 +139,7 @@ public class CharacterAssert extends AbstractComparableAssert<CharacterAssert, C
   @Override
   public CharacterAssert usingComparator(Comparator<? super Character> customComparator) {
     super.usingComparator(customComparator);
-    this.characters = new Characters(new ComparatorBasedComparisonStrategy(customComparator));
+    this.characters = new Characters(new ComparatorComparison(customComparator));
     return myself;
   }
 

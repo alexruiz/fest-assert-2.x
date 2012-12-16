@@ -20,7 +20,7 @@ import static org.fest.util.Objects.areEqual;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.assertions.internal.PropertySupport;
 import org.fest.util.IntrospectionError;
 import org.fest.util.VisibleForTesting;
@@ -28,11 +28,11 @@ import org.fest.util.VisibleForTesting;
 /**
  * Filters the elements of a given <code>{@link Iterable}</code> or array according to the specified filter criteria.
  * <p>
- * Filter criteria can be expressed either by a {@link Condition} or a pseudo filter language on elements properties.
+ * Filter criteria can be expressed either by a {@link Matcher} or a pseudo filter language on elements properties.
  * <p>
  * Note that the given {@link Iterable} or array is not modified, the filters are performed on a copy.
  * <p>
- * With {@link Condition} :
+ * With {@link Matcher} :
  * 
  * <pre>
  * List&lt;Player&gt; players = ...; 
@@ -76,11 +76,11 @@ public class Filters<E> {
   /**
    * Creates a new <code>{@link Filters}</code> with the {@link Iterable} to filter.
    * <p>
-   * Chain this call to express filter criteria either by a {@link Condition} or a pseudo filter language on elements properties.
+   * Chain this call to express filter criteria either by a {@link Matcher} or a pseudo filter language on elements properties.
    * <p>
    * Note that the given {@link Iterable} is not modified, the filters are performed on a copy.
    * <p>
-   * - With {@link Condition} :
+   * - With {@link Matcher} :
    * 
    * <pre>
    * List&lt;Player&gt; players = ...; 
@@ -114,11 +114,11 @@ public class Filters<E> {
   /**
    * Creates a new <code>{@link Filters}</code> with the array to filter.
    * <p>
-   * Chain this call to express filter criteria either by a {@link Condition} or a pseudo filter language on elements properties.
+   * Chain this call to express filter criteria either by a {@link Matcher} or a pseudo filter language on elements properties.
    * <p>
    * Note that the given array is not modified, the filters are performed on an {@link Iterable} copy of the array.
    * <p>
-   * With {@link Condition} :
+   * With {@link Matcher} :
    * 
    * <pre>
    * List&lt;Player&gt; players = ...; 
@@ -167,8 +167,8 @@ public class Filters<E> {
   }
 
   /**
-   * Filter the underlying group, keeping only elements satisfying the given {@link Condition}.<br>
-   * Same as {@link #having(Condition)} - pick the method you prefer to have the most readable code.
+   * Filter the underlying group, keeping only elements satisfying the given {@link Matcher}.<br>
+   * Same as {@link #having(Matcher)} - pick the method you prefer to have the most readable code.
    * 
    * <pre>
    * List&lt;Player&gt; players = ...; 
@@ -182,18 +182,18 @@ public class Filters<E> {
    * // use filter static method to build Filters
    * assertThat(filter(players).being(potentialMVP).get()).containsOnly(james, rose);</pre>
    * 
-   * @param condition the filter {@link Condition}.
+   * @param condition the filter {@link Matcher}.
    * @return this {@link Filters} to chain other filter operations.
    * @throws NullPointerException if the given condition is {@code null}.
    */
-  public Filters<E> being(Condition<? super E> condition) {
+  public Filters<E> being(Matcher<? super E> condition) {
     if (condition == null) throw new NullPointerException("The filter condition should not be null");
     return applyFilterCondition(condition);
   }
 
   /**
-   * Filter the underlying group, keeping only elements satisfying the given {@link Condition}.<br>
-   * Same as {@link #being(Condition)} - pick the method you prefer to have the most readable code.
+   * Filter the underlying group, keeping only elements satisfying the given {@link Matcher}.<br>
+   * Same as {@link #being(Matcher)} - pick the method you prefer to have the most readable code.
    * 
    * <pre>
    * List&lt;Player&gt; players = ...; 
@@ -207,16 +207,16 @@ public class Filters<E> {
    * // use filter static method to build Filters
    * assertThat(filter(players).having(mvpStats).get()).containsOnly(james, rose);</pre>
    * 
-   * @param condition the filter {@link Condition}.
+   * @param condition the filter {@link Matcher}.
    * @return this {@link Filters} to chain other filter operations.
    * @throws NullPointerException if the given condition is {@code null}.
    */
-  public Filters<E> having(Condition<? super E> condition) {
+  public Filters<E> having(Matcher<? super E> condition) {
     if (condition == null) throw new NullPointerException("The filter condition should not be null");
     return applyFilterCondition(condition);
   }
 
-  private Filters<E> applyFilterCondition(Condition<? super E> condition) {
+  private Filters<E> applyFilterCondition(Matcher<? super E> condition) {
     List<E> newFilteredIterable = new ArrayList<E>();
     for (E element : filteredIterable) {
       if (condition.matches(element)) {

@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.shortarrays;
 
 import static org.fest.assertions.error.ShouldEndWith.shouldEndWith;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ShortArrays.*;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -38,7 +38,7 @@ public class ShortArrays_assertEndsWith_Test extends ShortArraysBaseTest {
 
   @Override
   protected void initActualArray() {
-    actual = arrayOf(6, 8, 10, 12);
+    actual = newArray(6, 8, 10, 12);
   }
 
   @Test
@@ -56,7 +56,7 @@ public class ShortArrays_assertEndsWith_Test extends ShortArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertEndsWith(someInfo(), null, arrayOf(8));
+    arrays.assertEndsWith(someInfo(), null, newArray(8));
   }
 
   @Test
@@ -69,7 +69,7 @@ public class ShortArrays_assertEndsWith_Test extends ShortArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -82,7 +82,7 @@ public class ShortArrays_assertEndsWith_Test extends ShortArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -95,17 +95,17 @@ public class ShortArrays_assertEndsWith_Test extends ShortArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_ends_with_sequence() {
-    arrays.assertEndsWith(someInfo(), actual, arrayOf(8, 10, 12));
+    arrays.assertEndsWith(someInfo(), actual, newArray(8, 10, 12));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal() {
-    arrays.assertEndsWith(someInfo(), actual, arrayOf(6, 8, 10, 12));
+    arrays.assertEndsWith(someInfo(), actual, newArray(6, 8, 10, 12));
   }
 
   @Test
@@ -123,7 +123,7 @@ public class ShortArrays_assertEndsWith_Test extends ShortArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null_whatever_custom_comparison_strategy_is() {
     thrown.expectAssertionError(actualIsNull());
-    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), null, arrayOf(-8));
+    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), null, newArray(-8));
   }
 
   @Test
@@ -136,7 +136,7 @@ public class ShortArrays_assertEndsWith_Test extends ShortArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -149,7 +149,7 @@ public class ShortArrays_assertEndsWith_Test extends ShortArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -162,16 +162,16 @@ public class ShortArrays_assertEndsWith_Test extends ShortArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_ends_with_sequence_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), actual, arrayOf(-8, 10, 12));
+    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), actual, newArray(-8, 10, 12));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), actual, arrayOf(6, -8, 10, 12));
+    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), actual, newArray(6, -8, 10, 12));
   }
 }

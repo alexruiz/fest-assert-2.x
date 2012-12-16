@@ -20,7 +20,7 @@ import org.fest.assertions.internal.*;
 /**
  * Creates an error message indicating that an assertion that verifies a group of elements does not contain a value at a given
  * index failed. A group of elements can be a collection, an array or a {@code String}.<br>
- * It also mention the {@link ComparisonStrategy} if the default one is not used.
+ * It also mention the {@link Comparison} if the default one is not used.
  * 
  * @author Alex Ruiz
  * @author Joel Costigliola
@@ -32,11 +32,11 @@ public class ShouldNotContainAtIndex extends BasicErrorMessageFactory {
    * @param actual the actual value in the failed assertion.
    * @param expected value expected to be in {@code actual}.
    * @param index the index of the expected value.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldNotContainAtIndex(Object actual, Object expected, Index index,
-      ComparisonStrategy comparisonStrategy) {
+      Comparison comparisonStrategy) {
     return new ShouldNotContainAtIndex(actual, expected, index, comparisonStrategy);
   }
 
@@ -48,10 +48,10 @@ public class ShouldNotContainAtIndex extends BasicErrorMessageFactory {
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldNotContainAtIndex(Object actual, Object expected, Index index) {
-    return new ShouldNotContainAtIndex(actual, expected, index, StandardComparisonStrategy.instance());
+    return new ShouldNotContainAtIndex(actual, expected, index, EqualityComparison.instance());
   }
 
-  private ShouldNotContainAtIndex(Object actual, Object expected, Index index, ComparisonStrategy comparisonStrategy) {
+  private ShouldNotContainAtIndex(Object actual, Object expected, Index index, Comparison comparisonStrategy) {
     super("expecting \n<%s>\n not to contain \n<%s>\n at index <%s>\n%s", actual, expected, index.value, comparisonStrategy);
   }
 }

@@ -886,7 +886,7 @@ public class DateAssert extends AbstractAssert<DateAssert, Date> {
   @Override
   public DateAssert usingComparator(Comparator<? super Date> customComparator) {
     super.usingComparator(customComparator);
-    this.dates = new Dates(new ComparatorBasedComparisonStrategy(customComparator));
+    this.dates = new Dates(new ComparatorComparison(customComparator));
     return myself;
   }
 

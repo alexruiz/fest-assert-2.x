@@ -221,7 +221,7 @@ public class ByteArrayAssert extends AbstractAssert<ByteArrayAssert, byte[]> imp
 
   /** {@inheritDoc} */
   public ByteArrayAssert usingElementComparator(Comparator<? super Byte> customComparator) {
-    this.arrays = new ByteArrays(new ComparatorBasedComparisonStrategy(customComparator));
+    this.arrays = new ByteArrays(new ComparatorComparison(customComparator));
     return myself;
   }
 

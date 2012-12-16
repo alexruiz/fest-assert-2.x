@@ -20,7 +20,7 @@ package org.fest.assertions.test;
 public final class LongArrays {
   private static final long[] EMPTY = {};
 
-  public static long[] arrayOf(long... values) {
+  public static long[] newArray(long...values) {
     return values;
   }
 

@@ -24,7 +24,7 @@ import org.junit.Test;
 
 import org.fest.assertions.description.Description;
 import org.fest.assertions.description.TextDescription;
-import org.fest.assertions.internal.ComparatorBasedComparisonStrategy;
+import org.fest.assertions.internal.ComparatorComparison;
 import org.fest.assertions.util.CaseInsensitiveStringComparator;
 
 /**
@@ -51,7 +51,7 @@ public class ShouldContainSequence_create_Test {
   @Test
   public void should_create_error_message_with_custom_comparison_strategy() {
     ErrorMessageFactory factory = shouldContainSequence(newArrayList("Yoda", "Luke"), newArrayList("Han", "Leia"),
-        new ComparatorBasedComparisonStrategy(CaseInsensitiveStringComparator.instance));
+        new ComparatorComparison(CaseInsensitiveStringComparator.instance));
     String message = factory.create(new TextDescription("Test"));
     assertEquals("[Test] expecting:\n" + "<['Yoda', 'Luke']>\n" + " to contain sequence:\n" + "<['Han', 'Leia']>\n"
         + " according to 'CaseInsensitiveStringComparator' comparator", message);

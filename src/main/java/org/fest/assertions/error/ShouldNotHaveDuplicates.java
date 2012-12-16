@@ -29,11 +29,11 @@ public class ShouldNotHaveDuplicates extends BasicErrorMessageFactory {
    * Creates a new <code>{@link ShouldNotHaveDuplicates}</code>.
    * @param actual the actual value in the failed assertion.
    * @param duplicates the duplicate values found in {@code actual}.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return an instance of {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldNotHaveDuplicates(Object actual, Object duplicates,
-      ComparisonStrategy comparisonStrategy) {
+      Comparison comparisonStrategy) {
     return new ShouldNotHaveDuplicates(actual, duplicates, comparisonStrategy);
   }
 
@@ -44,10 +44,10 @@ public class ShouldNotHaveDuplicates extends BasicErrorMessageFactory {
    * @return an instance of {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldNotHaveDuplicates(Object actual, Object duplicates) {
-    return new ShouldNotHaveDuplicates(actual, duplicates, StandardComparisonStrategy.instance());
+    return new ShouldNotHaveDuplicates(actual, duplicates, EqualityComparison.instance());
   }
 
-  private ShouldNotHaveDuplicates(Object actual, Object duplicates, ComparisonStrategy comparisonStrategy) {
+  private ShouldNotHaveDuplicates(Object actual, Object duplicates, Comparison comparisonStrategy) {
     super("found duplicate(s)\n<%s>\n in\n<%s>\n%s", duplicates, actual, comparisonStrategy);
   }
 

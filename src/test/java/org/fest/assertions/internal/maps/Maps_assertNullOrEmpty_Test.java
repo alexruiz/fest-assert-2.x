@@ -17,10 +17,10 @@ package org.fest.assertions.internal.maps;
 import static java.util.Collections.emptyMap;
 
 import static org.fest.assertions.data.MapEntry.entry;
-import static org.fest.assertions.error.ShouldBeNullOrEmpty.shouldBeNullOrEmpty;
-import static org.fest.assertions.test.Maps.mapOf;
+import static org.fest.assertions.error.NotNullOrEmptyErrorMessageFactory.shouldBeNullOrEmpty;
+import static org.fest.assertions.test.Maps.newMap;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -43,14 +43,14 @@ public class Maps_assertNullOrEmpty_Test extends MapsBaseTest {
   @Test
   public void should_fail_if_array_is_not_null_and_is_not_empty() {
     AssertionInfo info = someInfo();
-    Map<?, ?> actual = mapOf(entry("name", "Yoda"));
+    Map<?, ?> actual = newMap(entry("name", "Yoda"));
     try {
       maps.assertNullOrEmpty(info, actual);
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldBeNullOrEmpty(actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

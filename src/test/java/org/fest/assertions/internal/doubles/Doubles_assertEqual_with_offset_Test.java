@@ -18,7 +18,7 @@ import static org.fest.assertions.data.Offset.offset;
 import static org.fest.assertions.error.ShouldBeEqualWithinOffset.shouldBeEqual;
 import static org.fest.assertions.test.ErrorMessages.offsetIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -63,7 +63,7 @@ public class Doubles_assertEqual_with_offset_Test extends DoublesBaseTest {
       verify(failures).failure(info, shouldBeEqual(6d, 8d, offset, 2d));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -92,6 +92,6 @@ public class Doubles_assertEqual_with_offset_Test extends DoublesBaseTest {
       verify(failures).failure(info, shouldBeEqual(6d, 8d, offset, 2d));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

@@ -32,11 +32,11 @@ public class ShouldContainOnly extends BasicErrorMessageFactory {
    * @param expected values expected to be contained in {@code actual}.
    * @param notFound values in {@code expected} not found in {@code actual}.
    * @param notExpected values in {@code actual} that were not in {@code expected}.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldContainOnly(Object actual, Object expected, Object notFound, Object notExpected,
-      ComparisonStrategy comparisonStrategy) {
+      Comparison comparisonStrategy) {
     return new ShouldContainOnly(actual, expected, notFound, notExpected, comparisonStrategy);
   }
 
@@ -49,11 +49,11 @@ public class ShouldContainOnly extends BasicErrorMessageFactory {
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldContainOnly(Object actual, Object expected, Object notFound, Object notExpected) {
-    return new ShouldContainOnly(actual, expected, notFound, notExpected, StandardComparisonStrategy.instance());
+    return new ShouldContainOnly(actual, expected, notFound, notExpected, EqualityComparison.instance());
   }
 
   private ShouldContainOnly(Object actual, Object expected, Object notFound, Object notExpected,
-      ComparisonStrategy comparisonStrategy) {
+      Comparison comparisonStrategy) {
     super("expecting:\n<%s>\n to contain only:\n<%s>\n elements not found:\n<%s>\n and elements not expected:\n<%s>\n%s", actual,
         expected, notFound, notExpected, comparisonStrategy);
   }

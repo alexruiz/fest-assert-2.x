@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.chararrays;
 
 import static org.fest.assertions.error.ShouldStartWith.shouldStartWith;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.CharArrays.*;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -39,7 +39,7 @@ public class CharArrays_assertStartsWith_Test extends CharArraysBaseTest {
 
   @Override
   protected void initActualArray() {
-    actual = arrayOf('a', 'b', 'c', 'd');
+    actual = newArray('a', 'b', 'c', 'd');
   }
 
   @Test
@@ -57,7 +57,7 @@ public class CharArrays_assertStartsWith_Test extends CharArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertStartsWith(someInfo(), null, arrayOf('a'));
+    arrays.assertStartsWith(someInfo(), null, newArray('a'));
   }
 
   @Test
@@ -70,7 +70,7 @@ public class CharArrays_assertStartsWith_Test extends CharArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -83,7 +83,7 @@ public class CharArrays_assertStartsWith_Test extends CharArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -96,17 +96,17 @@ public class CharArrays_assertStartsWith_Test extends CharArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_starts_with_sequence() {
-    arrays.assertStartsWith(someInfo(), actual, arrayOf('a', 'b', 'c'));
+    arrays.assertStartsWith(someInfo(), actual, newArray('a', 'b', 'c'));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal() {
-    arrays.assertStartsWith(someInfo(), actual, arrayOf('a', 'b', 'c', 'd'));
+    arrays.assertStartsWith(someInfo(), actual, newArray('a', 'b', 'c', 'd'));
   }
 
   @Test
@@ -124,7 +124,7 @@ public class CharArrays_assertStartsWith_Test extends CharArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null_whatever_custom_comparison_strategy_is() {
     thrown.expectAssertionError(actualIsNull());
-    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), null, arrayOf('A'));
+    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), null, newArray('A'));
   }
 
   @Test
@@ -137,7 +137,7 @@ public class CharArrays_assertStartsWith_Test extends CharArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence, caseInsensitiveComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -150,7 +150,7 @@ public class CharArrays_assertStartsWith_Test extends CharArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence, caseInsensitiveComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -163,16 +163,16 @@ public class CharArrays_assertStartsWith_Test extends CharArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence, caseInsensitiveComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_starts_with_sequence_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, arrayOf('A', 'b', 'c'));
+    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, newArray('A', 'b', 'c'));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, arrayOf('A', 'b', 'c', 'd'));
+    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, newArray('A', 'b', 'c', 'd'));
   }
 }

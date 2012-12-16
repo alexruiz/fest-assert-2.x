@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.booleanarrays;
 
 import static org.fest.assertions.error.ShouldContainSequence.shouldContainSequence;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.BooleanArrays.*;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -42,13 +42,13 @@ public class BooleanArrays_assertContainsSequence_Test extends BooleanArraysBase
   @Before
   public void setUp() {
     super.setUp();
-    actual = arrayOf(true, false, false, true);
+    actual = newArray(true, false, false, true);
   }
 
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertContainsSequence(someInfo(), null, arrayOf(true));
+    arrays.assertContainsSequence(someInfo(), null, newArray(true));
   }
 
   @Test
@@ -73,7 +73,7 @@ public class BooleanArrays_assertContainsSequence_Test extends BooleanArraysBase
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -86,7 +86,7 @@ public class BooleanArrays_assertContainsSequence_Test extends BooleanArraysBase
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -99,7 +99,7 @@ public class BooleanArrays_assertContainsSequence_Test extends BooleanArraysBase
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   private void verifyFailureThrownWhenSequenceNotFound(AssertionInfo info, boolean[] sequence) {
@@ -108,11 +108,11 @@ public class BooleanArrays_assertContainsSequence_Test extends BooleanArraysBase
 
   @Test
   public void should_pass_if_actual_contains_sequence() {
-    arrays.assertContainsSequence(someInfo(), actual, arrayOf(true, false));
+    arrays.assertContainsSequence(someInfo(), actual, newArray(true, false));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal() {
-    arrays.assertContainsSequence(someInfo(), actual, arrayOf(true, false, false, true));
+    arrays.assertContainsSequence(someInfo(), actual, newArray(true, false, false, true));
   }
 }

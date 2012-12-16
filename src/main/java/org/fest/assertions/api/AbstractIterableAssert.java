@@ -17,7 +17,7 @@ package org.fest.assertions.api;
 import java.util.Collection;
 import java.util.Comparator;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.assertions.core.ObjectEnumerableAssert;
 import org.fest.assertions.internal.*;
 import org.fest.util.VisibleForTesting;
@@ -156,97 +156,97 @@ public abstract class AbstractIterableAssert<S extends AbstractIterableAssert<S,
   }
 
   /** {@inheritDoc} */
-  public S are(Condition<? super T> condition) {
+  public S are(Matcher<? super T> condition) {
     iterables.assertAre(info, actual, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S areNot(Condition<? super T> condition) {
+  public S areNot(Matcher<? super T> condition) {
     iterables.assertAreNot(info, actual, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S have(Condition<? super T> condition) {
+  public S have(Matcher<? super T> condition) {
     iterables.assertHave(info, actual, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S doNotHave(Condition<? super T> condition) {
+  public S doNotHave(Matcher<? super T> condition) {
     iterables.assertDoNotHave(info, actual, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S areAtLeast(int times, Condition<? super T> condition) {
+  public S areAtLeast(int times, Matcher<? super T> condition) {
     iterables.assertAreAtLeast(info, actual, times, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S areNotAtLeast(int times, Condition<? super T> condition) {
+  public S areNotAtLeast(int times, Matcher<? super T> condition) {
     iterables.assertAreNotAtLeast(info, actual, times, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S areAtMost(int times, Condition<? super T> condition) {
+  public S areAtMost(int times, Matcher<? super T> condition) {
     iterables.assertAreAtMost(info, actual, times, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S areNotAtMost(int times, Condition<? super T> condition) {
+  public S areNotAtMost(int times, Matcher<? super T> condition) {
     iterables.assertAreNotAtMost(info, actual, times, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S areExactly(int times, Condition<? super T> condition) {
+  public S areExactly(int times, Matcher<? super T> condition) {
     iterables.assertAreExactly(info, actual, times, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S areNotExactly(int times, Condition<? super T> condition) {
+  public S areNotExactly(int times, Matcher<? super T> condition) {
     iterables.assertAreNotExactly(info, actual, times, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S haveAtLeast(int times, Condition<? super T> condition) {
+  public S haveAtLeast(int times, Matcher<? super T> condition) {
     iterables.assertHaveAtLeast(info, actual, times, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S doNotHaveAtLeast(int times, Condition<? super T> condition) {
+  public S doNotHaveAtLeast(int times, Matcher<? super T> condition) {
     iterables.assertDoNotHaveAtLeast(info, actual, times, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S haveAtMost(int times, Condition<? super T> condition) {
+  public S haveAtMost(int times, Matcher<? super T> condition) {
     iterables.assertHaveAtMost(info, actual, times, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S doNotHaveAtMost(int times, Condition<? super T> condition) {
+  public S doNotHaveAtMost(int times, Matcher<? super T> condition) {
     iterables.assertDoNotHaveAtMost(info, actual, times, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S haveExactly(int times, Condition<? super T> condition) {
+  public S haveExactly(int times, Matcher<? super T> condition) {
     iterables.assertHaveExactly(info, actual, times, condition);
     return myself;
   }
 
   /** {@inheritDoc} */
-  public S doNotHaveExactly(int times, Condition<? super T> condition) {
+  public S doNotHaveExactly(int times, Matcher<? super T> condition) {
     iterables.assertDoNotHaveExactly(info, actual, times, condition);
     return myself;
   }
@@ -259,7 +259,7 @@ public abstract class AbstractIterableAssert<S extends AbstractIterableAssert<S,
 
   /** {@inheritDoc} */
   public S usingElementComparator(Comparator<? super T> customComparator) {
-    this.iterables = new Iterables(new ComparatorBasedComparisonStrategy(customComparator));
+    this.iterables = new Iterables(new ComparatorComparison(customComparator));
     return myself;
   }
 

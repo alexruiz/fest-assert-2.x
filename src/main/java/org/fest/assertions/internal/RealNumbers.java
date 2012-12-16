@@ -14,7 +14,7 @@ public abstract class RealNumbers<NUMBER extends Comparable<NUMBER>> extends Num
     super();
   }
 
-  public RealNumbers(ComparisonStrategy comparisonStrategy) {
+  public RealNumbers(Comparison comparisonStrategy) {
     super(comparisonStrategy);
   }
 

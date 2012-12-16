@@ -124,7 +124,7 @@ public class LongAssert extends AbstractComparableAssert<LongAssert, Long> imple
    * @throws AssertionError if the actual value is greater than the given one.
    */
   public LongAssert isLessThanOrEqualTo(long other) {
-    longs.assertLessThanOrEqualTo(info, actual, other);
+    longs.assertNotGreaterThan(info, actual, other);
     return this;
   }
 
@@ -148,14 +148,14 @@ public class LongAssert extends AbstractComparableAssert<LongAssert, Long> imple
    * @throws AssertionError if the actual value is less than the given one.
    */
   public LongAssert isGreaterThanOrEqualTo(long other) {
-    longs.assertGreaterThanOrEqualTo(info, actual, other);
+    longs.assertNotLessThan(info, actual, other);
     return this;
   }
 
   @Override
   public LongAssert usingComparator(Comparator<? super Long> customComparator) {
     super.usingComparator(customComparator);
-    this.longs = new Longs(new ComparatorBasedComparisonStrategy(customComparator));
+    this.longs = new Longs(new ComparatorComparison(customComparator));
     return myself;
   }
 

@@ -16,10 +16,10 @@ package org.fest.assertions.internal.doublearrays;
 
 import static org.fest.assertions.data.Index.atIndex;
 import static org.fest.assertions.error.ShouldNotContainAtIndex.shouldNotContainAtIndex;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.DoubleArrays.emptyArray;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.*;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -75,7 +75,7 @@ public class DoubleArrays_assertDoesNotContain_at_Index_Test extends DoubleArray
       verify(failures).failure(info, shouldNotContainAtIndex(actual, 6d, index));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -115,6 +115,6 @@ public class DoubleArrays_assertDoesNotContain_at_Index_Test extends DoubleArray
       verify(failures).failure(info, shouldNotContainAtIndex(actual, 6d, index, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

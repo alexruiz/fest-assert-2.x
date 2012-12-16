@@ -28,11 +28,11 @@ public class FloatAssert_isGreaterThanOrEqualTo_float_Test extends FloatAssertBa
 
   @Override
   protected FloatAssert invoke_api_method() {
-    return assertions.isGreaterThanOrEqualTo(6);
+    return assertions.isNotLessThan(6);
   }
 
   @Override
   protected void verify_internal_effects() {
-    verify(floats).assertGreaterThanOrEqualTo(getInfo(assertions), getActual(assertions), 6f);
+    verify(floats).assertNotLessThan(getInfo(assertions), getActual(assertions), 6f);
   }
 }

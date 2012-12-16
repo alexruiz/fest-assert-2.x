@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.lists;
 
 import static org.fest.assertions.error.ShouldBeSorted.*;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Lists.newArrayList;
 
 import static org.mockito.Mockito.verify;
@@ -95,7 +95,7 @@ public class Lists_assertIsSortedAccordingToComparator_Test extends ListsBaseTes
       verify(failures).failure(info, shouldBeSortedAccordingToGivenComparator(3, actual, stringDescendingOrderComparator));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -112,7 +112,7 @@ public class Lists_assertIsSortedAccordingToComparator_Test extends ListsBaseTes
           shouldHaveComparableElementsAccordingToGivenComparator(actual, stringDescendingOrderComparator));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -126,7 +126,7 @@ public class Lists_assertIsSortedAccordingToComparator_Test extends ListsBaseTes
           shouldHaveComparableElementsAccordingToGivenComparator(actual, stringDescendingOrderComparator));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

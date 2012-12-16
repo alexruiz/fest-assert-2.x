@@ -16,10 +16,10 @@ package org.fest.assertions.internal.chararrays;
 
 import static org.fest.assertions.data.Index.atIndex;
 import static org.fest.assertions.error.ShouldContainAtIndex.shouldContainAtIndex;
-import static org.fest.util.FailureMessages.*;
 import static org.fest.assertions.test.CharArrays.emptyArray;
+import static org.fest.assertions.test.FailureMessages.*;
 import static org.fest.assertions.test.TestData.*;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -72,7 +72,7 @@ public class CharArrays_assertContains_at_Index_Test extends CharArraysBaseTest 
       verify(failures).failure(info, shouldContainAtIndex(actual, 'a', index, 'b'));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -114,7 +114,7 @@ public class CharArrays_assertContains_at_Index_Test extends CharArraysBaseTest 
       verify(failures).failure(info, shouldContainAtIndex(actual, 'a', index, 'b', caseInsensitiveComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

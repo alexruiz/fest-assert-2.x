@@ -14,7 +14,7 @@
  */
 package org.fest.assertions.condition;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 
 /**
  * Returns {@code true} if the condition is not satisfied.
@@ -31,11 +31,11 @@ public class DoesNotHave<T> extends Negative<T> {
    * @param condition the condition to inverse.
    * @return The Not condition created.
    */
-  public static <T> DoesNotHave<T> doesNotHave(Condition<? super T> condition) {
+  public static <T> DoesNotHave<T> doesNotHave(Matcher<? super T> condition) {
     return new DoesNotHave<T>(condition);
   }
 
-  private DoesNotHave(Condition<? super T> condition) {
+  private DoesNotHave(Matcher<? super T> condition) {
     super(condition);
   }
 

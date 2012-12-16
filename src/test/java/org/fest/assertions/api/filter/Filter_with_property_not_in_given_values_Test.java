@@ -9,7 +9,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import org.fest.test.Player;
+import org.fest.assertions.test.Player;
 import org.fest.util.IntrospectionError;
 
 public class Filter_with_property_not_in_given_values_Test extends AbstractTest_filter {

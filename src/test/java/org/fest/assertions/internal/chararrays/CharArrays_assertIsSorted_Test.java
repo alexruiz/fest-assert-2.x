@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.chararrays;
 
 import static org.fest.assertions.error.ShouldBeSorted.*;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.CharArrays.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -37,7 +37,7 @@ public class CharArrays_assertIsSorted_Test extends CharArraysBaseTest {
 
   @Override
   protected void initActualArray() {
-    actual = arrayOf('a', 'b', 'c', 'd', 'd');
+    actual = newArray('a', 'b', 'c', 'd', 'd');
   }
 
   @Test
@@ -52,7 +52,7 @@ public class CharArrays_assertIsSorted_Test extends CharArraysBaseTest {
 
   @Test
   public void should_pass_if_actual_contains_only_one_element() {
-    arrays.assertIsSorted(someInfo(), arrayOf('d'));
+    arrays.assertIsSorted(someInfo(), newArray('d'));
   }
 
   @Test
@@ -64,14 +64,14 @@ public class CharArrays_assertIsSorted_Test extends CharArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_not_sorted_in_ascending_order() {
     AssertionInfo info = someInfo();
-    actual = arrayOf('a', 'c', 'b');
+    actual = newArray('a', 'c', 'b');
     try {
       arrays.assertIsSorted(info, actual);
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldBeSorted(1, actual));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -86,7 +86,7 @@ public class CharArrays_assertIsSorted_Test extends CharArraysBaseTest {
 
   @Test
   public void should_pass_if_actual_contains_only_one_element_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertIsSorted(someInfo(), arrayOf('d'));
+    arraysWithCustomComparisonStrategy.assertIsSorted(someInfo(), newArray('d'));
   }
 
   @Test
@@ -98,7 +98,7 @@ public class CharArrays_assertIsSorted_Test extends CharArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_not_sorted_in_ascending_order_according_to_custom_comparison_strategy() {
     AssertionInfo info = someInfo();
-    actual = arrayOf('A', 'c', 'b');
+    actual = newArray('A', 'c', 'b');
     try {
       arraysWithCustomComparisonStrategy.assertIsSorted(info, actual);
     } catch (AssertionError e) {
@@ -106,7 +106,7 @@ public class CharArrays_assertIsSorted_Test extends CharArraysBaseTest {
           .failure(info, shouldBeSortedAccordingToGivenComparator(1, actual, comparatorForCustomComparisonStrategy()));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

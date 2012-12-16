@@ -1,42 +1,40 @@
 /*
  * Created on Dec 22, 2010
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- * 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- * 
- * Copyright @2010-2011 the original author or authors.
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ *
+ * Copyright @2010-2012 the original author or authors.
  */
 package org.fest.assertions.api;
 
-import java.util.Comparator;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import org.fest.assertions.core.EnumerableAssert;
-import org.fest.assertions.internal.*;
+import org.fest.assertions.description.Description;
+import org.fest.assertions.internal.Strings;
 import org.fest.util.VisibleForTesting;
 
 /**
- * Assertion methods for {@code String}s.
+ * Assertions for {@code String}s.
  * <p>
- * To create a new instance of this class, invoke <code>{@link Assertions#assertThat(String)}</code>.
+ * To create a new instance of this class, invoke {@link Assertions#assertThat(String)}.
  * </p>
- * 
+ *
  * @author Yvonne Wang
  * @author David DIDIER
  * @author Alex Ruiz
  * @author Joel Costigliola
- * @author Mikhail Mazursky
- * @author Nicolas Francois
  */
-public class StringAssert extends AbstractAssert<StringAssert, String> implements EnumerableAssert<StringAssert, String> {
-
+public class StringAssert extends AbstractAssert<StringAssert, String>
+    implements EnumerableAssert<StringAssert, String> {
   @VisibleForTesting
   Strings strings = Strings.instance();
 
@@ -44,204 +42,159 @@ public class StringAssert extends AbstractAssert<StringAssert, String> implement
     super(actual, StringAssert.class);
   }
 
+  protected StringAssert(String actual, Description description) {
+    super(actual, StringAssert.class, description);
+  }
+
   /** {@inheritDoc} */
+  @Override
   public void isNullOrEmpty() {
-    strings.assertNullOrEmpty(info, actual);
+    strings.assertNullOrEmpty(description, actual);
   }
 
   /** {@inheritDoc} */
+  @Override
   public void isEmpty() {
-    strings.assertEmpty(info, actual);
+    strings.assertEmpty(description, actual);
   }
 
   /** {@inheritDoc} */
+  @Override
   public StringAssert isNotEmpty() {
-    strings.assertNotEmpty(info, actual);
+    strings.assertNotEmpty(description, actual);
     return this;
   }
 
   /** {@inheritDoc} */
+  @Override
   public StringAssert hasSize(int expected) {
-    strings.assertHasSize(info, actual, expected);
-    return this;
-  }
-
-  /** {@inheritDoc} */
-  public StringAssert hasSameSizeAs(Object[] other) {
-    strings.assertHasSameSizeAs(info, actual, other);
-    return this;
-  }
-
-  /** {@inheritDoc} */
-  public StringAssert hasSameSizeAs(Iterable<?> other) {
-    strings.assertHasSameSizeAs(info, actual, other);
+    strings.assertHasSize(description, actual, expected);
     return this;
   }
 
   /**
-   * Verifies that the actual {@code String} is equal to the given one, ignoring case considerations.
+   * Verifies that the <em>actual</em> {@code String} is equal to the given one, ignoring case considerations.
+   *
    * @param expected the given {@code String} to compare the actual {@code String} to.
    * @return {@code this} assertion object.
-   * @throws AssertionError if the actual {@code String} is not equal to the given one.
+   * @throws AssertionError if the <em>actual</em> {@code String} is not equal to the given one.
    */
   public StringAssert isEqualToIgnoringCase(String expected) {
-    strings.assertEqualsIgnoringCase(info, actual, expected);
+    strings.assertEqualsIgnoringCase(description, actual, expected);
     return this;
   }
 
   /**
-   * Verifies that the actual {@code String} contains only once the given sequence.
-   * 
-   * @param sequence the sequence to search for.
-   * @return {@code this} assertion object.
-   * @throws AssertionError if the actual {@code String} does not contain the given one, or contain it multiple times.
-   */
-  public StringAssert containsOnlyOnce(String sequence) {
-    strings.assertContainsOnlyOnce(info, actual, sequence);
-    return this;
-  }
-
-  /**
-   * Verifies that the actual {@code String} contains the given sequence.
-   * 
-   * @param sequence the sequence to search for.
+   * Verifies that the <em>actual</em> {@code String} contains the given sequence.
+   *
+   * @param sequence the sequence to look for.
    * @return {@code this} assertion object.
    * @throws NullPointerException if the given sequence is {@code null}.
-   * @throws AssertionError if the actual {@code String} is {@code null}.
-   * @throws AssertionError if the actual {@code String} does not contain the given one.
+   * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
+   * @throws AssertionError if the <em>actual</em> {@code String} does not contain the given one.
    */
   public StringAssert contains(String sequence) {
-    strings.assertContains(info, actual, sequence);
+    strings.assertContains(description, actual, sequence);
     return this;
   }
 
   /**
-   * Verifies that the actual {@code String} contains the given sequence, ignoring case considerations.
-   * @param sequence the sequence to search for.
+   * Verifies that the <em>actual</em> {@code String} does not contain the given sequence.
+   *
+   * @param sequence the sequence to look for.
    * @return {@code this} assertion object.
    * @throws NullPointerException if the given sequence is {@code null}.
-   * @throws AssertionError if the actual {@code String} is {@code null}.
-   * @throws AssertionError if the actual {@code String} does not contain the given one.
-   */
-  public StringAssert containsIgnoringCase(String sequence) {
-    strings.assertContainsIgnoringCase(info, actual, sequence);
-    return this;
-  }
-
-  /**
-   * Verifies that the actual {@code String} does not contain the given sequence.
-   * @param sequence the sequence to search for.
-   * @return {@code this} assertion object.
-   * @throws NullPointerException if the given sequence is {@code null}.
-   * @throws AssertionError if the actual {@code String} is {@code null}.
-   * @throws AssertionError if the actual {@code String} contains the given one.
+   * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
+   * @throws AssertionError if the <em>actual</em> {@code String} contains the given one.
    */
   public StringAssert doesNotContain(String sequence) {
-    strings.assertDoesNotContain(info, actual, sequence);
+    strings.assertDoesNotContain(description, actual, sequence);
     return this;
   }
 
   /**
-   * Verifies that the actual {@code String} starts with the given prefix.
+   * Verifies that the <em>actual</em> {@code String} starts with the given prefix.
+   *
    * @param prefix the given prefix.
    * @return {@code this} assertion object.
    * @throws NullPointerException if the given prefix is {@code null}.
-   * @throws AssertionError if the actual {@code String} is {@code null}.
-   * @throws AssertionError if the actual {@code String} does not start with the given prefix.
+   * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
+   * @throws AssertionError if the <em>actual</em> {@code String} does not start with the given prefix.
    */
   public StringAssert startsWith(String prefix) {
-    strings.assertStartsWith(info, actual, prefix);
+    strings.assertStartsWith(description, actual, prefix);
     return this;
   }
 
   /**
-   * Verifies that the actual {@code String} ends with the given suffix.
+   * Verifies that the <em>actual</em> {@code String} ends with the given suffix.
+   *
    * @param suffix the given suffix.
    * @return {@code this} assertion object.
    * @throws NullPointerException if the given suffix is {@code null}.
-   * @throws AssertionError if the actual {@code String} is {@code null}.
-   * @throws AssertionError if the actual {@code String} does not end with the given suffix.
+   * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
+   * @throws AssertionError if the <em>actual</em> {@code String} does not end with the given suffix.
    */
   public StringAssert endsWith(String suffix) {
-    strings.assertEndsWith(info, actual, suffix);
+    strings.assertEndsWith(description, actual, suffix);
     return this;
   }
 
   /**
-   * Verifies that the actual {@code String} matches the given regular expression.
-   * @param regex the regular expression to which the actual {@code String} is to be matched.
+   * Verifies that the <em>actual</em> {@code String} matches the given regular expression.
+   *
+   * @param regex the regular expression to which the <em>actual</em> {@code String} is to be matched.
    * @return {@code this} assertion object.
    * @throws NullPointerException if the given pattern is {@code null}.
    * @throws PatternSyntaxException if the regular expression's syntax is invalid.
-   * @throws AssertionError if the actual {@code String} is {@code null}.
-   * @throws AssertionError if the actual {@code String} does not match the given regular expression.
+   * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
+   * @throws AssertionError if the <em>actual</em> {@code String} does not match the given regular expression.
    */
   public StringAssert matches(String regex) {
-    strings.assertMatches(info, actual, regex);
+    strings.assertMatches(description, actual, regex);
     return this;
   }
 
   /**
-   * Verifies that the actual {@code String} does not match the given regular expression.
-   * @param regex the regular expression to which the actual {@code String} is to be matched.
+   * Verifies that the <em>actual</em> {@code String} does not match the given regular expression.
+   *
+   * @param regex the regular expression to which the <em>actual</em> {@code String} is to be matched.
    * @return {@code this} assertion object.
    * @throws NullPointerException if the given pattern is {@code null}.
    * @throws PatternSyntaxException if the regular expression's syntax is invalid.
-   * @throws AssertionError if the actual {@code String} is {@code null}.
-   * @throws AssertionError if the actual {@code String} matches the given regular expression.
+   * @throws AssertionError if the <em>actual</em> {@code String} matches the given regular expression.
    */
   public StringAssert doesNotMatch(String regex) {
-    strings.assertDoesNotMatch(info, actual, regex);
+    strings.assertDoesNotMatch(description, actual, regex);
     return this;
   }
 
   /**
-   * Verifies that the actual {@code String} matches the given regular expression.
-   * @param pattern the regular expression to which the actual {@code String} is to be matched.
+   * Verifies that the <em>actual</em> {@code String} matches the given regular expression.
+   *
+   * @param pattern the compiled representation of the regular expression to which the <em>actual</em> {@code String} is
+   *        to be matched.
    * @return {@code this} assertion object.
    * @throws NullPointerException if the given pattern is {@code null}.
-   * @throws AssertionError if the actual {@code String} is {@code null}.
-   * @throws AssertionError if the actual {@code String} does not match the given regular expression.
+   * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
+   * @throws AssertionError if the <em>actual</em> {@code String} does not match the given regular expression.
    */
   public StringAssert matches(Pattern pattern) {
-    strings.assertMatches(info, actual, pattern);
+    strings.assertMatches(description, actual, pattern);
     return this;
   }
 
   /**
-   * Verifies that the actual {@code String} does not match the given regular expression.
-   * @param pattern the regular expression to which the actual {@code String} is to be matched.
+   * Verifies that the <em>actual</em> {@code String} does not match the given regular expression.
+   *
+   * @param pattern the compiled representation of the regular expression to which the <em>actual</em> {@code String} is
+   *        to be matched.
    * @return {@code this} assertion object.
    * @throws NullPointerException if the given pattern is {@code null}.
-   * @throws AssertionError if the actual {@code String} does not match the given regular expression.
+   * @throws AssertionError if the <em>actual</em> {@code String} does not match the given regular expression.
    */
   public StringAssert doesNotMatch(Pattern pattern) {
-    strings.assertDoesNotMatch(info, actual, pattern);
+    strings.assertDoesNotMatch(description, actual, pattern);
     return this;
-  }
-  
-  /** {@inheritDoc} */
-  public StringAssert usingElementComparator(Comparator<? super String> customComparator) {
-    // TODO maybe use Comparator<? super Character>
-    throw new UnsupportedOperationException("custom element Comparator is not supported for String comparison");
-  }
-
-  /** {@inheritDoc} */
-  public StringAssert usingDefaultElementComparator() {
-    throw new UnsupportedOperationException("custom element Comparator is not supported for String comparison");
-  }
-
-  @Override
-  public StringAssert usingComparator(Comparator<? super String> customComparator) {
-    super.usingComparator(customComparator);
-    this.strings = new Strings(new ComparatorBasedComparisonStrategy(customComparator));
-    return myself;
-  }
-
-  @Override
-  public StringAssert usingDefaultComparator() {
-    super.usingDefaultComparator();
-    this.strings = Strings.instance();
-    return myself;
   }
 }

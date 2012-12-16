@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.booleanarrays;
 
 import static org.fest.assertions.error.ShouldNotHaveDuplicates.shouldNotHaveDuplicates;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.BooleanArrays.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Sets.newLinkedHashSet;
 
 import static org.mockito.Mockito.verify;
@@ -55,7 +55,7 @@ public class BooleanArrays_assertDoesNotHaveDuplicates_Test extends BooleanArray
 
   @Test
   public void should_fail_if_actual_contains_duplicates() {
-    actual = arrayOf(true, true, false);
+    actual = newArray(true, true, false);
     AssertionInfo info = someInfo();
     try {
       arrays.assertDoesNotHaveDuplicates(info, actual);
@@ -63,6 +63,6 @@ public class BooleanArrays_assertDoesNotHaveDuplicates_Test extends BooleanArray
       verify(failures).failure(info, shouldNotHaveDuplicates(actual, newLinkedHashSet(true)));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

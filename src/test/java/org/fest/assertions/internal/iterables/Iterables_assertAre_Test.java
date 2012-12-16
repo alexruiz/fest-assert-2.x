@@ -16,7 +16,7 @@ package org.fest.assertions.internal.iterables;
 
 import static org.fest.assertions.error.ElementsShouldBe.elementsShouldBe;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Lists.newArrayList;
 
 import static org.mockito.Mockito.verify;
@@ -63,7 +63,7 @@ public class Iterables_assertAre_Test extends IterablesWithConditionsBaseTest {
       verify(failures).failure(info, elementsShouldBe(actual, newArrayList("Leia"), jedi));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

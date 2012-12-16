@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.TestMatcher;
 import org.fest.assertions.description.Description;
 import org.fest.assertions.description.TextDescription;
 
@@ -38,7 +38,7 @@ public class ElementsShouldBeExactly_create_Test {
 
   @Before
   public void setUp() {
-    factory = elementsShouldBeExactly(newArrayList("Yoda", "Solo", "Leia"), 2, new TestCondition<String>("a Jedi"));
+    factory = elementsShouldBeExactly(newArrayList("Yoda", "Solo", "Leia"), 2, new TestMatcher<String>("a Jedi"));
   }
 
   @Test

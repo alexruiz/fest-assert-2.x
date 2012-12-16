@@ -29,10 +29,10 @@ public class ShouldContainSequence extends BasicErrorMessageFactory {
    * Creates a new <code>{@link ShouldContainSequence}</code>.
    * @param actual the actual value in the failed assertion.
    * @param sequence the sequence of values expected to be in {@code actual}.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
-  public static ErrorMessageFactory shouldContainSequence(Object actual, Object sequence, ComparisonStrategy comparisonStrategy) {
+  public static ErrorMessageFactory shouldContainSequence(Object actual, Object sequence, Comparison comparisonStrategy) {
     return new ShouldContainSequence(actual, sequence, comparisonStrategy);
   }
 
@@ -43,10 +43,10 @@ public class ShouldContainSequence extends BasicErrorMessageFactory {
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldContainSequence(Object actual, Object sequence) {
-    return new ShouldContainSequence(actual, sequence, StandardComparisonStrategy.instance());
+    return new ShouldContainSequence(actual, sequence, EqualityComparison.instance());
   }
 
-  private ShouldContainSequence(Object actual, Object sequence, ComparisonStrategy comparisonStrategy) {
+  private ShouldContainSequence(Object actual, Object sequence, Comparison comparisonStrategy) {
     super("expecting:\n<%s>\n to contain sequence:\n<%s>\n%s", actual, sequence, comparisonStrategy);
   }
 

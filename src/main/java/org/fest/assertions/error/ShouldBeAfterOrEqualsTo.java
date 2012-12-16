@@ -30,10 +30,10 @@ public class ShouldBeAfterOrEqualsTo extends BasicErrorMessageFactory {
    * Creates a new </code>{@link ShouldBeAfterOrEqualsTo}</code>.
    * @param actual the actual value in the failed assertion.
    * @param other the value used in the failed assertion to compare the actual value to.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
-  public static ErrorMessageFactory shouldBeAfterOrEqualsTo(Date actual, Date other, ComparisonStrategy comparisonStrategy) {
+  public static ErrorMessageFactory shouldBeAfterOrEqualsTo(Date actual, Date other, Comparison comparisonStrategy) {
     return new ShouldBeAfterOrEqualsTo(actual, other, comparisonStrategy);
   }
 
@@ -44,10 +44,10 @@ public class ShouldBeAfterOrEqualsTo extends BasicErrorMessageFactory {
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldBeAfterOrEqualsTo(Date actual, Date other) {
-    return new ShouldBeAfterOrEqualsTo(actual, other, StandardComparisonStrategy.instance());
+    return new ShouldBeAfterOrEqualsTo(actual, other, EqualityComparison.instance());
   }
 
-  private ShouldBeAfterOrEqualsTo(Date actual, Date other, ComparisonStrategy comparisonStrategy) {
+  private ShouldBeAfterOrEqualsTo(Date actual, Date other, Comparison comparisonStrategy) {
     super("expected:<%s> to be after or equals to:<%s>%s", actual, other, comparisonStrategy);
   }
 }

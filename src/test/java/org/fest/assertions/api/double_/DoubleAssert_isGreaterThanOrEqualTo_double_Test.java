@@ -28,11 +28,11 @@ public class DoubleAssert_isGreaterThanOrEqualTo_double_Test extends DoubleAsser
 
   @Override
   protected DoubleAssert invoke_api_method() {
-    return assertions.isGreaterThanOrEqualTo(6);
+    return assertions.isNotLessThan(6);
   }
 
   @Override
   protected void verify_internal_effects() {
-    verify(doubles).assertGreaterThanOrEqualTo(getInfo(assertions), getActual(assertions), 6d);
+    verify(doubles).assertNotLessThan(getInfo(assertions), getActual(assertions), 6d);
   }
 }

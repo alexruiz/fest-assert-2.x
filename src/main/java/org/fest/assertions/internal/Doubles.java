@@ -1,15 +1,15 @@
 /*
  * Created on Oct 25, 2010
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
  * License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
  * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
- * 
+ *
  * Copyright @2010-2011 the original author or authors.
  */
 package org.fest.assertions.internal;
@@ -17,7 +17,8 @@ package org.fest.assertions.internal;
 import static java.lang.Math.abs;
 
 import static org.fest.assertions.error.ShouldBeEqualWithinOffset.shouldBeEqual;
-import static org.fest.assertions.internal.CommonValidations.*;
+import static org.fest.assertions.internal.CommonValidations.checkNumberIsNotNull;
+import static org.fest.assertions.internal.CommonValidations.checkOffsetIsNotNull;
 
 import org.fest.assertions.core.AssertionInfo;
 import org.fest.assertions.data.Offset;
@@ -26,7 +27,7 @@ import org.fest.util.VisibleForTesting;
 
 /**
  * Reusable assertions for <code>{@link Double}</code>s.
- * 
+ *
  * @author Alex Ruiz
  * @author Joel Costigliola
  */
@@ -35,8 +36,8 @@ public class Doubles extends RealNumbers<Double> {
   private static final Doubles INSTANCE = new Doubles();
 
   /**
-   * Returns the singleton instance of this class based on {@link StandardComparisonStrategy}.
-   * @return the singleton instance of this class based on {@link StandardComparisonStrategy}.
+   * Returns the singleton instance of this class based on {@link EqualityComparison}.
+   * @return the singleton instance of this class based on {@link EqualityComparison}.
    */
   public static Doubles instance() {
     return INSTANCE;
@@ -47,7 +48,7 @@ public class Doubles extends RealNumbers<Double> {
     super();
   }
 
-  public Doubles(ComparisonStrategy comparisonStrategy) {
+  public Doubles(Comparison comparisonStrategy) {
     super(comparisonStrategy);
   }
 
@@ -80,8 +81,12 @@ public class Doubles extends RealNumbers<Double> {
     checkNumberIsNotNull(expected);
     assertNotNull(info, actual);
     // doesn't use areEqual method relying on comparisonStrategy attribute
-    if (Objects.areEqual(actual, expected)) return;
-    if (expected != null && isEqualTo(actual, expected, offset)) return;
+    if (Objects.areEqual(actual, expected)) {
+      return;
+    }
+    if (expected != null && isEqualTo(actual, expected, offset)) {
+      return;
+    }
     throw failures.failure(info, shouldBeEqual(actual, expected, offset, abs(expected.doubleValue() - actual.doubleValue())));
   }
 

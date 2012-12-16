@@ -99,7 +99,7 @@ public class BigDecimalAssert extends AbstractUnevenComparableAssert<BigDecimalA
   @Override
   public BigDecimalAssert usingComparator(Comparator<? super BigDecimal> customComparator) {
     super.usingComparator(customComparator);
-    this.bigDecimals = new BigDecimals(new ComparatorBasedComparisonStrategy(customComparator));
+    this.bigDecimals = new BigDecimals(new ComparatorComparison(customComparator));
     return myself;
   }
 

@@ -31,10 +31,10 @@ public class ShouldBeBefore extends BasicErrorMessageFactory {
    * Creates a new </code>{@link ShouldBeBefore}</code>.
    * @param actual the actual value in the failed assertion.
    * @param other the value used in the failed assertion to compare the actual value to.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
-  public static ErrorMessageFactory shouldBeBefore(Date actual, Date other, ComparisonStrategy comparisonStrategy) {
+  public static ErrorMessageFactory shouldBeBefore(Date actual, Date other, Comparison comparisonStrategy) {
     return new ShouldBeBefore(actual, other, comparisonStrategy);
   }
 
@@ -45,7 +45,7 @@ public class ShouldBeBefore extends BasicErrorMessageFactory {
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldBeBefore(Date actual, Date other) {
-    return new ShouldBeBefore(actual, other, StandardComparisonStrategy.instance());
+    return new ShouldBeBefore(actual, other, EqualityComparison.instance());
   }
 
   /**
@@ -56,10 +56,10 @@ public class ShouldBeBefore extends BasicErrorMessageFactory {
    */
   public static ErrorMessageFactory shouldBeBefore(Date actual, int year) {
     Date januaryTheFirstOfGivenYear = parse(year + "-01-01");
-    return new ShouldBeBefore(actual, januaryTheFirstOfGivenYear, StandardComparisonStrategy.instance());
+    return new ShouldBeBefore(actual, januaryTheFirstOfGivenYear, EqualityComparison.instance());
   }
 
-  private ShouldBeBefore(Date actual, Date other, ComparisonStrategy comparisonStrategy) {
+  private ShouldBeBefore(Date actual, Date other, Comparison comparisonStrategy) {
     super("expected:<%s> to be strictly before:<%s>%s", actual, other, comparisonStrategy);
   }
 }

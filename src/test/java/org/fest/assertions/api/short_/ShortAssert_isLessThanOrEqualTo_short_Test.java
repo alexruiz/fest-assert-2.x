@@ -28,11 +28,11 @@ public class ShortAssert_isLessThanOrEqualTo_short_Test extends ShortAssertBaseT
 
   @Override
   protected ShortAssert invoke_api_method() {
-    return assertions.isLessThanOrEqualTo((short) 8);
+    return assertions.isNotGreaterThan((short) 8);
   }
 
   @Override
   protected void verify_internal_effects() {
-    verify(shorts).assertLessThanOrEqualTo(getInfo(assertions), getActual(assertions), (short) 8);
+    verify(shorts).assertNotGreaterThan(getInfo(assertions), getActual(assertions), (short) 8);
   }
 }

@@ -26,15 +26,15 @@ import org.junit.*;
  * @author Yvonne Wang
  */
 public class AnyOf_toString_Test {
-  private TestCondition<Object> condition1;
-  private TestCondition<Object> condition2;
-  private Condition<Object> anyOf;
+  private TestMatcher<Object> condition1;
+  private TestMatcher<Object> condition2;
+  private Matcher<Object> anyOf;
 
   @SuppressWarnings("unchecked")
   @Before
   public void setUp() {
-    condition1 = new TestCondition<Object>("Condition 1");
-    condition2 = new TestCondition<Object>("Condition 2");
+    condition1 = new TestMatcher<Object>("Condition 1");
+    condition2 = new TestMatcher<Object>("Condition 2");
     anyOf = anyOf(condition1, condition2);
   }
 

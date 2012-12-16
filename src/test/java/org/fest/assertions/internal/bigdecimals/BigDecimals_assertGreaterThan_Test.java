@@ -17,9 +17,9 @@ package org.fest.assertions.internal.bigdecimals;
 import static java.math.BigDecimal.*;
 
 import static org.fest.assertions.error.ShouldBeGreater.shouldBeGreater;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -58,7 +58,7 @@ public class BigDecimals_assertGreaterThan_Test extends BigDecimalsBaseTest {
       verify(failures).failure(info, shouldBeGreater(TEN, TEN));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -70,7 +70,7 @@ public class BigDecimals_assertGreaterThan_Test extends BigDecimalsBaseTest {
       verify(failures).failure(info, shouldBeGreater(ONE, TEN));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   // ------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ public class BigDecimals_assertGreaterThan_Test extends BigDecimalsBaseTest {
       verify(failures).failure(info, shouldBeGreater(TEN.negate(), TEN, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -103,7 +103,7 @@ public class BigDecimals_assertGreaterThan_Test extends BigDecimalsBaseTest {
       verify(failures).failure(info, shouldBeGreater(ONE, TEN.negate(), absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

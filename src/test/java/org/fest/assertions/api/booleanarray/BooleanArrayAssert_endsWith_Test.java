@@ -14,7 +14,7 @@
  */
 package org.fest.assertions.api.booleanarray;
 
-import static org.fest.assertions.test.BooleanArrays.arrayOf;
+import static org.fest.assertions.test.BooleanArrays.newArray;
 import static org.mockito.Mockito.verify;
 
 import org.fest.assertions.api.BooleanArrayAssert;
@@ -34,6 +34,6 @@ public class BooleanArrayAssert_endsWith_Test extends BooleanArrayAssertBaseTest
 
   @Override
   protected void verify_internal_effects() {
-    verify(arrays).assertEndsWith(getInfo(assertions), getActual(assertions), arrayOf(true, false));
+    verify(arrays).assertEndsWith(getInfo(assertions), getActual(assertions), newArray(true, false));
   }
 }

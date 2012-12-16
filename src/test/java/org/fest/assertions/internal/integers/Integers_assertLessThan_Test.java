@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.integers;
 
 import static org.fest.assertions.error.ShouldBeLess.shouldBeLess;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -54,7 +54,7 @@ public class Integers_assertLessThan_Test extends IntegersBaseTest {
       verify(failures).failure(info, shouldBeLess(6, 6));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -66,7 +66,7 @@ public class Integers_assertLessThan_Test extends IntegersBaseTest {
       verify(failures).failure(info, shouldBeLess(8, 6));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -89,7 +89,7 @@ public class Integers_assertLessThan_Test extends IntegersBaseTest {
       verify(failures).failure(info, shouldBeLess(6, -6, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -101,6 +101,6 @@ public class Integers_assertLessThan_Test extends IntegersBaseTest {
       verify(failures).failure(info, shouldBeLess(-8, 6, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

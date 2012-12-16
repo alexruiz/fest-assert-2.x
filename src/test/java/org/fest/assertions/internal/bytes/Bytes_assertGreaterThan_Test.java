@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.bytes;
 
 import static org.fest.assertions.error.ShouldBeGreater.shouldBeGreater;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -54,7 +54,7 @@ public class Bytes_assertGreaterThan_Test extends BytesBaseTest {
       verify(failures).failure(someInfo(), shouldBeGreater((byte) 6, (byte) 6));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -66,7 +66,7 @@ public class Bytes_assertGreaterThan_Test extends BytesBaseTest {
       verify(failures).failure(info, shouldBeGreater((byte) 6, (byte) 8));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   // ------------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ public class Bytes_assertGreaterThan_Test extends BytesBaseTest {
       verify(failures).failure(someInfo(), shouldBeGreater((byte) -6, (byte) 6, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -98,7 +98,7 @@ public class Bytes_assertGreaterThan_Test extends BytesBaseTest {
       verify(failures).failure(info, shouldBeGreater((byte) -6, (byte) 8, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

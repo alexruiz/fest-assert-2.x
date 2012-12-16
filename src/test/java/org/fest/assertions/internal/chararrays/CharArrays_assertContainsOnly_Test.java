@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.chararrays;
 
 import static org.fest.assertions.error.ShouldContainOnly.shouldContainOnly;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.CharArrays.*;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Sets.newLinkedHashSet;
 
 import static org.mockito.Mockito.verify;
@@ -40,23 +40,23 @@ public class CharArrays_assertContainsOnly_Test extends CharArraysBaseTest {
 
   @Test
   public void should_pass_if_actual_contains_given_values_only() {
-    arrays.assertContainsOnly(someInfo(), actual, arrayOf('a', 'b', 'c'));
+    arrays.assertContainsOnly(someInfo(), actual, newArray('a', 'b', 'c'));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_in_different_order() {
-    arrays.assertContainsOnly(someInfo(), actual, arrayOf('c', 'b', 'a'));
+    arrays.assertContainsOnly(someInfo(), actual, newArray('c', 'b', 'a'));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_more_than_once() {
-    actual = arrayOf('a', 'b', 'c', 'c', 'c');
-    arrays.assertContainsOnly(someInfo(), actual, arrayOf('a', 'b', 'c'));
+    actual = newArray('a', 'b', 'c', 'c', 'c');
+    arrays.assertContainsOnly(someInfo(), actual, newArray('a', 'b', 'c'));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_even_if_duplicated() {
-    arrays.assertContainsOnly(someInfo(), actual, arrayOf('a', 'b', 'c', 'a', 'b', 'c'));
+    arrays.assertContainsOnly(someInfo(), actual, newArray('a', 'b', 'c', 'a', 'b', 'c'));
   }
 
   @Test
@@ -74,7 +74,7 @@ public class CharArrays_assertContainsOnly_Test extends CharArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertContainsOnly(someInfo(), null, arrayOf('a'));
+    arrays.assertContainsOnly(someInfo(), null, newArray('a'));
   }
 
   @Test
@@ -87,28 +87,28 @@ public class CharArrays_assertContainsOnly_Test extends CharArraysBaseTest {
       verify(failures).failure(info, shouldContainOnly(actual, expected, newLinkedHashSet('d'), newLinkedHashSet('c')));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, arrayOf('A', 'b', 'c'));
+    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, newArray('A', 'b', 'c'));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_in_different_order_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, arrayOf('c', 'b', 'A'));
+    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, newArray('c', 'b', 'A'));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_more_than_once_according_to_custom_comparison_strategy() {
-    actual = arrayOf('A', 'b', 'c', 'c', 'c');
-    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, arrayOf('A', 'b', 'c'));
+    actual = newArray('A', 'b', 'c', 'c', 'c');
+    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, newArray('A', 'b', 'c'));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_even_if_duplicated_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, arrayOf('A', 'b', 'c', 'A', 'b', 'c'));
+    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, newArray('A', 'b', 'c', 'A', 'b', 'c'));
   }
 
   @Test
@@ -126,7 +126,7 @@ public class CharArrays_assertContainsOnly_Test extends CharArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null_whatever_custom_comparison_strategy_is() {
     thrown.expectAssertionError(actualIsNull());
-    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), null, arrayOf('A'));
+    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), null, newArray('A'));
   }
 
   @Test
@@ -139,6 +139,6 @@ public class CharArrays_assertContainsOnly_Test extends CharArraysBaseTest {
       verify(failures).failure(info, shouldContainOnly(actual, expected, newLinkedHashSet('d'), newLinkedHashSet('c'), caseInsensitiveComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

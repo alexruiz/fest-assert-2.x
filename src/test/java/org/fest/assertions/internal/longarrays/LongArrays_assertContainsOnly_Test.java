@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.longarrays;
 
 import static org.fest.assertions.error.ShouldContainOnly.shouldContainOnly;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.LongArrays.*;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Sets.newLinkedHashSet;
 
 import static org.mockito.Mockito.verify;
@@ -40,23 +40,23 @@ public class LongArrays_assertContainsOnly_Test extends LongArraysBaseTest {
 
   @Test
   public void should_pass_if_actual_contains_given_values_only() {
-    arrays.assertContainsOnly(someInfo(), actual, arrayOf(6L, 8L, 10L));
+    arrays.assertContainsOnly(someInfo(), actual, newArray(6L, 8L, 10L));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_in_different_order() {
-    arrays.assertContainsOnly(someInfo(), actual, arrayOf(10L, 8L, 6L));
+    arrays.assertContainsOnly(someInfo(), actual, newArray(10L, 8L, 6L));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_more_than_once() {
-    actual = arrayOf(6L, 8L, 10L, 8L, 8L, 8L);
-    arrays.assertContainsOnly(someInfo(), actual, arrayOf(6L, 8L, 10L));
+    actual = newArray(6L, 8L, 10L, 8L, 8L, 8L);
+    arrays.assertContainsOnly(someInfo(), actual, newArray(6L, 8L, 10L));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_even_if_duplicated() {
-    arrays.assertContainsOnly(someInfo(), actual, arrayOf(6L, 8L, 10L, 6L, 8L, 10L));
+    arrays.assertContainsOnly(someInfo(), actual, newArray(6L, 8L, 10L, 6L, 8L, 10L));
   }
 
   @Test
@@ -74,7 +74,7 @@ public class LongArrays_assertContainsOnly_Test extends LongArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertContainsOnly(someInfo(), null, arrayOf(8L));
+    arrays.assertContainsOnly(someInfo(), null, newArray(8L));
   }
 
   @Test
@@ -87,28 +87,28 @@ public class LongArrays_assertContainsOnly_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldContainOnly(actual, expected, newLinkedHashSet(20L), newLinkedHashSet(10L)));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, arrayOf(6L, -8L, 10L));
+    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, newArray(6L, -8L, 10L));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_in_different_order_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, arrayOf(10L, -8L, 6L));
+    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, newArray(10L, -8L, 6L));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_more_than_once_according_to_custom_comparison_strategy() {
-    actual = arrayOf(6L, -8L, 10L, -8L, -8L, -8L);
-    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, arrayOf(6L, -8L, 10L));
+    actual = newArray(6L, -8L, 10L, -8L, -8L, -8L);
+    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, newArray(6L, -8L, 10L));
   }
 
   @Test
   public void should_pass_if_actual_contains_given_values_only_even_if_duplicated_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, arrayOf(6L, -8L, 10L, 6L, -8L, 10L));
+    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), actual, newArray(6L, -8L, 10L, 6L, -8L, 10L));
   }
 
   @Test
@@ -126,7 +126,7 @@ public class LongArrays_assertContainsOnly_Test extends LongArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null_whatever_custom_comparison_strategy_is() {
     thrown.expectAssertionError(actualIsNull());
-    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), null, arrayOf(-8L));
+    arraysWithCustomComparisonStrategy.assertContainsOnly(someInfo(), null, newArray(-8L));
   }
 
   @Test
@@ -139,6 +139,6 @@ public class LongArrays_assertContainsOnly_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldContainOnly(actual, expected, newLinkedHashSet(20L), newLinkedHashSet(10L), absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

@@ -29,8 +29,8 @@ public class BigDecimals extends Numbers<BigDecimal> {
   private static final BigDecimals INSTANCE = new BigDecimals();
 
   /**
-   * Returns the singleton instance of this class based on {@link StandardComparisonStrategy}.
-   * @return the singleton instance of this class based on {@link StandardComparisonStrategy}.
+   * Returns the singleton instance of this class based on {@link EqualityComparison}.
+   * @return the singleton instance of this class based on {@link EqualityComparison}.
    */
   public static BigDecimals instance() {
     return INSTANCE;
@@ -41,7 +41,7 @@ public class BigDecimals extends Numbers<BigDecimal> {
     super();
   }
 
-  public BigDecimals(ComparisonStrategy comparisonStrategy) {
+  public BigDecimals(Comparison comparisonStrategy) {
     super(comparisonStrategy);
   }
 

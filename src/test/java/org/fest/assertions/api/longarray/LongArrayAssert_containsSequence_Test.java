@@ -14,7 +14,7 @@
  */
 package org.fest.assertions.api.longarray;
 
-import static org.fest.assertions.test.LongArrays.arrayOf;
+import static org.fest.assertions.test.LongArrays.newArray;
 import static org.mockito.Mockito.verify;
 
 import org.fest.assertions.api.LongArrayAssert;
@@ -34,6 +34,6 @@ public class LongArrayAssert_containsSequence_Test extends LongArrayAssertBaseTe
 
   @Override
   protected void verify_internal_effects() {
-    verify(arrays).assertContainsSequence(getInfo(assertions), getActual(assertions), arrayOf(6L, 8L));
+    verify(arrays).assertContainsSequence(getInfo(assertions), getActual(assertions), newArray(6L, 8L));
   }
 }

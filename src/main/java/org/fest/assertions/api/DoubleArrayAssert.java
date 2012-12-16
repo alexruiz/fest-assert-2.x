@@ -221,7 +221,7 @@ public class DoubleArrayAssert extends AbstractAssert<DoubleArrayAssert, double[
 
   /** {@inheritDoc} */
   public DoubleArrayAssert usingElementComparator(Comparator<? super Double> customComparator) {
-    this.arrays = new DoubleArrays(new ComparatorBasedComparisonStrategy(customComparator));
+    this.arrays = new DoubleArrays(new ComparatorComparison(customComparator));
     return myself;
   }
 

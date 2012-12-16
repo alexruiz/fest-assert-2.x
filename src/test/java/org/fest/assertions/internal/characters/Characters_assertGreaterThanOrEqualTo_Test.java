@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.characters;
 
 import static org.fest.assertions.error.ShouldBeGreaterOrEqual.shouldBeGreaterOrEqual;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -28,7 +28,7 @@ import org.fest.assertions.internal.Characters;
 import org.fest.assertions.internal.CharactersBaseTest;
 
 /**
- * Tests for <code>{@link Characters#assertGreaterThanOrEqualTo(AssertionInfo, Character, char)}</code>.
+ * Tests for <code>{@link Characters#assertNotLessThan(AssertionInfo, Character, char)}</code>.
  * 
  * @author Alex Ruiz
  * @author Joel Costigliola
@@ -38,56 +38,56 @@ public class Characters_assertGreaterThanOrEqualTo_Test extends CharactersBaseTe
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    characters.assertGreaterThanOrEqualTo(someInfo(), null, 'a');
+    characters.assertNotLessThan(someInfo(), null, 'a');
   }
 
   @Test
   public void should_pass_if_actual_is_greater_than_other() {
-    characters.assertGreaterThanOrEqualTo(someInfo(), 'b', 'a');
+    characters.assertNotLessThan(someInfo(), 'b', 'a');
   }
 
   @Test
   public void should_pass_if_actual_is_equal_to_other() {
-    characters.assertGreaterThanOrEqualTo(someInfo(), 'b', 'b');
+    characters.assertNotLessThan(someInfo(), 'b', 'b');
   }
 
   @Test
   public void should_fail_if_actual_is_less_than_other() {
     AssertionInfo info = someInfo();
     try {
-      characters.assertGreaterThanOrEqualTo(info, 'a', 'b');
+      characters.assertNotLessThan(info, 'a', 'b');
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldBeGreaterOrEqual('a', 'b'));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_fail_if_actual_is_null_according_to_custom_comparison_strategy() {
     thrown.expectAssertionError(actualIsNull());
-    charactersWithCaseInsensitiveComparisonStrategy.assertGreaterThanOrEqualTo(someInfo(), null, 'a');
+    charactersWithCaseInsensitiveComparisonStrategy.assertNotLessThan(someInfo(), null, 'a');
   }
 
   @Test
   public void should_pass_if_actual_is_greater_than_other_according_to_custom_comparison_strategy() {
-    charactersWithCaseInsensitiveComparisonStrategy.assertGreaterThanOrEqualTo(someInfo(), 'B', 'a');
+    charactersWithCaseInsensitiveComparisonStrategy.assertNotLessThan(someInfo(), 'B', 'a');
   }
 
   @Test
   public void should_pass_if_actual_is_equal_to_other_according_to_custom_comparison_strategy() {
-    charactersWithCaseInsensitiveComparisonStrategy.assertGreaterThanOrEqualTo(someInfo(), 'B', 'b');
+    charactersWithCaseInsensitiveComparisonStrategy.assertNotLessThan(someInfo(), 'B', 'b');
   }
 
   @Test
   public void should_fail_if_actual_is_less_than_other_according_to_custom_comparison_strategy() {
     AssertionInfo info = someInfo();
     try {
-      charactersWithCaseInsensitiveComparisonStrategy.assertGreaterThanOrEqualTo(info, 'a', 'B');
+      charactersWithCaseInsensitiveComparisonStrategy.assertNotLessThan(info, 'a', 'B');
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldBeGreaterOrEqual('a', 'B', caseInsensitiveComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

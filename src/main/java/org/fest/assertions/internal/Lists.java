@@ -29,7 +29,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.fest.assertions.core.AssertionInfo;
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.assertions.data.Index;
 import org.fest.util.VisibleForTesting;
 
@@ -53,23 +53,23 @@ public class Lists {
     return INSTANCE;
   }
 
-  private ComparisonStrategy comparisonStrategy;
+  private Comparison comparisonStrategy;
 
   @VisibleForTesting
   Failures failures = Failures.instance();
 
   @VisibleForTesting
   Lists() {
-    this(StandardComparisonStrategy.instance());
+    this(EqualityComparison.instance());
   }
 
-  public Lists(ComparisonStrategy comparisonStrategy) {
+  public Lists(Comparison comparisonStrategy) {
     this.comparisonStrategy = comparisonStrategy;
   }
 
   @VisibleForTesting
   public Comparator<?> getComparator() {
-    if (comparisonStrategy instanceof ComparatorBasedComparisonStrategy) { return ((ComparatorBasedComparisonStrategy) comparisonStrategy)
+    if (comparisonStrategy instanceof ComparatorComparison) { return ((ComparatorComparison) comparisonStrategy)
         .getComparator(); }
     return null;
   }
@@ -138,9 +138,9 @@ public class Lists {
    */
   public void assertIsSorted(AssertionInfo info, List<?> actual) {
     assertNotNull(info, actual);
-    if (comparisonStrategy instanceof ComparatorBasedComparisonStrategy) {
+    if (comparisonStrategy instanceof ComparatorComparison) {
       // instead of comparing elements with their natural comparator, use the one set by client.
-      Comparator<?> comparator = ((ComparatorBasedComparisonStrategy) comparisonStrategy).getComparator();
+      Comparator<?> comparator = ((ComparatorComparison) comparisonStrategy).getComparator();
       assertIsSortedAccordingToComparator(info, actual, comparator);
       return;
     }
@@ -199,7 +199,7 @@ public class Lists {
   }
 
   /**
-   * Verifies that the given {@code List} satisfies the given <code>{@link Condition}</code> at the given index.
+   * Verifies that the given {@code List} satisfies the given <code>{@link Matcher}</code> at the given index.
    * @param <T> the type of the actual value and the type of values that given {@code Condition} takes.
    * @param info contains information about the assertion.
    * @param actual the given {@code List}.
@@ -213,7 +213,7 @@ public class Lists {
    * @throws AssertionError if the value in the given {@code List} at the given index does not satisfy the given {@code Condition}
    *           .
    */
-  public <T> void assertHas(AssertionInfo info, List<T> actual, Condition<? super T> condition, Index index) {
+  public <T> void assertHas(AssertionInfo info, List<T> actual, Matcher<? super T> condition, Index index) {
     assertNotNull(info, actual);
     assertNotNull(condition);
     Iterables.instance().assertNotEmpty(info, actual);
@@ -226,7 +226,7 @@ public class Lists {
   }
 
   /**
-   * Verifies that the given {@code List} satisfies the given <code>{@link Condition}</code> at the given index.
+   * Verifies that the given {@code List} satisfies the given <code>{@link Matcher}</code> at the given index.
    * @param <T> the type of the actual value and the type of values that given {@code Condition} takes.
    * @param info contains information about the assertion.
    * @param actual the given {@code List}.
@@ -240,7 +240,7 @@ public class Lists {
    * @throws AssertionError if the value in the given {@code List} at the given index does not satisfy the given {@code Condition}
    *           .
    */
-  public <T> void assertIs(AssertionInfo info, List<T> actual, Condition<? super T> condition, Index index) {
+  public <T> void assertIs(AssertionInfo info, List<T> actual, Matcher<? super T> condition, Index index) {
     assertNotNull(info, actual);
     assertNotNull(condition);
     Iterables.instance().assertNotEmpty(info, actual);
@@ -265,12 +265,12 @@ public class Lists {
     Objects.instance().assertNotNull(info, actual);
   }
 
-  private void assertNotNull(Condition<?> condition) {
-    Conditions.instance().assertIsNotNull(condition);
+  private void assertNotNull(Matcher<?> condition) {
+    Matchers.instance().assertIsNotNull(condition);
   }
 
   /**
-   * Delegates to {@link ComparisonStrategy#areEqual(Object, Object)}
+   * Delegates to {@link Comparison#areEqual(Object, Object)}
    */
   private boolean areEqual(Object actual, Object other) {
     return comparisonStrategy.areEqual(actual, other);

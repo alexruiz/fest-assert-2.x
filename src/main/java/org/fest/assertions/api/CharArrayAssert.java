@@ -221,7 +221,7 @@ public class CharArrayAssert extends AbstractAssert<CharArrayAssert, char[]> imp
 
   /** {@inheritDoc} */
   public CharArrayAssert usingElementComparator(Comparator<? super Character> customComparator) {
-    this.arrays = new CharArrays(new ComparatorBasedComparisonStrategy(customComparator));
+    this.arrays = new CharArrays(new ComparatorComparison(customComparator));
     return myself;
   }
 

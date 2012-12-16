@@ -16,10 +16,10 @@ package org.fest.assertions.internal.bytearrays;
 
 import static org.fest.assertions.data.Index.atIndex;
 import static org.fest.assertions.error.ShouldContainAtIndex.shouldContainAtIndex;
-import static org.fest.util.FailureMessages.*;
 import static org.fest.assertions.test.ByteArrays.emptyArray;
+import static org.fest.assertions.test.FailureMessages.*;
 import static org.fest.assertions.test.TestData.*;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -74,7 +74,7 @@ public class ByteArrays_assertContains_at_Index_Test extends ByteArraysBaseTest 
       verify(failures).failure(info, shouldContainAtIndex(actual, value, index, found));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -118,7 +118,7 @@ public class ByteArrays_assertContains_at_Index_Test extends ByteArraysBaseTest 
       verify(failures).failure(info, shouldContainAtIndex(actual, value, index, found, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

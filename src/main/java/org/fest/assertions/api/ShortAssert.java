@@ -123,7 +123,7 @@ public class ShortAssert extends AbstractComparableAssert<ShortAssert, Short> im
    * @throws AssertionError if the actual value is greater than the given one.
    */
   public ShortAssert isLessThanOrEqualTo(short other) {
-    shorts.assertLessThanOrEqualTo(info, actual, other);
+    shorts.assertNotGreaterThan(info, actual, other);
     return this;
   }
 
@@ -147,14 +147,14 @@ public class ShortAssert extends AbstractComparableAssert<ShortAssert, Short> im
    * @throws AssertionError if the actual value is less than the given one.
    */
   public ShortAssert isGreaterThanOrEqualTo(short other) {
-    shorts.assertGreaterThanOrEqualTo(info, actual, other);
+    shorts.assertNotLessThan(info, actual, other);
     return this;
   }
 
   @Override
   public ShortAssert usingComparator(Comparator<? super Short> customComparator) {
     super.usingComparator(customComparator);
-    this.shorts = new Shorts(new ComparatorBasedComparisonStrategy(customComparator));
+    this.shorts = new Shorts(new ComparatorComparison(customComparator));
     return myself;
   }
 

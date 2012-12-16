@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.objectarrays;
 
 import static org.fest.assertions.error.ShouldNotHaveDuplicates.shouldNotHaveDuplicates;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ObjectArrays.emptyArray;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Arrays.array;
 import static org.fest.util.Sets.newLinkedHashSet;
 
@@ -68,7 +68,7 @@ public class ObjectArrays_assertDoesNotHaveDuplicates_Test extends ObjectArraysB
       verify(failures).failure(info, shouldNotHaveDuplicates(actual, newLinkedHashSet("Luke", "Yoda")));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -98,6 +98,6 @@ public class ObjectArrays_assertDoesNotHaveDuplicates_Test extends ObjectArraysB
           shouldNotHaveDuplicates(actual, newLinkedHashSet("Luke", "Yoda"), caseInsensitiveStringComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

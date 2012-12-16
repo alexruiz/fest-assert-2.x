@@ -15,16 +15,17 @@
 package org.fest.assertions.condition;
 
 import static junit.framework.Assert.assertEquals;
-import static org.fest.assertions.test.ExpectedException.none;
+
+import static org.fest.test.ExpectedException.none;
 
 import java.util.*;
 
 import org.fest.assertions.core.*;
-import org.fest.assertions.test.ExpectedException;
+import org.fest.test.ExpectedException;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link Join#Join(Condition...)}</code>.
+ * Tests for <code>{@link Join#Join(Matcher...)}</code>.
  * 
  * @author Yvonne Wang
  */
@@ -36,23 +37,23 @@ public class Join_constructor_with_Collection_Test {
   @Test
   public void should_throw_error_if_Collection_is_null() {
     thrown.expectNullPointerException("The given conditions should not be null");
-    Collection<Condition<Object>> conditions = null;
+    Collection<Matcher<Object>> conditions = null;
     new ConcreteJoin(conditions);
   }
 
   @Test
   public void should_throw_error_if_Collection_contains_nulls() {
     thrown.expectNullPointerException("The given conditions should not have null entries");
-    Collection<Condition<Object>> conditions = new ArrayList<Condition<Object>>();
-    conditions.add(new TestCondition<Object>());
+    Collection<Matcher<Object>> conditions = new ArrayList<Matcher<Object>>();
+    conditions.add(new TestMatcher<Object>());
     conditions.add(null);
     new ConcreteJoin(conditions);
   }
 
   @Test
   public void should_create_new_Join_with_passed_Conditions() {
-    Collection<Condition<Object>> conditions = new ArrayList<Condition<Object>>();
-    conditions.add(new TestCondition<Object>());
+    Collection<Matcher<Object>> conditions = new ArrayList<Matcher<Object>>();
+    conditions.add(new TestMatcher<Object>());
     Join<Object> join = new ConcreteJoin(conditions);
     assertEquals(conditions, join.conditions);
   }

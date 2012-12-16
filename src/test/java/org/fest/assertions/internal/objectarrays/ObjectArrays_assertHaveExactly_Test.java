@@ -16,7 +16,7 @@ package org.fest.assertions.internal.objectarrays;
 
 import static org.fest.assertions.error.ElementsShouldHaveExactly.elementsShouldHaveExactly;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Arrays.array;
 
 import static org.mockito.Mockito.verify;
@@ -24,12 +24,12 @@ import static org.mockito.Mockito.verify;
 import org.junit.Test;
 
 import org.fest.assertions.core.AssertionInfo;
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.assertions.internal.ObjectArrays;
 import org.fest.assertions.internal.ObjectArraysWithConditionBaseTest;
 
 /**
- * Tests for <code>{@link ObjectArrays#assertHaveExactly(AssertionInfo, Object[], Condition, int)}</code> .
+ * Tests for <code>{@link ObjectArrays#assertHaveExactly(AssertionInfo, Object[], Matcher, int)}</code> .
  * 
  * @author Nicolas François
  * @author Mikhail Mazursky
@@ -64,7 +64,7 @@ public class ObjectArrays_assertHaveExactly_Test extends ObjectArraysWithConditi
       verify(failures).failure(info, elementsShouldHaveExactly(actual, 2, jediPower));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -79,7 +79,7 @@ public class ObjectArrays_assertHaveExactly_Test extends ObjectArraysWithConditi
       verify(failures).failure(info, elementsShouldHaveExactly(actual, 2, jediPower));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

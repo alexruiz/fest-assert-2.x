@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.TestMatcher;
 import org.fest.assertions.description.TextDescription;
 
 /**
@@ -20,7 +20,7 @@ public class ShouldBeAtIndex_create_Test {
 
   @Test
   public void should_create_error_message() {
-    ErrorMessageFactory factory = shouldBeAtIndex(newArrayList("Yoda", "Luke"), new TestCondition<String>("red lightsaber"), atIndex(1),
+    ErrorMessageFactory factory = shouldBeAtIndex(newArrayList("Yoda", "Luke"), new TestMatcher<String>("red lightsaber"), atIndex(1),
         "Luke");
     String message = factory.create(new TextDescription("Test"));
     assertEquals("[Test] expecting:<'Luke'> at index <1> to be:<red lightsaber> in:\n <['Yoda', 'Luke']>\n", message);

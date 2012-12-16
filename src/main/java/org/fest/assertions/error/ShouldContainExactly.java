@@ -32,11 +32,11 @@ public class ShouldContainExactly extends BasicErrorMessageFactory {
    * @param expected values expected to be contained in {@code actual}.
    * @param notFound values in {@code expected} not found in {@code actual}.
    * @param notExpected values in {@code actual} that were not in {@code expected}.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldContainExactly(Object actual, Object expected, Object notFound,
-      Object notExpected, ComparisonStrategy comparisonStrategy) {
+      Object notExpected, Comparison comparisonStrategy) {
     return new ShouldContainExactly(actual, expected, notFound, notExpected, comparisonStrategy);
   }
 
@@ -51,11 +51,11 @@ public class ShouldContainExactly extends BasicErrorMessageFactory {
    */
   public static ErrorMessageFactory shouldContainExactly(Object actual, Object expected, Object notFound,
       Object notExpected) {
-    return new ShouldContainExactly(actual, expected, notFound, notExpected, StandardComparisonStrategy.instance());
+    return new ShouldContainExactly(actual, expected, notFound, notExpected, EqualityComparison.instance());
   }
 
   private ShouldContainExactly(Object actual, Object expected, Object notFound, Object notExpected,
-      ComparisonStrategy comparisonStrategy) {
+      Comparison comparisonStrategy) {
     super(
         "expecting:\n<%s>\n to contain exactly (and in same order):\n<%s>\n but some elements were not found:\n<%s>\n and others were not expected:\n<%s>\n%s",
         actual, expected, notFound, notExpected, comparisonStrategy);
@@ -63,16 +63,16 @@ public class ShouldContainExactly extends BasicErrorMessageFactory {
 
   /**
    * Creates a new </code>{@link ShouldContainExactly}</code> for the case where actual and expected have the same
-   * elements in different order according to the given {@link ComparisonStrategy}.
+   * elements in different order according to the given {@link Comparison}.
    * 
    * @param actualElement the actual element at indexOfDifferentElements index.
    * @param expectedElement the expected element at indexOfDifferentElements index.
    * @param indexOfDifferentElements index where actual and expect differs.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldContainExactly(Object actualElement, Object expectedElement,
-      int indexOfDifferentElements, ComparisonStrategy comparisonStrategy) {
+      int indexOfDifferentElements, Comparison comparisonStrategy) {
     return new ShouldContainExactly(actualElement, expectedElement, indexOfDifferentElements, comparisonStrategy);
   }
 
@@ -88,11 +88,11 @@ public class ShouldContainExactly extends BasicErrorMessageFactory {
   public static ErrorMessageFactory shouldContainExactly(Object actualElement, Object expectedElement,
       int indexOfDifferentElements) {
     return new ShouldContainExactly(actualElement, expectedElement, indexOfDifferentElements,
-        StandardComparisonStrategy.instance());
+        EqualityComparison.instance());
   }
 
   private ShouldContainExactly(Object actualElement, Object expectedElement, int indexOfDifferentElements,
-      ComparisonStrategy comparisonStrategy) {
+      Comparison comparisonStrategy) {
     super(
         "actual and expected have the same elements but not in the same order, at index %s actual element was :\n<%s>\n whereas expected element was :\n<%s>\n%s",
         indexOfDifferentElements, actualElement, expectedElement, comparisonStrategy);

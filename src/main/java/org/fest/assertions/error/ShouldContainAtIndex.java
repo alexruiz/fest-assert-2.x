@@ -20,7 +20,7 @@ import org.fest.assertions.internal.*;
 /**
  * Creates an error message indicating that an assertion that verifies a group of elements contains a value at a given index
  * failed. A group of elements can be a collection, an array or a {@code String}.<br>
- * It also mention the {@link ComparisonStrategy} if the default one is not used.
+ * It also mention the {@link Comparison} if the default one is not used.
  * 
  * @author Alex Ruiz
  * @author Joel Costigliola
@@ -33,11 +33,11 @@ public class ShouldContainAtIndex extends BasicErrorMessageFactory {
    * @param expected value expected to be in {@code actual}.
    * @param index the index of the expected value.
    * @param found the value in {@code actual} stored under {@code index}.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldContainAtIndex(Object actual, Object expected, Index index, Object found,
-      ComparisonStrategy comparisonStrategy) {
+      Comparison comparisonStrategy) {
     return new ShouldContainAtIndex(actual, expected, index, found, comparisonStrategy);
   }
 
@@ -50,10 +50,10 @@ public class ShouldContainAtIndex extends BasicErrorMessageFactory {
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldContainAtIndex(Object actual, Object expected, Index index, Object found) {
-    return new ShouldContainAtIndex(actual, expected, index, found, StandardComparisonStrategy.instance());
+    return new ShouldContainAtIndex(actual, expected, index, found, EqualityComparison.instance());
   }
 
-  private ShouldContainAtIndex(Object actual, Object expected, Index index, Object found, ComparisonStrategy comparisonStrategy) {
+  private ShouldContainAtIndex(Object actual, Object expected, Index index, Object found, Comparison comparisonStrategy) {
     super("expecting:<%s> at index <%s> but found <%s> in:\n <%s>\n%s", expected, index.value, found, actual, comparisonStrategy);
   }
 }

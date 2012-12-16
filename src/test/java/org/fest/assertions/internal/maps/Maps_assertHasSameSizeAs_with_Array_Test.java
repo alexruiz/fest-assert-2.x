@@ -16,10 +16,10 @@ package org.fest.assertions.internal.maps;
 
 import static org.fest.assertions.data.MapEntry.entry;
 import static org.fest.assertions.error.ShouldHaveSameSizeAs.shouldHaveSameSizeAs;
-import static org.fest.util.FailureMessages.actualIsNull;
-import static org.fest.assertions.test.Maps.mapOf;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.Maps.newMap;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Arrays.array;
 
 import static org.mockito.Mockito.verify;
@@ -45,7 +45,7 @@ public class Maps_assertHasSameSizeAs_with_Array_Test extends MapsBaseTest {
   @Before
   public void setUp() {
     super.setUp();
-    actual = (Map<String, String>) mapOf(entry("name", "Yoda"), entry("job", "Yedi Master"));
+    actual = (Map<String, String>) newMap(entry("name", "Yoda"), entry("job", "Yedi Master"));
   }
 
   @Test
@@ -64,7 +64,7 @@ public class Maps_assertHasSameSizeAs_with_Array_Test extends MapsBaseTest {
       verify(failures).failure(info, shouldHaveSameSizeAs(actual, actual.size(), other.length));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

@@ -24,7 +24,7 @@ import org.junit.Test;
 
 import org.fest.assertions.description.Description;
 import org.fest.assertions.description.TextDescription;
-import org.fest.assertions.internal.ComparatorBasedComparisonStrategy;
+import org.fest.assertions.internal.ComparatorComparison;
 import org.fest.assertions.util.CaseInsensitiveStringComparator;
 
 /**
@@ -50,7 +50,7 @@ public class ShouldNotHaveDuplicates_create_Test {
 
   @Test
   public void should_create_error_message_with_custom_comparison_strategy() {
-    factory = shouldNotHaveDuplicates(newArrayList("Yoda", "Yoda", "Luke"), newArrayList("Yoda"), new ComparatorBasedComparisonStrategy(
+    factory = shouldNotHaveDuplicates(newArrayList("Yoda", "Yoda", "Luke"), newArrayList("Yoda"), new ComparatorComparison(
         CaseInsensitiveStringComparator.instance));
     String message = factory.create(new TextDescription("Test"));
     assertEquals("[Test] found duplicate(s)\n" + "<['Yoda']>\n" + " in\n" + "<['Yoda', 'Yoda', 'Luke']>\n"

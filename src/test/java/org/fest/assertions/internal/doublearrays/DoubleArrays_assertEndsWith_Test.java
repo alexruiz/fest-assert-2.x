@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.doublearrays;
 
 import static org.fest.assertions.error.ShouldEndWith.shouldEndWith;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.DoubleArrays.*;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -39,7 +39,7 @@ public class DoubleArrays_assertEndsWith_Test extends DoubleArraysBaseTest {
 
   @Override
   protected void initActualArray() {
-    actual = arrayOf(6d, 8d, 10d, 12d);
+    actual = newArray(6d, 8d, 10d, 12d);
   }
 
   @Test
@@ -57,7 +57,7 @@ public class DoubleArrays_assertEndsWith_Test extends DoubleArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertEndsWith(someInfo(), null, arrayOf(8d));
+    arrays.assertEndsWith(someInfo(), null, newArray(8d));
   }
 
   @Test
@@ -70,7 +70,7 @@ public class DoubleArrays_assertEndsWith_Test extends DoubleArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -83,7 +83,7 @@ public class DoubleArrays_assertEndsWith_Test extends DoubleArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -96,17 +96,17 @@ public class DoubleArrays_assertEndsWith_Test extends DoubleArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_ends_with_sequence() {
-    arrays.assertEndsWith(someInfo(), actual, arrayOf(8d, 10d, 12d));
+    arrays.assertEndsWith(someInfo(), actual, newArray(8d, 10d, 12d));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal() {
-    arrays.assertEndsWith(someInfo(), actual, arrayOf(6d, 8d, 10d, 12d));
+    arrays.assertEndsWith(someInfo(), actual, newArray(6d, 8d, 10d, 12d));
   }
 
   @Test
@@ -124,7 +124,7 @@ public class DoubleArrays_assertEndsWith_Test extends DoubleArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null_whatever_custom_comparison_strategy_is() {
     thrown.expectAssertionError(actualIsNull());
-    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), null, arrayOf(-8d));
+    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), null, newArray(-8d));
   }
 
   @Test
@@ -137,7 +137,7 @@ public class DoubleArrays_assertEndsWith_Test extends DoubleArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -150,7 +150,7 @@ public class DoubleArrays_assertEndsWith_Test extends DoubleArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -163,16 +163,16 @@ public class DoubleArrays_assertEndsWith_Test extends DoubleArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_ends_with_sequence_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), actual, arrayOf(-8d, 10d, 12d));
+    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), actual, newArray(-8d, 10d, 12d));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), actual, arrayOf(6d, -8d, 10d, 12d));
+    arraysWithCustomComparisonStrategy.assertEndsWith(someInfo(), actual, newArray(6d, -8d, 10d, 12d));
   }
 }

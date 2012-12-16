@@ -124,7 +124,7 @@ public class IntegerAssert extends AbstractComparableAssert<IntegerAssert, Integ
    * @throws AssertionError if the actual value is greater than the given one.
    */
   public IntegerAssert isLessThanOrEqualTo(int other) {
-    integers.assertLessThanOrEqualTo(info, actual, other);
+    integers.assertNotGreaterThan(info, actual, other);
     return this;
   }
 
@@ -148,14 +148,14 @@ public class IntegerAssert extends AbstractComparableAssert<IntegerAssert, Integ
    * @throws AssertionError if the actual value is less than the given one.
    */
   public IntegerAssert isGreaterThanOrEqualTo(int other) {
-    integers.assertGreaterThanOrEqualTo(info, actual, other);
+    integers.assertNotLessThan(info, actual, other);
     return this;
   }
 
   @Override
   public IntegerAssert usingComparator(Comparator<? super Integer> customComparator) {
     super.usingComparator(customComparator);
-    this.integers = new Integers(new ComparatorBasedComparisonStrategy(customComparator));
+    this.integers = new Integers(new ComparatorComparison(customComparator));
     return myself;
   }
 

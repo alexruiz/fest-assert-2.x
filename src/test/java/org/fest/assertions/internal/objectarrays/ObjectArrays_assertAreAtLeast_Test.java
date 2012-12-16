@@ -16,7 +16,7 @@ package org.fest.assertions.internal.objectarrays;
 
 import static org.fest.assertions.error.ElementsShouldBeAtLeast.elementsShouldBeAtLeast;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Arrays.array;
 
 import static org.mockito.Mockito.verify;
@@ -24,12 +24,12 @@ import static org.mockito.Mockito.verify;
 import org.junit.Test;
 
 import org.fest.assertions.core.AssertionInfo;
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.assertions.internal.ObjectArrays;
 import org.fest.assertions.internal.ObjectArraysWithConditionBaseTest;
 
 /**
- * Tests for <code>{@link ObjectArrays#assertAreAtLeast(AssertionInfo, Object[], int, Condition)}</code> .
+ * Tests for <code>{@link ObjectArrays#assertAreAtLeast(AssertionInfo, Object[], int, Matcher)}</code> .
  * 
  * @author Nicolas François
  * @author Mikhail Mazursky
@@ -71,7 +71,7 @@ public class ObjectArrays_assertAreAtLeast_Test extends ObjectArraysWithConditio
       verify(failures).failure(info, elementsShouldBeAtLeast(actual, 2, jedi));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

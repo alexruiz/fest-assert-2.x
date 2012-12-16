@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.floatarrays;
 
 import static org.fest.assertions.error.ShouldStartWith.shouldStartWith;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.FloatArrays.*;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -39,7 +39,7 @@ public class FloatArrays_assertStartsWith_Test extends FloatArraysBaseTest {
 
   @Override
   protected void initActualArray() {
-    actual = arrayOf(6f, 8f, 10f, 12f);
+    actual = newArray(6f, 8f, 10f, 12f);
   }
 
   @Test
@@ -57,7 +57,7 @@ public class FloatArrays_assertStartsWith_Test extends FloatArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertStartsWith(someInfo(), null, arrayOf(6f));
+    arrays.assertStartsWith(someInfo(), null, newArray(6f));
   }
 
   @Test
@@ -70,7 +70,7 @@ public class FloatArrays_assertStartsWith_Test extends FloatArraysBaseTest {
       verify(failures).failure(someInfo(), shouldStartWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -83,7 +83,7 @@ public class FloatArrays_assertStartsWith_Test extends FloatArraysBaseTest {
       verify(failures).failure(someInfo(), shouldStartWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -96,17 +96,17 @@ public class FloatArrays_assertStartsWith_Test extends FloatArraysBaseTest {
       verify(failures).failure(someInfo(), shouldStartWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_starts_with_sequence() {
-    arrays.assertStartsWith(someInfo(), actual, arrayOf(6f, 8f, 10f));
+    arrays.assertStartsWith(someInfo(), actual, newArray(6f, 8f, 10f));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal() {
-    arrays.assertStartsWith(someInfo(), actual, arrayOf(6f, 8f, 10f, 12f));
+    arrays.assertStartsWith(someInfo(), actual, newArray(6f, 8f, 10f, 12f));
   }
 
   @Test
@@ -124,7 +124,7 @@ public class FloatArrays_assertStartsWith_Test extends FloatArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null_whatever_custom_comparison_strategy_is() {
     thrown.expectAssertionError(actualIsNull());
-    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), null, arrayOf(6f));
+    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), null, newArray(6f));
   }
 
   @Test
@@ -137,7 +137,7 @@ public class FloatArrays_assertStartsWith_Test extends FloatArraysBaseTest {
       verify(failures).failure(someInfo(), shouldStartWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -150,7 +150,7 @@ public class FloatArrays_assertStartsWith_Test extends FloatArraysBaseTest {
       verify(failures).failure(someInfo(), shouldStartWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -163,16 +163,16 @@ public class FloatArrays_assertStartsWith_Test extends FloatArraysBaseTest {
       verify(failures).failure(someInfo(), shouldStartWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_starts_with_sequence_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, arrayOf(6f, -8f, 10f));
+    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, newArray(6f, -8f, 10f));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, arrayOf(6f, -8f, 10f, 12f));
+    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, newArray(6f, -8f, 10f, 12f));
   }
 }

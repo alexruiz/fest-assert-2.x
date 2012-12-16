@@ -17,12 +17,12 @@ package org.fest.assertions.internal.iterables;
 import static java.util.Collections.emptyList;
 import static org.fest.assertions.error.ShouldNotContain.shouldNotContain;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ObjectArrays.emptyArray;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Arrays.array;
 import static org.fest.util.Sets.newLinkedHashSet;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.util.Lists.newArrayList;
 import static org.mockito.Mockito.verify;
 
@@ -82,7 +82,7 @@ public class Iterables_assertDoesNotContain_Test extends IterablesBaseTest {
       verify(failures).failure(info, shouldNotContain(actual, expected, newLinkedHashSet("Luke", "Yoda")));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   // ------------------------------------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ public class Iterables_assertDoesNotContain_Test extends IterablesBaseTest {
       verify(failures).failure(info, shouldNotContain(actual, expected, newLinkedHashSet("LuKe", "YODA"), comparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

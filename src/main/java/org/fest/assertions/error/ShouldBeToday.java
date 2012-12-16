@@ -29,10 +29,10 @@ public class ShouldBeToday extends BasicErrorMessageFactory {
   /**
    * Creates a new </code>{@link ShouldBeToday}</code>.
    * @param actual the actual value in the failed assertion.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
-  public static ErrorMessageFactory shouldBeToday(Date actual, ComparisonStrategy comparisonStrategy) {
+  public static ErrorMessageFactory shouldBeToday(Date actual, Comparison comparisonStrategy) {
     return new ShouldBeToday(actual, comparisonStrategy);
   }
 
@@ -42,10 +42,10 @@ public class ShouldBeToday extends BasicErrorMessageFactory {
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldBeToday(Date actual) {
-    return new ShouldBeToday(actual, StandardComparisonStrategy.instance());
+    return new ShouldBeToday(actual, EqualityComparison.instance());
   }
 
-  private ShouldBeToday(Date actual, ComparisonStrategy comparisonStrategy) {
+  private ShouldBeToday(Date actual, Comparison comparisonStrategy) {
     super("expected:<%s> to be today%s but was not.", actual, comparisonStrategy);
   }
 }

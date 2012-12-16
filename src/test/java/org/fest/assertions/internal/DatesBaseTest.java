@@ -1,6 +1,6 @@
 package org.fest.assertions.internal;
 
-import static org.fest.assertions.test.ExpectedException.none;
+import static org.fest.test.ExpectedException.none;
 
 import static org.mockito.Mockito.spy;
 
@@ -10,8 +10,8 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Rule;
 
-import org.fest.assertions.test.ExpectedException;
 import org.fest.assertions.util.YearAndMonthComparator;
+import org.fest.test.ExpectedException;
 
 /**
  * Base class for {@link Dates} unit tests
@@ -26,7 +26,7 @@ public abstract class DatesBaseTest {
   public ExpectedException thrown = none();
   protected Failures failures;
   protected Dates dates;
-  protected ComparatorBasedComparisonStrategy yearAndMonthComparisonStrategy;
+  protected ComparatorComparison yearAndMonthComparisonStrategy;
   protected Dates datesWithCustomComparisonStrategy;
   protected Date actual;
 
@@ -37,7 +37,7 @@ public abstract class DatesBaseTest {
     failures = spy(new Failures());
     dates = new Dates();
     dates.failures = failures;
-    yearAndMonthComparisonStrategy = new ComparatorBasedComparisonStrategy(comparatorForCustomComparisonStrategy());
+    yearAndMonthComparisonStrategy = new ComparatorComparison(comparatorForCustomComparisonStrategy());
     datesWithCustomComparisonStrategy = new Dates(yearAndMonthComparisonStrategy);
     datesWithCustomComparisonStrategy.failures = failures;
     initActualDate();

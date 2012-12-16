@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.objectarrays;
 
 import static org.fest.assertions.error.ShouldContainOnly.shouldContainOnly;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ObjectArrays.emptyArray;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Arrays.array;
 import static org.fest.util.Sets.newLinkedHashSet;
 
@@ -89,7 +89,7 @@ public class ObjectArrays_assertContainsOnly_Test extends ObjectArraysBaseTest {
       verify(failures).failure(info, shouldContainOnly(actual, expected, newLinkedHashSet("Han"), newLinkedHashSet("Leia")));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -143,6 +143,6 @@ public class ObjectArrays_assertContainsOnly_Test extends ObjectArraysBaseTest {
           shouldContainOnly(actual, expected, newLinkedHashSet("Han"), newLinkedHashSet("Leia"), caseInsensitiveStringComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

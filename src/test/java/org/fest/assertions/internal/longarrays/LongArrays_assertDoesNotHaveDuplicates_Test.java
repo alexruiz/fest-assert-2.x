@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.longarrays;
 
 import static org.fest.assertions.error.ShouldNotHaveDuplicates.shouldNotHaveDuplicates;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.LongArrays.*;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Sets.newLinkedHashSet;
 
 import static org.mockito.Mockito.verify;
@@ -39,7 +39,7 @@ public class LongArrays_assertDoesNotHaveDuplicates_Test extends LongArraysBaseT
 
   @Override
   protected void initActualArray() {
-    actual = arrayOf(6L, 8L);
+    actual = newArray(6L, 8L);
   }
 
   @Test
@@ -61,14 +61,14 @@ public class LongArrays_assertDoesNotHaveDuplicates_Test extends LongArraysBaseT
   @Test
   public void should_fail_if_actual_contains_duplicates() {
     AssertionInfo info = someInfo();
-    actual = arrayOf(6L, 8L, 6L, 8L);
+    actual = newArray(6L, 8L, 6L, 8L);
     try {
       arrays.assertDoesNotHaveDuplicates(info, actual);
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldNotHaveDuplicates(actual, newLinkedHashSet(6L, 8L)));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -90,13 +90,13 @@ public class LongArrays_assertDoesNotHaveDuplicates_Test extends LongArraysBaseT
   @Test
   public void should_fail_if_actual_contains_duplicates_according_to_custom_comparison_strategy() {
     AssertionInfo info = someInfo();
-    actual = arrayOf(6L, -8L, 6L, -8L);
+    actual = newArray(6L, -8L, 6L, -8L);
     try {
       arraysWithCustomComparisonStrategy.assertDoesNotHaveDuplicates(info, actual);
     } catch (AssertionError e) {
       verify(failures).failure(info, shouldNotHaveDuplicates(actual, newLinkedHashSet(6L, -8L), absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

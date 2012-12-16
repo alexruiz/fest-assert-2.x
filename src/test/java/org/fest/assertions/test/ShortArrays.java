@@ -20,7 +20,7 @@ package org.fest.assertions.test;
 public final class ShortArrays {
   private static final short[] EMPTY = {};
 
-  public static short[] arrayOf(int... values) {
+  public static short[] newArray(int...values) {
     int size = values.length;
     short[] array = new short[size];
     for (int i = 0; i < size; i++) {

@@ -20,7 +20,7 @@ package org.fest.assertions.test;
 public final class CharArrays {
   private static final char[] EMPTY = {};
 
-  public static char[] arrayOf(char... values) {
+  public static char[] newArray(char...values) {
     return values;
   }
 

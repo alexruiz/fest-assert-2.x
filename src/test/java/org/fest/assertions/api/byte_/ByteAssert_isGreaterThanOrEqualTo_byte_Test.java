@@ -28,11 +28,11 @@ public class ByteAssert_isGreaterThanOrEqualTo_byte_Test extends ByteAssertBaseT
 
   @Override
   protected ByteAssert invoke_api_method() {
-    return assertions.isGreaterThanOrEqualTo((byte) 6);
+    return assertions.isNotLessThan((byte) 6);
   }
 
   @Override
   protected void verify_internal_effects() {
-    verify(bytes).assertGreaterThanOrEqualTo(getInfo(assertions), getActual(assertions), (byte) 6);
+    verify(bytes).assertNotLessThan(getInfo(assertions), getActual(assertions), (byte) 6);
   }
 }

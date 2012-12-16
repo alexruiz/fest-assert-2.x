@@ -47,10 +47,10 @@ public class FloatArrays {
 
   @VisibleForTesting
   FloatArrays() {
-    this(StandardComparisonStrategy.instance());
+    this(EqualityComparison.instance());
   }
 
-  public FloatArrays(ComparisonStrategy comparisonStrategy) {
+  public FloatArrays(Comparison comparisonStrategy) {
     this.arrays = new Arrays(comparisonStrategy);
   }
 

@@ -14,7 +14,7 @@
  */
 package org.fest.assertions.error;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 
 /**
  * Creates an error message indicating that an assertion that verifies type of elements of group and {@code Condition} A group of
@@ -25,7 +25,7 @@ import org.fest.assertions.core.Condition;
  */
 public class ConditionAndGroupGenericParameterTypeShouldBeTheSame extends BasicErrorMessageFactory {
 
-  public ConditionAndGroupGenericParameterTypeShouldBeTheSame(Object actual, Condition<?> condition) {
+  public ConditionAndGroupGenericParameterTypeShouldBeTheSame(Object actual, Matcher<?> condition) {
     super("expecting: <%s> have the same generic type as condition <%s>", actual, condition);
   }
 
@@ -35,7 +35,7 @@ public class ConditionAndGroupGenericParameterTypeShouldBeTheSame extends BasicE
    * @param condition the {@code Condition}.
    * @return the created {@code ErrorMessageFactory}.
    */
-  public static ErrorMessageFactory shouldBeSameGenericBetweenIterableAndCondition(Object actual, Condition<?> condition) {
+  public static ErrorMessageFactory shouldBeSameGenericBetweenIterableAndCondition(Object actual, Matcher<?> condition) {
     return new ConditionAndGroupGenericParameterTypeShouldBeTheSame(actual, condition);
   }
 

@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.longarrays;
 
 import static org.fest.assertions.error.ShouldStartWith.shouldStartWith;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.LongArrays.*;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -39,7 +39,7 @@ public class LongArrays_assertStartsWith_Test extends LongArraysBaseTest {
 
   @Override
   protected void initActualArray() {
-    actual = arrayOf(6L, 8L, 10L, 12L);
+    actual = newArray(6L, 8L, 10L, 12L);
   }
 
   @Test
@@ -57,7 +57,7 @@ public class LongArrays_assertStartsWith_Test extends LongArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expectAssertionError(actualIsNull());
-    arrays.assertStartsWith(someInfo(), null, arrayOf(8L));
+    arrays.assertStartsWith(someInfo(), null, newArray(8L));
   }
 
   @Test
@@ -70,7 +70,7 @@ public class LongArrays_assertStartsWith_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -83,7 +83,7 @@ public class LongArrays_assertStartsWith_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -96,17 +96,17 @@ public class LongArrays_assertStartsWith_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_starts_with_sequence() {
-    arrays.assertStartsWith(someInfo(), actual, arrayOf(6L, 8L, 10L));
+    arrays.assertStartsWith(someInfo(), actual, newArray(6L, 8L, 10L));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal() {
-    arrays.assertStartsWith(someInfo(), actual, arrayOf(6L, 8L, 10L, 12L));
+    arrays.assertStartsWith(someInfo(), actual, newArray(6L, 8L, 10L, 12L));
   }
 
   @Test
@@ -124,7 +124,7 @@ public class LongArrays_assertStartsWith_Test extends LongArraysBaseTest {
   @Test
   public void should_fail_if_actual_is_null_whatever_custom_comparison_strategy_is() {
     thrown.expectAssertionError(actualIsNull());
-    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), null, arrayOf(-8L));
+    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), null, newArray(-8L));
   }
 
   @Test
@@ -137,7 +137,7 @@ public class LongArrays_assertStartsWith_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -150,7 +150,7 @@ public class LongArrays_assertStartsWith_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -163,16 +163,16 @@ public class LongArrays_assertStartsWith_Test extends LongArraysBaseTest {
       verify(failures).failure(info, shouldStartWith(actual, sequence, absValueComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_starts_with_sequence_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, arrayOf(6L, -8L, 10L));
+    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, newArray(6L, -8L, 10L));
   }
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal_according_to_custom_comparison_strategy() {
-    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, arrayOf(6L, -8L, 10L, 12L));
+    arraysWithCustomComparisonStrategy.assertStartsWith(someInfo(), actual, newArray(6L, -8L, 10L, 12L));
   }
 }

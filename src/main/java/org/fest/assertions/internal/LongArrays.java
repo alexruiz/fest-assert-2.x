@@ -48,10 +48,10 @@ public class LongArrays {
 
   @VisibleForTesting
   LongArrays() {
-    this(StandardComparisonStrategy.instance());
+    this(EqualityComparison.instance());
   }
 
-  public LongArrays(ComparisonStrategy comparisonStrategy) {
+  public LongArrays(Comparison comparisonStrategy) {
     this.arrays = new Arrays(comparisonStrategy);
   }
 

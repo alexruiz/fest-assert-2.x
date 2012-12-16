@@ -221,7 +221,7 @@ public class IntArrayAssert extends AbstractAssert<IntArrayAssert, int[]> implem
 
   /** {@inheritDoc} */
   public IntArrayAssert usingElementComparator(Comparator<? super Integer> customComparator) {
-    this.arrays = new IntArrays(new ComparatorBasedComparisonStrategy(customComparator));
+    this.arrays = new IntArrays(new ComparatorComparison(customComparator));
     return myself;
   }
 

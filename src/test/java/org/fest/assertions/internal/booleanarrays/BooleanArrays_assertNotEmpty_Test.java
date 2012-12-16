@@ -15,10 +15,10 @@
 package org.fest.assertions.internal.booleanarrays;
 
 import static org.fest.assertions.error.ShouldNotBeEmpty.shouldNotBeEmpty;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.BooleanArrays.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -51,11 +51,11 @@ public class BooleanArrays_assertNotEmpty_Test extends BooleanArraysBaseTest {
       verify(failures).failure(info, shouldNotBeEmpty());
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
   public void should_pass_if_actual_is_not_empty() {
-    arrays.assertNotEmpty(someInfo(), arrayOf(true));
+    arrays.assertNotEmpty(someInfo(), newArray(true));
   }
 }

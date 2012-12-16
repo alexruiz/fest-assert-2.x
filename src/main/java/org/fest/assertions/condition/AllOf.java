@@ -14,7 +14,7 @@
  */
 package org.fest.assertions.condition;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 
 /**
  * Returns {@code true} if all of the joined conditions is satisfied.
@@ -33,7 +33,7 @@ public class AllOf<T> extends Join<T> {
    * @throws NullPointerException if the given array is {@code null}.
    * @throws NullPointerException if any of the elements in the given array is {@code null}.
    */
-  public static <T> Condition<T> allOf(Condition<? super T>... conditions) {
+  public static <T> Matcher<T> allOf(Matcher<? super T>... conditions) {
     return new AllOf<T>(conditions);
   }
 
@@ -45,22 +45,22 @@ public class AllOf<T> extends Join<T> {
    * @throws NullPointerException if the given iterable is {@code null}.
    * @throws NullPointerException if any of the elements in the given iterable is {@code null}.
    */
-  public static <T> Condition<T> allOf(Iterable<? extends Condition<? super T>> conditions) {
+  public static <T> Matcher<T> allOf(Iterable<? extends Matcher<? super T>> conditions) {
     return new AllOf<T>(conditions);
   }
 
-  private AllOf(Condition<? super T>... conditions) {
+  private AllOf(Matcher<? super T>... conditions) {
     super(conditions);
   }
 
-  private AllOf(Iterable<? extends Condition<? super T>> conditions) {
+  private AllOf(Iterable<? extends Matcher<? super T>> conditions) {
     super(conditions);
   }
 
   /** {@inheritDoc} */
   @Override
   public boolean matches(T value) {
-    for (Condition<? super T> condition : conditions)
+    for (Matcher<? super T> condition : conditions)
       if (!condition.matches(value)) return false;
     return true;
   }

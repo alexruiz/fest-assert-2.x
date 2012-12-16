@@ -15,16 +15,17 @@
 package org.fest.assertions.condition;
 
 import static junit.framework.Assert.assertEquals;
-import static org.fest.assertions.test.ExpectedException.none;
+
+import static org.fest.test.ExpectedException.none;
 import static org.fest.util.Arrays.array;
 import static org.fest.util.Lists.newArrayList;
 
 import org.fest.assertions.core.*;
-import org.fest.assertions.test.ExpectedException;
+import org.fest.test.ExpectedException;
 import org.junit.*;
 
 /**
- * Tests for <code>{@link AllOf#allOf(Condition...)}</code>.
+ * Tests for <code>{@link AllOf#allOf(Matcher...)}</code>.
  * 
  * @author Yvonne Wang
  */
@@ -36,8 +37,8 @@ public class AllOf_allOf_with_array_Test {
   @SuppressWarnings("unchecked")
   @Test
   public void should_create_new_AllOf_with_passed_Conditions() {
-    Condition<Object>[] conditions = array(new TestCondition<Object>(), new TestCondition<Object>());
-    Condition<Object> created = AllOf.allOf(conditions);
+    Matcher<Object>[] conditions = array(new TestMatcher<Object>(), new TestMatcher<Object>());
+    Matcher<Object> created = AllOf.allOf(conditions);
     assertEquals(AllOf.class, created.getClass());
     AllOf<Object> allOf = (AllOf<Object>) created;
     assertEquals(newArrayList(conditions), allOf.conditions);

@@ -16,10 +16,10 @@ package org.fest.assertions.internal.iterables;
 
 import static org.fest.assertions.error.ShouldContain.shouldContain;
 import static org.fest.assertions.test.ErrorMessages.iterableToLookForIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Sets.newLinkedHashSet;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.util.Lists.newArrayList;
 import static org.mockito.Mockito.verify;
 
@@ -77,7 +77,7 @@ public class Iterables_assertContainsAll_Test extends IterablesBaseTest {
       verify(failures).failure(info, shouldContain(actual, expected.toArray(), newLinkedHashSet("Han")));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   // ------------------------------------------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ public class Iterables_assertContainsAll_Test extends IterablesBaseTest {
       verify(failures).failure(info, shouldContain(actual, expected.toArray(), newLinkedHashSet("Han"), comparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

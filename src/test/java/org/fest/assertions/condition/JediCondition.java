@@ -18,7 +18,7 @@ import static org.fest.util.Sets.newLinkedHashSet;
 
 import java.util.Set;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 
 /**
  * 
@@ -26,7 +26,7 @@ import org.fest.assertions.core.Condition;
  * 
  * @author Nicolas François
  */
-public class JediCondition extends Condition<String> {
+public class JediCondition extends Matcher<String> {
 
   private final Set<String> jedis = newLinkedHashSet("Luke", "Yoda", "Obiwan");
 

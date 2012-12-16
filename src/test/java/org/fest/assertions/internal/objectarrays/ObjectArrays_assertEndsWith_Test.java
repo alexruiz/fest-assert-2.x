@@ -15,11 +15,11 @@
 package org.fest.assertions.internal.objectarrays;
 
 import static org.fest.assertions.error.ShouldEndWith.shouldEndWith;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ObjectArrays.emptyArray;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Arrays.array;
 
 import static org.mockito.Mockito.verify;
@@ -71,7 +71,7 @@ public class ObjectArrays_assertEndsWith_Test extends ObjectArraysBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -84,7 +84,7 @@ public class ObjectArrays_assertEndsWith_Test extends ObjectArraysBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -97,7 +97,7 @@ public class ObjectArrays_assertEndsWith_Test extends ObjectArraysBaseTest {
       verifyFailureThrownWhenSequenceNotFound(info, sequence);
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   private void verifyFailureThrownWhenSequenceNotFound(AssertionInfo info, Object[] sequence) {
@@ -130,7 +130,7 @@ public class ObjectArrays_assertEndsWith_Test extends ObjectArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence, caseInsensitiveStringComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -143,7 +143,7 @@ public class ObjectArrays_assertEndsWith_Test extends ObjectArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence, caseInsensitiveStringComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -156,7 +156,7 @@ public class ObjectArrays_assertEndsWith_Test extends ObjectArraysBaseTest {
       verify(failures).failure(info, shouldEndWith(actual, sequence, caseInsensitiveStringComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test

@@ -33,11 +33,11 @@ public class ShouldNotBeBetween extends BasicErrorMessageFactory {
    * @param end the lower boundary of date period.
    * @param inclusiveStart wether to include start date in period.
    * @param inclusiveEnd wether to include end date in period.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldNotBeBetween(Date actual, Date start, Date end, boolean inclusiveStart,
-      boolean inclusiveEnd, ComparisonStrategy comparisonStrategy) {
+      boolean inclusiveEnd, Comparison comparisonStrategy) {
     return new ShouldNotBeBetween(actual, start, end, inclusiveStart, inclusiveEnd, comparisonStrategy);
   }
 
@@ -52,11 +52,11 @@ public class ShouldNotBeBetween extends BasicErrorMessageFactory {
    */
   public static ErrorMessageFactory shouldNotBeBetween(Date actual, Date start, Date end, boolean inclusiveStart,
       boolean inclusiveEnd) {
-    return new ShouldNotBeBetween(actual, start, end, inclusiveStart, inclusiveEnd, StandardComparisonStrategy.instance());
+    return new ShouldNotBeBetween(actual, start, end, inclusiveStart, inclusiveEnd, EqualityComparison.instance());
   }
 
   private ShouldNotBeBetween(Date actual, Date start, Date end, boolean inclusiveStart, boolean inclusiveEnd,
-      ComparisonStrategy comparisonStrategy) {
+      Comparison comparisonStrategy) {
     super("expected:<%s> not to be in period %s%s, %s%s%s", actual, inclusiveStart ? '[' : ']', start, end, inclusiveEnd ? ']'
         : '[', comparisonStrategy);
   }

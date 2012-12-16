@@ -14,7 +14,7 @@
  */
 package org.fest.assertions.error;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 
 /**
  * Creates an error message indicating that an assertion that verifies elements of a group satisfies at least n times a
@@ -33,11 +33,11 @@ public class ElementsShouldHaveAtLeast extends BasicErrorMessageFactory {
    * @param condition the {@code Condition}.
    * @return the created {@code ErrorMessageFactory}.
    */
-  public static ErrorMessageFactory elementsShouldHaveAtLeast(Object actual, int times, Condition<?> condition) {
+  public static ErrorMessageFactory elementsShouldHaveAtLeast(Object actual, int times, Matcher<?> condition) {
     return new ElementsShouldHaveAtLeast(actual, times, condition);
   }
 
-  private ElementsShouldHaveAtLeast(Object actual, int times, Condition<?> condition) {
+  private ElementsShouldHaveAtLeast(Object actual, int times, Matcher<?> condition) {
     super("expecting elements:\n<%s>\n to have at least %s times <%s>", actual, times, condition);
   }
 }

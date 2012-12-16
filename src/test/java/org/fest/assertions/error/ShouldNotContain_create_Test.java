@@ -21,7 +21,7 @@ import static org.fest.util.Lists.newArrayList;
 
 import org.fest.assertions.description.Description;
 import org.fest.assertions.description.TextDescription;
-import org.fest.assertions.internal.ComparatorBasedComparisonStrategy;
+import org.fest.assertions.internal.ComparatorComparison;
 import org.fest.assertions.util.CaseInsensitiveStringComparator;
 import org.junit.Test;
 
@@ -45,7 +45,7 @@ public class ShouldNotContain_create_Test {
   @Test
   public void should_create_error_message_with_custom_comparison_strategy() {
     ErrorMessageFactory factory = shouldNotContain(newArrayList("Yoda"), newArrayList("Luke", "Yoda"), newLinkedHashSet("Yoda"),
-        new ComparatorBasedComparisonStrategy(CaseInsensitiveStringComparator.instance));
+        new ComparatorComparison(CaseInsensitiveStringComparator.instance));
     String message = factory.create(new TextDescription("Test"));
     assertEquals("[Test] expecting\n" + "<['Yoda']>\n" + " not to contain\n" + "<['Luke', 'Yoda']>\n" + " but found\n"
         + "<['Yoda']>\n" + " according to 'CaseInsensitiveStringComparator' comparator", message);

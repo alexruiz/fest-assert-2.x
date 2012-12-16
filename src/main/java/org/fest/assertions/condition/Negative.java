@@ -14,7 +14,7 @@
  */
 package org.fest.assertions.condition;
 
-import org.fest.assertions.core.Condition;
+import org.fest.assertions.core.Matcher;
 import org.fest.util.VisibleForTesting;
 
 /**
@@ -23,17 +23,17 @@ import org.fest.util.VisibleForTesting;
  * @author Nicolas François
  * @author Mikhail Mazursky
  */
-public abstract class Negative<T> extends Condition<T> {
+public abstract class Negative<T> extends Matcher<T> {
 
   @VisibleForTesting
-  final Condition<? super T> condition;
+  final Matcher<? super T> condition;
 
   @Override
   public boolean matches(T value) {
     return !condition.matches(value);
   }
 
-  protected Negative(Condition<? super T> condition) {
+  protected Negative(Matcher<? super T> condition) {
     this.condition = condition;
   }
 

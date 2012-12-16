@@ -25,7 +25,7 @@ import org.junit.Test;
 
 import org.fest.assertions.description.Description;
 import org.fest.assertions.description.TextDescription;
-import org.fest.assertions.internal.ComparatorBasedComparisonStrategy;
+import org.fest.assertions.internal.ComparatorComparison;
 import org.fest.assertions.util.CaseInsensitiveStringComparator;
 
 /**
@@ -52,7 +52,7 @@ public class ShouldNotContainAtIndex_create_Test {
 
   @Test
   public void should_create_error_message_with_custom_comparison_strategy() {
-    factory = shouldNotContainAtIndex(newArrayList("Yoda", "Luke"), "Luke", atIndex(1), new ComparatorBasedComparisonStrategy(
+    factory = shouldNotContainAtIndex(newArrayList("Yoda", "Luke"), "Luke", atIndex(1), new ComparatorComparison(
         CaseInsensitiveStringComparator.instance));
     String message = factory.create(new TextDescription("Test"));
     assertEquals("[Test] expecting \n" + "<['Yoda', 'Luke']>\n" + " not to contain \n" + "<'Luke'>\n" + " at index <1>\n"

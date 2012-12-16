@@ -8,23 +8,23 @@ import org.junit.BeforeClass;
 
 import org.fest.assertions.api.ListAssert;
 import org.fest.assertions.api.ListAssertBaseTest;
-import org.fest.assertions.core.Condition;
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.Matcher;
+import org.fest.assertions.core.TestMatcher;
 import org.fest.assertions.data.Index;
 
 /**
- * Tests for <code>{@link ListAssert#has(Condition, Index)}</code>.
+ * Tests for <code>{@link ListAssert#has(Matcher, Index)}</code>.
  * 
  * @author Bo Gotthardt
  */
 public class ListAssert_has_at_Index_Test extends ListAssertBaseTest {
 
-  private static Condition<Object> condition;
+  private static Matcher<Object> condition;
   private static Index index;
 
   @BeforeClass
   public static void setUpOnce() {
-    condition = new TestCondition<Object>();
+    condition = new TestMatcher<Object>();
     index = someIndex();
   }
 

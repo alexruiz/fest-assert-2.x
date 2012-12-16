@@ -16,10 +16,10 @@ package org.fest.assertions.internal.bigdecimals;
 
 import static java.math.BigDecimal.*;
 
-import static org.fest.assertions.error.ShouldBeEqual.shouldBeEqual;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.error.NotEqualErrorFactory.shouldBeEqual;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -60,7 +60,7 @@ public class BigDecimals_assertEqual_Test extends BigDecimalsBaseTest {
       verify(failures).failure(info, shouldBeEqual(ONE_WITH_3_DECIMALS, ONE));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -83,6 +83,6 @@ public class BigDecimals_assertEqual_Test extends BigDecimalsBaseTest {
       verify(failures).failure(info, shouldBeEqual(TEN, ONE, comparatorComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

@@ -17,8 +17,8 @@ package org.fest.assertions.condition;
 import static junit.framework.Assert.assertEquals;
 import static org.fest.assertions.condition.Not.not;
 
-import org.fest.assertions.core.Condition;
-import org.fest.assertions.core.TestCondition;
+import org.fest.assertions.core.Matcher;
+import org.fest.assertions.core.TestMatcher;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,12 +29,12 @@ import org.junit.Test;
  */
 public class Not_toString_Test {
 
-  private TestCondition<Object> condition;
-  private Condition<Object> not;
+  private TestMatcher<Object> condition;
+  private Matcher<Object> not;
 
   @Before
   public void setUp() {
-    condition = new TestCondition<Object>("Jedi");
+    condition = new TestMatcher<Object>("Jedi");
     not = not(condition);
   }
 

@@ -17,11 +17,11 @@ package org.fest.assertions.internal.iterables;
 import static java.util.Collections.emptyList;
 import static org.fest.assertions.error.ShouldContainExactly.shouldContainExactly;
 import static org.fest.assertions.test.ErrorMessages.*;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.ObjectArrays.emptyArray;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.util.Arrays.array;
-import static org.fest.util.FailureMessages.actualIsNull;
 import static org.fest.util.Sets.newLinkedHashSet;
 import static org.mockito.Mockito.verify;
 
@@ -77,7 +77,7 @@ public class Iterables_assertContainsExactly_Test extends IterablesBaseTest {
           shouldContainExactly(actual, expected, newLinkedHashSet("Han"), newLinkedHashSet("Leia")));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -90,7 +90,7 @@ public class Iterables_assertContainsExactly_Test extends IterablesBaseTest {
       verify(failures).failure(info, shouldContainExactly("Yoda", "Leia", 1));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   // ------------------------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ public class Iterables_assertContainsExactly_Test extends IterablesBaseTest {
                   comparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -130,7 +130,7 @@ public class Iterables_assertContainsExactly_Test extends IterablesBaseTest {
       verify(failures).failure(info, shouldContainExactly("Yoda", "Leia", 1, comparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
 }

@@ -25,7 +25,7 @@ import org.junit.Test;
 
 import org.fest.assertions.description.Description;
 import org.fest.assertions.description.TextDescription;
-import org.fest.assertions.internal.ComparatorBasedComparisonStrategy;
+import org.fest.assertions.internal.ComparatorComparison;
 import org.fest.assertions.util.CaseInsensitiveStringComparator;
 
 /**
@@ -55,7 +55,7 @@ public class ShouldContainExactly_create_Test {
   @Test
   public void should_create_error_message_with_custom_comparison_strategy() {
     ErrorMessageFactory factory = shouldContainExactly(newArrayList("Yoda", "Han"), newArrayList("Luke", "Yoda"),
-        newLinkedHashSet("Luke"), newLinkedHashSet("Han"), new ComparatorBasedComparisonStrategy(
+        newLinkedHashSet("Luke"), newLinkedHashSet("Han"), new ComparatorComparison(
             CaseInsensitiveStringComparator.instance));
     String message = factory.create(new TextDescription("Test"));
     assertEquals("[Test] expecting:\n" + "<['Yoda', 'Han']>\n to contain exactly (and in same order):\n"
@@ -74,7 +74,7 @@ public class ShouldContainExactly_create_Test {
 
   @Test
   public void should_create_error_message_when_only_elements_order_differs_according_to_custom_comparison_strategy() {
-    factory = shouldContainExactly("Luke", "Han", 1, new ComparatorBasedComparisonStrategy(
+    factory = shouldContainExactly("Luke", "Han", 1, new ComparatorComparison(
         CaseInsensitiveStringComparator.instance));
     String message = factory.create(new TextDescription("Test"));
     assertEquals(

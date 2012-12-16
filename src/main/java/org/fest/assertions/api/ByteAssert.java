@@ -1,32 +1,30 @@
 /*
  * Created on Oct 21, 2010
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- * 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- * 
- * Copyright @2010-2011 the original author or authors.
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ *
+ * Copyright @2010-2012 the original author or authors.
  */
 package org.fest.assertions.api;
 
-import java.util.Comparator;
-
 import org.fest.assertions.core.NumberAssert;
-import org.fest.assertions.internal.*;
+import org.fest.assertions.internal.Bytes;
 import org.fest.util.VisibleForTesting;
 
 /**
  * Assertion methods for bytes.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(Byte)}</code> or
- * <code>{@link Assertions#assertThat(byte)}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(Byte)} or
+ * {@link Assertions#assertThat(byte)}.
  * </p>
- * 
+ *
  * @author Yvonne Wang
  * @author David DIDIER
  * @author Ansgar Konermann
@@ -35,7 +33,6 @@ import org.fest.util.VisibleForTesting;
  * @author Nicolas François
  */
 public class ByteAssert extends AbstractComparableAssert<ByteAssert, Byte> implements NumberAssert<Byte> {
-
   @VisibleForTesting
   Bytes bytes = Bytes.instance();
 
@@ -45,6 +42,7 @@ public class ByteAssert extends AbstractComparableAssert<ByteAssert, Byte> imple
 
   /**
    * Verifies that the actual value is equal to the given one.
+   *
    * @param expected the given value to compare the actual value to.
    * @return {@code this} assertion object.
    * @throws AssertionError if the actual value is {@code null}.
@@ -57,6 +55,7 @@ public class ByteAssert extends AbstractComparableAssert<ByteAssert, Byte> imple
 
   /**
    * Verifies that the actual value is not equal to the given one.
+   *
    * @param other the given value to compare the actual value to.
    * @return {@code this} assertion object.
    * @throws AssertionError if the actual value is {@code null}.
@@ -68,43 +67,36 @@ public class ByteAssert extends AbstractComparableAssert<ByteAssert, Byte> imple
   }
 
   /** {@inheritDoc} */
+  @Override
   public ByteAssert isZero() {
     bytes.assertIsZero(info, actual);
     return this;
   }
 
   /** {@inheritDoc} */
+  @Override
   public ByteAssert isNotZero() {
     bytes.assertIsNotZero(info, actual);
     return this;
   }
 
   /** {@inheritDoc} */
+  @Override
   public ByteAssert isPositive() {
     bytes.assertIsPositive(info, actual);
     return this;
   }
 
   /** {@inheritDoc} */
+  @Override
   public ByteAssert isNegative() {
     bytes.assertIsNegative(info, actual);
     return this;
   }
 
-  /** {@inheritDoc} */
-  public ByteAssert isNotNegative() {
-    bytes.assertIsNotNegative(info, actual);
-    return this;
-  }
-
-  /** {@inheritDoc} */
-  public ByteAssert isNotPositive() {
-    bytes.assertIsNotPositive(info, actual);
-    return this;
-  }
-
   /**
    * Verifies that the actual value is less than the given one.
+   *
    * @param other the given value to compare the actual value to.
    * @return {@code this} assertion object.
    * @throws AssertionError if the actual value is {@code null}.
@@ -117,18 +109,20 @@ public class ByteAssert extends AbstractComparableAssert<ByteAssert, Byte> imple
 
   /**
    * Verifies that the actual value is less than or equal to the given one.
+   *
    * @param other the given value to compare the actual value to.
    * @return {@code this} assertion object.
    * @throws AssertionError if the actual value is {@code null}.
    * @throws AssertionError if the actual value is greater than the given one.
    */
   public ByteAssert isLessThanOrEqualTo(byte other) {
-    bytes.assertLessThanOrEqualTo(info, actual, other);
+    bytes.assertNotGreaterThan(info, actual, other);
     return this;
   }
 
   /**
    * Verifies that the actual value is greater than the given one.
+   *
    * @param other the given value to compare the actual value to.
    * @return {@code this} assertion object.
    * @throws AssertionError if the actual value is {@code null}.
@@ -141,27 +135,15 @@ public class ByteAssert extends AbstractComparableAssert<ByteAssert, Byte> imple
 
   /**
    * Verifies that the actual value is greater than or equal to the given one.
+   *
    * @param other the given value to compare the actual value to.
    * @return {@code this} assertion object.
    * @throws AssertionError if the actual value is {@code null}.
    * @throws AssertionError if the actual value is less than the given one.
    */
   public ByteAssert isGreaterThanOrEqualTo(byte other) {
-    bytes.assertGreaterThanOrEqualTo(info, actual, other);
+    bytes.assertNotLessThan(info, actual, other);
     return this;
   }
 
-  @Override
-  public ByteAssert usingComparator(Comparator<? super Byte> customComparator) {
-    super.usingComparator(customComparator);
-    this.bytes = new Bytes(new ComparatorBasedComparisonStrategy(customComparator));
-    return myself;
-  }
-
-  @Override
-  public ByteAssert usingDefaultComparator() {
-    super.usingDefaultComparator();
-    this.bytes = Bytes.instance();
-    return myself;
-  }
 }

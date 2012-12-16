@@ -28,10 +28,10 @@ public class ShouldBeInTheFuture extends BasicErrorMessageFactory {
   /**
    * Creates a new </code>{@link ShouldBeInTheFuture}</code>.
    * @param actual the actual value in the failed assertion.
-   * @param comparisonStrategy the {@link ComparisonStrategy} used to evaluate assertion.
+   * @param comparisonStrategy the {@link Comparison} used to evaluate assertion.
    * @return the created {@code ErrorMessageFactory}.
    */
-  public static ErrorMessageFactory shouldBeInTheFuture(Date actual, ComparisonStrategy comparisonStrategy) {
+  public static ErrorMessageFactory shouldBeInTheFuture(Date actual, Comparison comparisonStrategy) {
     return new ShouldBeInTheFuture(actual, comparisonStrategy);
   }
 
@@ -41,10 +41,10 @@ public class ShouldBeInTheFuture extends BasicErrorMessageFactory {
    * @return the created {@code ErrorMessageFactory}.
    */
   public static ErrorMessageFactory shouldBeInTheFuture(Date actual) {
-    return new ShouldBeInTheFuture(actual, StandardComparisonStrategy.instance());
+    return new ShouldBeInTheFuture(actual, EqualityComparison.instance());
   }
 
-  private ShouldBeInTheFuture(Date actual, ComparisonStrategy comparisonStrategy) {
+  private ShouldBeInTheFuture(Date actual, Comparison comparisonStrategy) {
     super("expected:<%s> to be in the future%s but was not.", actual, comparisonStrategy);
   }
 }

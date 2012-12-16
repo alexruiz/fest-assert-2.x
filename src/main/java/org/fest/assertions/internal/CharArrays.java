@@ -48,7 +48,7 @@ public class CharArrays {
 
   @VisibleForTesting
   CharArrays() {
-    this(StandardComparisonStrategy.instance());
+    this(EqualityComparison.instance());
   }
 
   @VisibleForTesting
@@ -56,7 +56,7 @@ public class CharArrays {
     return arrays.getComparator();
   }
 
-  public CharArrays(ComparisonStrategy comparisonStrategy) {
+  public CharArrays(Comparison comparisonStrategy) {
     this.arrays = new Arrays(comparisonStrategy);
   }
 

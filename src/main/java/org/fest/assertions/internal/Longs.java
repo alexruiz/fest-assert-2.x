@@ -44,7 +44,7 @@ public class Longs extends Numbers<Long> {
     super();
   }
 
-  public Longs(ComparisonStrategy comparisonStrategy) {
+  public Longs(Comparison comparisonStrategy) {
     super(comparisonStrategy);
   }
 

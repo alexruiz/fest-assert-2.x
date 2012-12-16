@@ -15,9 +15,9 @@
 package org.fest.assertions.internal.characters;
 
 import static org.fest.assertions.error.ShouldNotBeEqual.shouldNotBeEqual;
-import static org.fest.util.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestData.someInfo;
-import static org.fest.test.TestFailures.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 
 import static org.mockito.Mockito.verify;
 
@@ -55,7 +55,7 @@ public class Characters_assertNotEqual_Test extends CharactersBaseTest {
       verify(failures).failure(info, shouldNotBeEqual('b', 'b'));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 
   @Test
@@ -78,6 +78,6 @@ public class Characters_assertNotEqual_Test extends CharactersBaseTest {
       verify(failures).failure(info, shouldNotBeEqual('b', 'B', caseInsensitiveComparisonStrategy));
       return;
     }
-    failBecauseExpectedAssertionErrorWasNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

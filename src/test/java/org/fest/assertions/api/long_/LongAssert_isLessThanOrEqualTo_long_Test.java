@@ -28,11 +28,11 @@ public class LongAssert_isLessThanOrEqualTo_long_Test extends LongAssertBaseTest
 
   @Override
   protected LongAssert invoke_api_method() {
-    return assertions.isLessThanOrEqualTo(8L);
+    return assertions.isNotGreaterThan(8L);
   }
 
   @Override
   protected void verify_internal_effects() {
-    verify(longs).assertLessThanOrEqualTo(getInfo(assertions), getActual(assertions), 8L);
+    verify(longs).assertNotGreaterThan(getInfo(assertions), getActual(assertions), 8L);
   }
 }
