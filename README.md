@@ -2,7 +2,7 @@ FEST-Assert provides a fluent interface for assertions.
 
 Example:
 
-```
+```java
 int removed = employees.removeFired();
 assertThat(removed).isZero();
  
@@ -21,6 +21,10 @@ FEST's assertions are incredibly easy to write: just type **```assertThat```** f
 IDE will show you all the assertions available for the type of the object to verify. No more confusion about the 
 order of the "expected" and "actual" values. Our assertions are very readable as well: they read very close to plain 
 English, making it easier for non-technical people to read test code.
+
+FEST provides also separate modules for :
+* [**Joda Time assertions**](https://github.com/joel-costigliola/fest-joda-time-assert) 
+* [**Guava assertions**](https://github.com/joel-costigliola/fest-guava-assert)   
 
 For more details please visit :
 
