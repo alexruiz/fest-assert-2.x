@@ -25,6 +25,7 @@ English, making it easier for non-technical people to read test code.
 FEST provides also separate modules for :
 * [**Joda Time assertions**](https://github.com/joel-costigliola/fest-joda-time-assert) 
 * [**Guava assertions**](https://github.com/joel-costigliola/fest-guava-assert)   
+* [**Android assertions**](http://square.github.com/fest-android)
 
 For more details please visit :
 
