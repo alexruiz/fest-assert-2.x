@@ -30,7 +30,8 @@ FEST provides also separate modules for :
 For more details please visit :
 
 * **[FEST-Assert's wiki](https://github.com/alexruiz/fest-assert-2.x/wiki)** for the most up to date documentation.
+* **[fest-examples project ](https://github.com/joel-costigliola/fest-examples/tree/master/src/main/java/org/fest/assertions/examples)** project showing Fest assertions running examples.
 
-Many thanks to Cloudbees for their FOSS program that allows FEST to have a **[Jenkins CI server](https://fest.ci.cloudbees.com/#)**!
+Many thanks to Cloudbees for their FOSS program that allows FEST to have a **[Jenkins CI server](https://fest.ci.cloudbees.com/#)** and Sonar for **[code quality report](http://nemo.sonarsource.org/dashboard/index/424557)**.
 
 ![cloudbees](/alexruiz/fest-assert-2.x/raw/master/src/site/resources/images/built-on-Dev@Cloud-Cloudbees.png)
