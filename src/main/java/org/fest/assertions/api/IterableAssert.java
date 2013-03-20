@@ -14,6 +14,11 @@
  */
 package org.fest.assertions.api;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+
 /**
  * Assertion methods for {@link Iterable}.
  * <p>
@@ -26,10 +31,23 @@ package org.fest.assertions.api;
  * @author Matthieu Baechler
  * @author Joel Costigliola
  * @author Mikhail Mazursky
+ * @author Julien Meddah
  */
 public class IterableAssert<T> extends AbstractIterableAssert<IterableAssert<T>, Iterable<T>, T> {
 
   protected IterableAssert(Iterable<T> actual) {
     super(actual, IterableAssert.class);
+  }
+  
+  protected IterableAssert(Iterator<T> actual) {
+    this(toIterable(actual));
+  }
+
+  private static <T> Iterable<T> toIterable(Iterator<T> actual) {
+    Collection<T> actualList = new ArrayList<T>();
+    while(actual.hasNext()) {
+      actualList.add(actual.next());
+    }
+    return actualList;
   }
 }
