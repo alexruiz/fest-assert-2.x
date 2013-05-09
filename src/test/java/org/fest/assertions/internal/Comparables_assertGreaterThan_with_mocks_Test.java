@@ -74,11 +74,11 @@ public class Comparables_assertGreaterThan_with_mocks_Test {
     try {
       comparables.assertGreaterThan(description, actual, other);
     } catch (AssertionError e) {
-      String message = "[Testing] expected:<" + quote(actual) + "> to be greater than:<" + quote(other) + ">";
+      String message = "[Testing] expecting:\n<" + quote(actual) + "> should be greater than:<" + quote(other) + ">";
       assertEquals(message, e.getMessage());
       verify(failures).failure(same(description), any(ErrorMessageFactory.class));
       return;
     }
-    throw expectedAssertionErrorNotThrown();
+    expectedAssertionErrorNotThrown();
   }
 }

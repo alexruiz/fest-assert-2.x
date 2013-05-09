@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
@@ -35,6 +35,7 @@ import org.junit.Test;
  * Tests for {@link Strings#assertNotEmpty(Description, String)}.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class Strings_assertNotEmpty_Test {
   @Rule
@@ -57,7 +58,7 @@ public class Strings_assertNotEmpty_Test {
 
   @Test
   public void should_fail_if_actual_is_null() {
-    thrown.expectAssertionError(actualIsNull());
+    thrown.expect(AssertionError.class, actualIsNull());
     strings.assertNotEmpty(mock(Description.class), null);
   }
 
@@ -67,7 +68,7 @@ public class Strings_assertNotEmpty_Test {
     try {
       strings.assertNotEmpty(description, "");
     } catch (AssertionError e) {
-      assertEquals("[Testing] expecting actual not to be an empty String", e.getMessage());
+      assertEquals("[Testing] expecting: actual not to be empty", e.getMessage());
       verify(failures).failure(same(description), any(ErrorMessageFactory.class));
       return;
     }

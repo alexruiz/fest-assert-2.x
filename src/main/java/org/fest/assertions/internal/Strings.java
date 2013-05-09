@@ -10,12 +10,15 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
+import static org.fest.assertions.error.ShouldBeEmpty.shouldBeEmpty;
+import static org.fest.assertions.error.ShouldBeNullOrEmpty.shouldBeNullOrEmpty;
 import static org.fest.assertions.error.ShouldEndWith.shouldEndWith;
 import static org.fest.assertions.error.ShouldHaveSize.shouldHaveSize;
+import static org.fest.assertions.error.ShouldNotBeEmpty.shouldNotBeEmpty;
 import static org.fest.assertions.error.ShouldStartWith.shouldStartWith;
 import static org.fest.util.Preconditions.checkNotNull;
 import static org.fest.util.Strings.isNullOrEmpty;
@@ -23,8 +26,12 @@ import static org.fest.util.Strings.isNullOrEmpty;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.fest.assertions.description.Description;
 import org.fest.assertions.error.BasicErrorMessageFactory;
+import org.fest.util.InternalApi;
 import org.fest.util.VisibleForTesting;
 
 /**
@@ -32,10 +39,11 @@ import org.fest.util.VisibleForTesting;
  *
  * @author Alex Ruiz
  */
+@InternalApi
 public class Strings {
   private static final Strings INSTANCE = new Strings();
 
-  public static Strings instance() {
+  public static @Nonnull Strings instance() {
     return INSTANCE;
   }
 
@@ -52,10 +60,9 @@ public class Strings {
    * @param actual the <em>actual</em> {@code String}.
    * @throws AssertionError if the <em>actual</em> {@code String} is not {@code null} and not empty.
    */
-  public void assertNullOrEmpty(Description description, String actual) {
+  public void assertNullOrEmpty(@Nullable Description description, @Nullable String actual) {
     if (!isNullOrEmpty(actual)) {
-      String format = "expecting null or empty String, but was:<%s>";
-      throw failures.failure(description, new BasicErrorMessageFactory(format, actual));
+      throw failures.failure(description, shouldBeNullOrEmpty(actual));
     }
   }
 
@@ -67,11 +74,10 @@ public class Strings {
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} is not empty.
    */
-  public void assertEmpty(Description description, String actual) {
+  public void assertEmpty(@Nullable Description description, @Nullable String actual) {
     assertNotNull(description, actual);
     if (!actual.isEmpty()) {
-      String format = "expecting empty String but was:<%s>";
-      throw failures.failure(description, new BasicErrorMessageFactory(format, actual));
+      throw failures.failure(description, shouldBeEmpty(actual));
     }
   }
 
@@ -83,11 +89,10 @@ public class Strings {
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} is empty.
    */
-  public void assertNotEmpty(Description description, String actual) {
+  public void assertNotEmpty(@Nullable Description description, @Nullable String actual) {
     assertNotNull(description, actual);
     if (actual.isEmpty()) {
-      String format = "expecting actual not to be an empty String";
-      throw failures.failure(description, new BasicErrorMessageFactory(format));
+      throw failures.failure(description, shouldNotBeEmpty());
     }
   }
 
@@ -100,7 +105,7 @@ public class Strings {
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the size of the <em>actual</em> {@code String} is different than the expected one.
    */
-  public void assertHasSize(Description description, String actual, int expectedSize) {
+  public void assertHasSize(@Nullable Description description, @Nullable String actual, int expectedSize) {
     assertNotNull(description, actual);
     int actualSize = actual.length();
     if (actualSize != expectedSize) {
@@ -116,7 +121,8 @@ public class Strings {
    * @param expected the expected {@code String}.
    * @throws AssertionError if the given {@code String}s are not equal.
    */
-  public void assertEqualsIgnoringCase(Description description, String actual, String expected) {
+  public void assertEqualsIgnoringCase(@Nullable Description description, @Nullable String actual,
+      @Nullable String expected) {
     if (!areEqualIgnoringCase(actual, expected)) {
       String format = "expecting:<%s> to be equal to:<%s>, ignoring case considerations";
       throw failures.failure(description, new BasicErrorMessageFactory(format, actual, expected));
@@ -140,7 +146,7 @@ public class Strings {
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} does not contain the given sequence.
    */
-  public void assertContains(Description description, String actual, String sequence) {
+  public void assertContains(@Nullable Description description, @Nullable String actual, @Nonnull String sequence) {
     checkNotNull(sequence);
     assertNotNull(description, actual);
     if (!actual.contains(sequence)) {
@@ -159,7 +165,8 @@ public class Strings {
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} contains the given sequence.
    */
-  public void assertDoesNotContain(Description description, String actual, String sequence) {
+  public void assertDoesNotContain(@Nullable Description description, @Nullable String actual,
+      @Nonnull String sequence) {
     checkNotNull(sequence);
     assertNotNull(description, actual);
     if (actual.contains(sequence)) {
@@ -178,7 +185,7 @@ public class Strings {
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} does not start with the given prefix.
    */
-  public void assertStartsWith(Description description, String actual, String prefix) {
+  public void assertStartsWith(@Nullable Description description, @Nullable String actual, @Nonnull String prefix) {
     checkNotNull(prefix);
     assertNotNull(description, actual);
     if (!actual.startsWith(prefix)) {
@@ -196,7 +203,7 @@ public class Strings {
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} does not end with the given suffix.
    */
-  public void assertEndsWith(Description description, String actual, String suffix) {
+  public void assertEndsWith(@Nullable Description description, @Nullable String actual, @Nonnull String suffix) {
     checkNotNull(suffix);
     assertNotNull(description, actual);
     if (!actual.endsWith(suffix)) {
@@ -215,7 +222,7 @@ public class Strings {
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} does not match the given regular expression.
    */
-  public void assertMatches(Description description, String actual, String regex) {
+  public void assertMatches(@Nullable Description description, @Nullable String actual, @Nonnull String regex) {
     checkNotNull(regex);
     assertMatches(description, actual, Pattern.compile(regex));
   }
@@ -231,7 +238,7 @@ public class Strings {
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} does not match the given regular expression.
    */
-  public void assertMatches(Description description, String actual, Pattern pattern) {
+  public void assertMatches(@Nullable Description description, @Nullable String actual, @Nonnull Pattern pattern) {
     checkNotNull(pattern);
     assertNotNull(description, actual);
     if (!pattern.matcher(actual).matches()) {
@@ -250,7 +257,7 @@ public class Strings {
    * @throws PatternSyntaxException if the regular expression's syntax is invalid.
    * @throws AssertionError if the <em>actual</em> {@code String} matches the given regular expression.
    */
-  public void assertDoesNotMatch(Description description, String actual, String regex) {
+  public void assertDoesNotMatch(@Nullable Description description, @Nullable String actual, @Nonnull String regex) {
     checkNotNull(regex);
     assertDoesNotMatch(description, actual, Pattern.compile(regex));
   }
@@ -265,7 +272,7 @@ public class Strings {
    * @throws NullPointerException if the given pattern is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} matches the given regular expression.
    */
-  public void assertDoesNotMatch(Description description, String actual, Pattern pattern) {
+  public void assertDoesNotMatch(@Nullable Description description, @Nullable String actual, @Nonnull Pattern pattern) {
     checkNotNull(pattern);
     if (actual != null && pattern.matcher(actual).matches()) {
       String format = "expecting:<%s> not to match regular expression:<%s>";
@@ -273,7 +280,7 @@ public class Strings {
     }
   }
 
-  private void assertNotNull(Description description, String actual) {
+  private void assertNotNull(@Nullable Description description, @Nullable String actual) {
     Objects.instance().assertNotNull(description, actual);
   }
 }

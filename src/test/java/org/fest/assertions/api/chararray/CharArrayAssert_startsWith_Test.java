@@ -34,6 +34,6 @@ public class CharArrayAssert_startsWith_Test extends CharArrayAssertBaseTest {
 
   @Override
   protected void verify_internal_effects() {
-    verify(arrays).assertStartsWith(getInfo(assertions), getActual(assertions), newArray('a', 'b'));
+    verify(arrays).assertEndsWith(getInfo(assertions), getActual(assertions), newArray('a', 'b'));
   }
 }

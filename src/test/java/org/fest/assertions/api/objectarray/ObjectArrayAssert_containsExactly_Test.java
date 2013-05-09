@@ -34,6 +34,6 @@ public class ObjectArrayAssert_containsExactly_Test extends ObjectArrayAssertBas
 
   @Override
   protected void verify_internal_effects() {
-    verify(objects).assertEqual(getInfo(assertions), getActual(assertions), newArrayList("Yoda", "Luke"));
+    verify(objects).assertEqualTo(getInfo(assertions), getActual(assertions), newArrayList("Yoda", "Luke"));
   }
 }

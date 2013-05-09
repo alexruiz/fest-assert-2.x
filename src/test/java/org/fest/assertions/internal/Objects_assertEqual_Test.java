@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 import org.fest.assertions.description.Description;
+import org.fest.assertions.test.Person;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,6 +40,14 @@ public class Objects_assertEqual_Test {
   @Test
   public void should_pass_if_objects_are_equal() {
     objects.assertEqual(mock(Description.class), "Yoda", "Yoda");
+  }
+
+  @Test
+  public void should_pass_if_objects_are_different_instances_but_with_same_value() {
+    Description description = new TestDescription("Testing");
+    Object actual = new Person("Yoda");
+    Object expected = new Person("Yoda");
+    objects.assertEqual(description, actual, expected);
   }
 
   @Test

@@ -1,9 +1,9 @@
 package org.fest.assertions.error;
 
+import java.util.List;
+
 import org.fest.assertions.core.Matcher;
 import org.fest.assertions.data.Index;
-
-import java.util.List;
 
 /**
  * Creates an error message indicating that an assertion that verifies a group of elements contains a value at a given
@@ -27,6 +27,6 @@ public class ShouldHaveAtIndex extends BasicErrorMessageFactory {
   }
 
   private <T> ShouldHaveAtIndex(List<T> actual, Matcher<? super T> condition, Index index, T found) {
-    super("expecting:<%s> at index <%s> to have:<%s> in:\n <%s>\n", found, index.value, condition, actual);
+    super("expecting:\n<%s> at index <%s> to have:<%s> in:\n <%s>\n", found, index.value, condition, actual);
   }
 }

@@ -24,6 +24,7 @@ import static org.fest.util.Objects.HASH_CODE_PRIME;
 public class Index {
   public final int value;
 
+  //TODO:(Yvonne) why we need this method.
   /**
    * Creates a new {@link Index}.
    *
@@ -32,13 +33,16 @@ public class Index {
    * @throws IllegalArgumentException if the given value is negative.
    */
   public static Index atIndex(int value) {
-    if (value < 0) {
+    /*if (value < 0) {
       throw new IllegalArgumentException("The value of the index should not be negative");
-    }
+    }*/
     return new Index(value);
   }
 
   private Index(int value) {
+    if(value < 0) {
+      throw new IllegalArgumentException("The value of the index should not be negative");
+    }
     this.value = value;
   }
 

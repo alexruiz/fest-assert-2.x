@@ -47,7 +47,7 @@ public abstract class Matcher<T> {
    * @throws NullPointerException if the given description is {@code null}.
    */
   public Matcher(String description) {
-    this(new TextDescription(checkNotNull(description)));
+    this(new TextDescription(description));
   }
 
   /**

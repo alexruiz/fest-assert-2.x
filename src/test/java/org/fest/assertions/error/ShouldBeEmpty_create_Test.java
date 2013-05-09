@@ -15,7 +15,7 @@
 package org.fest.assertions.error;
 
 import static junit.framework.Assert.assertEquals;
-import static org.fest.assertions.error.NotEmptyErrorMessageFactory.shouldBeEmpty;
+import static org.fest.assertions.error.ShouldBeEmpty.shouldBeEmpty;
 import static org.fest.util.Lists.newArrayList;
 
 import org.fest.assertions.description.Description;
@@ -24,7 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Tests for {@link NotEmptyErrorMessageFactory#create(Description)}.
+ * Tests for {@link ShouldBeEmpty#create(Description)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang

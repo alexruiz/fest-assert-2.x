@@ -33,6 +33,6 @@ public class CharacterAssert_isNotEqualTo_char_Test extends CharacterAssertBaseT
 
   @Override
   protected void verify_internal_effects() {
-    verify(characters).assertNotEqual(getInfo(assertions), getActual(assertions), 'b');
+    verify(characters).assertNotEqualTo(getInfo(assertions), getActual(assertions), 'b');
   }
 }

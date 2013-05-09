@@ -32,6 +32,10 @@ public final class ErrorMessages {
     return "The array of entries to look for should not be empty";
   }
 
+  public static String entriesToLookForIsNull() {
+    return "The array of entries to look for should not be null";
+  }
+
   public static String isNotArray(Object o) {
     return String.format("The object <%s> should be an array", o);
   }
@@ -42,6 +46,10 @@ public final class ErrorMessages {
 
   public static String valuesToLookForIsEmpty() {
     return "The array of values to look for should not be empty";
+  }
+
+  public static String valuesToLookForIsNull() {
+    return "The array of values to look for should not be null";
   }
 
   private ErrorMessages() {}

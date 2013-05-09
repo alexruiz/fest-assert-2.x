@@ -33,6 +33,6 @@ public class LongAssert_isNotEqualTo_long_Test extends LongAssertBaseTest {
 
   @Override
   protected void verify_internal_effects() {
-    verify(longs).assertNotEqual(getInfo(assertions), getActual(assertions), 8L);
+    verify(longs).assertNotEqualTo(getInfo(assertions), getActual(assertions), 8L);
   }
 }

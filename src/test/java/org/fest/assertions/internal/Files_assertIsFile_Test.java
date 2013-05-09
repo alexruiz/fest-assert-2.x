@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2011-2012 the original author or authors.
+ * Copyright @2011-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
@@ -57,7 +57,7 @@ public class Files_assertIsFile_Test {
 
   @Test
   public void should_fail_if_actual_is_null() {
-    thrown.expectAssertionError(actualIsNull());
+    thrown.expect(AssertionError.class, actualIsNull());
     files.assertIsFile(mock(Description.class), null);
   }
 

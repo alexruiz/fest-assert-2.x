@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2011 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
@@ -31,6 +31,7 @@ import org.fest.util.VisibleForTesting;
  */
 public abstract class AbstractComparableAssert<S, A extends Comparable<A>> extends AbstractAssert<S, A>
     implements ComparableAssert<S, A> {
+
   @VisibleForTesting
   Comparables comparables = Comparables.instance();
 
@@ -40,6 +41,20 @@ public abstract class AbstractComparableAssert<S, A extends Comparable<A>> exten
 
   protected AbstractComparableAssert(A actual, Class<S> selfType, Description description) {
     super(actual, selfType, description);
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public S isEqualTo(A expected) {
+    comparables.assertEqual(description, actual, expected);
+    return myself;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public S isNotEqualTo(A expected) {
+    comparables.assertNotEqual(description, actual, expected);
+    return myself;
   }
 
   /** {@inheritDoc} */

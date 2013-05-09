@@ -33,6 +33,6 @@ public class ByteAssert_isNotEqualTo_byte_Test extends ByteAssertBaseTest {
 
   @Override
   protected void verify_internal_effects() {
-    verify(bytes).assertNotEqual(getInfo(assertions), getActual(assertions), (byte) 8);
+    verify(bytes).assertNotEqualTo(getInfo(assertions), getActual(assertions), (byte) 8);
   }
 }

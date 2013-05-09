@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
@@ -52,7 +52,7 @@ public class Comparables_assertNotGreaterThan_Test {
 
   @Test
   public void should_fail_if_actual_is_null() {
-    thrown.expectAssertionError(actualIsNull());
+    thrown.expect(AssertionError.class, actualIsNull());
     comparables.assertNotGreaterThan(mock(Description.class), null, 8);
   }
 
@@ -72,7 +72,7 @@ public class Comparables_assertNotGreaterThan_Test {
     try {
       comparables.assertNotGreaterThan(description, 8, 6);
     } catch (AssertionError e) {
-      assertEquals("[Testing] expected:<8> to be less than or equal to:<6>", e.getMessage());
+      assertEquals("[Testing] expecting:\n<8> should not be greater than:<6>", e.getMessage());
       verify(failures).failure(same(description), any(ErrorMessageFactory.class));
       return;
     }

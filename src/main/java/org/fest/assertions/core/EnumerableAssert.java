@@ -10,35 +10,37 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.core;
+
+import javax.annotation.Nonnull;
 
 /**
  * Assertions applicable to groups of values that can be enumerated (e.g. arrays, collections or strings.)
  *
- * @param <S> the "self" type of this assertion class. Please read &quot;<a href="http://bit.ly/anMa4g"
- *          target="_blank">Emulating 'self types' using Java Generics to simplify fluent API implementation</a>&quot;
- *          for more details.
- * @param <T> the type of elements of the "actual" value.
+ * @param <S> the type of the assertion objects.
  *
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public interface EnumerableAssert<S, T> {
+public interface EnumerableAssert<S> {
+
   /**
    * Verifies that the <em>actual</em> enumeration is {@code null} or empty.
    *
+   * @return {@code this} the assertion object.
    * @throws AssertionError if the <em>actual</em> enumeration is not {@code null} or not empty.
    */
-  void isNullOrEmpty();
+  S isNullOrEmpty();
 
   /**
    * Verifies that the <em>actual</em> enumeration is empty.
    *
+   * @return {@code this} the assertion object.
    * @throws AssertionError if the <em>actual</em> enumeration is not empty.
    */
-  void isEmpty();
+  S isEmpty();
 
   /**
    * Verifies that the <em>actual</em> enumeration is not empty.
@@ -46,6 +48,7 @@ public interface EnumerableAssert<S, T> {
    * @return {@code this} assertion object.
    * @throws AssertionError if the <em>actual</em> enumeration is empty.
    */
+  @Nonnull
   S isNotEmpty();
 
   /**
@@ -55,5 +58,6 @@ public interface EnumerableAssert<S, T> {
    * @return {@code this} assertion object.
    * @throws AssertionError if the number of values of the <em>actual</em> enumeration is not equal to the given one.
    */
+  @Nonnull
   S hasSize(int expected);
 }

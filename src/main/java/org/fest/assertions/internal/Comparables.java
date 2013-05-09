@@ -15,10 +15,13 @@
 package org.fest.assertions.internal;
 
 import static org.fest.assertions.error.NotEqualErrorFactory.shouldBeEqual;
+import static org.fest.assertions.error.ShouldBeGreaterThan.shouldBeGreaterThan;
+import static org.fest.assertions.error.ShouldBeLessThan.shouldBeLessThan;
 import static org.fest.assertions.error.ShouldNotBeEqual.shouldNotBeEqual;
+import static org.fest.assertions.error.ShouldNotBeGreaterThan.shouldNotBeGreaterThan;
+import static org.fest.assertions.error.ShouldNotBeLessThan.shouldNotBeLessThan;
 
 import org.fest.assertions.description.Description;
-import org.fest.assertions.error.BasicErrorMessageFactory;
 import org.fest.util.VisibleForTesting;
 
 /**
@@ -94,8 +97,7 @@ public class Comparables {
   public <T extends Comparable<T>> void assertLessThan(Description description, T actual, T other) {
     assertNotNull(description, actual);
     if (!isLessThan(actual, other)) {
-      String format = "expected:<%s> to be less than:<%s>";
-      throw failures.failure(description, new BasicErrorMessageFactory(format, actual, other));
+      throw failures.failure(description, shouldBeLessThan(actual, other));
     }
   }
 
@@ -111,8 +113,7 @@ public class Comparables {
   public <T extends Comparable<T>> void assertNotLessThan(Description description, T actual, T other) {
     assertNotNull(description, actual);
     if (isLessThan(actual, other)) {
-      String format = "expected:<%s> to be greater than or equal to:<%s>";
-      throw failures.failure(description, new BasicErrorMessageFactory(format, actual, other));
+      throw failures.failure(description, shouldNotBeLessThan(actual, other));
     }
   }
 
@@ -132,8 +133,7 @@ public class Comparables {
   public <T extends Comparable<T>> void assertGreaterThan(Description description, T actual, T other) {
     assertNotNull(description, actual);
     if (!isGreaterThan(actual, other)) {
-      String format = "expected:<%s> to be greater than:<%s>";
-      throw failures.failure(description, new BasicErrorMessageFactory(format, actual, other));
+      throw failures.failure(description, shouldBeGreaterThan(actual, other));
     }
   }
 
@@ -149,8 +149,7 @@ public class Comparables {
   public <T extends Comparable<T>> void assertNotGreaterThan(Description description, T actual, T other) {
     assertNotNull(description, actual);
     if (isGreaterThan(actual, other)) {
-      String format = "expected:<%s> to be less than or equal to:<%s>";
-      throw failures.failure(description, new BasicErrorMessageFactory(format, actual, other));
+      throw failures.failure(description, shouldNotBeGreaterThan(actual, other));
     }
   }
 

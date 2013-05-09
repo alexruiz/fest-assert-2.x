@@ -34,6 +34,6 @@ public class FloatArrayAssert_startsWith_Test extends FloatArrayAssertBaseTest {
 
   @Override
   protected void verify_internal_effects() {
-    verify(arrays).assertStartsWith(getInfo(assertions), getActual(assertions), newArray(6f, 8f));
+    verify(arrays).assertEndsWith(getInfo(assertions), getActual(assertions), newArray(6f, 8f));
   }
 }

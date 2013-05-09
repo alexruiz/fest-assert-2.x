@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
@@ -36,6 +36,7 @@ import org.junit.Test;
  * Tests for {@link Objects#assertIsInstanceOf(Description, Object, Class)}.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class Objects_assertIsInstanceOf_Test {
   @Rule
@@ -66,7 +67,7 @@ public class Objects_assertIsInstanceOf_Test {
 
   @Test
   public void should_fail_if_actual_is_null() {
-    thrown.expectAssertionError(actualIsNull());
+    thrown.expect(AssertionError.class, actualIsNull());
     objects.assertIsInstanceOf(mock(Description.class), null, Object.class);
   }
 
@@ -76,8 +77,8 @@ public class Objects_assertIsInstanceOf_Test {
     try {
       objects.assertIsInstanceOf(description, actual, String.class);
     } catch (AssertionError e) {
-      String message = "[Testing] expecting <Person[name='Yoda']> to be an instance of:<java.lang.String> but was " +
-          "instance of:<org.fest.assertions.test.Person>";
+      String message = "[Testing] expecting <Person[name='Yoda']> to be an instance of:<java.lang.String> but was "
+          + "instance of:<org.fest.assertions.test.Person>";
       assertEquals(message, e.getMessage());
       verify(failures).failure(same(description), any(ErrorMessageFactory.class));
       return;

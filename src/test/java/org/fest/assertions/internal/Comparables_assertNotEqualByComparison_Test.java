@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2011 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
@@ -32,6 +32,7 @@ import org.junit.Test;
  * Tests for {@link Comparables#assertNotEqual(Description, Comparable, Comparable)}.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class Comparables_assertNotEqualByComparison_Test {
   @Rule
@@ -49,7 +50,7 @@ public class Comparables_assertNotEqualByComparison_Test {
 
   @Test
   public void should_fail_if_actual_is_null() {
-    thrown.expectAssertionError(actualIsNull());
+    thrown.expect(AssertionError.class, actualIsNull());
     comparables.assertNotEqual(mock(Description.class), null, 8);
   }
 
@@ -64,10 +65,12 @@ public class Comparables_assertNotEqualByComparison_Test {
   @Test
   public void should_fail_if_objects_are_equal() {
     Description description = new TestDescription("Testing");
+    Person a = spy(new Person("Yoda"));
+    Person o = new Person("Yoda");
     try {
-      comparables.assertNotEqual(description, "Yoda", "Yoda");
+      comparables.assertNotEqual(description, a, o);
     } catch (AssertionError e) {
-      verify(failures).failure(description, shouldNotBeEqual("Yoda", "Yoda"));
+      verify(failures).failure(description, shouldNotBeEqual(a, o));
       return;
     }
     throw expectedAssertionErrorNotThrown();

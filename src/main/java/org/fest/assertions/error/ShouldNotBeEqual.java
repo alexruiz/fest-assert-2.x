@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.error;
 
@@ -18,7 +18,6 @@ package org.fest.assertions.error;
  * Creates an error message indicating that an assertion that verifies that two objects are not equal failed.
  *
  * @author Alex Ruiz
- * @author Joel Costigliola
  * @author Yvonne Wang
  */
 public class ShouldNotBeEqual extends BasicErrorMessageFactory {
@@ -34,6 +33,6 @@ public class ShouldNotBeEqual extends BasicErrorMessageFactory {
   }
 
   private ShouldNotBeEqual(Object actual, Object other) {
-    super("<%s> should not be equal to:<%s>", actual, other);
+    super("expecting:\n<%s> should not be equal to:<%s>", actual, other);
   }
 }

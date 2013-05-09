@@ -10,13 +10,13 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2011-2012 the original author or authors.
+ * Copyright @2011-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
 import static org.fest.assertions.test.FailureMessages.actualIsNull;
-import static org.fest.assertions.test.FakeFile.newWritableFile;
 import static org.fest.assertions.test.FakeFile.newNonExistingResource;
+import static org.fest.assertions.test.FakeFile.newWritableFile;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
 import static org.junit.Assert.assertEquals;
@@ -57,7 +57,7 @@ public class Files_assertExists_Test {
 
   @Test
   public void should_fail_if_actual_is_null() {
-    thrown.expectAssertionError(actualIsNull());
+    thrown.expect(AssertionError.class, actualIsNull());
     files.assertExists(mock(Description.class), null);
   }
 
@@ -74,7 +74,7 @@ public class Files_assertExists_Test {
     try {
       files.assertExists(description, actual);
     } catch (AssertionError e) {
-      assertEquals("[Testing] expecting resource in path:</usr/local/temp.txt> to exist", e.getMessage());
+      assertEquals("[Testing] expecting resource in path:</usr/local/actual.txt> to exist", e.getMessage());
       verify(failures).failure(same(description), any(ErrorMessageFactory.class));
       return;
     }

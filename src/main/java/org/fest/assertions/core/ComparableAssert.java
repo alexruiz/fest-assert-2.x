@@ -57,7 +57,7 @@ public interface ComparableAssert<S, A extends Comparable<? super A>> {
   S isGreaterThan(A other);
 
   /**
-   * Verifies that the <em>actual</em> value is less than or equal to the given one.
+   * Verifies that the <em>actual</em> value is not greater than the given one.
    *
    * @param other the given value to compare the <em>actual</em> value to.
    * @return {@code this} assertion object.

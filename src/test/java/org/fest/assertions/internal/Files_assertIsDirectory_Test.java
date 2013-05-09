@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2011-2012 the original author or authors.
+ * Copyright @2011-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
@@ -29,6 +29,7 @@ import java.io.File;
 
 import org.fest.assertions.description.Description;
 import org.fest.assertions.error.ErrorMessageFactory;
+import org.fest.assertions.test.FakeFile;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
@@ -56,7 +57,7 @@ public class Files_assertIsDirectory_Test {
 
   @Test
   public void should_fail_if_actual_is_null() {
-    thrown.expectAssertionError(actualIsNull());
+    thrown.expect(AssertionError.class, actualIsNull());
     files.assertIsDirectory(mock(Description.class), null);
   }
 
@@ -69,12 +70,12 @@ public class Files_assertIsDirectory_Test {
   @Test
   public void should_fail_if_actual_is_not_directory() {
     Description description = new TestDescription("Testing");
-    File actual = newDirectory("/usr/local/actual.txt");
+    File actual = FakeFile.newWritableFile("/usr/local/actual.txt");
     try {
       files.assertIsDirectory(description, actual);
     } catch (AssertionError e) {
-      assertEquals(
-          "[Testing] expecting path:</usr/local/actual.txt> to represent an existing directory", e.getMessage());
+      assertEquals("[Testing] expecting path:</usr/local/actual.txt> to represent an existing directory",
+          e.getMessage());
       verify(failures).failure(same(description), any(ErrorMessageFactory.class));
       return;
     }

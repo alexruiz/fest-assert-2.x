@@ -59,7 +59,7 @@ public class Strings_assertEndsWith_Test {
 
   @Test
   public void should_fail_if_actual_is_null() {
-    thrown.expectAssertionError(actualIsNull());
+    thrown.expect(AssertionError.class, actualIsNull());
     strings.assertEndsWith(mock(Description.class), null, "Yoda");
   }
 

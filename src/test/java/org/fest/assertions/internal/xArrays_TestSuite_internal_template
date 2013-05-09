@@ -1,0 +1,16 @@
+-assertNullOrEmpty_Test.class,
+-assertEmpty_Test.class,
+-assertHasSize_Test.class,
+-assertContainsNull_Test.class,//not for primitive types. 
+-assertContains_Test.class,
+-assertContains_At_Index_Test.class,
+-assertContainsOnly_Test.class,
+-assertContainsAll_Test.class,
+-assertContainsSequence_Test.class,
+-assertStartsWith_Test.class,
+-assertEndsWith_Test.class,
+-assertDoesNotContain_Test.class,
+_assertDoesNotContain_At_Index_Test.class,
+-assertNotEmpty_Test.class,
+-assertDoesNotHaveDuplicates_Test.class, 
+-assertDoesNotContainNull_Test.class //not for primitive types.

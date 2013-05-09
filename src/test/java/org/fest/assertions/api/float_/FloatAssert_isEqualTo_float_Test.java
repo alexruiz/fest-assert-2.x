@@ -33,6 +33,6 @@ public class FloatAssert_isEqualTo_float_Test extends FloatAssertBaseTest {
 
   @Override
   protected void verify_internal_effects() {
-    verify(floats).assertEqual(getInfo(assertions), getActual(assertions), 8f);
+    verify(floats).assertEqualTo(getInfo(assertions), getActual(assertions), 8f);
   }
 }

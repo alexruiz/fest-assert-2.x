@@ -10,20 +10,24 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.util;
 
 import static org.fest.test.ExpectedException.none;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 import org.fest.test.ExpectedException;
-import org.junit.*;
+import org.junit.Rule;
+import org.junit.Test;
 
 /**
  * Tests for <code>{@link ArrayWrapperList#wrap(Object)}</code>.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class ArrayWrapperList_wrap_Test {
   @Rule
@@ -44,7 +48,7 @@ public class ArrayWrapperList_wrap_Test {
 
   @Test
   public void should_throw_error_if_parameter_is_not_array() {
-    thrown.expectIllegalArgumentException("The object to wrap should be an array");
+    thrown.expect(IllegalArgumentException.class, "The object to wrap should be an array");
     ArrayWrapperList.wrap("Yoda");
   }
 }

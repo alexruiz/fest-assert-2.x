@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verify;
 
 import org.fest.assertions.description.Description;
 import org.fest.assertions.error.ErrorMessageFactory;
+import org.fest.assertions.test.Person;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -56,6 +57,21 @@ public class Objects_assertSame_Test {
       objects.assertSame(description, "Yoda", "Luke");
     } catch (AssertionError e) {
       assertEquals("[Testing] expected:<'Luke'> and actual:<'Yoda'> should refer to the same instance", e.getMessage());
+      verify(failures).failure(same(description), any(ErrorMessageFactory.class));
+      return;
+    }
+    throw expectedAssertionErrorNotThrown();
+  }
+
+  @Test
+  public void should_fail_if_objects_are_different_instances_but_with_same_value() {
+    Description description = new TestDescription("Testing");
+    Object actual = new Person("Yoda");
+    Object expected = new Person("Yoda");
+    try {
+      objects.assertSame(description, actual, expected);
+    } catch (AssertionError e) {
+      assertEquals("[Testing] expected:<Person[name='Yoda']> and actual:<Person[name='Yoda']> should refer to the same instance", e.getMessage());
       verify(failures).failure(same(description), any(ErrorMessageFactory.class));
       return;
     }

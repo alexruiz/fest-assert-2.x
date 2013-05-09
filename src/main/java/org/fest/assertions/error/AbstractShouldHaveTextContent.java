@@ -1,17 +1,30 @@
+/*
+ * Created on Dec 14, 2010
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ *
+ * Copyright @2013 the original author or authors.
+ */
 package org.fest.assertions.error;
-
-import static org.fest.util.SystemProperties.LINE_SEPARATOR;
 
 import java.util.List;
 
 import org.fest.assertions.description.Description;
 
 /**
- * 
+ *
  * Base class for text content error.
- * 
+ *
  * @author Joel Costigliola
- * 
+ * @author Yvonne Wang
+ *
  */
 public class AbstractShouldHaveTextContent extends BasicErrorMessageFactory {
 
@@ -27,22 +40,26 @@ public class AbstractShouldHaveTextContent extends BasicErrorMessageFactory {
     //
     // case 1 - append diffs to String passed in super :
     // super("file:<%s> and file:<%s> do not have equal content:" + diffs, actual, expected);
-    // this leads to a MissingFormatArgumentException if diffs contains a format specifier (like %s) because the String will
+    // this leads to a MissingFormatArgumentException if diffs contains a format specifier (like %s) because the String
+    // will
     // finally be evaluated with String.format
     //
     // case 2 - add as format arg to the String passed in super :
     // super("file:<%s> and file:<%s> do not have equal content:"actual, expected, diffs);
-    // this is better than case 1 but the diffs String will be quoted before the class to String.format as all String in Fest
+    // this is better than case 1 but the diffs String will be quoted before the class to String.format as all String in
+    // Fest
     // error message. This is not what we want
     //
-    // The solution is to keep diffs as an attribute and append it after String.format has been applied on the error message.
+    // The solution is to keep diffs as an attribute and append it after String.format has been applied on the error
+    // message.
     return super.create(d) + diffs;
   }
 
   protected static String diffsAsString(List<String> diffsList) {
     StringBuilder stringBuilder = new StringBuilder();
-    for (String diff : diffsList)
-      stringBuilder.append(LINE_SEPARATOR).append(diff);
+    for (String diff : diffsList) {
+      stringBuilder.append(System.getProperty(",")).append(diff);
+    }
     return stringBuilder.toString();
   }
 

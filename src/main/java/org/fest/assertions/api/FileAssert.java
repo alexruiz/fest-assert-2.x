@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2011-2012 the original author or authors.
+ * Copyright @2011-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
@@ -98,7 +98,7 @@ public class FileAssert extends AbstractAssert<FileAssert, File> {
 
   /**
    * Verifies that the content of the file represented by the <em>actual</em> {@code File} is equal to the content of
-   * the file represented by the given {@code File}.  It is assumed that the content of the files is text. This method
+   * the file represented by the given {@code File}. It is assumed that the content of the files is text. This method
    * uses the charset in {@link Charset#defaultCharset()} to read the contents of the files.
    *
    * @param expected the <em>expected</em> {@code File}.
@@ -109,7 +109,7 @@ public class FileAssert extends AbstractAssert<FileAssert, File> {
    * @throws AssertionError if the <em>actual</em> {@code File} does not represent an existing file.
    * @throws IORuntimeException if an I/O error occurs.
    * @throws AssertionError if the content of the file represented by the <em>actual</em> {@code File} is not equal to
-   *         the content of the file represented by the given {@code File}.
+   *           the content of the file represented by the given {@code File}.
    */
   public FileAssert hasContentEqualTo(File expected) {
     return hasContentEqualTo(expected, defaultCharset());
@@ -117,7 +117,7 @@ public class FileAssert extends AbstractAssert<FileAssert, File> {
 
   /**
    * Verifies that the content of the file represented by the <em>actual</em> {@code File} is equal to the content of
-   * the file represented by the given {@code File}.  It is assumed that the content of the files is text.
+   * the file represented by the given {@code File}. It is assumed that the content of the files is text.
    *
    * @param expected the <em>expected</em> {@code File}.
    * @param charset the charset to use when reading the contents of the {@code File}s.
@@ -129,7 +129,7 @@ public class FileAssert extends AbstractAssert<FileAssert, File> {
    * @throws AssertionError if the <em>actual</em> {@code File} does not represent an existing file.
    * @throws IORuntimeException if an I/O error occurs.
    * @throws AssertionError if the content of the file represented by the <em>actual</em> {@code File} is not equal to
-   *         the content of the file represented by the given {@code File}.
+   *           the content of the file represented by the given {@code File}.
    */
   public FileAssert hasContentEqualTo(File expected, Charset charset) {
     files.assertEqualContent(description, actual, expected, charset);

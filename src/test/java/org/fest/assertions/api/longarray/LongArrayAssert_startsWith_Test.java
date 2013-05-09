@@ -34,6 +34,6 @@ public class LongArrayAssert_startsWith_Test extends LongArrayAssertBaseTest {
 
   @Override
   protected void verify_internal_effects() {
-    verify(arrays).assertStartsWith(getInfo(assertions), getActual(assertions), newArray(6L, 8L));
+    verify(arrays).assertEndsWith(getInfo(assertions), getActual(assertions), newArray(6L, 8L));
   }
 }

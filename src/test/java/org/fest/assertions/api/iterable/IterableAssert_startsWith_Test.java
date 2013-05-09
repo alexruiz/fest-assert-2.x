@@ -36,6 +36,6 @@ public class IterableAssert_startsWith_Test extends IterableAssertBaseTest {
 
   @Override
   protected void verify_internal_effects() {
-    verify(iterables).assertStartsWith(getInfo(assertions), getActual(assertions), array("Luke", "Yoda"));
+    verify(iterables).assertEndsWith(getInfo(assertions), getActual(assertions), array("Luke", "Yoda"));
   }
 }

@@ -34,6 +34,6 @@ public class DoubleArrayAssert_startsWith_Test extends DoubleArrayAssertBaseTest
 
   @Override
   protected void verify_internal_effects() {
-    verify(arrays).assertStartsWith(getInfo(assertions), getActual(assertions), newArray(6d, 8d));
+    verify(arrays).assertEndsWith(getInfo(assertions), getActual(assertions), newArray(6d, 8d));
   }
 }

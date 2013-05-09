@@ -35,6 +35,6 @@ public class ObjectArrayAssert_startsWith_Test extends ObjectArrayAssertBaseTest
 
   @Override
   protected void verify_internal_effects() {
-    verify(arrays).assertStartsWith(getInfo(assertions), getActual(assertions), array("Luke", "Yoda"));
+    verify(arrays).assertEndsWith(getInfo(assertions), getActual(assertions), array("Luke", "Yoda"));
   }
 }

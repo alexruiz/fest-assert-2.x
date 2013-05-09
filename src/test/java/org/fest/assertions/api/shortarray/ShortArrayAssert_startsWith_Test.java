@@ -34,6 +34,6 @@ public class ShortArrayAssert_startsWith_Test extends ShortArrayAssertBaseTest {
 
   @Override
   protected void verify_internal_effects() {
-    verify(arrays).assertStartsWith(getInfo(assertions), getActual(assertions), newArray(6, 8));
+    verify(arrays).assertEndsWith(getInfo(assertions), getActual(assertions), newArray(6, 8));
   }
 }

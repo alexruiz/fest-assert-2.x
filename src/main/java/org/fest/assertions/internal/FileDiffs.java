@@ -10,11 +10,9 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2012 the original author or authors.
+ * Copyright @2013 the original author or authors.
  */
 package org.fest.assertions.internal;
-
-import static org.fest.util.SystemProperties.LINE_SEPARATOR;
 
 import java.util.List;
 
@@ -23,6 +21,7 @@ import org.fest.util.Lists;
 /**
  * @author Joel Costigliola
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 class FileDiffs {
   private final List<String> diffs = Lists.newArrayList();
@@ -46,11 +45,12 @@ class FileDiffs {
   @Override
   public String toString() {
     StringBuilder buffer = new StringBuilder();
+    String lineSeparator = System.getProperty("line.separator");
     int diffCount = diffs.size();
     for (int i = 0; i < diffCount; i++) {
       buffer.append("  ").append(diffs.get(i));
       if (i < diffs.size() - 1) {
-        buffer.append(LINE_SEPARATOR);
+        buffer.append(lineSeparator);
       }
     }
     return buffer.toString();

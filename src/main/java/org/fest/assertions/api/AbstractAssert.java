@@ -10,61 +10,60 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2011 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
 import org.fest.assertions.core.Assert;
-import org.fest.assertions.core.ExtensionPoints;
-import org.fest.assertions.core.Matcher;
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.Matchers;
 import org.fest.assertions.internal.Objects;
 import org.fest.util.VisibleForTesting;
 
 /**
- * Base class for all assertions.
+ * Base class for all assertions, except {@link MapAssert}.
  *
  * @param <S> the "self" type of this assertion class. Please read &quot;<a href="http://bit.ly/anMa4g"
  *          target="_blank">Emulating 'self types' using Java Generics to simplify fluent API implementation</a>&quot;
  *          for more details.
- * @param <A> the type of the <em>actual</em> value.
+ * @param <T> the type of the <em>actual</em> value.
  *
  * @author Alex Ruiz
  * @author Joel Costigliola
  * @author Yvonne Wang
  */
-public abstract class AbstractAssert<S, A> implements Assert<S, A>, ExtensionPoints<S, A> {
+public abstract class AbstractAssert<S, T> implements Assert<S, T> {
   @VisibleForTesting
   Objects objects = Objects.instance();
 
   @VisibleForTesting
   Matchers matchers = Matchers.instance();
 
-  protected final A actual;
+  protected final T actual;
   protected final S myself;
   protected final Description description;
 
-  protected AbstractAssert(A actual, Class<S> selfType) {
+  protected AbstractAssert(T actual, Class<S> selfType) {
     this(actual, selfType, null);
   }
 
-  protected AbstractAssert(A actual, Class<S> selfType, Description description) {
+  protected AbstractAssert(T actual, Class<S> selfType, Description description) {
     myself = selfType.cast(this);
     this.actual = actual;
     this.description = description;
   }
 
+
   /** {@inheritDoc} */
   @Override
-  public S isEqualTo(A expected) {
+  public S isEqualTo(T expected) {
     objects.assertEqual(description, actual, expected);
     return myself;
   }
 
   /** {@inheritDoc} */
   @Override
-  public S isNotEqualTo(A other) {
+  public S isNotEqualTo(T other) {
     objects.assertNotEqual(description, actual, other);
     return myself;
   }
@@ -79,34 +78,6 @@ public abstract class AbstractAssert<S, A> implements Assert<S, A>, ExtensionPoi
   @Override
   public S isNotNull() {
     objects.assertNotNull(description, actual);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public S is(Matcher<? super A> matcher) {
-    matchers.assertIs(description, actual, matcher);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public S isNot(Matcher<? super A> matcher) {
-    matchers.assertIsNot(description, actual, matcher);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public S has(Matcher<? super A> matcher) {
-    matchers.assertHas(description, actual, matcher);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  @Override
-  public S doesNotHave(Matcher<? super A> matcher) {
-    matchers.assertDoesNotHave(description, actual, matcher);
     return myself;
   }
 

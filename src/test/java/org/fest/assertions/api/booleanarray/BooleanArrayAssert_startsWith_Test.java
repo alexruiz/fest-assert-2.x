@@ -34,6 +34,6 @@ public class BooleanArrayAssert_startsWith_Test extends BooleanArrayAssertBaseTe
 
   @Override
   protected void verify_internal_effects() {
-    verify(arrays).assertStartsWith(getInfo(assertions), getActual(assertions), newArray(true, false));
+    verify(arrays).assertEndsWith(getInfo(assertions), getActual(assertions), newArray(true, false));
   }
 }

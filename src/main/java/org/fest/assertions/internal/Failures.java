@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
@@ -40,12 +40,12 @@ public class Failures {
   }
 
   /**
-   * flag indicating wether or not we remove elements related to Fest from assertion error stack trace.
+   * flag indicating whether or not we remove elements related to FEST from assertion error stack trace.
    */
   private boolean removeFestRelatedElementsFromStackTrace = true;
 
   /**
-   * Sets wether we remove elements related to Fest from assertion error stack trace.
+   * Sets whether we remove elements related to FEST from assertion error stack trace.
    *
    * @param removeFestRelatedElementsFromStackTrace flag
    */
@@ -58,16 +58,11 @@ public class Failures {
   }
 
   /**
-   * Creates a <code>{@link AssertionError}</code> following this pattern:
-   * <ol>
-   * <li>creates a <code>{@link AssertionError}</code> using <code>{@link AssertionInfo#overridingErrorMessage()}</code>
-   * as the error message if such value is not {@code null}, or</li>
-   * <li>uses the given <code>{@link ErrorMessageFactory}</code> to create the detail message of the
-   * <code>{@link AssertionError}</code>, prepending the value of <code>{@link AssertionInfo#description()}</code> to
-   * the error message</li>
-   * </ol>
+   * Creates a <code>{@link AssertionError}</code> using <code>{@link ErrorMessageFactory}</code> to create the detail message of the
+   * <code>{@link AssertionError}</code>, prepending the value of <code>{@link Description}</code> to the
+   * error message
    *
-   * @param info contains information about the failed assertion.
+   * @param description contains information about the failed assertion.
    * @param message knows how to create detail messages for {@code AssertionError}s.
    * @return the created <code>{@link AssertionError}</code>.
    */
@@ -93,7 +88,7 @@ public class Failures {
   }
 
 /**
-   * If is {@link #removeFestRelatedElementsFromStackTrace} is true, it filters the stack trace of the given {@link AssertionError}
+   * If the {@link #removeFestRelatedElementsFromStackTrace} is true, it filters the stack trace of the given {@link AssertionError}
    * by removing stack trace elements related to Fest in order to get a more readable stack trace.
    * <p>
    * See example below :
@@ -127,7 +122,7 @@ org.junit.ComparisonFailure: expected:<'[Ronaldo]'> but was:<'[Messi]'>
    */
   public void removeFestRelatedElementsFromStackTraceIfNeeded(AssertionError assertionError) {
     if (removeFestRelatedElementsFromStackTrace) {
-      Throwables.removeFestRelatedElementsFromStackTrace(assertionError);
+      Throwables.removeFestFromStackTrace(assertionError);
     }
   }
 

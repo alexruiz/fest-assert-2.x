@@ -18,10 +18,11 @@ package org.fest.assertions.core;
  * Assertion methods applicable to {@link Number}s.
  *
  * @param <T> the type of the <em>actual</em> value.
+ * @param <S> self type of the assertion objects.
  *
  * @author Alex Ruiz
  */
-public interface NumberAssert<T extends Number> {
+public interface NumberAssert<S, T extends Number> {
   /**
    * Verifies that the <em>actual</em> value is equal to zero.
    *
@@ -29,7 +30,7 @@ public interface NumberAssert<T extends Number> {
    * @throws AssertionError if the <em>actual</em> value is {@code null}.
    * @throws AssertionError if the <em>actual</em> value is not equal to zero.
    */
-  NumberAssert<T> isZero();
+  S isZero();
 
   /**
    * Verifies that the <em>actual</em> value is not equal to zero.
@@ -38,7 +39,7 @@ public interface NumberAssert<T extends Number> {
    * @throws AssertionError if the <em>actual</em> value is {@code null}.
    * @throws AssertionError if the <em>actual</em> value is equal to zero.
    */
-  NumberAssert<T> isNotZero();
+  S isNotZero();
 
   /**
    * Verifies that the <em>actual</em> value is positive.
@@ -47,7 +48,7 @@ public interface NumberAssert<T extends Number> {
    * @throws AssertionError if the <em>actual</em> value is {@code null}.
    * @throws AssertionError if the <em>actual</em> value is not positive.
    */
-  NumberAssert<T> isPositive();
+  S isPositive();
 
   /**
    * Verifies that the <em>actual</em> value is negative.
@@ -56,5 +57,5 @@ public interface NumberAssert<T extends Number> {
    * @throws AssertionError if the <em>actual</em> value is {@code null}.
    * @throws AssertionError if the <em>actual</em> value is not negative.
    */
-  NumberAssert<T> isNegative();
+  S isNegative();
 }

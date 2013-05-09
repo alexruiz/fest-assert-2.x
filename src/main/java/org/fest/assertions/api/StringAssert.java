@@ -10,12 +10,15 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.fest.assertions.core.EnumerableAssert;
 import org.fest.assertions.description.Description;
@@ -23,7 +26,10 @@ import org.fest.assertions.internal.Strings;
 import org.fest.util.VisibleForTesting;
 
 /**
+ * <p>
  * Assertions for {@code String}s.
+ * </p>
+ *
  * <p>
  * To create a new instance of this class, invoke {@link Assertions#assertThat(String)}.
  * </p>
@@ -33,8 +39,8 @@ import org.fest.util.VisibleForTesting;
  * @author Alex Ruiz
  * @author Joel Costigliola
  */
-public class StringAssert extends AbstractAssert<StringAssert, String>
-    implements EnumerableAssert<StringAssert, String> {
+public class StringAssert extends AbstractAssert<StringAssert, String> implements EnumerableAssert<StringAssert> {
+
   @VisibleForTesting
   Strings strings = Strings.instance();
 
@@ -48,26 +54,30 @@ public class StringAssert extends AbstractAssert<StringAssert, String>
 
   /** {@inheritDoc} */
   @Override
-  public void isNullOrEmpty() {
+  public StringAssert isNullOrEmpty() {
     strings.assertNullOrEmpty(description, actual);
+    return this;
   }
 
   /** {@inheritDoc} */
   @Override
-  public void isEmpty() {
+  public StringAssert isEmpty() {
     strings.assertEmpty(description, actual);
+    return this;
   }
 
   /** {@inheritDoc} */
   @Override
-  public StringAssert isNotEmpty() {
+  public @Nonnull
+  StringAssert isNotEmpty() {
     strings.assertNotEmpty(description, actual);
     return this;
   }
 
   /** {@inheritDoc} */
   @Override
-  public StringAssert hasSize(int expected) {
+  public @Nonnull
+  StringAssert hasSize(int expected) {
     strings.assertHasSize(description, actual, expected);
     return this;
   }
@@ -79,7 +89,8 @@ public class StringAssert extends AbstractAssert<StringAssert, String>
    * @return {@code this} assertion object.
    * @throws AssertionError if the <em>actual</em> {@code String} is not equal to the given one.
    */
-  public StringAssert isEqualToIgnoringCase(String expected) {
+  public @Nonnull
+  StringAssert isEqualToIgnoringCase(@Nullable String expected) {
     strings.assertEqualsIgnoringCase(description, actual, expected);
     return this;
   }
@@ -93,7 +104,8 @@ public class StringAssert extends AbstractAssert<StringAssert, String>
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} does not contain the given one.
    */
-  public StringAssert contains(String sequence) {
+  public @Nonnull
+  StringAssert contains(@Nonnull String sequence) {
     strings.assertContains(description, actual, sequence);
     return this;
   }
@@ -107,7 +119,8 @@ public class StringAssert extends AbstractAssert<StringAssert, String>
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} contains the given one.
    */
-  public StringAssert doesNotContain(String sequence) {
+  public @Nonnull
+  StringAssert doesNotContain(@Nonnull String sequence) {
     strings.assertDoesNotContain(description, actual, sequence);
     return this;
   }
@@ -121,7 +134,8 @@ public class StringAssert extends AbstractAssert<StringAssert, String>
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} does not start with the given prefix.
    */
-  public StringAssert startsWith(String prefix) {
+  public @Nonnull
+  StringAssert startsWith(@Nonnull String prefix) {
     strings.assertStartsWith(description, actual, prefix);
     return this;
   }
@@ -135,7 +149,8 @@ public class StringAssert extends AbstractAssert<StringAssert, String>
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} does not end with the given suffix.
    */
-  public StringAssert endsWith(String suffix) {
+  public @Nonnull
+  StringAssert endsWith(@Nonnull String suffix) {
     strings.assertEndsWith(description, actual, suffix);
     return this;
   }
@@ -150,7 +165,8 @@ public class StringAssert extends AbstractAssert<StringAssert, String>
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} does not match the given regular expression.
    */
-  public StringAssert matches(String regex) {
+  public @Nonnull
+  StringAssert matches(@Nonnull String regex) {
     strings.assertMatches(description, actual, regex);
     return this;
   }
@@ -164,7 +180,8 @@ public class StringAssert extends AbstractAssert<StringAssert, String>
    * @throws PatternSyntaxException if the regular expression's syntax is invalid.
    * @throws AssertionError if the <em>actual</em> {@code String} matches the given regular expression.
    */
-  public StringAssert doesNotMatch(String regex) {
+  public @Nonnull
+  StringAssert doesNotMatch(@Nonnull String regex) {
     strings.assertDoesNotMatch(description, actual, regex);
     return this;
   }
@@ -173,13 +190,14 @@ public class StringAssert extends AbstractAssert<StringAssert, String>
    * Verifies that the <em>actual</em> {@code String} matches the given regular expression.
    *
    * @param pattern the compiled representation of the regular expression to which the <em>actual</em> {@code String} is
-   *        to be matched.
+   *          to be matched.
    * @return {@code this} assertion object.
    * @throws NullPointerException if the given pattern is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} does not match the given regular expression.
    */
-  public StringAssert matches(Pattern pattern) {
+  public @Nonnull
+  StringAssert matches(@Nonnull Pattern pattern) {
     strings.assertMatches(description, actual, pattern);
     return this;
   }
@@ -188,12 +206,13 @@ public class StringAssert extends AbstractAssert<StringAssert, String>
    * Verifies that the <em>actual</em> {@code String} does not match the given regular expression.
    *
    * @param pattern the compiled representation of the regular expression to which the <em>actual</em> {@code String} is
-   *        to be matched.
+   *          to be matched.
    * @return {@code this} assertion object.
    * @throws NullPointerException if the given pattern is {@code null}.
    * @throws AssertionError if the <em>actual</em> {@code String} does not match the given regular expression.
    */
-  public StringAssert doesNotMatch(Pattern pattern) {
+  public @Nonnull
+  StringAssert doesNotMatch(@Nonnull Pattern pattern) {
     strings.assertDoesNotMatch(description, actual, pattern);
     return this;
   }

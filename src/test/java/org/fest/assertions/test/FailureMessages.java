@@ -19,11 +19,11 @@ package org.fest.assertions.test;
  */
 public final class FailureMessages {
   public static String actualIsEmpty() {
-    return "expecting actual not to be empty";
+    return "expecting: actual not to be empty";
   }
 
   public static String actualIsNull() {
-    return "expecting actual value to be non-null";
+    return "expecting: actual value not to be null";
   }
 
   private FailureMessages() {}

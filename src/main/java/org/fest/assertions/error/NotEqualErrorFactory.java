@@ -61,7 +61,7 @@ public class NotEqualErrorFactory implements AssertionErrorFactory {
   }
 
   @VisibleForTesting
-  NotEqualErrorFactory(Object actual, Object expected) {
+  public NotEqualErrorFactory(Object actual, Object expected) {
     this.actual = actual;
     this.expected = expected;
   }

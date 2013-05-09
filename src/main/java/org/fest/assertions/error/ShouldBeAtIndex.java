@@ -8,7 +8,7 @@ import org.fest.assertions.data.Index;
 /**
  * Creates an error message indicating that an assertion that verifies a group of elements contains a value at a given index that
  * satisfies a <code>{@link Matcher}</code> failed.
- * 
+ *
  * @author Bo Gotthardt
  */
 public class ShouldBeAtIndex extends BasicErrorMessageFactory {
@@ -26,6 +26,6 @@ public class ShouldBeAtIndex extends BasicErrorMessageFactory {
   }
 
   private <T> ShouldBeAtIndex(List<T> actual, Matcher<? super T> condition, Index index, T found) {
-    super("expecting:<%s> at index <%s> to be:<%s> in:\n <%s>\n", found, index.value, condition, actual);
+    super("expecting:\n<%s> at index <%s> to be:<%s> in:\n <%s>\n", found, index.value, condition, actual);
   }
 }

@@ -10,13 +10,17 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
+import static org.fest.assertions.error.ShouldBeLessThan.shouldBeLessThan;
 import static org.fest.assertions.test.FailureMessages.actualIsNull;
+import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import org.fest.assertions.description.Description;
 import org.fest.test.ExpectedException;
@@ -28,26 +32,54 @@ import org.junit.Test;
  * Tests for {@link Comparables#assertLessThan(Description, Comparable, Comparable)}.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class Comparables_assertLessThan_Test {
   @Rule
   public ExpectedException thrown = none();
 
   private Comparables comparables;
+  private Failures failures;
+  private Description description;
 
   @Before
   public void setUp() {
     comparables = new Comparables();
+    failures = spy(new Failures());
+    comparables.failures = failures;
+    description = new TestDescription("testing");
   }
 
   @Test
   public void should_fail_if_actual_is_null() {
-    thrown.expectAssertionError(actualIsNull());
+    thrown.expect(AssertionError.class, actualIsNull());
     comparables.assertLessThan(mock(Description.class), null, 8);
   }
 
   @Test
   public void should_pass_if_actual_is_less_than_other() {
     comparables.assertLessThan(mock(Description.class), 6, 8);
+  }
+
+  @Test
+  public void should_fail_if_actual_is_equal_to_actual() {
+    try {
+      comparables.assertLessThan(description, 8, 8);
+    } catch (AssertionError e) {
+      verify(failures).failure(description, shouldBeLessThan(8, 8));
+      return;
+    }
+    expectedAssertionErrorNotThrown();
+  }
+
+  @Test
+  public void should_fail_if_actual_is_greater_than_actual() {
+    try {
+      comparables.assertLessThan(description, 8, 6);
+    } catch (AssertionError e) {
+      verify(failures).failure(description, shouldBeLessThan(8, 6));
+      return;
+    }
+    expectedAssertionErrorNotThrown();
   }
 }

@@ -1,281 +1,224 @@
 /*
  * Created on Jul 26, 2010
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- * 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- * 
- * Copyright @2010-2011 the original author or authors.
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ *
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
-import static org.fest.util.Lists.newArrayList;
+import javax.annotation.Nonnull;
 
-import java.util.Comparator;
-
-import org.fest.assertions.core.ArraySortedAssert;
-import org.fest.assertions.core.Matcher;
+import org.fest.assertions.core.EnumerableAssert;
 import org.fest.assertions.core.IndexedObjectEnumerableAssert;
 import org.fest.assertions.data.Index;
-import org.fest.assertions.internal.*;
+import org.fest.assertions.description.Description;
+import org.fest.assertions.internal.ObjectArrays;
 import org.fest.util.VisibleForTesting;
 
 /**
- * Assertion methods for arrays of objects.
- * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(T[])}</code>.
- * </p>
- * @param <T> the type of elements of the "actual" value.
- * 
+ * Assertion methods for arrays of objects. To create an instance of this class, invoke
+ * <code>{@link Assertions#assertThat(Object[])}</code>.
+ *
  * @author Yvonne Wang
  * @author Alex Ruiz
- * @author Joel Costigliola
- * @author Nicolas François
- * @author Mikhail Mazursky
  */
-public class ObjectArrayAssert<T> extends AbstractAssert<ObjectArrayAssert<T>, T[]> implements
-    IndexedObjectEnumerableAssert<ObjectArrayAssert<T>, T>, ArraySortedAssert<ObjectArrayAssert<T>, T> {
+public class ObjectArrayAssert extends AbstractAssert<ObjectArrayAssert, Object[]> implements
+    EnumerableAssert<ObjectArrayAssert>, IndexedObjectEnumerableAssert<ObjectArrayAssert, Object> {
 
   @VisibleForTesting
   ObjectArrays arrays = ObjectArrays.instance();
 
-  protected ObjectArrayAssert(T[] actual) {
+  protected ObjectArrayAssert(Object[] actual) {
     super(actual, ObjectArrayAssert.class);
   }
 
-  /** {@inheritDoc} */
-  public void isNullOrEmpty() {
-    arrays.assertNullOrEmpty(info, actual);
+  protected ObjectArrayAssert(Object[] actual, Description description) {
+    super(actual, ObjectArrayAssert.class, description);
   }
 
   /** {@inheritDoc} */
-  public void isEmpty() {
-    arrays.assertEmpty(info, actual);
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> isNotEmpty() {
-    arrays.assertNotEmpty(info, actual);
+  @Override
+  public ObjectArrayAssert isNullOrEmpty() {
+    arrays.assertNullOrEmpty(description, actual);
     return this;
   }
 
   /** {@inheritDoc} */
-  public ObjectArrayAssert<T> hasSize(int expected) {
-    arrays.assertHasSize(info, actual, expected);
+  @Override
+  public ObjectArrayAssert isEmpty() {
+    arrays.assertEmpty(description, actual);
     return this;
   }
 
   /** {@inheritDoc} */
-  public ObjectArrayAssert<T> hasSameSizeAs(Object[] other) {
-    arrays.assertHasSameSizeAs(info, actual, other);
+  @Override
+  @Nonnull
+  public ObjectArrayAssert isNotEmpty() {
+    arrays.assertNotEmpty(description, actual);
     return this;
   }
 
   /** {@inheritDoc} */
-  public ObjectArrayAssert<T> hasSameSizeAs(Iterable<?> other) {
-    arrays.assertHasSameSizeAs(info, actual, other);
+  @Override
+  @Nonnull
+  public ObjectArrayAssert hasSize(int expectedSize) {
+    arrays.assertHasSize(description, actual, expectedSize);
     return this;
   }
 
   /** {@inheritDoc} */
-  public ObjectArrayAssert<T> contains(T... values) {
-    arrays.assertContains(info, actual, values);
+  @Override
+  public ObjectArrayAssert contains(Object value, Index index) {
+    arrays.assertContains(description, actual, value, index);
     return this;
   }
 
   /** {@inheritDoc} */
-  public ObjectArrayAssert<T> containsOnly(T... values) {
-    arrays.assertContainsOnly(info, actual, values);
+  @Override
+  public ObjectArrayAssert doesNotContain(Object value, Index index) {
+    arrays.assertDoesNotContain(description, actual, value, index);
     return this;
   }
 
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> containsExactly(T... values) {
-    objects.assertEqual(info, actual, newArrayList(values));
-    return this;
-  };
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> containsSequence(T... sequence) {
-    arrays.assertContainsSequence(info, actual, sequence);
-    return this;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> contains(T value, Index index) {
-    arrays.assertContains(info, actual, value, index);
+  /**
+   * Verifies that the actual array contains the given values, in any order.
+   *
+   * @param values the given values.
+   * @return {@code this} assertion object.
+   * @throws NullPointerException if the given argument is {@code null}.
+   * @throws IllegalArgumentException if the given argument is an empty array.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array does not contain the given values.
+   */
+  public ObjectArrayAssert contains(Object... values) {
+    arrays.assertContains(description, actual, values);
     return this;
   }
 
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> doesNotContain(T value, Index index) {
-    arrays.assertDoesNotContain(info, actual, value, index);
+  /**
+   * Verifies that the actual array contains only the given values and nothing else, in any order.
+   *
+   * @param values the given values.
+   * @return {@code this} assertion object.
+   * @throws NullPointerException if the given argument is {@code null}.
+   * @throws IllegalArgumentException if the given argument is an empty array.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array does not contain the given values, i.e. the actual array contains some
+   *           or none of the given values, or the actual array contains more values than the given ones.
+   */
+  public ObjectArrayAssert containsOnly(Object... values) {
+    arrays.assertContainsOnly(description, actual, values);
     return this;
   }
 
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> doesNotContain(T... values) {
-    arrays.assertDoesNotContain(info, actual, values);
+  /**
+   * Verifies that the actual array contains the given sequence, without any other values between them.
+   *
+   * @param sequence the sequence of values to look for.
+   * @return this assertion object.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the given array is {@code null}.
+   * @throws AssertionError if the actual array does not contain the given sequence.
+   */
+  public ObjectArrayAssert containsSequence(Object... sequence) {
+    arrays.assertContainsSequence(description, actual, sequence);
     return this;
   }
 
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> doesNotHaveDuplicates() {
-    arrays.assertDoesNotHaveDuplicates(info, actual);
+  /**
+   * Verifies that the actual array does not contain the given values.
+   *
+   * @param values the given values.
+   * @return {@code this} assertion object.
+   * @throws NullPointerException if the given argument is {@code null}.
+   * @throws IllegalArgumentException if the given argument is an empty array.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array contains any of the given values.
+   */
+  public ObjectArrayAssert doesNotContain(Object... values) {
+    arrays.assertDoesNotContain(description, actual, values);
     return this;
   }
 
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> startsWith(T... sequence) {
-    arrays.assertStartsWith(info, actual, sequence);
+  /**
+   * Verifies that the actual array does not contain duplicates.
+   *
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array contains duplicates.
+   */
+  public ObjectArrayAssert doesNotHaveDuplicates() {
+    arrays.assertDoesNotHaveDuplicates(description, actual);
     return this;
   }
 
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> endsWith(T... sequence) {
-    arrays.assertEndsWith(info, actual, sequence);
+  /**
+   * Verifies that the actual array starts with the given sequence of values, without any other values between them.
+   * Similar to <code>{@link #containsSequence(byte...)}</code>, but it also verifies that the first element in the
+   * sequence is also first element of the actual array.
+   *
+   * @param sequence the sequence of values to look for.
+   * @return this assertion object.
+   * @throws NullPointerException if the given argument is {@code null}.
+   * @throws IllegalArgumentException if the given argument is an empty array.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array does not start with the given sequence.
+   */
+  public ObjectArrayAssert startsWith(Object... sequence) {
+    arrays.assertStartsWith(description, actual, sequence);
     return this;
   }
 
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> containsNull() {
-    arrays.assertContainsNull(info, actual);
+  /**
+   * Verifies that the actual array ends with the given sequence of values, without any other values between them.
+   * Similar to <code>{@link #containsSequence(byte...)}</code>, but it also verifies that the last element in the
+   * sequence is also last element of the actual array.
+   *
+   * @param sequence the sequence of values to look for.
+   * @return this assertion object.
+   * @throws NullPointerException if the given argument is {@code null}.
+   * @throws IllegalArgumentException if the given argument is an empty array.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array does not end with the given sequence.
+   */
+  public ObjectArrayAssert endsWith(Object... sequence) {
+    arrays.assertEndsWith(description, actual, sequence);
     return this;
   }
 
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> doesNotContainNull() {
-    arrays.assertDoesNotContainNull(info, actual);
+  /**
+   * Verifies that the actual array contains the {@code null} value(s), in any order.
+   *
+   * @return {@code this} assertion object.
+   * @throws NullPointerException if the given argument is {@code null}.
+   * @throws IllegalArgumentException if the given argument is an empty array.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array does not contain the given values.
+   */
+  public ObjectArrayAssert containsNull() {
+    arrays.assertContainsNull(description, actual);
     return this;
   }
 
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> are(Matcher<? super T> condition) {
-    arrays.assertAre(info, actual, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> areNot(Matcher<? super T> condition) {
-    arrays.assertAreNot(info, actual, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> have(Matcher<? super T> condition) {
-    arrays.assertHave(info, actual, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> doNotHave(Matcher<? super T> condition) {
-    arrays.assertDoNotHave(info, actual, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> areAtLeast(int times, Matcher<? super T> condition) {
-    arrays.assertAreAtLeast(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> areNotAtLeast(int times, Matcher<? super T> condition) {
-    arrays.assertAreNotAtLeast(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> areAtMost(int times, Matcher<? super T> condition) {
-    arrays.assertAreAtMost(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> areNotAtMost(int times, Matcher<? super T> condition) {
-    arrays.assertAreNotAtMost(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> areExactly(int times, Matcher<? super T> condition) {
-    arrays.assertAreExactly(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> areNotExactly(int times, Matcher<? super T> condition) {
-    arrays.assertAreNotExactly(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> haveAtLeast(int times, Matcher<? super T> condition) {
-    arrays.assertHaveAtLeast(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> doNotHaveAtLeast(int times, Matcher<? super T> condition) {
-    arrays.assertDoNotHaveAtLeast(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> haveAtMost(int times, Matcher<? super T> condition) {
-    arrays.assertHaveAtMost(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> doNotHaveAtMost(int times, Matcher<? super T> condition) {
-    arrays.assertDoNotHaveAtMost(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> haveExactly(int times, Matcher<? super T> condition) {
-    arrays.assertHaveExactly(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> doNotHaveExactly(int times, Matcher<? super T> condition) {
-    arrays.assertDoNotHaveExactly(info, actual, times, condition);
-    return myself;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> isSorted() {
-    arrays.assertIsSorted(info, actual);
+  /**
+   * Verifies that the actual array does not contain the {@code null} value(s), in any order.
+   *
+   * @return {@code this} assertion object.
+   * @throws NullPointerException if the given argument is {@code null}.
+   * @throws IllegalArgumentException if the given argument is an empty array.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array does not contain the given values.
+   */
+  public ObjectArrayAssert doesNotContainNull() {
+    arrays.assertDoesNotContainNull(description, actual);
     return this;
   }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> isSortedAccordingTo(Comparator<? super T> comparator) {
-    arrays.assertIsSortedAccordingToComparator(info, actual, comparator);
-    return this;
-  }
-
-  /** {@inheritDoc} */
-  public ObjectArrayAssert<T> containsAll(Iterable<? extends T> iterable) {
-    arrays.assertContainsAll(info, actual, iterable);
-    return this;
-  }
-
-  public ObjectArrayAssert<T> usingElementComparator(Comparator<? super T> customComparator) {
-    this.arrays = new ObjectArrays(new ComparatorComparison(customComparator));
-    return myself;
-  }
-
-  public ObjectArrayAssert<T> usingDefaultElementComparator() {
-    this.arrays = ObjectArrays.instance();
-    return myself;
-  }
-
 }

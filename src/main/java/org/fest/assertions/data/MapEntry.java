@@ -14,7 +14,9 @@
  */
 package org.fest.assertions.data;
 
-import static org.fest.util.Objects.*;
+import static org.fest.util.Objects.HASH_CODE_PRIME;
+import static org.fest.util.Objects.areEqual;
+import static org.fest.util.Objects.hashCodeFor;
 import static org.fest.util.Strings.quote;
 
 import java.util.Map;

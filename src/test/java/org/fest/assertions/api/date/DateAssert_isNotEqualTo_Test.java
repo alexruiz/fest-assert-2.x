@@ -39,7 +39,7 @@ public class DateAssert_isNotEqualTo_Test extends AbstractDateAssertWithDateArg_
 
   @Override
   protected void verifyAssertionInvocation(Date date) {
-    verify(objects).assertNotEqual(getInfo(assertions), getActual(assertions), date);
+    verify(objects).assertNotEqualTo(getInfo(assertions), getActual(assertions), date);
   }
 
 }

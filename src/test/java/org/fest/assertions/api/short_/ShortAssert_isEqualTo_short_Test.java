@@ -33,6 +33,6 @@ public class ShortAssert_isEqualTo_short_Test extends ShortAssertBaseTest {
 
   @Override
   protected void verify_internal_effects() {
-    verify(shorts).assertEqual(getInfo(assertions), getActual(assertions), (short) 8);
+    verify(shorts).assertEqualTo(getInfo(assertions), getActual(assertions), (short) 8);
   }
 }

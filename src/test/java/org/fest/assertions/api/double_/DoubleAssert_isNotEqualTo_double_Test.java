@@ -33,6 +33,6 @@ public class DoubleAssert_isNotEqualTo_double_Test extends DoubleAssertBaseTest 
 
   @Override
   protected void verify_internal_effects() {
-    verify(doubles).assertNotEqual(getInfo(assertions), getActual(assertions), 8d);
+    verify(doubles).assertNotEqualTo(getInfo(assertions), getActual(assertions), 8d);
   }
 }

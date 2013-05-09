@@ -35,6 +35,6 @@ public class BigDecimalAssert_isEqualToWithStringParameter_Test extends BigDecim
 
   @Override
   protected void verify_internal_effects() {
-    verify(objects).assertEqual(getInfo(assertions), getActual(assertions), new BigDecimal(ONE_AS_STRING));
+    verify(objects).assertEqualTo(getInfo(assertions), getActual(assertions), new BigDecimal(ONE_AS_STRING));
   }
 }

@@ -16,12 +16,12 @@ package org.fest.assertions.internal;
 
 import static junit.framework.Assert.assertSame;
 import static junit.framework.Assert.fail;
+
 import static org.fest.assertions.test.FailureMessages.actualIsNull;
-import static org.fest.assertions.test.FakeFile.newWritableFile;
 import static org.fest.assertions.test.FakeFile.newNonExistingResource;
+import static org.fest.assertions.test.FakeFile.newWritableFile;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
-import static org.fest.util.SystemProperties.LINE_SEPARATOR;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.same;
@@ -68,22 +68,21 @@ public class Files_assertEqualContent_Test {
   }
 
   @Test
-  public void should_throw_error_if_expected_is_null() {
+  public void should_fail_if_expected_is_null() {
     File actual = newWritableFile("/usr/local/actual.txt");
     thrown.expect(NullPointerException.class);
     files.assertEqualContent(mock(Description.class), actual, null, charset);
   }
 
   @Test
-  public void should_throw_error_if_expected_is_not_file() {
-    File actual = newWritableFile("/usr/local/actual.txt");
-    File expected = newNonExistingResource("/usr/local/expected.txt");
-    thrown.expect(IllegalArgumentException.class);
-    files.assertEqualContent(mock(Description.class), actual, expected, charset);
+  public void should_fail_if_actual_is_null() {
+    File expected = newWritableFile("/usr/local/expected.txt");
+    thrown.expect(AssertionError.class, actualIsNull());
+    files.assertEqualContent(mock(Description.class), null, expected, charset);
   }
 
   @Test
-  public void should_throw_error_if_charset_is_null() {
+  public void should_fail_if_charset_is_null() {
     File actual = newWritableFile("/usr/local/actual.txt");
     File expected = newWritableFile("/usr/local/expected.txt");
     thrown.expect(NullPointerException.class);
@@ -91,17 +90,18 @@ public class Files_assertEqualContent_Test {
   }
 
   @Test
-  public void should_fail_if_actual_is_null() {
-    File expected = newWritableFile("/usr/local/expected.txt");
-    thrown.expectAssertionError(actualIsNull());
-    files.assertEqualContent(mock(Description.class), null, expected, charset);
+  public void should_fail_if_expected_is_not_file() {
+    File actual = newWritableFile("/usr/local/actual.txt");
+    File expected = newNonExistingResource("/usr/local/expected.txt");
+    thrown.expect(IllegalArgumentException.class);
+    files.assertEqualContent(mock(Description.class), actual, expected, charset);
   }
 
   @Test
   public void should_fail_if_actual_is_not_file() {
     File actual = newNonExistingResource("/usr/local/actual.txt");
     File expected = newWritableFile("/usr/local/expected.txt");
-    thrown.expectAssertionError("[Testing] expecting path:</usr/local/actual.txt> to represent an existing file");
+    thrown.expectMessage("[Testing] expecting path:</usr/local/actual.txt> to represent an existing file");
     files.assertEqualContent(new TestDescription("Testing"), actual, expected, charset);
   }
 
@@ -139,13 +139,14 @@ public class Files_assertEqualContent_Test {
     try {
       files.assertEqualContent(description, actual, expected, charset);
     } catch (AssertionError e) {
+      String lineSeparator = System.getProperty("line.separator");
       String message =
           "[Testing] files expected:</usr/local/expected.txt> and actual:</usr/local/actual.txt> do not have equal content:"
-          + LINE_SEPARATOR
+          + lineSeparator
           + "  line:1, expected:<line1> but was:<%s>"
-          + LINE_SEPARATOR
+          + lineSeparator
           + "  line:2, expected:<line2> but was:<EOF>"
-          + LINE_SEPARATOR
+          + lineSeparator
           + "using charset:<UTF-8>";
       assertEquals(message, e.getMessage());
       verify(failures).failure(same(description), any(ErrorMessageFactory.class));

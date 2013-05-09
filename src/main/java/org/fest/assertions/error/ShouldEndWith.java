@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.error;
 
@@ -19,6 +19,7 @@ package org.fest.assertions.error;
  * or sequence of values, failed. A group of elements can be a collection, an array or a {@code String}.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class ShouldEndWith extends BasicErrorMessageFactory {
   /**
@@ -33,6 +34,6 @@ public class ShouldEndWith extends BasicErrorMessageFactory {
   }
 
   private ShouldEndWith(Object actual, Object expected) {
-    super("expecting:<%s> to end with:<%s>", actual, expected);
+    super("expecting:\n<%s> to end with:<%s>", actual, expected);
   }
 }

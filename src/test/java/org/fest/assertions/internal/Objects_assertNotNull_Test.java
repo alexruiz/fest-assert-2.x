@@ -55,7 +55,7 @@ public class Objects_assertNotNull_Test {
     try {
       objects.assertNotNull(description, null);
     } catch (AssertionError e) {
-      assertEquals("[Testing] expecting actual value to be non-null", e.getMessage());
+      assertEquals("[Testing] expecting: actual value not to be null", e.getMessage());
       verify(failures).failure(same(description), any(ErrorMessageFactory.class));
       return;
     }

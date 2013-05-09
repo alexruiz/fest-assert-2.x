@@ -10,12 +10,11 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2011-2012 the original author or authors.
+ * Copyright @2011-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
 import static org.fest.util.Preconditions.checkNotNull;
-import static org.fest.util.SystemProperties.LINE_SEPARATOR;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +48,8 @@ public class Files {
   Failures failures = Failures.instance();
 
   @VisibleForTesting
-  Files() {}
+  Files() {
+  }
 
   /**
    * Asserts that the <em>actual</em> {@link File} represents an existing file or directory.
@@ -136,10 +136,11 @@ public class Files {
     checkNotNull(charset);
     assertIsFile(description, actual);
     try {
+      String lineSeparator = System.getProperty("line.separator");
       FileDiffs diffs = comparator.compareContents(actual, expected, charset);
       if (!diffs.isEmpty()) {
-        String format = "files expected:<%s> and actual:<%s> do not have equal content:" + LINE_SEPARATOR + "%s"
-            + LINE_SEPARATOR + "using charset:<%s>";
+        String format = "files expected:<%s> and actual:<%s> do not have equal content:" + lineSeparator + "%s"
+            + lineSeparator + "using charset:<%s>";
         throw failures.failure(description, new BasicErrorMessageFactory(format, expected, actual, diffs, charset));
       }
     } catch (IOException e) {

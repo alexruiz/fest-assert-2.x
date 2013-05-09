@@ -10,16 +10,15 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2011 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.internal;
 
 import static org.fest.assertions.error.NotEqualErrorFactory.shouldBeEqual;
 import static org.fest.assertions.error.ShouldNotBeEqual.shouldNotBeEqual;
+import static org.fest.assertions.error.ShouldNotBeNull.shouldNotBeNull;
 import static org.fest.util.Objects.areEqual;
 import static org.fest.util.Preconditions.checkNotNull;
-
-import java.util.Comparator;
 
 import org.fest.assertions.description.Description;
 import org.fest.assertions.error.BasicErrorMessageFactory;
@@ -30,7 +29,6 @@ import org.fest.util.VisibleForTesting;
  *
  * @author Yvonne Wang
  * @author Alex Ruiz
- * @author Nicolas François
  */
 public class Objects {
   private static final Objects INSTANCE = new Objects();
@@ -43,10 +41,8 @@ public class Objects {
   Failures failures = Failures.instance();
 
   @VisibleForTesting
-  PropertySupport propertySupport = PropertySupport.instance();
-
-  @VisibleForTesting
-  Objects() {}
+  Objects() {
+  }
 
   /**
    * Asserts that the <em>actual</em> object is {@code null}.
@@ -68,7 +64,7 @@ public class Objects {
    */
   public void assertNotNull(Description description, Object actual) {
     if (actual == null) {
-      throw failures.failure(description, new BasicErrorMessageFactory("expecting actual value to be non-null"));
+      throw failures.failure(description, shouldNotBeNull());
     }
   }
 
@@ -79,36 +75,12 @@ public class Objects {
    * @param actual the <em>actual</em> object.
    * @param expected the <em>expected</em> object.
    * @throws AssertionError if {@code actual} is not equal to {@code expected}. This method will throw a
-   *         {@code org.junit.ComparisonFailure} instead if JUnit is in the classpath and the given objects are not
-   *         equal.
+   *           {@code org.junit.ComparisonFailure} instead if JUnit is in the classpath and the given objects are not
+   *           equal.
    */
   public void assertEqual(Description description, Object actual, Object expected) {
     if (!areEqual(actual, expected)) {
       throw shouldBeEqual(actual, expected).newAssertionError(description);
-    }
-  }
-
-  /**
-   * Asserts that the given {@code Comparator} indicates that the given objects are equal.
-   * <p>
-   * <strong>Warning:</strong> it is recommended to use {@link #assertEqual(Description, Object, Object)} instead, given
-   * that a {@link Comparator} should be consistent to {@link Object#equals(Object)}. Use this method with caution.
-   * </p>
-   *
-   * @param description the description of the <em>actual</em> object.
-   * @param actual the <em>actual</em> object.
-   * @param expected the <em>expected</em> object.
-   * @param comparator the given {@code Comparator}.
-   * @throws NullPointerException if the given {@code Comparator} is {@code null}.
-   * @throws AssertionError if the given {@code Comparator} indicates that {@code actual} is not equal to
-   *         {@code expected}.
-   */
-  public void assertEqual(Description description, Object actual, Object expected, Comparator<Object> comparator) {
-    checkNotNull(comparator);
-    if (comparator.compare(actual, expected) != 0) {
-      String format = "expected:<%s> but was:<%s>, using comparator:<%s>";
-      throw failures.failure(
-          description, new BasicErrorMessageFactory(format, expected, actual, comparator.getClass()));
     }
   }
 

@@ -35,6 +35,6 @@ public class ShouldStartWith extends BasicErrorMessageFactory {
   }
 
   private ShouldStartWith(Object actual, Object expected) {
-    super("expecting:<%s> to start with:<%s>", actual, expected);
+    super("expecting:\n<%s> to start with:<%s>", actual, expected);
   }
 }
