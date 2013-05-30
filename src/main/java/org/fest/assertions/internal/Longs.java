@@ -88,7 +88,7 @@ public class Longs {
    * @param actual the <em>actual</em> value.
    * @param expected the <em>expected</em> value.
    */
-  public void assertGreatThan(Description description, Long actual, long expected) {
+  public void assertGreaterThan(Description description, Long actual, long expected) {
     assertNotNull(description, actual);
     if (!isGreaterThan(actual, expected)) {
       throw failures.failure(description, shouldBeGreaterThan(actual, expected));

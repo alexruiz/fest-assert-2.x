@@ -42,4 +42,34 @@ public class LongAssert extends AbstractComparableAssert<LongAssert, Long> {
   protected LongAssert(Long actual, Description description) {
     super(actual, LongAssert.class, description);
   }
+
+  public LongAssert isEqualTo(long expected){
+    longs.assertEqualTo(description, actual, expected);
+    return this;
+  }
+
+  public LongAssert isNotEqualTo(long expected){
+    longs.assertNotEqualTo(description, actual, expected);
+    return this;
+  }
+
+  public LongAssert isGreaterThan(long expected){
+    longs.assertGreaterThan(description, actual, expected);
+    return this;
+  }
+
+  public LongAssert isNotGreaterThan(long expected){
+    longs.assertNotGreaterThan(description, actual, expected);
+    return this;
+  }
+
+  public LongAssert isLessThan(long expected){
+    longs.assertLessThan(description, actual, expected);
+    return this;
+  }
+
+  public LongAssert isNotLessThan(long expected){
+    longs.assertNotLessThan(description, actual, expected);
+    return this;
+  }
 }

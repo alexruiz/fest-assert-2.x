@@ -52,7 +52,7 @@ public class Longs_assertGreaterThan_Test {
   @Test
   public void should_fail_is_actual_is_null() {
     thrown.expect(AssertionError.class, "[" + description + "] " + actualIsNull());
-    longs.assertGreatThan(description, null, 2l);
+    longs.assertGreaterThan(description, null, 2l);
   }
 
   @Test
@@ -60,7 +60,7 @@ public class Longs_assertGreaterThan_Test {
     long actual = 6l;
     long expected = 8l;
     try {
-      longs.assertGreatThan(description, actual, expected);
+      longs.assertGreaterThan(description, actual, expected);
     } catch (AssertionError e) {
       verify(failures).failure(description, shouldBeGreaterThan(actual, expected));
       return;
@@ -73,7 +73,7 @@ public class Longs_assertGreaterThan_Test {
     long actual = 8;
     long expected = 8;
     try {
-      longs.assertGreatThan(description, actual, expected);
+      longs.assertGreaterThan(description, actual, expected);
     } catch (AssertionError e) {
       verify(failures).failure(description, shouldBeGreaterThan(actual, expected));
       return;
@@ -85,6 +85,6 @@ public class Longs_assertGreaterThan_Test {
   public void should_pass_if_actual_is_greater_than_expected() {
     long actual = 8;
     long expected = 6;
-    longs.assertGreatThan(description, actual, expected);
+    longs.assertGreaterThan(description, actual, expected);
   }
 }
