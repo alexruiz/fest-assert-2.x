@@ -32,7 +32,7 @@ import org.junit.runners.Suite.SuiteClasses;
   Sets_assertContainsOnly_Test.class,
   Sets_assertHasSize_Test.class,
   Sets_assertNotEmpty_Test.class,
-  Sets_assertDoesNotContain_Test.class,
+  Sets_assertDoesNotContain_Test.class
 })
 public class Sets_TestSuite {
 

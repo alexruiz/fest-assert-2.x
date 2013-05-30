@@ -14,18 +14,18 @@
  */
 package org.fest.assertions.internal;
 
+import org.fest.assertions.description.Description;
+import org.fest.test.ExpectedException;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
 import static org.fest.assertions.error.ShouldBeEqual.shouldBeEqual;
 import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-
-import org.fest.assertions.description.Description;
-import org.fest.test.ExpectedException;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
 
 /**
  * @author Alex Ruiz
@@ -52,18 +52,18 @@ public class Integers_assertEqualTo_Test {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expect(AssertionError.class, "[" + description + "] " + actualIsNull());
-    integers.assertEqual(description, null, 6);
+    integers.assertEqualTo(description, null, 6);
   }
 
   @Test
   public void should_pass_if_integers_are_equal() {
-    integers.assertEqual(description, 8, 8);
+    integers.assertEqualTo(description, 8, 8);
   }
 
   @Test
   public void should_fail_if_integers_are_not_equal() {
     try {
-      integers.assertEqual(description, 8, 6);
+      integers.assertEqualTo(description, 8, 6);
     } catch (AssertionError e) {
       verify(failures).failure(description, shouldBeEqual(8, 6));
       return;

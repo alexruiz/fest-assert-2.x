@@ -10,14 +10,14 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2012 the original author or authors.
+ * Copyright @2012-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for {@link AbstractAssert#equals(Object)} and {@link AbstractAssert#hashCode()}.

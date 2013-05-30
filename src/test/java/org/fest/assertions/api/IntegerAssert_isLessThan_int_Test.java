@@ -10,29 +10,65 @@
  * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  * 
- * Copyright @2010-2011 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
-import static org.mockito.Mockito.verify;
+import org.fest.test.ExpectedException;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 
-import org.fest.assertions.api.IntegerAssert;
-import org.fest.assertions.api.IntegerAssertBaseTest;
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
 
 /**
  * Tests for <code>{@link IntegerAssert#isLessThan(int)}</code>.
- * 
+ *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
-public class IntegerAssert_isLessThan_int_Test extends IntegerAssertBaseTest {
+public class IntegerAssert_isLessThan_int_Test {
+  @Rule
+  public ExpectedException thrown = none();
+  private IntegerAssert assertions;
+  private Integer actual = 6;
+  private int expected = 8;
 
-  @Override
-  protected IntegerAssert invoke_api_method() {
-    return assertions.isLessThan(8);
+  @Before
+  public void setUp() {
+    assertions = new IntegerAssert(actual);
   }
 
-  @Override
-  protected void verify_internal_effects() {
-    verify(integers).assertLessThan(getInfo(assertions), getActual(assertions), 8);
+  @Test
+  public void should_pass_if_actual_is_less_than_expected() {
+    assertions.isLessThan(expected);
+  }
+
+  @Test
+  public void should_return_this() {
+    IntegerAssert returned = assertions.isLessThan(expected);
+    assertSame(assertions, returned);
+  }
+
+  @Test
+  public void should_throw_error_if_actual_is_null() {
+    thrown.expect(AssertionError.class);
+    actual = null;
+    assertions.isLessThan(expected);
+  }
+
+  @Test
+  public void should_fail_if_actual_is_less_than_expected() {
+    thrown.expect(AssertionError.class);
+    expected = 18;
+    assertions.isLessThan(expected);
+  }
+
+  @Test
+  public void should_fail_if_actual_is_equal_to_expected() {
+    thrown.expect(AssertionError.class);
+    expected = 8;
+    assertions.isLessThan(expected);
   }
 }

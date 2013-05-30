@@ -104,7 +104,7 @@ org.junit.ComparisonFailure: expected:<'[Ronaldo]'> but was:<'[Messi]'>
   at org.fest.assertions.error.ShouldBeEqual.comparisonFailure(ShouldBeEqual.java:103)
   at org.fest.assertions.error.ShouldBeEqual.newAssertionError(ShouldBeEqual.java:81)
   at org.fest.assertions.internal.Failures.failure(Failures.java:76)
-  at org.fest.assertions.internal.Objects.assertEqual(Objects.java:116)
+  at org.fest.assertions.internal.Objects.assertEqualTo(Objects.java:116)
   at org.fest.assertions.api.AbstractAssert.isEqualTo(AbstractAssert.java:74)
   at examples.StackTraceFilterExample.main(StackTraceFilterExample.java:13)
 

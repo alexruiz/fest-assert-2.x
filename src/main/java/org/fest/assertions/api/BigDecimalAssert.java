@@ -14,11 +14,11 @@
  */
 package org.fest.assertions.api;
 
-import java.math.BigDecimal;
-
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.BigDecimals;
 import org.fest.util.VisibleForTesting;
+
+import java.math.BigDecimal;
 
 /**
  * Assertion methods for <code>{@link BigDecimal}</code>s.
@@ -38,11 +38,53 @@ public class BigDecimalAssert extends AbstractUnevenComparableAssert<BigDecimalA
   @VisibleForTesting
   BigDecimals bigDecimals = BigDecimals.instance();
 
+  protected BigDecimalAssert(String actual) {
+    super(new BigDecimal(actual), BigDecimalAssert.class);
+  }
+
   protected BigDecimalAssert(BigDecimal actual) {
     super(actual, BigDecimalAssert.class);
   }
 
   protected BigDecimalAssert(BigDecimal actual, Description description) {
     super(actual, BigDecimalAssert.class, description);
+  }
+
+  public BigDecimalAssert isEqualTo(String expected) {
+    bigDecimals.assertEqual(description, actual, new BigDecimal(expected));
+    return this;
+  }
+
+  public BigDecimalAssert isNotEqualTo(String expected) {
+    bigDecimals.assertNotEqual(description, actual, new BigDecimal(expected));
+    return this;
+  }
+
+  public BigDecimalAssert isGreaterThan(String expected) {
+    bigDecimals.assertGreaterThan(description, actual, new BigDecimal(expected));
+    return this;
+  }
+
+  public BigDecimalAssert isNotGreaterThan(String expected) {
+    bigDecimals.assertNotGreaterThan(description, actual, new BigDecimal(expected));
+    return this;
+  }
+
+  public BigDecimalAssert isLessThan(String expected) {
+    bigDecimals.assertLessThan(description, actual, new BigDecimal(expected));
+    return this;
+  }
+
+  public BigDecimalAssert isNotLessThan(String expected) {
+    bigDecimals.assertNotLessThan(description, actual, new BigDecimal(expected));
+    return this;
+  }
+
+  public BigDecimalAssert isEqualByComparingTo(String expected) {
+    return super.isEqualByComparingTo(new BigDecimal(expected));
+  }
+
+  public BigDecimalAssert isNotEqualByComparingTo(String expected) {
+    return super.isNotEqualByComparingTo(new BigDecimal(expected));
   }
 }

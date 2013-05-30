@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2012 Google Inc. and others.
+ * Copyright @2012-2013 Google Inc. and others.
  */
 package org.fest.assertions.api;
 
@@ -21,6 +21,7 @@ import org.junit.runners.Suite;
  * All tests for {@link StringAssert}.
  *
  * @author alruiz@google.com (Alex Ruiz)
+ * @author Yvonne Wang
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -36,6 +37,6 @@ import org.junit.runners.Suite;
     StringAssert_isNullOrEmpty_Test.class,
     StringAssert_matches_Pattern_Test.class,
     StringAssert_matches_String_Test.class,
-    StringAssert_startsWith_Test.class,
+    StringAssert_startsWith_Test.class
 })
 public class StringAssert_TestSuite {}

@@ -42,4 +42,34 @@ public class ByteAssert extends AbstractComparableAssert<ByteAssert, Byte> {
   protected ByteAssert(Byte actual, Description description) {
     super(actual, ByteAssert.class, description);
   }
+
+  public ByteAssert isEqualTo(byte expected) {
+    bytes.assertEqualTo(description, actual, expected);
+    return this;
+  }
+
+  public ByteAssert isNotEqualTo(byte expected) {
+    bytes.assertNotEqualTo(description, actual, expected);
+    return this;
+  }
+
+  public ByteAssert isLessThan(byte expected) {
+    bytes.assertLessThan(description, actual, expected);
+    return this;
+  }
+
+  public ByteAssert isNotLessThan(byte expected) {
+    bytes.assertNotLessThan(description, actual, expected);
+    return this;
+  }
+
+  public ByteAssert isGreaterThan(byte expected) {
+    bytes.assertGreaterThan(description, actual, expected);
+    return this;
+  }
+
+  public ByteAssert isNotGreaterThan(byte expected) {
+    bytes.assertGreaterThan(description, actual, expected);
+    return this;
+  }
 }

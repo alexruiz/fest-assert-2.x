@@ -35,11 +35,41 @@ public class IntegerAssert extends AbstractComparableAssert<IntegerAssert, Integ
   @VisibleForTesting
   Integers integers = Integers.instance();
 
-  protected IntegerAssert(Integer actual) {
+  protected IntegerAssert(int actual) {
     super(actual, IntegerAssert.class);
   }
 
-  protected IntegerAssert(Integer actual, Description description) {
+  protected IntegerAssert(int actual, Description description) {
     super(actual, IntegerAssert.class, description);
+  }
+
+  public IntegerAssert isEqualTo(int expected) {
+    integers.assertEqualTo(description, actual, expected);
+    return this;
+  }
+
+  public IntegerAssert isNotEqualTo(int expected) {
+    integers.assertNotEqualTo(description, actual, expected);
+    return this;
+  }
+
+  public IntegerAssert isLessThan(int expected) {
+    integers.assertLessThan(description, actual, expected);
+    return this;
+  }
+
+  public IntegerAssert isNotLessThan(int expected) {
+    integers.assertNotLessThan(description, actual, expected);
+    return this;
+  }
+
+  public IntegerAssert isGreaterThan(int expected) {
+    integers.assertGreaterThan(description, actual, expected);
+    return this;
+  }
+
+  public IntegerAssert isNotGreaterThan(int expected) {
+    integers.assertGreaterThan(description, actual, expected);
+    return this;
   }
 }

@@ -51,18 +51,18 @@ public class Integers_assertNotEqualTo_Test {
   @Test
   public void should_fail_if_actual_is_null() {
     thrown.expect(AssertionError.class, "[" + description + "] " + actualIsNull());
-    integers.assertNotEqual(description, null, 8);
+    integers.assertNotEqualTo(description, null, 8);
   }
 
   @Test
   public void should_pass_if_integers_are_not_equal() {
-    integers.assertNotEqual(description, 8, 6);
+    integers.assertNotEqualTo(description, 8, 6);
   }
 
   @Test
   public void should_fail_if_integers_are_equal() {
     try {
-      integers.assertNotEqual(description, 8, 8);
+      integers.assertNotEqualTo(description, 8, 8);
     }catch(AssertionError e) {
       verify(failures).failure(description, shouldNotBeEqual(8, 8));
       return;
