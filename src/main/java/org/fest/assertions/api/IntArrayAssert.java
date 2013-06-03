@@ -25,7 +25,7 @@ import org.fest.util.VisibleForTesting;
 /**
  * Assertion methods for arrays of {@code int}s.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(int[])}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(int[])}.
  * </p>
  *
  * @author Yvonne Wang

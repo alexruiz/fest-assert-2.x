@@ -10,44 +10,59 @@
  * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  *
- * Copyright @2010-2011 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
+
 package org.fest.assertions.api;
 
-import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-import org.fest.assertions.internal.Integers;
+import org.fest.test.ExpectedException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
+
 /**
- * Tests for <code>{@link IntegerAssert#isEqualTo(int)}</code>.
+ * Tests for {@link IntegerAssert#isEqualTo(int)}.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class IntegerAssert_isEqualTo_int_Test {
-
-  private Integers integers;
+  @Rule
+  public ExpectedException thrown = none();
   private IntegerAssert assertions;
+  private Integer actual = 6;
+  private int expected = 6;
 
   @Before
   public void setUp() {
-    integers = mock(Integers.class);
-    assertions = new IntegerAssert(6);
-    assertions.integers = integers;
+    assertions = new IntegerAssert(actual);
   }
 
   @Test
-  public void verify_that_actual_is_equal_to_expected() {
-    assertions.isEqualTo(6);
-    verify(integers).assertEqual(assertions.description, assertions.actual, 6);
+  public void should_pass_if_actual_is_equal_to_expected() {
+    assertions.isEqualTo(expected);
   }
 
   @Test
   public void should_return_this() {
-    IntegerAssert returned = assertions.isEqualTo(6);
+    IntegerAssert returned = assertions.isEqualTo(expected);
     assertSame(assertions, returned);
+  }
+
+  @Test
+  public void should_throw_error_if_actual_is_null() {
+    thrown.expect(AssertionError.class);
+    actual = null;
+    assertions.isEqualTo(expected);
+  }
+
+  @Test
+  public void should_fail_if_actual_is_not_equal_to_expected() {
+    thrown.expect(AssertionError.class);
+    expected = 8;
+    assertions.isEqualTo(expected);
   }
 }

@@ -43,33 +43,33 @@ public class ShortAssert extends AbstractComparableAssert<ShortAssert, Short> {
     super(actual, ShortAssert.class, description);
   }
 
-  public ShortAssert isEqualTo(short expected){
+  public ShortAssert isEqualTo(short expected) {
     shorts.assertEqualTo(description, actual, expected);
     return this;
   }
 
-  public ShortAssert isNotEqualTo(short expected){
+  public ShortAssert isNotEqualTo(short expected) {
     shorts.assertNotEqualTo(description, actual, expected);
     return this;
   }
 
-  public ShortAssert isGreaterThan(short expected){
-    shorts.assertGreaterThan(description, actual, expected);
-    return this;
-  }
-
-  public ShortAssert isNotGreaterThan(short expected){
-    shorts.assertNotGreaterThan(description, actual, expected);
-    return this;
-  }
-
-  public ShortAssert isLessThan(short expected){
+  public ShortAssert isLessThan(short expected) {
     shorts.assertLessThan(description, actual, expected);
     return this;
   }
 
-  public ShortAssert isNotLessThan(short expected){
+  public ShortAssert isNotLessThan(short expected) {
     shorts.assertNotLessThan(description, actual, expected);
+    return this;
+  }
+
+  public ShortAssert isGreaterThan(short expected) {
+    shorts.assertGreaterThan(description, actual, expected);
+    return this;
+  }
+
+  public ShortAssert isNotGreaterThan(short expected) {
+    shorts.assertGreaterThan(description, actual, expected);
     return this;
   }
 }

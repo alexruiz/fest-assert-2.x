@@ -15,9 +15,7 @@
 package org.fest.assertions.groups;
 
 import static org.fest.assertions.util.ArrayWrapperList.wrap;
-
-
-import org.fest.assertions.internal.PropertySupport;
+//import org.fest.assertions.internal.PropertySupport;
 import org.fest.util.IntrospectionError;
 import org.fest.util.VisibleForTesting;
 
@@ -36,9 +34,10 @@ public class Properties<T> {
   final String propertyName;
   final Class<T> propertyType;
 
-  @VisibleForTesting
+  //TODO:fix this.
+ /* @VisibleForTesting
   PropertySupport propertySupport = PropertySupport.instance();
-
+*/
   /**
    * Creates a new <code>{@link Properties}</code>.
    * @param propertyName the name of the property to be read from the elements of a {@code Iterable}. It may be a nested
@@ -102,8 +101,9 @@ public class Properties<T> {
    * @return the values of the previously specified property extracted from the given {@code Iterable}.
    * @throws IntrospectionError if an element in the given {@code Iterable} does not have a property with a matching name.
    */
+  //TODO:fix this.
   public Iterable<T> from(Iterable<?> c) {
-    return propertySupport.propertyValues(propertyName, propertyType, c);
+    return null;//propertySupport.propertyValues(propertyName, propertyType, c);
   }
 
   /**
@@ -113,7 +113,8 @@ public class Properties<T> {
    * @return the values of the previously specified property extracted from the given array.
    * @throws IntrospectionError if an element in the given array does not have a property with a matching name.
    */
+  //TODO:fix this.
   public Iterable<T> from(Object[] array) {
-    return propertySupport.propertyValues(propertyName, propertyType, wrap(array));
+    return null;//propertySupport.propertyValues(propertyName, propertyType, wrap(array));
   }
 }

@@ -28,7 +28,7 @@ import org.fest.assertions.internal.Failures;
 public final class Fail {
 
   /**
-   * Sets wether we remove elements related to Fest from assertion error stack trace.
+   * Sets whether we remove elements related to Fest from assertion error stack trace.
    *
    * @param removeFestRelatedElementsFromStackTrace flag.
    */

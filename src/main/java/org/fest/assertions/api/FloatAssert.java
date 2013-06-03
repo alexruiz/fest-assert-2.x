@@ -23,8 +23,8 @@ import org.fest.util.VisibleForTesting;
 /**
  * Assertion methods for floats.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(Float)}</code> or
- * <code>{@link Assertions#assertThat(float)}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(Float)} or
+ * {@link Assertions#assertThat(float)}.
  * </p>
  *
  * @author Yvonne Wang
@@ -32,7 +32,7 @@ import org.fest.util.VisibleForTesting;
  * @author Ansgar Konermann
  */
 public class FloatAssert extends AbstractComparableAssert<FloatAssert, Float> implements
-    FloatingPointNumberAssert<FloatAssert, Float> {
+  FloatingPointNumberAssert<FloatAssert, Float> {
 
   @VisibleForTesting
   Floats floats = Floats.instance();
@@ -45,24 +45,123 @@ public class FloatAssert extends AbstractComparableAssert<FloatAssert, Float> im
     super(actual, FloatAssert.class, description);
   }
 
-  /** {@inheritDoc} */
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public FloatAssert isNaN() {
     floats.assertIsNaN(description, actual);
     return this;
   }
 
-  /** {@inheritDoc} */
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public FloatAssert isNotNaN() {
     floats.assertIsNotNaN(description, actual);
     return this;
   }
 
-  /** {@inheritDoc} */
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public FloatAssert isEqualTo(Float expected, Offset<Float> offset) {
     floats.assertEqual(description, actual, expected, offset);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is not equal to the given one.
+   */
+  public FloatAssert isEqualTo(float expected) {
+    floats.assertEqual(description, actual, expected);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is equal to the given one, within a positive offset.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @param offset   the given positive offset.
+   * @return {@code this} assertion object.
+   * @throws NullPointerException if the given offset is {@code null}.
+   * @throws AssertionError       if the actual value is {@code null}.
+   * @throws AssertionError       if the actual value is not equal to the given one.
+   */
+  public FloatAssert isEqualTo(float expected, Offset<Float> offset) {
+    floats.assertEqual(description, actual, expected, offset);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is not equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is equal to the given one.
+   */
+  public FloatAssert isNotEqualTo(float expected) {
+    floats.assertNotEqual(description, actual, expected);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is less than the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is equal to or greater than the given one.
+   */
+  public FloatAssert isLessThan(float expected) {
+    floats.assertLessThan(description, actual, expected);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is less than or equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is greater than the given one.
+   */
+  public FloatAssert isNotGreaterThan(float expected) {
+    floats.assertNotGreaterThan(description, actual, expected);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is greater than the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is equal to or less than the given one.
+   */
+  public FloatAssert isGreaterThan(float expected) {
+    floats.assertGreaterThan(description, actual, expected);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is greater than or equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is less than the given one.
+   */
+  public FloatAssert isNotLessThan(float expected) {
+    floats.assertNotLessThan(description, actual, expected);
     return this;
   }
 }

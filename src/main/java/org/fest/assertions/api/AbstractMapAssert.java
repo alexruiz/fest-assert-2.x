@@ -34,9 +34,9 @@ import org.fest.util.VisibleForTesting;
  */
 public abstract class AbstractMapAssert<S> implements EnumerableAssert<S> {
 
-  private final Map<?, ?> actual;
-  private final S myself;
-  private final Description description;
+  protected final Map<?, ?> actual;
+  protected final S myself;
+  protected final Description description;
 
   @VisibleForTesting
   Maps maps = Maps.instance();

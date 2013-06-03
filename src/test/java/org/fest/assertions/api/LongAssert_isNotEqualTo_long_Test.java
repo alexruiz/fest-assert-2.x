@@ -12,6 +12,7 @@
  * 
  * Copyright @2010-2013 the original author or authors.
  */
+
 package org.fest.assertions.api;
 
 import org.fest.test.ExpectedException;
@@ -22,13 +23,12 @@ import org.junit.Test;
 import static org.fest.test.ExpectedException.none;
 
 /**
- * Tests for <code>{@link LongAssert#isNotEqualTo(long)}</code>.
+ * Tests for {@link LongAssert#isNotEqualTo(long)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
 public class LongAssert_isNotEqualTo_long_Test {
-
   @Rule
   public ExpectedException thrown = none();
 
@@ -37,7 +37,7 @@ public class LongAssert_isNotEqualTo_long_Test {
 
   @Before
   public void setUp() {
-    actual = (long) 6;
+    actual = new Long(6);
     assertions = new LongAssert(actual);
   }
 

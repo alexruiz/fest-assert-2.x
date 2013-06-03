@@ -31,7 +31,6 @@ import static org.fest.assertions.internal.CommonErrors.arrayOfValuesToLookForIs
 import static org.fest.assertions.internal.CommonErrors.arrayOfValuesToLookForIsNull;
 import static org.fest.assertions.internal.CommonValidations.checkIndexValueIsValid;
 import static org.fest.util.Collections.duplicatesFrom;
-import static org.fest.util.Collections.set;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -52,6 +51,8 @@ import org.fest.util.VisibleForTesting;
 public class Lists {
 
   private static final Lists INSTANCE = new Lists();
+  @VisibleForTesting
+  Failures failures = Failures.instance();
 
   /**
    * Returns the singleton instance of this class.
@@ -62,14 +63,23 @@ public class Lists {
     return INSTANCE;
   }
 
-  @VisibleForTesting
-  Failures failures = Failures.instance();
+  private static Set<Object> containsOnly(Set<Object> actual, Object[] values) {
+    Set<Object> notFound = new LinkedHashSet<Object>();
+    for (Object o : org.fest.util.Sets.newLinkedHashSet(values)) {
+      if (actual.contains(o)) {
+        actual.remove(o);
+      } else {
+        notFound.add(o);
+      }
+    }
+    return notFound;
+  }
 
   /**
    * Asserts that the given <code>{@link List}</code> is {@code null} or empty.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
+   * @param actual      the given {@code List}.
    * @throws AssertionError if the given {@code List} is not {@code null} *and* contains one or more elements.
    */
   public void assertNullOrEmpty(Description description, List<?> actual) {
@@ -83,7 +93,7 @@ public class Lists {
    * Asserts that the given {@code List} is empty.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
+   * @param actual      the given {@code List}.
    * @throws AssertionError if the given {@code List} is {@code null}.
    * @throws AssertionError if the given {@code List} is not empty.
    */
@@ -98,7 +108,7 @@ public class Lists {
    * Asserts that the given {@code List} is not empty.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
+   * @param actual      the given {@code List}.
    * @throws AssertionError if the given {@code List} is {@code null}.
    * @throws AssertionError if the given {@code List} is not empty.
    */
@@ -110,8 +120,8 @@ public class Lists {
   /**
    * Asserts that the number of elements in the given {@code List} is equal to the expected one.
    *
-   * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
+   * @param description  contains information about the assertion.
+   * @param actual       the given {@code List}.
    * @param expectedSize the expected size of {@code actual}.
    * @throws AssertionError if the given {@code Collection} is {@code null}.
    * @throws AssertionError if the number of elements in the given {@code List} is different than the expected one.
@@ -128,14 +138,14 @@ public class Lists {
    * Asserts that the given {@code List} contains the given object at the given index.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
-   * @param value the object to look for.
-   * @param index the index where the object should be stored in the given {@code List}.
-   * @throws AssertionError if the given {@code List} is {@code null} or empty.
-   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @param actual      the given {@code List}.
+   * @param value       the object to look for.
+   * @param index       the index where the object should be stored in the given {@code List}.
+   * @throws AssertionError            if the given {@code List} is {@code null} or empty.
+   * @throws NullPointerException      if the given {@code Index} is {@code null}.
    * @throws IndexOutOfBoundsException if the value of the given {@code Index} is equal to or greater than the size of
-   *           the given {@code List}.
-   * @throws AssertionError if the given {@code List} does not contain the given object at the given index.
+   *                                   the given {@code List}.
+   * @throws AssertionError            if the given {@code List} does not contain the given object at the given index.
    */
   public void assertContains(Description description, List<?> actual, Object value, Index index) {
     assertNotNull(description, actual);
@@ -143,7 +153,7 @@ public class Lists {
     checkIndexValueIsValid(index, actual.size() - 1);
     Object actualElement = actual.get(index.value);
     if (!areEqual(actualElement, value)) {
-        throw failures.failure(description, shouldContainAtIndex(actual, value, index, actual.get(index.value)));
+      throw failures.failure(description, shouldContainAtIndex(actual, value, index, actual.get(index.value)));
     }
   }
 
@@ -151,7 +161,7 @@ public class Lists {
    * Asserts that the given {@code List} contains {@code null}.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
+   * @param actual      the given {@code Collection}.
    * @throws AssertionError if the given {@code List} is {@code null}.
    * @throws AssertionError if the given {@code List} does not contain null.
    */
@@ -167,13 +177,13 @@ public class Lists {
    * allowed.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
-   * @param values the values that are expected to be in the given {@code List}.
-   * @throws NullPointerException if the array of values is {@code null}.
+   * @param actual      the given {@code List}.
+   * @param values      the values that are expected to be in the given {@code List}.
+   * @throws NullPointerException     if the array of values is {@code null}.
    * @throws IllegalArgumentException if the array of values is empty.
-   * @throws AssertionError if the given {@code List} is {@code null}.
-   * @throws AssertionError if the given {@code List} does not contain the given values or if the given {@code List}
-   *           contains values that are not in the given array.
+   * @throws AssertionError           if the given {@code List} is {@code null}.
+   * @throws AssertionError           if the given {@code List} does not contain the given values or if the given {@code List}
+   *                                  contains values that are not in the given array.
    */
   public void assertContainsOnly(Description description, List<?> actual, Object[] values) {
     checkIsNotNullAndNotEmpty(values);
@@ -190,12 +200,12 @@ public class Lists {
    * Asserts that the given {@code List} contains all of the given values, in any order. Duplicates are allowed.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
-   * @param values the values that are expected to be in the given {@code List}.
-   * @throws NullPointerException if the array of values is {@code null}.
+   * @param actual      the given {@code List}.
+   * @param values      the values that are expected to be in the given {@code List}.
+   * @throws NullPointerException     if the array of values is {@code null}.
    * @throws IllegalArgumentException if the array of values is empty.
-   * @throws AssertionError if the given {@code List} is {@code null}.
-   * @throws AssertionError if the given {@code List} does not contain all the given values.
+   * @throws AssertionError           if the given {@code List} is {@code null}.
+   * @throws AssertionError           if the given {@code List} does not contain all the given values.
    */
   public void assertContains(Description description, List<?> actual, Object[] values) {
     checkIsNotNullAndNotEmpty(values);
@@ -212,12 +222,12 @@ public class Lists {
    * other objects between them. Duplicates are allowed.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
-   * @param sequence the sequence of objects to look for.
-   * @throws AssertionError if the given {@code List} is {@code null}.
-   * @throws NullPointerException if the given sequence is {@code null}.
+   * @param actual      the given {@code List}.
+   * @param sequence    the sequence of objects to look for.
+   * @throws AssertionError           if the given {@code List} is {@code null}.
+   * @throws NullPointerException     if the given sequence is {@code null}.
    * @throws IllegalArgumentException if the given sequence is empty.
-   * @throws AssertionError if the given {@code List} does not contain the given sequence of objects.
+   * @throws AssertionError           if the given {@code List} does not contain the given sequence of objects.
    */
   public void assertContainsSequence(Description description, List<?> actual, Object[] sequence) {
     checkIsNotNullAndNotEmpty(sequence);
@@ -255,12 +265,12 @@ public class Lists {
    * Verifies that the given {@code List} does not contain the given object at the given index.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
-   * @param value the object to look for.
-   * @param index the index where the object should be stored in the given {@code List}.
-   * @throws AssertionError if the given {@code List} is {@code null}.
+   * @param actual      the given {@code List}.
+   * @param value       the object to look for.
+   * @param index       the index where the object should be stored in the given {@code List}.
+   * @throws AssertionError       if the given {@code List} is {@code null}.
    * @throws NullPointerException if the given {@code Index} is {@code null}.
-   * @throws AssertionError if the given {@code List} contains the given object at the given index.
+   * @throws AssertionError       if the given {@code List} contains the given object at the given index.
    */
   public void assertDoesNotContain(Description description, List<?> actual, Object value, Index index) {
     assertNotNull(description, actual);
@@ -277,7 +287,7 @@ public class Lists {
    * Asserts that the given {@code List} does not contain {@code null}.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
+   * @param actual      the given {@code List}.
    * @throws AssertionError if the given {@code List} is {@code null}.
    * @throws AssertionError if the given {@code List} contains any of given values.
    */
@@ -293,11 +303,11 @@ public class Lists {
    * Asserts that the given {@code List} does not have duplicate values.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
-   * @throws NullPointerException if the array of values is {@code null}.
+   * @param actual      the given {@code List}.
+   * @throws NullPointerException     if the array of values is {@code null}.
    * @throws IllegalArgumentException if the array of values is empty.
-   * @throws AssertionError if the given {@code List} is {@code null}.
-   * @throws AssertionError if the given {@code List} contains duplicate values.
+   * @throws AssertionError           if the given {@code List} is {@code null}.
+   * @throws AssertionError           if the given {@code List} contains duplicate values.
    */
   public void assertDoesNotHaveDuplicates(Description description, List<?> actual) {
     assertNotNull(description, actual);
@@ -314,12 +324,12 @@ public class Lists {
    * that the first element in the sequence is also the first element of the given {@code List}.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
-   * @param sequence the sequence of objects to look for.
-   * @throws NullPointerException if the given argument is {@code null}.
+   * @param actual      the given {@code List}.
+   * @param sequence    the sequence of objects to look for.
+   * @throws NullPointerException     if the given argument is {@code null}.
    * @throws IllegalArgumentException if the given argument is an empty array.
-   * @throws AssertionError if the given {@code List} is {@code null}.
-   * @throws AssertionError if the given {@code List} does not start with the given sequence of objects.
+   * @throws AssertionError           if the given {@code List} is {@code null}.
+   * @throws AssertionError           if the given {@code List} does not start with the given sequence of objects.
    */
   public void assertStartsWith(Description description, List<?> actual, Object[] sequence) {
     checkIsNotNullAndNotEmpty(sequence);
@@ -346,12 +356,12 @@ public class Lists {
    * that the last element in the sequence is also the last element of the given {@code List}.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code List}.
-   * @param sequence the sequence of objects to look for.
-   * @throws NullPointerException if the given argument is {@code null}.
+   * @param actual      the given {@code List}.
+   * @param sequence    the sequence of objects to look for.
+   * @throws NullPointerException     if the given argument is {@code null}.
    * @throws IllegalArgumentException if the given argument is an empty array.
-   * @throws AssertionError if the given {@code List} is {@code null}.
-   * @throws AssertionError if the given {@code List} does not end with the given sequence of objects.
+   * @throws AssertionError           if the given {@code List} is {@code null}.
+   * @throws AssertionError           if the given {@code List} does not end with the given sequence of objects.
    */
   public void assertEndsWith(Description description, List<?> actual, Object[] sequence) {
     checkIsNotNullAndNotEmpty(sequence);
@@ -403,17 +413,5 @@ public class Lists {
     if (values.length == 0) {
       throw arrayOfValuesToLookForIsEmpty();
     }
-  }
-
-  private static Set<Object> containsOnly(Set<Object> actual, Object[] values) {
-    Set<Object> notFound = new LinkedHashSet<Object>();
-    for (Object o : set(values)) {
-      if (actual.contains(o)) {
-        actual.remove(o);
-      } else {
-        notFound.add(o);
-      }
-    }
-    return notFound;
   }
 }

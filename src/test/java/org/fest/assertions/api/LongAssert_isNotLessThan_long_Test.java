@@ -22,13 +22,12 @@ import org.junit.Test;
 import static org.fest.test.ExpectedException.none;
 
 /**
- * Tests for <code>{@link LongAssert#isNotLessThan(long)}</code>.
+ * Tests for {@link LongAssert#isNotLessThan(long)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
 public class LongAssert_isNotLessThan_long_Test {
-
   @Rule
   public ExpectedException thrown = none();
   private LongAssert assertions;

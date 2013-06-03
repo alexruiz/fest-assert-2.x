@@ -22,13 +22,12 @@ import org.junit.Test;
 import static org.fest.test.ExpectedException.none;
 
 /**
- * Tests for <code>{@link ShortAssert#isNotLessThan(short)}</code>.
- * 
+ * Tests for {@link ShortAssert#isNotLessThan(short)}.
+ *
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
 public class ShortAssert_isNotLessThan_short_Test {
-
   @Rule
   public ExpectedException thrown = none();
   private ShortAssert assertions;
@@ -36,7 +35,7 @@ public class ShortAssert_isNotLessThan_short_Test {
 
   @Before
   public void setUp() {
-    actual = (short) 8;
+    actual = new Short((short) 8);
     assertions = new ShortAssert(actual);
   }
 

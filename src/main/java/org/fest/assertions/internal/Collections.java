@@ -14,6 +14,14 @@
  */
 package org.fest.assertions.internal;
 
+import org.fest.assertions.description.Description;
+import org.fest.assertions.error.ShouldContainNull;
+import org.fest.util.VisibleForTesting;
+
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static org.fest.assertions.error.ShouldBeEmpty.shouldBeEmpty;
 import static org.fest.assertions.error.ShouldBeNullOrEmpty.shouldBeNullOrEmpty;
 import static org.fest.assertions.error.ShouldContain.shouldContain;
@@ -29,16 +37,7 @@ import static org.fest.assertions.error.ShouldStartWith.shouldStartWith;
 import static org.fest.assertions.internal.CommonErrors.arrayOfValuesToLookForIsEmpty;
 import static org.fest.assertions.internal.CommonErrors.arrayOfValuesToLookForIsNull;
 import static org.fest.util.Collections.duplicatesFrom;
-import static org.fest.util.Collections.set;
 import static org.fest.util.Objects.areEqual;
-
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import org.fest.assertions.description.Description;
-import org.fest.assertions.error.ShouldContainNull;
-import org.fest.util.VisibleForTesting;
 
 /**
  * Reusable assertions for <code>{@link Collection}</code>s.
@@ -49,6 +48,12 @@ import org.fest.util.VisibleForTesting;
 public class Collections {
 
   private static final Collections INSTANCE = new Collections();
+  @VisibleForTesting
+  Failures failures = Failures.instance();
+
+  @VisibleForTesting
+  Collections() {
+  }
 
   /**
    * Returns the singleton instance of this class.
@@ -59,18 +64,23 @@ public class Collections {
     return INSTANCE;
   }
 
-  @VisibleForTesting
-  Failures failures = Failures.instance();
-
-  @VisibleForTesting
-  Collections() {
+  private static Set<Object> containsOnly(Set<Object> actual, Object[] values) {
+    Set<Object> notFound = new LinkedHashSet<Object>();
+    for (Object o : org.fest.util.Sets.newLinkedHashSet(values)) {
+      if (actual.contains(o)) {
+        actual.remove(o);
+      } else {
+        notFound.add(o);
+      }
+    }
+    return notFound;
   }
 
   /**
    * Asserts that the given <code>{@link Collection}</code> is {@code null} or empty.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
+   * @param actual      the given {@code Collection}.
    * @throws AssertionError if the given {@code Collection} is not {@code null} *and* contains one or more elements.
    */
   public void assertNullOrEmpty(Description description, Collection<?> actual) {
@@ -84,7 +94,7 @@ public class Collections {
    * Asserts that the given {@code Collection} is empty.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
+   * @param actual      the given {@code Collection}.
    * @throws AssertionError if the given {@code Collection} is {@code null}.
    * @throws AssertionError if the given {@code Collection} is not empty.
    */
@@ -99,7 +109,7 @@ public class Collections {
    * Asserts that the given {@code Collection} is not empty.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
+   * @param actual      the given {@code Collection}.
    * @throws AssertionError if the given {@code Collection} is {@code null}.
    * @throws AssertionError if the given {@code Collection} is empty.
    */
@@ -113,12 +123,12 @@ public class Collections {
   /**
    * Asserts that the number of elements in the given {@code Collection} is equal to the expected one.
    *
-   * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
+   * @param description  contains information about the assertion.
+   * @param actual       the given {@code Collection}.
    * @param expectedSize the expected size of {@code actual}.
    * @throws AssertionError if the given {@code Collection} is {@code null}.
    * @throws AssertionError if the number of elements in the given {@code Collection} is different than the expected
-   *           one.
+   *                        one.
    */
   public void assertHasSize(Description description, Collection<?> actual, int expectedSize) {
     assertNotNull(description, actual);
@@ -132,12 +142,12 @@ public class Collections {
    * Asserts that the given {@code Collection} contains the given values, in any order.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
-   * @param values the values that are expected to be in the given {@code Collection}.
-   * @throws NullPointerException if the array of values is {@code null}.
+   * @param actual      the given {@code Collection}.
+   * @param values      the values that are expected to be in the given {@code Collection}.
+   * @throws NullPointerException     if the array of values is {@code null}.
    * @throws IllegalArgumentException if the array of values is empty.
-   * @throws AssertionError if the given {@code Collection} is {@code null}.
-   * @throws AssertionError if the given {@code Collection} does not contain the given values.
+   * @throws AssertionError           if the given {@code Collection} is {@code null}.
+   * @throws AssertionError           if the given {@code Collection} does not contain the given values.
    */
   public void assertContains(Description description, Collection<?> actual, Object[] values) {
     checkIsNotNullAndNotEmpty(values);
@@ -158,7 +168,7 @@ public class Collections {
    * Asserts that the given {@code Collection} contains {@code null}.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
+   * @param actual      the given {@code Collection}.
    * @throws AssertionError if the given {@code Collection} is {@code null}.
    * @throws AssertionError if the given {@code Collection} does not contain null.
    */
@@ -173,13 +183,13 @@ public class Collections {
    * Asserts that the given {@code Collection} contains only the given values and nothing else, in any order.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
-   * @param values the values that are expected to be in the given {@code Collection}.
-   * @throws NullPointerException if the array of values is {@code null}.
+   * @param actual      the given {@code Collection}.
+   * @param values      the values that are expected to be in the given {@code Collection}.
+   * @throws NullPointerException     if the array of values is {@code null}.
    * @throws IllegalArgumentException if the array of values is empty.
-   * @throws AssertionError if the given {@code Collection} is {@code null}.
-   * @throws AssertionError if the given {@code Collection} does not contain the given values or if the given
-   *           {@code Collection} contains values that are not in the given array.
+   * @throws AssertionError           if the given {@code Collection} is {@code null}.
+   * @throws AssertionError           if the given {@code Collection} does not contain the given values or if the given
+   *                                  {@code Collection} contains values that are not in the given array.
    */
   public void assertContainsOnly(Description description, Collection<?> actual, Object[] values) {
     checkIsNotNullAndNotEmpty(values);
@@ -192,29 +202,17 @@ public class Collections {
     throw failures.failure(description, shouldContainOnly(actual, values, notFound, notExpected));
   }
 
-  private static Set<Object> containsOnly(Set<Object> actual, Object[] values) {
-    Set<Object> notFound = new LinkedHashSet<Object>();
-    for (Object o : set(values)) {
-      if (actual.contains(o)) {
-        actual.remove(o);
-      } else {
-        notFound.add(o);
-      }
-    }
-    return notFound;
-  }
-
   /**
    * Verifies that the given <code>{@link Collection}</code> contains the given sequence of objects, without any other
    * objects between them.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
-   * @param sequence the sequence of objects to look for.
-   * @throws AssertionError if the given {@code Collection} is {@code null}.
-   * @throws NullPointerException if the given sequence is {@code null}.
+   * @param actual      the given {@code Collection}.
+   * @param sequence    the sequence of objects to look for.
+   * @throws AssertionError           if the given {@code Collection} is {@code null}.
+   * @throws NullPointerException     if the given sequence is {@code null}.
    * @throws IllegalArgumentException if the given sequence is empty.
-   * @throws AssertionError if the given {@code Collection} does not contain the given sequence of objects.
+   * @throws AssertionError           if the given {@code Collection} does not contain the given sequence of objects.
    */
   public void assertContainsSequence(Description description, Collection<?> actual, Object[] sequence) {
     checkIsNotNullAndNotEmpty(sequence);
@@ -252,12 +250,12 @@ public class Collections {
    * Asserts that the given {@code Collection} does not contain the given values.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
-   * @param values the values that are expected not to be in the given {@code Collection}.
-   * @throws NullPointerException if the array of values is {@code null}.
+   * @param actual      the given {@code Collection}.
+   * @param values      the values that are expected not to be in the given {@code Collection}.
+   * @throws NullPointerException     if the array of values is {@code null}.
    * @throws IllegalArgumentException if the array of values is empty.
-   * @throws AssertionError if the given {@code Collection} is {@code null}.
-   * @throws AssertionError if the given {@code Collection} contains any of given values.
+   * @throws AssertionError           if the given {@code Collection} is {@code null}.
+   * @throws AssertionError           if the given {@code Collection} contains any of given values.
    */
   public void assertDoesNotContain(Description description, Collection<?> actual, Object[] values) {
     checkIsNotNullAndNotEmpty(values);
@@ -278,7 +276,7 @@ public class Collections {
    * Asserts that the given {@code Collection} does not contain {@code null}.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
+   * @param actual      the given {@code Collection}.
    * @throws AssertionError if the given {@code Collection} is {@code null}.
    * @throws AssertionError if the given {@code Collection} contains any of given values.
    */
@@ -294,11 +292,11 @@ public class Collections {
    * Asserts that the given {@code Collection} does not have duplicate values.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
-   * @throws NullPointerException if the array of values is {@code null}.
+   * @param actual      the given {@code Collection}.
+   * @throws NullPointerException     if the array of values is {@code null}.
    * @throws IllegalArgumentException if the array of values is empty.
-   * @throws AssertionError if the given {@code Collection} is {@code null}.
-   * @throws AssertionError if the given {@code Collection} contains duplicate values.
+   * @throws AssertionError           if the given {@code Collection} is {@code null}.
+   * @throws AssertionError           if the given {@code Collection} contains duplicate values.
    */
   public void assertDoesNotHaveDuplicates(Description description, Collection<?> actual) {
     assertNotNull(description, actual);
@@ -315,12 +313,12 @@ public class Collections {
    * also verifies that the first element in the sequence is also the first element of the given {@code Collection}.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
-   * @param sequence the sequence of objects to look for.
-   * @throws NullPointerException if the given argument is {@code null}.
+   * @param actual      the given {@code Collection}.
+   * @param sequence    the sequence of objects to look for.
+   * @throws NullPointerException     if the given argument is {@code null}.
    * @throws IllegalArgumentException if the given argument is an empty array.
-   * @throws AssertionError if the given {@code Collection} is {@code null}.
-   * @throws AssertionError if the given {@code Collection} does not start with the given sequence of objects.
+   * @throws AssertionError           if the given {@code Collection} is {@code null}.
+   * @throws AssertionError           if the given {@code Collection} does not start with the given sequence of objects.
    */
   public void assertStartsWith(Description description, Collection<?> actual, Object[] sequence) {
     checkIsNotNullAndNotEmpty(sequence);
@@ -351,12 +349,12 @@ public class Collections {
    * also verifies that the last element in the sequence is also the last element of the given {@code Collection}.
    *
    * @param description contains information about the assertion.
-   * @param actual the given {@code Collection}.
-   * @param sequence the sequence of objects to look for.
-   * @throws NullPointerException if the given argument is {@code null}.
+   * @param actual      the given {@code Collection}.
+   * @param sequence    the sequence of objects to look for.
+   * @throws NullPointerException     if the given argument is {@code null}.
    * @throws IllegalArgumentException if the given argument is an empty array.
-   * @throws AssertionError if the given {@code Collection} is {@code null}.
-   * @throws AssertionError if the given {@code Collection} does not end with the given sequence of objects.
+   * @throws AssertionError           if the given {@code Collection} is {@code null}.
+   * @throws AssertionError           if the given {@code Collection} does not end with the given sequence of objects.
    */
   public void assertEndsWith(Description description, Collection<?> actual, Object[] sequence) {
     checkIsNotNullAndNotEmpty(sequence);

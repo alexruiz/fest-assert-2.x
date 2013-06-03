@@ -30,7 +30,7 @@ import org.fest.assertions.error.ShouldNotBeLessThan;
 import org.fest.util.VisibleForTesting;
 
 /**
- * Reusable assertions for <code>{@link Character}</code>s.
+ * Reusable assertions for {@link Character}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang

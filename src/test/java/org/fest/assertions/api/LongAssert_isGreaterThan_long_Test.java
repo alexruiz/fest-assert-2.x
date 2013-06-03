@@ -12,6 +12,7 @@
  * 
  * Copyright @2010-2013 the original author or authors.
  */
+
 package org.fest.assertions.api;
 
 import org.fest.test.ExpectedException;
@@ -20,13 +21,12 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Tests for <code>{@link LongAssert#isGreaterThan(long)}</code>.
+ * Tests for {@link LongAssert#isGreaterThan(long)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
 public class LongAssert_isGreaterThan_long_Test {
-
   @Rule
   public ExpectedException thrown = ExpectedException.none();
   private LongAssert assertions;
@@ -34,7 +34,7 @@ public class LongAssert_isGreaterThan_long_Test {
 
   @Before
   public void setUp() {
-    actual = (long) 8;
+    actual = new Long(8);
     assertions = new LongAssert(actual);
   }
 
