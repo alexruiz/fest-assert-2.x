@@ -25,7 +25,7 @@ import org.fest.util.VisibleForTesting;
 /**
  * Assertion methods for arrays of {@code short}s.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(short[])}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(short[])}.
  * </p>
  *
  * @author Yvonne Wang

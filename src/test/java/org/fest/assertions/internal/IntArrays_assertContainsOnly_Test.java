@@ -36,7 +36,6 @@ import org.junit.Test;
  *
  */
 public class IntArrays_assertContainsOnly_Test {
-
   @Rule
   public ExpectedException thrown = none();
 

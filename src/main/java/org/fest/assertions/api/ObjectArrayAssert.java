@@ -162,7 +162,7 @@ public class ObjectArrayAssert extends AbstractAssert<ObjectArrayAssert, Object[
 
   /**
    * Verifies that the actual array starts with the given sequence of values, without any other values between them.
-   * Similar to <code>{@link #containsSequence(byte...)}</code>, but it also verifies that the first element in the
+   * Similar to <code>{@link #containsSequence(Object...)}</code>, but it also verifies that the first element in the
    * sequence is also first element of the actual array.
    *
    * @param sequence the sequence of values to look for.
@@ -179,7 +179,7 @@ public class ObjectArrayAssert extends AbstractAssert<ObjectArrayAssert, Object[
 
   /**
    * Verifies that the actual array ends with the given sequence of values, without any other values between them.
-   * Similar to <code>{@link #containsSequence(byte...)}</code>, but it also verifies that the last element in the
+   * Similar to <code>{@link #containsSequence(Object...)}</code>, but it also verifies that the last element in the
    * sequence is also last element of the actual array.
    *
    * @param sequence the sequence of values to look for.

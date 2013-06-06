@@ -21,10 +21,12 @@ import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.DoubleArrays;
 import org.fest.util.VisibleForTesting;
 
+import javax.annotation.Nonnull;
+
 /**
  * Assertion methods for arrays of {@code double}s.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(double[])}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(double[])}.
  * </p>
  *
  * @author Yvonne Wang
@@ -59,6 +61,7 @@ public class DoubleArrayAssert extends AbstractAssert<DoubleArrayAssert, double[
   }
 
   /** {@inheritDoc} */
+  @Nonnull
   @Override
   public DoubleArrayAssert isNotEmpty() {
     arrays.assertNotEmpty(description, actual);
@@ -66,6 +69,7 @@ public class DoubleArrayAssert extends AbstractAssert<DoubleArrayAssert, double[
   }
 
   /** {@inheritDoc} */
+  @Nonnull
   @Override
   public DoubleArrayAssert hasSize(int expected) {
     arrays.assertHasSize(description, actual, expected);
