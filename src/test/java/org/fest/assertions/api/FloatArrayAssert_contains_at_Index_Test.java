@@ -14,14 +14,15 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.assertions.data.Index;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link FloatArrayAssert#contains(Float, Index)}.
@@ -32,9 +33,9 @@ import static org.fest.test.ExpectedException.none;
 public class FloatArrayAssert_contains_at_Index_Test {
   @Rule
   public ExpectedException thrown = none();
-  private float[] actual = {1f, 2f, 3f, 4f, 5f, 6f};
-  private Float value = 3f;
-  private Index index = Index.atIndex(3);
+  private final float[] actual = {1f, 2f, 3f, 4f, 5f, 6f};
+  private final Float value = 4f;
+  private final Index index = Index.atIndex(3);
   private FloatArrayAssert assertions;
 
   @Before
@@ -44,12 +45,12 @@ public class FloatArrayAssert_contains_at_Index_Test {
 
   @Test
   public void should_pass_if_actual_does_not_contain_given_value_at_given_index() {
-    assertions.doesNotContain(value, index);
+    assertions.contains(value, index);
   }
 
   @Test
   public void should_return_this_if_actual_does_not_contain_given_value_at_given_index() {
-    FloatArrayAssert returned = assertions.doesNotContain(value, index);
+    FloatArrayAssert returned = assertions.contains(value, index);
     assertSame(returned, assertions);
   }
 
@@ -57,31 +58,31 @@ public class FloatArrayAssert_contains_at_Index_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     assertions = new FloatArrayAssert(null);
-    assertions.doesNotContain(value, index);
+    assertions.contains(value, index);
   }
 
   @Test
   public void should_throw_error_if_actual_is_empty() {
     thrown.expect(AssertionError.class);
     assertions = new FloatArrayAssert(new float[0]);
-    assertions.doesNotContain(value, index);
+    assertions.contains(value, index);
   }
 
   @Test
   public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(AssertionError.class);
-    assertions.doesNotContain(null, index);
+    thrown.expect(NullPointerException.class);
+    assertions.contains(null, index);
   }
 
   @Test
   public void should_throw_error_if_given_index_is_null() {
-    thrown.expect(AssertionError.class);
-    assertions.doesNotContain(value, null);
+    thrown.expect(NullPointerException.class);
+    assertions.contains(value, null);
   }
 
   @Test
   public void should_fail_if_actual_contains_given_value_at_given_index() {
     thrown.expect(AssertionError.class);
-    assertions.doesNotContain(4f, index);
+    assertions.contains(3f, index);
   }
 }

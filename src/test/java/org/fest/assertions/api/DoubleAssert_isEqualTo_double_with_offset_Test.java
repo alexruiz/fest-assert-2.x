@@ -14,14 +14,15 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.assertions.data.Offset;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for <code>{@link DoubleAssert#isEqualTo(double, Offset)}</code>.
@@ -66,7 +67,7 @@ public class DoubleAssert_isEqualTo_double_with_offset_Test {
   @Test
   public void should_throw_error_if_offset_is_null() {
     offset = null;
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.isEqualTo(expected, offset);
   }
 

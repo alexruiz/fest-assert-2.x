@@ -14,16 +14,17 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link DoubleAssert#isNotGreaterThan(Comparable)}.
+ * Tests for {@link DoubleAssert#isNotGreaterThan(Double)}.
  *
  * @author Yvonne Wang
  */
@@ -52,7 +53,7 @@ public class DoubleAssert_isNotGreaterThan_double_wrapper_Test {
   }
 
   @Test
-  public void should_return_this() {
+  public void should_return_this_if_actual_is_less_than_expected() {
     DoubleAssert returned = assertions.isNotGreaterThan(expected);
     assertSame(returned, assertions);
   }
@@ -66,7 +67,7 @@ public class DoubleAssert_isNotGreaterThan_double_wrapper_Test {
 
   @Test
   public void should_throw_error_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.isNotGreaterThan(null);
   }
 
@@ -74,11 +75,5 @@ public class DoubleAssert_isNotGreaterThan_double_wrapper_Test {
   public void should_fail_if_actual_is_greater_than_expected() {
     thrown.expect(AssertionError.class);
     assertions.isNotGreaterThan(new Double(2d));
-  }
-
-  @Test
-  public void should_fail_if_actual_is_equal_to_expected() {
-    thrown.expect(AssertionError.class);
-    assertions.isNotGreaterThan(actual);
   }
 }

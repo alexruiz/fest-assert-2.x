@@ -15,12 +15,12 @@
 
 package org.fest.assertions.api;
 
+import static org.junit.rules.ExpectedException.none;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import static org.junit.rules.ExpectedException.none;
 
 /**
  * Tests for {@link ByteAssert#isNotGreaterThan(byte)}.
@@ -47,12 +47,6 @@ public class ByteAssert_isNotGreaterThan_byte_Test {
   @Test
   public void should_pass_if_actual_is_equal_to_expected() {
     assertions.isNotGreaterThan((byte) 6);
-  }
-
-  @Test
-  public void should_fail_if_actual_is_less_than_expected() {
-    thrown.expect(AssertionError.class);
-    assertions.isNotGreaterThan((byte) 8);
   }
 
   @Test

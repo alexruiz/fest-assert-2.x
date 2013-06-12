@@ -117,7 +117,7 @@ public class IntegerAssert extends AbstractComparableAssert<IntegerAssert, Integ
    * @throws AssertionError if the actual value is greater than the given one.
    */
   public IntegerAssert isNotGreaterThan(int expected) {
-    integers.assertGreaterThan(description, actual, expected);
+    integers.assertNotGreaterThan(description, actual, expected);
     return this;
   }
 }

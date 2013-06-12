@@ -14,13 +14,13 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
-import static org.junit.Assert.assertSame;
 
 /**
  * Tests for {@link CharacterAssert#isGreaterThan(char)}.
@@ -32,7 +32,7 @@ public class CharacterAssert_isGreaterThan_char_Test {
   public ExpectedException thrown = none();
   private CharacterAssert assertions;
   private Character actual = new Character('b');
-  private char expected = 'a';
+  private final char expected = 'a';
 
   @Before
   public void setUp() {
@@ -41,12 +41,12 @@ public class CharacterAssert_isGreaterThan_char_Test {
 
   @Test
   public void should_pass_if_actual_is_greater_than_expected() {
-    assertions.isEqualTo(expected);
+    assertions.isGreaterThan(expected);
   }
 
   @Test
   public void should_return_this() {
-    CharacterAssert returned = assertions.isEqualTo(expected);
+    CharacterAssert returned = assertions.isGreaterThan(expected);
     assertSame(assertions, returned);
   }
 
@@ -54,18 +54,19 @@ public class CharacterAssert_isGreaterThan_char_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     actual = null;
-    assertions.isEqualTo(expected);
+    assertions = new CharacterAssert(actual);
+    assertions.isGreaterThan(expected);
   }
 
   @Test
   public void should_fail_if_actual_is_equal_to_expected() {
     thrown.expect(AssertionError.class);
-    assertions.isEqualTo(actual);
+    assertions.isGreaterThan(actual);
   }
 
   @Test
   public void should_fail_if_actual_is_less_than_expected() {
     thrown.expect(AssertionError.class);
-    assertions.isEqualTo('c');
+    assertions.isGreaterThan('c');
   }
 }

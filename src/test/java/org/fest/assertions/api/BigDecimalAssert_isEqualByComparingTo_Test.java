@@ -14,6 +14,10 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
+import java.math.BigDecimal;
+
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.Comparables;
 import org.fest.assertions.internal.TestDescription;
@@ -23,13 +27,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
-import static org.fest.test.ExpectedException.none;
-import static org.mockito.Mockito.verify;
-
 /**
- * Tests for {@link BigDecimalAssert#isEqualByComparingTo(Comparable)}.
+ * Tests for {@link BigDecimalAssert#isEqualByComparingTo(BigDecimal)}.
  *
  * @author Yvonne Wang
  */
@@ -41,7 +40,7 @@ public class BigDecimalAssert_isEqualByComparingTo_Test {
   public ExpectedException thrown = none();
   private Comparables comparables;
   private BigDecimalAssert assertions;
-  private Description description = new TestDescription("testing");
+  private final Description description = new TestDescription("testing");
 
   @Before
   public void setUp() {
@@ -57,9 +56,8 @@ public class BigDecimalAssert_isEqualByComparingTo_Test {
   }
 
   @Test
-  public void verify_comparables_is_called() {
+  public void should_pass_if_actual_is_equal_to_epxected() {
     assertions.isEqualByComparingTo(expected);
-    verify(comparables).assertEqual(assertions.description, assertions.actual, expected);
   }
 
   @Test

@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link FloatArrayAssert#containsSequence(float...)}.
@@ -30,7 +30,7 @@ import static org.fest.test.ExpectedException.none;
 public class FloatArrayAssert_containsSequence_Test {
   @Rule
   public ExpectedException thrown = none();
-  private float[] actual = {6f, 8f, 10f, 16f, 18f};
+  private final float[] actual = {6f, 8f, 10f, 16f, 18f};
   private float[] sequence = {6f, 8f, 10f};
   private FloatArrayAssert assertions;
 
@@ -50,7 +50,8 @@ public class FloatArrayAssert_containsSequence_Test {
   }
 
   @Test
-  public void should_pass_if_actual_contains_given_sequence_multiple_times() {
+  public void should_fail_if_actual_contains_given_sequence_multiple_times() {
+    thrown.expect(AssertionError.class);
     assertions.containsSequence(6f, 6f, 8f, 10f, 10f);
   }
 
@@ -70,14 +71,14 @@ public class FloatArrayAssert_containsSequence_Test {
 
   @Test
   public void should_throw_error_if_given_sequence_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     sequence = null;
     assertions.containsSequence(sequence);
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.containsSequence();
   }
 

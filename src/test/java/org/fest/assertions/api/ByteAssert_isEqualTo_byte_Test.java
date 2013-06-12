@@ -15,12 +15,12 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link ByteAssert#isEqualTo(byte)}.
@@ -41,7 +41,7 @@ public class ByteAssert_isEqualTo_byte_Test {
 
   @Test
   public void should_pass_if_actual_is_equal_to_expected() {
-    assertions.isEqualTo(actual);
+    assertions.isEqualTo(actual.byteValue());
   }
 
   @Test

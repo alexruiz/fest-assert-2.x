@@ -14,14 +14,15 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.assertions.data.Offset;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link DoubleAssert#isEqualTo(Double, Offset)}.
@@ -40,20 +41,20 @@ public class DoubleAssert_isEqualTo_double_wrapper_with_offset_Test {
 
   @Before
   public void setUp() {
-    actual = new Double(6f);
-    expected = new Double(8d);
-    offset = Offset.offset(5d);
+    actual = new Double(6d);
+    expected = new Double(6d);
+    offset = Offset.offset(1d);
     assertions = new DoubleAssert(actual);
   }
 
   @Test
   public void should_pass_if_actual_is_equal_to_expected_within_given_offset() {
-    assertions.isEqualTo(expected, offset);
+    assertions.isEqualTo(actual, offset);
   }
 
   @Test
   public void should_return_this() {
-    DoubleAssert returned = assertions.isEqualTo(expected, offset);
+    DoubleAssert returned = assertions.isEqualTo(actual, offset);
     assertSame(returned, assertions);
   }
 
@@ -66,14 +67,14 @@ public class DoubleAssert_isEqualTo_double_wrapper_with_offset_Test {
 
   @Test
   public void should_throw_error_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.isEqualTo(null, offset);
   }
 
   @Test
   public void should_throw_error_if_offset_is_null() {
     offset = null;
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.isEqualTo(expected, offset);
   }
 

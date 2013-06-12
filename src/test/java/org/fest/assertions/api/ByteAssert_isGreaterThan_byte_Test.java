@@ -15,13 +15,13 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
-import static org.junit.Assert.assertSame;
 
 /**
  * Tests for {@link ByteAssert#isGreaterThan(byte)}.
@@ -55,6 +55,7 @@ public class ByteAssert_isGreaterThan_byte_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     actual = null;
+    assertions = new ByteAssert(actual);
     assertions.isGreaterThan(expected);
   }
 

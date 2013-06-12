@@ -69,7 +69,7 @@ public class LongAssert extends AbstractComparableAssert<LongAssert, Long> {
   }
 
   public LongAssert isNotGreaterThan(long expected) {
-    longs.assertGreaterThan(description, actual, expected);
+    longs.assertNotGreaterThan(description, actual, expected);
     return this;
   }
 }

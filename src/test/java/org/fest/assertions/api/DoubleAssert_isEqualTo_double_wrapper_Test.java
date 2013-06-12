@@ -14,16 +14,17 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link DoubleAssert#isEqualTo(Comparable)}.
+ * Tests for {@link DoubleAssert#isEqualTo(Double)}.
  *
  * @author Yvonne Wang
  */
@@ -37,7 +38,7 @@ public class DoubleAssert_isEqualTo_double_wrapper_Test {
   @Before
   public void setUp() {
     actual = new Double(8d);
-    expected = new Double(6d);
+    expected = new Double(8d);
     assertions = new DoubleAssert(actual);
   }
 
@@ -47,8 +48,8 @@ public class DoubleAssert_isEqualTo_double_wrapper_Test {
   }
 
   @Test
-  public void should_return_this() {
-    DoubleAssert returned = assertions.isEqualTo(expected);
+  public void should_return_this_if_actual_is_equal_to_expected() {
+    DoubleAssert returned = assertions.isEqualTo(actual);
     assertSame(returned, assertions);
   }
 
@@ -56,18 +57,19 @@ public class DoubleAssert_isEqualTo_double_wrapper_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     assertions = new DoubleAssert(null);
-    assertions.isEqualTo(expected);
+    assertions.isEqualTo(6d);
   }
 
   @Test
-  public void should_fail_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
-    assertions.isEqualTo(null);
+  public void should_throw_error_if_expected_is_null() {
+    thrown.expect(NullPointerException.class);
+    expected = null;
+    assertions.isEqualTo(expected);
   }
 
   @Test
   public void should_fail_if_actual_is_not_equal_to_expected() {
     thrown.expect(AssertionError.class);
-    assertions.isEqualTo(expected);
+    assertions.isEqualTo(new Double(6d));
   }
 }

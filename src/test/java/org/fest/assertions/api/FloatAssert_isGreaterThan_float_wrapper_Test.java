@@ -15,16 +15,17 @@
 
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link FloatAssert#isGreaterThan(Comparable)}.
+ * Tests for {@link FloatAssert#isGreaterThan(Float)}.
  *
  * @author Yvonne Wang
  */
@@ -62,7 +63,7 @@ public class FloatAssert_isGreaterThan_float_wrapper_Test {
 
   @Test
   public void should_throw_error_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.isGreaterThan(null);
   }
 

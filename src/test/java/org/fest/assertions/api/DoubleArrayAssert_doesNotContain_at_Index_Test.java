@@ -14,14 +14,15 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.assertions.data.Index;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link DoubleArrayAssert#doesNotContain(Double, Index)}.
@@ -32,9 +33,9 @@ import static org.fest.test.ExpectedException.none;
 public class DoubleArrayAssert_doesNotContain_at_Index_Test {
   @Rule
   public ExpectedException thrown = none();
-  private double[] actual = {1d, 2d, 3d, 4d, 5d, 6d};
-  private Double value = 3d;
-  private Index index = Index.atIndex(3);
+  private final double[] actual = {1d, 2d, 3d, 4d, 5d, 6d};
+  private final Double value = 3d;
+  private final Index index = Index.atIndex(3);
   private DoubleArrayAssert assertions;
 
   @Before
@@ -61,21 +62,20 @@ public class DoubleArrayAssert_doesNotContain_at_Index_Test {
   }
 
   @Test
-  public void should_throw_error_if_actual_is_empty() {
-    thrown.expect(AssertionError.class);
+  public void should_pass_if_actual_is_empty() {
     assertions = new DoubleArrayAssert(new double[0]);
     assertions.doesNotContain(value, index);
   }
 
   @Test
   public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.doesNotContain(null, index);
   }
 
   @Test
   public void should_throw_error_if_given_index_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.doesNotContain(value, null);
   }
 

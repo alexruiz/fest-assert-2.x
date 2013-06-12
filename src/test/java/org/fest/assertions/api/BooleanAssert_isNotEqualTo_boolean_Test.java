@@ -15,39 +15,53 @@
 package org.fest.assertions.api;
 
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
-import org.fest.assertions.description.Description;
-import org.fest.assertions.internal.Objects;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Tests for {@link BooleanAssert#isNotEqualTo(boolean)}.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
-public class BooleanAssert_isNotEqualTo_Test {
-  private Objects objects;
+public class BooleanAssert_isNotEqualTo_boolean_Test {
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
   private BooleanAssert assertions;
+  private Boolean actual;
+  private boolean expected;
 
   @Before
   public void setUp() {
-    objects = mock(Objects.class);
-    assertions = new BooleanAssert(true, mock(Description.class));
-    assertions.objects = objects;
+    actual = new Boolean(true);
+    expected = false;
+    assertions = new BooleanAssert(actual);
   }
 
   @Test
-  public void should_verify_that_actual_is_not_equal_to_expected() {
-    assertions.isNotEqualTo(true);
-    verify(objects).assertNotEqual(assertions.description, assertions.actual, true);
+  public void should_pass_if_actual_is_not_equal_to_expected() {
+    assertions.isNotEqualTo(expected);
   }
 
   @Test
   public void should_return_this() {
-    BooleanAssert returned = assertions.isNotEqualTo(false);
+    BooleanAssert returned = assertions.isNotEqualTo(expected);
     assertSame(assertions, returned);
+  }
+
+  @Test
+  public void should_fail_if_actual_is_null() {
+    actual = null;
+    assertions = new BooleanAssert(actual);
+    assertions.isNotEqualTo(expected);
+  }
+
+  @Test
+  public void should_fail_if_actual_is_equal_to_expected() {
+    thrown.expect(AssertionError.class);
+    assertions.isNotEqualTo(true);
   }
 }

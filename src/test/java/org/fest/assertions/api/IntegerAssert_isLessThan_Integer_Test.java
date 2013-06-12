@@ -15,16 +15,16 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.fest.test.ExpectedException.none;
-import static org.junit.Assert.assertSame;
-
 /**
- * Tests for {@link IntegerAssert#isLessThan(Comparable)}.
+ * Tests for {@link IntegerAssert#isLessThan(Integer)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
@@ -33,8 +33,8 @@ public class IntegerAssert_isLessThan_Integer_Test {
   @Rule
   public ExpectedException thrown = none();
   private IntegerAssert assertions;
-  private Integer actual = 6;
-  private Integer expected = 8;
+  private Integer actual = new Integer(6);
+  private Integer expected = new Integer(8);
 
   @Before
   public void setUp() {
@@ -56,12 +56,13 @@ public class IntegerAssert_isLessThan_Integer_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     actual = null;
+    assertions = new IntegerAssert(actual);
     assertions.isLessThan(expected);
   }
 
   @Test
   public void should_throw_error_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     expected = null;
     assertions.isLessThan(expected);
   }
@@ -69,7 +70,7 @@ public class IntegerAssert_isLessThan_Integer_Test {
   @Test
   public void should_fail_if_actual_is_greater_than_expected() {
     thrown.expect(AssertionError.class);
-    assertions.isLessThan(new Integer(18));
+    assertions.isLessThan(new Integer(2));
   }
 
   @Test

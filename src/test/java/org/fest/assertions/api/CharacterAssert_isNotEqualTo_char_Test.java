@@ -14,13 +14,13 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
-import static org.junit.Assert.assertSame;
 
 /**
  * Tests for {@link CharacterAssert#isNotEqualTo(char)}.
@@ -41,12 +41,12 @@ public class CharacterAssert_isNotEqualTo_char_Test {
 
   @Test
   public void should_pass_if_actual_is_equal_to_expected() {
-    assertions.isEqualTo(expected);
+    assertions.isNotEqualTo(expected);
   }
 
   @Test
   public void should_return_this() {
-    CharacterAssert returned = assertions.isEqualTo(expected);
+    CharacterAssert returned = assertions.isNotEqualTo(expected);
     assertSame(assertions, returned);
   }
 
@@ -54,13 +54,14 @@ public class CharacterAssert_isNotEqualTo_char_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     actual = null;
-    assertions.isEqualTo(expected);
+    assertions = new CharacterAssert(actual);
+    assertions.isNotEqualTo(expected);
   }
 
   @Test
   public void should_fail_if_actual_is_not_equal_to_expected() {
     thrown.expect(AssertionError.class);
     expected = 'a';
-    assertions.isEqualTo(expected);
+    assertions.isNotEqualTo(expected);
   }
 }

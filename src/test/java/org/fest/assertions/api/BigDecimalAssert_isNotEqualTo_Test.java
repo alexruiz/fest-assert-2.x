@@ -17,6 +17,10 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
+import java.math.BigDecimal;
+
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.TestDescription;
 import org.fest.test.ExpectedException;
@@ -25,12 +29,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link BigDecimalAssert#isNotEqualTo(Comparable)}.
+ * Tests for {@link BigDecimalAssert#isNotEqualTo(String)}.
  * <p/>
  * Author: Yvonne Wang
  */
@@ -40,7 +40,7 @@ public class BigDecimalAssert_isNotEqualTo_Test {
   private BigDecimalAssert assertions;
   private BigDecimal actual = new BigDecimal(8);
   private BigDecimal expected = new BigDecimal(6);
-  private Description description = new TestDescription("testing");
+  private final Description description = new TestDescription("testing");
 
   @Before
   public void setUp() {
@@ -73,12 +73,13 @@ public class BigDecimalAssert_isNotEqualTo_Test {
   public void should_fail_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     actual = null;
+    assertions = new BigDecimalAssert(actual);
     assertions.isNotEqualTo(expected);
   }
 
   @Test
   public void should_fail_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     expected = null;
     assertions.isNotEqualTo(expected);
   }

@@ -14,16 +14,17 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link DoubleAssert#isLessThan(Comparable)}.
+ * Tests for {@link DoubleAssert#isLessThan(Double)}.
  *
  * @author Yvonne Wang
  */
@@ -47,7 +48,7 @@ public class DoubleAssert_isLessThan_double_wrapper_Test {
   }
 
   @Test
-  public void should_return_this() {
+  public void should_return_this_if_actual_is_less_than_expected() {
     DoubleAssert returned = assertions.isLessThan(expected);
     assertSame(returned, assertions);
   }
@@ -61,7 +62,7 @@ public class DoubleAssert_isLessThan_double_wrapper_Test {
 
   @Test
   public void should_throw_error_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.isLessThan(null);
   }
 

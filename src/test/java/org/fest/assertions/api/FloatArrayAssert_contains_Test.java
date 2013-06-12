@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link FloatArrayAssert#contains(float...)}.
@@ -30,7 +30,7 @@ import static org.fest.test.ExpectedException.none;
 public class FloatArrayAssert_contains_Test {
   @Rule
   public ExpectedException thrown = none();
-  private float[] actual = {1f, 2f, 3f, 4f, 5f, 6f};
+  private final float[] actual = {1f, 2f, 3f, 4f, 5f, 6f};
   private float[] values = {5f, 6f};
   private FloatArrayAssert assertions;
 
@@ -50,8 +50,15 @@ public class FloatArrayAssert_contains_Test {
   }
 
   @Test
-  public void should_pass_if_both_actual_and_given_values_are_empty() {
+  public void should_throw_error_if_actual_is_empty() {
     assertions = new FloatArrayAssert(new float[0]);
+    thrown.expect(AssertionError.class);
+    assertions.contains(values);
+  }
+
+  @Test
+  public void should_throw_error_if_parameter_values_is_missing() {
+    thrown.expect(IllegalArgumentException.class);
     assertions.contains();
   }
 
@@ -69,14 +76,14 @@ public class FloatArrayAssert_contains_Test {
 
   @Test
   public void should_throw_error_if_given_values_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     values = null;
     assertions.contains(values);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.contains();
   }
 }

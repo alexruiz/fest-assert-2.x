@@ -14,15 +14,15 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link LongAssert#isNotEqualTo(Comparable)}.
+ * Tests for {@link LongAssert#isNotEqualTo(Long)}.
  *
  * @author Yvonne Wang
  */
@@ -35,8 +35,8 @@ public class LongAssert_isNotEqualTo_long_wrapper_Test {
 
   @Before
   public void setUp() {
-    actual = new Long(6);
-    expected = new Long(2);
+    actual = new Long(6l);
+    expected = new Long(2l);
     assertions = new LongAssert(actual);
   }
 
@@ -60,7 +60,7 @@ public class LongAssert_isNotEqualTo_long_wrapper_Test {
 
   @Test
   public void should_throw_error_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.isNotEqualTo(null);
   }
 }

@@ -15,13 +15,13 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
-import static org.junit.Assert.assertSame;
 
 /**
  * Tests for {@link ByteAssert#isLessThan(byte)}.
@@ -33,8 +33,8 @@ public class ByteAssert_isLessThan_byte_Test {
   @Rule
   public ExpectedException thrown = none();
   private ByteAssert assertions;
-  private Byte actual = 6;
-  private byte expected = 8;
+  private final Byte actual = 6;
+  private final byte expected = 8;
 
   @Before
   public void setUp() {
@@ -60,16 +60,8 @@ public class ByteAssert_isLessThan_byte_Test {
   }
 
   @Test
-  public void should_fail_if_actual_is_less_than_expected() {
-    thrown.expect(AssertionError.class);
-    expected = 18;
-    assertions.isLessThan(expected);
-  }
-
-  @Test
   public void should_fail_if_actual_is_equal_to_expected() {
     thrown.expect(AssertionError.class);
-    expected = 8;
-    assertions.isLessThan(expected);
+    assertions.isLessThan(actual.byteValue());
   }
 }

@@ -14,16 +14,17 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link DoubleAssert#isNotEqualTo(Comparable)}.
+ * Tests for {@link DoubleAssert#isNotEqualTo(Double)}.
  *
  * @author Yvonne Wang
  */
@@ -61,7 +62,7 @@ public class DoubleAssert_isNotEqualTo_double_wrapper_Test {
 
   @Test
   public void should_fail_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.isNotEqualTo(null);
   }
 

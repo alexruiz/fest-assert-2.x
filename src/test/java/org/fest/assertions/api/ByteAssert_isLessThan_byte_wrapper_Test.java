@@ -15,16 +15,16 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.fest.test.ExpectedException.none;
-import static org.junit.Assert.assertSame;
-
 /**
- * Tests for {@link ByteAssert#isLessThan(Comparable)}.
+ * Tests for {@link ByteAssert#isLessThan(Byte)}.
  *
  * @author Yvonne Wang
  */
@@ -33,8 +33,8 @@ public class ByteAssert_isLessThan_byte_wrapper_Test {
   @Rule
   public ExpectedException thrown = none();
   private ByteAssert assertions;
-  private Byte actual = 6;
-  private Byte expected = 8;
+  private Byte actual = new Byte((byte) 6);
+  private Byte expected = new Byte((byte) 8);
 
   @Before
   public void setUp() {
@@ -56,27 +56,20 @@ public class ByteAssert_isLessThan_byte_wrapper_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     actual = null;
+    assertions = new ByteAssert(actual);
     assertions.isLessThan(expected);
   }
 
   @Test
   public void should_throw_error_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     expected = null;
-    assertions.isLessThan(expected);
-  }
-
-  @Test
-  public void should_fail_if_actual_is_less_than_expected() {
-    thrown.expect(AssertionError.class);
-    expected = 18;
     assertions.isLessThan(expected);
   }
 
   @Test
   public void should_fail_if_actual_is_equal_to_expected() {
     thrown.expect(AssertionError.class);
-    expected = 8;
-    assertions.isLessThan(expected);
+    assertions.isLessThan(actual);
   }
 }

@@ -14,15 +14,15 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link ShortAssert#isNotLessThan(Comparable)}.
+ * Tests for {@link ShortAssert#isNotLessThan(Short)}.
  *
  * @author Yvonne Wang
  */
@@ -65,7 +65,7 @@ public class ShortAssert_isNotLessThan_short_wrapper_Test {
 
   @Test
   public void should_throw_error_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.isNotLessThan(null);
   }
 }

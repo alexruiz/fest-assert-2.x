@@ -14,9 +14,6 @@
  */
 package org.fest.assertions.internal;
 
-import org.fest.assertions.description.Description;
-import org.fest.util.VisibleForTesting;
-
 import static org.fest.assertions.error.ShouldBeEqual.shouldBeEqual;
 import static org.fest.assertions.error.ShouldBeGreaterThan.shouldBeGreaterThan;
 import static org.fest.assertions.error.ShouldBeLessThan.shouldBeLessThan;
@@ -24,6 +21,9 @@ import static org.fest.assertions.error.ShouldNotBeEqual.shouldNotBeEqual;
 import static org.fest.assertions.error.ShouldNotBeGreaterThan.shouldNotBeGreaterThan;
 import static org.fest.assertions.error.ShouldNotBeLessThan.shouldNotBeLessThan;
 import static org.fest.assertions.internal.Comparables.assertNotNull;
+
+import org.fest.assertions.description.Description;
+import org.fest.util.VisibleForTesting;
 
 /**
  * Reusable assertions for <code>{@link Integer}</code>s.

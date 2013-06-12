@@ -15,16 +15,16 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.fest.test.ExpectedException.none;
-import static org.junit.Assert.assertSame;
-
 /**
- * Tests for {@link IntegerAssert#isEqualTo(Comparable)}.
+ * Tests for {@link IntegerAssert#isEqualTo(Integer)}.
  *
  * @author Yvonne Wang
  */
@@ -32,8 +32,8 @@ public class IntegerAssert_isEqualTo_Integer_Test {
   @Rule
   public ExpectedException thrown = none();
   private IntegerAssert assertions;
-  private Integer actual = 6;
-  private Integer expected = 6;
+  private Integer actual = new Integer(6);
+  private Integer expected = new Integer(6);
 
   @Before
   public void setUp() {
@@ -55,12 +55,13 @@ public class IntegerAssert_isEqualTo_Integer_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     actual = null;
+    assertions = new IntegerAssert(actual);
     assertions.isEqualTo(expected);
   }
 
   @Test
   public void should_throw_error_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     expected = null;
     assertions.isEqualTo(expected);
   }
@@ -68,7 +69,6 @@ public class IntegerAssert_isEqualTo_Integer_Test {
   @Test
   public void should_fail_if_actual_is_not_equal_to_expected() {
     thrown.expect(AssertionError.class);
-    expected = 8;
-    assertions.isEqualTo(expected);
+    assertions.isEqualTo(new Integer(8));
   }
 }

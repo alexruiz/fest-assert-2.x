@@ -26,10 +26,7 @@ import org.fest.assertions.internal.Strings;
 import org.fest.util.VisibleForTesting;
 
 /**
- * <p>
  * Assertions for {@code String}s.
- * </p>
- *
  * <p>
  * To create a new instance of this class, invoke {@link Assertions#assertThat(String)}.
  * </p>

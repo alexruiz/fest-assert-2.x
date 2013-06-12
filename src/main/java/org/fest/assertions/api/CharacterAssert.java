@@ -14,8 +14,8 @@
  */
 package org.fest.assertions.api;
 
-import org.fest.assertions.internal.Characters;
 import org.fest.assertions.description.Description;
+import org.fest.assertions.internal.Characters;
 import org.fest.util.VisibleForTesting;
 
 /**
@@ -142,7 +142,7 @@ public class CharacterAssert extends AbstractComparableAssert<CharacterAssert, C
    * @throws AssertionError if the actual value is greater than the given one.
    */
   public CharacterAssert isNotGreaterThan(char expected) {
-    characters.assertGreaterThan(description, actual, expected);
+    characters.assertNotGreaterThan(description, actual, expected);
     return this;
   }
 }

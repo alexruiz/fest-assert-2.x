@@ -14,13 +14,13 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
-import static org.junit.Assert.assertSame;
 
 /**
  * Tests for {@link CharacterAssert#isLessThan(char)}.
@@ -31,8 +31,8 @@ public class CharacterAssert_isLessThan_char_Test {
   @Rule
   public ExpectedException thrown = none();
   private CharacterAssert assertions;
-  private Character actual = new Character('a');
-  private char expected = 'b';
+  private final Character actual = new Character('a');
+  private final char expected = 'b';
 
   @Before
   public void setUp() {
@@ -67,6 +67,6 @@ public class CharacterAssert_isLessThan_char_Test {
   @Test
   public void should_fail_if_actual_is_equal_to_expected() {
     thrown.expect(AssertionError.class);
-    assertions.isLessThan(actual);
+    assertions.isLessThan(actual.charValue());
   }
 }

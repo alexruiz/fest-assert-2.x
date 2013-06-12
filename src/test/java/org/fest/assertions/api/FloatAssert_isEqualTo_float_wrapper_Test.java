@@ -15,16 +15,17 @@
 
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link FloatAssert#isEqualTo(Comparable)}.
+ * Tests for {@link FloatAssert#isEqualTo(Float)}.
  *
  * @author Yvonne Wang
  */
@@ -48,8 +49,8 @@ public class FloatAssert_isEqualTo_float_wrapper_Test {
   }
 
   @Test
-  public void should_return_this() {
-    FloatAssert returned = assertions.isEqualTo(expected);
+  public void should_return_this_if_actual_is_equal_to_expected() {
+    FloatAssert returned = assertions.isEqualTo(actual);
     assertSame(returned, assertions);
   }
 
@@ -62,7 +63,7 @@ public class FloatAssert_isEqualTo_float_wrapper_Test {
 
   @Test
   public void should_fail_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.isEqualTo(null);
   }
 

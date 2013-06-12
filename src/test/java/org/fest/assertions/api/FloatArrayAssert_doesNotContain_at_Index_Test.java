@@ -14,14 +14,15 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.assertions.data.Index;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link FloatArrayAssert#doesNotContain(Float, org.fest.assertions.data.Index)}.
@@ -32,9 +33,9 @@ import static org.fest.test.ExpectedException.none;
 public class FloatArrayAssert_doesNotContain_at_Index_Test {
   @Rule
   public ExpectedException thrown = none();
-  private float[] actual = {1f, 2f, 3f, 4f, 5f, 6f};
-  private Float value = 3f;
-  private Index index = Index.atIndex(3);
+  private final float[] actual = { 1f, 2f, 3f, 4f, 5f, 6f };
+  private final Float value = 3f;
+  private final Index index = Index.atIndex(3);
   private FloatArrayAssert assertions;
 
   @Before
@@ -61,21 +62,20 @@ public class FloatArrayAssert_doesNotContain_at_Index_Test {
   }
 
   @Test
-  public void should_throw_error_if_actual_is_empty() {
-    thrown.expect(AssertionError.class);
+  public void should_pass_if_actual_is_empty() {
     assertions = new FloatArrayAssert(new float[0]);
     assertions.doesNotContain(value, index);
   }
 
   @Test
   public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.doesNotContain(null, index);
   }
 
   @Test
   public void should_throw_error_if_given_index_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.doesNotContain(value, null);
   }
 

@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link DoubleArrayAssert#contains(double...)}.
@@ -30,8 +30,8 @@ import static org.fest.test.ExpectedException.none;
 public class DoubleArrayAssert_contains_Test {
   @Rule
   public ExpectedException thrown = none();
-  private double[] actual = {1d, 2d, 3d, 4d, 5d, 6d};
-  private double[] values = {5d, 6d};
+  private final double[] actual = { 1d, 2d, 3d, 4d, 5d, 6d };
+  private double[] values = { 5d, 6d };
   private DoubleArrayAssert assertions;
 
   @Before
@@ -50,8 +50,8 @@ public class DoubleArrayAssert_contains_Test {
   }
 
   @Test
-  public void should_pass_if_both_actual_and_given_values_are_empty() {
-    assertions = new DoubleArrayAssert(new double[0]);
+  public void should_throw_error_if_parameter_given_values_is_missing() {
+    thrown.expect(IllegalArgumentException.class);
     assertions.contains();
   }
 
@@ -68,15 +68,22 @@ public class DoubleArrayAssert_contains_Test {
   }
 
   @Test
-  public void should_throw_error_if_given_values_is_null() {
+  public void should_throw_error_if_actual_is_empty() {
     thrown.expect(AssertionError.class);
+    assertions = new DoubleArrayAssert(new double[0]);
+    assertions.contains(values);
+  }
+
+  @Test
+  public void should_throw_error_if_given_values_is_null() {
+    thrown.expect(NullPointerException.class);
     values = null;
     assertions.contains(values);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.contains();
   }
 }

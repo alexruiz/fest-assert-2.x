@@ -14,14 +14,15 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.assertions.data.Index;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link DoubleArrayAssert#contains(Double, Index)}.
@@ -32,9 +33,9 @@ import static org.fest.test.ExpectedException.none;
 public class DoubleArrayAssert_contains_at_Index_Test {
   @Rule
   public ExpectedException thrown = none();
-  private double[] actual = {1d, 2d, 3d, 4d, 5d, 6d};
-  private Double value = 3d;
-  private Index index = Index.atIndex(3);
+  private final double[] actual = {1d, 2d, 3d, 4d, 5d, 6d};
+  private final Double value = 4d;
+  private final Index index = Index.atIndex(3);
   private DoubleArrayAssert assertions;
 
   @Before
@@ -43,13 +44,13 @@ public class DoubleArrayAssert_contains_at_Index_Test {
   }
 
   @Test
-  public void should_pass_if_actual_does_not_contain_given_value_at_given_index() {
-    assertions.doesNotContain(value, index);
+  public void should_pass_if_actual_contains_given_value_at_given_index() {
+    assertions.contains(value, index);
   }
 
   @Test
-  public void should_return_this_if_actual_does_not_contain_given_value_at_given_index() {
-    DoubleArrayAssert returned = assertions.doesNotContain(value, index);
+  public void should_return_this_if_actual_contains_given_value_at_given_index() {
+    DoubleArrayAssert returned = assertions.contains(value, index);
     assertSame(returned, assertions);
   }
 
@@ -57,31 +58,31 @@ public class DoubleArrayAssert_contains_at_Index_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     assertions = new DoubleArrayAssert(null);
-    assertions.doesNotContain(value, index);
+    assertions.contains(value, index);
   }
 
   @Test
   public void should_throw_error_if_actual_is_empty() {
     thrown.expect(AssertionError.class);
     assertions = new DoubleArrayAssert(new double[0]);
-    assertions.doesNotContain(value, index);
+    assertions.contains(value, index);
   }
 
   @Test
   public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(AssertionError.class);
-    assertions.doesNotContain(null, index);
+    thrown.expect(NullPointerException.class);
+    assertions.contains(null, index);
   }
 
   @Test
   public void should_throw_error_if_given_index_is_null() {
-    thrown.expect(AssertionError.class);
-    assertions.doesNotContain(value, null);
+    thrown.expect(NullPointerException.class);
+    assertions.contains(value, null);
   }
 
   @Test
-  public void should_fail_if_actual_contains_given_value_at_given_index() {
+  public void should_fail_if_actual_does_not_contain_given_value_at_given_index() {
     thrown.expect(AssertionError.class);
-    assertions.doesNotContain(4d, index);
+    assertions.contains(3d, index);
   }
 }

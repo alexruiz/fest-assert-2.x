@@ -15,16 +15,16 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.fest.test.ExpectedException.none;
-import static org.junit.Assert.assertSame;
-
 /**
- * Tests for {@link ByteAssert#isNotGreaterThan(Comparable)}.
+ * Tests for {@link ByteAssert#isNotGreaterThan(Byte)}.
  *
  * @author Yvonne Wang
  */
@@ -33,8 +33,8 @@ public class ByteAssert_isNotGreaterThan_byte_wrapper_Test {
   @Rule
   public ExpectedException thrown = none();
   private ByteAssert assertions;
-  private Byte actual = 8;
-  private Byte expected = 6;
+  private Byte actual = new Byte((byte) 6);
+  private Byte expected = new Byte((byte) 8);
 
   @Before
   public void setUp() {
@@ -42,19 +42,18 @@ public class ByteAssert_isNotGreaterThan_byte_wrapper_Test {
   }
 
   @Test
-  public void should_pass_if_actual_is_greater_than_expected() {
-    assertions.isNotLessThan(expected);
+  public void should_pass_if_actual_is_less_than_expected() {
+    assertions.isNotGreaterThan(expected);
   }
 
   @Test
   public void should_pass_if_actual_is_equal_to_expected() {
-    expected = 8;
-    assertions.isNotLessThan(expected);
+    assertions.isNotGreaterThan(expected);
   }
 
   @Test
   public void should_return_this() {
-    ByteAssert returned = assertions.isNotLessThan(expected);
+    ByteAssert returned = assertions.isNotGreaterThan(expected);
     assertSame(assertions, returned);
   }
 
@@ -62,20 +61,20 @@ public class ByteAssert_isNotGreaterThan_byte_wrapper_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     actual = null;
-    assertions.isNotLessThan(expected);
+    assertions = new ByteAssert(actual);
+    assertions.isNotGreaterThan(expected);
   }
 
   @Test
   public void should_throw_error_if_expected_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     expected = null;
-    assertions.isNotLessThan(expected);
+    assertions.isNotGreaterThan(expected);
   }
 
   @Test
-  public void should_fail_if_actual_is_less_than_expected() {
+  public void should_fail_if_actual_is_greater_than_expected() {
     thrown.expect(AssertionError.class);
-    expected = 10;
-    assertions.isNotLessThan(expected);
+    assertions.isNotGreaterThan(new Byte((byte) 2));
   }
 }

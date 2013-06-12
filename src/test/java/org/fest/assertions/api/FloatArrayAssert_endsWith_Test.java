@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link FloatArrayAssert#endsWith(float...)}.
@@ -30,7 +30,7 @@ import static org.fest.test.ExpectedException.none;
 public class FloatArrayAssert_endsWith_Test {
   @Rule
   public ExpectedException thrown = none();
-  private float[] actual = {6f, 8f, 10f, 16f, 18f};
+  private final float[] actual = {6f, 8f, 10f, 16f, 18f};
   private float[] sequence = {16f, 18f};
   private FloatArrayAssert assertions;
 
@@ -55,7 +55,8 @@ public class FloatArrayAssert_endsWith_Test {
   }
 
   @Test
-  public void should_pass_if_actual_ends_with_given_sequence_multiple_times() {
+  public void should_fail_if_actual_ends_with_given_sequence_multiple_times() {
+    thrown.expect(AssertionError.class);
     assertions.endsWith(16f, 16f, 18f);
   }
 
@@ -68,21 +69,21 @@ public class FloatArrayAssert_endsWith_Test {
 
   @Test
   public void should_fail_if_actual_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.endsWith();
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     sequence = null;
     assertions.endsWith(sequence);
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_empty() {
-    thrown.expect(AssertionError.class);
-    assertions.endsWith();
+    thrown.expect(IllegalArgumentException.class);
+    assertions.endsWith(new float[0]);
   }
 
   @Test
@@ -90,5 +91,4 @@ public class FloatArrayAssert_endsWith_Test {
     thrown.expect(AssertionError.class);
     assertions.endsWith(2f, 4f);
   }
-
 }

@@ -15,12 +15,12 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link LongAssert#isNull()}.
@@ -35,7 +35,7 @@ public class LongAssert_isNull_Test {
 
   @Before
   public void setUp() {
-    actual = new Long(6);
+    actual = null;
     assertions = new LongAssert(actual);
   }
 
@@ -47,6 +47,8 @@ public class LongAssert_isNull_Test {
   @Test
   public void should_fail_if_actual_is_not_null() {
     thrown.expect(AssertionError.class);
+    actual = new Long(6l);
+    assertions = new LongAssert(actual);
     assertions.isNull();
   }
 }

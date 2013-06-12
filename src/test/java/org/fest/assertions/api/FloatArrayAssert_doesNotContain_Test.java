@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link FloatArrayAssert#doesNotContain(float...)}.
@@ -30,7 +30,7 @@ import static org.fest.test.ExpectedException.none;
 public class FloatArrayAssert_doesNotContain_Test {
   @Rule
   public ExpectedException thrown = none();
-  private float[] actual = {6f, 8f, 10f};
+  private final float[] actual = {6f, 8f, 10f};
   private float[] values = {2f, 4f};
   private FloatArrayAssert assertions;
 
@@ -69,14 +69,14 @@ public class FloatArrayAssert_doesNotContain_Test {
 
   @Test
   public void should_throw_error_if_given_values_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     values = null;
     assertions.doesNotContain(values);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.doesNotContain();
   }
 

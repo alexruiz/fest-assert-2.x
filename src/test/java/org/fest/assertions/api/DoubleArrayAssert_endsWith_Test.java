@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link DoubleArrayAssert#endsWith(double...)}.
@@ -30,8 +30,8 @@ import static org.fest.test.ExpectedException.none;
 public class DoubleArrayAssert_endsWith_Test {
   @Rule
   public ExpectedException thrown = none();
-  private double[] actual = {6d, 8d, 10d, 16d, 18d};
-  private double[] sequence = {16d, 18d};
+  private final double[] actual = { 6d, 8d, 10d, 16d, 18d };
+  private double[] sequence = { 16d, 18d };
   private DoubleArrayAssert assertions;
 
   @Before
@@ -55,7 +55,8 @@ public class DoubleArrayAssert_endsWith_Test {
   }
 
   @Test
-  public void should_pass_if_actual_ends_with_given_sequence_multiple_times() {
+  public void should_fail_if_actual_ends_with_given_sequence_multiple_times() {
+    thrown.expect(AssertionError.class);
     assertions.endsWith(16d, 16d, 18d);
   }
 
@@ -68,20 +69,20 @@ public class DoubleArrayAssert_endsWith_Test {
 
   @Test
   public void should_fail_if_actual_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.endsWith();
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     sequence = null;
     assertions.endsWith(sequence);
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.endsWith();
   }
 
