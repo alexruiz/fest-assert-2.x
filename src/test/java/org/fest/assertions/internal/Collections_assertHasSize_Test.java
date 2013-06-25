@@ -17,7 +17,7 @@ package org.fest.assertions.internal;
 import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
-import static org.fest.util.Collections.list;
+import static org.fest.util.Lists.newArrayList;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -31,14 +31,14 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
+ * Tests for {@link Collections#assertHasSize(Description, Collection, int)}.
+ *
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
 public class Collections_assertHasSize_Test {
-
   @Rule
   public ExpectedException thrown = none();
-
   private Failures failures;
   private Collections collections;
   private Description description;
@@ -53,7 +53,7 @@ public class Collections_assertHasSize_Test {
 
   @Test
   public void should_pass_if_size_of_actual_is_equal_to_expected_size() {
-    collections.assertHasSize(description, list("Luke", "Yoda"), 2);
+    collections.assertHasSize(description, newArrayList("Luke", "Yoda"), 2);
   }
 
   @Test
@@ -64,7 +64,7 @@ public class Collections_assertHasSize_Test {
 
   @Test
   public void should_fail_if_size_of_actual_is_not_equal_to_expected_size() {
-    Collection<String> actual = list("Yoda");
+    Collection<String> actual = newArrayList("Yoda");
     try {
       collections.assertHasSize(description, actual, 8);
     } catch (AssertionError e) {

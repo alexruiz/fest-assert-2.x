@@ -14,17 +14,18 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.assertions.data.Index;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link IntArrayAssert#contains(Integer, Index)}.
+ * Tests for {@link IntArrayAssert#contains(int, Index)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
@@ -32,9 +33,9 @@ import static org.fest.test.ExpectedException.none;
 public class IntArrayAssert_contains_at_Index_Test {
   @Rule
   public ExpectedException thrown = none();
-  private int[] actual = {1, 2, 3, 4, 5, 6};
-  private Integer value = 3;
-  private Index index = Index.atIndex(2);
+  private int[] actual = { 1, 2, 3, 4, 5, 6 };
+  private final Integer value = 3;
+  private final Index index = Index.atIndex(2);
   private IntArrayAssert assertions;
 
   @Before
@@ -63,18 +64,14 @@ public class IntArrayAssert_contains_at_Index_Test {
   @Test
   public void should_throw_error_if_actual_is_empty() {
     thrown.expect(AssertionError.class);
+    actual = new int[0];
+    assertions = new IntArrayAssert(actual);
     assertions.contains(value, index);
   }
 
   @Test
-  public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(AssertionError.class);
-    assertions.contains(null, index);
-  }
-
-  @Test
   public void should_throw_error_if_given_index_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.contains(value, null);
   }
 

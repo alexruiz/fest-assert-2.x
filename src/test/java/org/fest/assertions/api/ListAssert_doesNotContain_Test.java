@@ -15,28 +15,26 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+import static org.fest.util.Lists.newArrayList;
+
+import java.util.List;
+
 import org.fest.test.ExpectedException;
-import org.fest.util.Lists;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.Collection;
-import java.util.List;
-
-import static org.fest.test.ExpectedException.none;
-import static org.fest.util.Lists.newArrayList;
-
 /**
- * Tests for {@link ListAssert#doesNotContain(Collection[])}.
+ * Tests for {@link ListAssert#doesNotContain(Object...)}.
  *
  * @author Yvonne Wang
  */
 public class ListAssert_doesNotContain_Test {
   @Rule
   public ExpectedException thrown = none();
-  private List<String> actual = newArrayList("one", "two");
-  private List<String> expected = newArrayList("three");
+  private final List<String> actual = newArrayList("one", "two");
+  private Object[] expected = { "three" };
   private ListAssert assertions;
 
   @Before
@@ -46,32 +44,34 @@ public class ListAssert_doesNotContain_Test {
 
   @Test
   public void should_throw_error_if_actual_is_null() {
+    thrown.expect(AssertionError.class);
     assertions = new ListAssert(null);
     assertions.doesNotContain(expected);
   }
 
   @Test
   public void should_throw_error_if_expected_is_null() {
+    thrown.expect(NullPointerException.class);
     expected = null;
     assertions.doesNotContain(expected);
   }
 
   @Test
-  public void should_throw_error_if_expected_is_empty_list() {
-    thrown.expect(AssertionError.class);
-    assertions.doesNotContain(Lists.emptyList());
+  public void should_throw_error_if_expected_is_empty() {
+    thrown.expect(IllegalArgumentException.class);
+    assertions.doesNotContain(new Object[0]);
   }
 
   @Test
   public void should_fail_if_actual_contains_expected() {
     thrown.expect(AssertionError.class);
-    assertions.doesNotContain(newArrayList("one"));
+    assertions.doesNotContain(new Object[] { "one" });
   }
 
   @Test
   public void should_fail_if_actual_contains_itself() {
     thrown.expect(AssertionError.class);
-    assertions.doesNotContain(actual);
+    assertions.doesNotContain(actual.toArray());
   }
 
   @Test

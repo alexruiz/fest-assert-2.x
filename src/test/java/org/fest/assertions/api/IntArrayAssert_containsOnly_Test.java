@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link IntArrayAssert#containsOnly(int...)}.
@@ -30,8 +30,8 @@ import static org.fest.test.ExpectedException.none;
 public class IntArrayAssert_containsOnly_Test {
   @Rule
   public ExpectedException thrown = none();
-  private int[] actual = {6, 8, 10};
-  private int[] values = {6, 6, 8, 8, 10, 10};
+  private final int[] actual = { 6, 8, 10 };
+  private int[] values = { 6, 6, 8, 8, 10, 10 };
   private IntArrayAssert assertions;
 
   @Before
@@ -70,14 +70,20 @@ public class IntArrayAssert_containsOnly_Test {
 
   @Test
   public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     values = null;
     assertions.containsOnly(values);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
+    assertions.containsOnly(new int[0]);
+  }
+
+  @Test
+  public void should_throw_error_if_parameter_values_is_missing() {
+    thrown.expect(IllegalArgumentException.class);
     assertions.containsOnly();
   }
 

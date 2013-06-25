@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link IntArrayAssert#startsWith(int...)}.
@@ -30,8 +30,8 @@ import static org.fest.test.ExpectedException.none;
 public class IntArrayAssert_startsWith_Test {
   @Rule
   public ExpectedException thrown = none();
-  private int[] actual = {6, 8, 10, 16, 18};
-  private int[] sequence = {6, 8, 10};
+  private final int[] actual = { 6, 8, 10, 16, 18 };
+  private int[] sequence = { 6, 8, 10 };
   private IntArrayAssert assertions;
 
   @Before
@@ -55,7 +55,8 @@ public class IntArrayAssert_startsWith_Test {
   }
 
   @Test
-  public void should_pass_if_actual_starts_with_given_sequence_multiple_times() {
+  public void should_fail_if_actual_starts_with_given_sequence_multiple_times() {
+    thrown.expect(AssertionError.class);
     assertions.startsWith(6, 6, 8, 10, 10);
   }
 
@@ -75,14 +76,20 @@ public class IntArrayAssert_startsWith_Test {
 
   @Test
   public void should_throw_error_if_given_sequence_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     sequence = null;
+    assertions.startsWith(sequence);
+  }
+
+  @Test
+  public void should_throw_error_if_parameter_sequence_is_missing() {
+    thrown.expect(IllegalArgumentException.class);
     assertions.startsWith();
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.startsWith();
   }
 

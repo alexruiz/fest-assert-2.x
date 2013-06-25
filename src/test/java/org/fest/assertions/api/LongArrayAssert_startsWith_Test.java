@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link LongArrayAssert#startsWith(long...)}.
@@ -30,7 +30,7 @@ import static org.fest.test.ExpectedException.none;
 public class LongArrayAssert_startsWith_Test {
   @Rule
   public ExpectedException thrown = none();
-  private long[] actual = {6, 8, 10, 16, 18};
+  private final long[] actual = {6, 8, 10, 16, 18};
   private long[] sequence = {6, 8, 10};
   private LongArrayAssert assertions;
 
@@ -55,7 +55,8 @@ public class LongArrayAssert_startsWith_Test {
   }
 
   @Test
-  public void should_pass_if_actual_starts_with_given_sequence_multiple_times() {
+  public void should_throw_error_if_actual_starts_with_given_sequence_multiple_times() {
+    thrown.expect(AssertionError.class);
     assertions.startsWith(6, 6, 8, 10, 10);
   }
 
@@ -75,14 +76,14 @@ public class LongArrayAssert_startsWith_Test {
 
   @Test
   public void should_throw_error_if_given_sequence_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     sequence = null;
     assertions.startsWith(sequence);
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.startsWith();
   }
 

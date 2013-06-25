@@ -14,26 +14,57 @@
  */
 package org.fest.assertions.api;
 
-import static org.mockito.Mockito.verify;
+import static org.fest.test.ExpectedException.none;
 
-import org.fest.assertions.api.ObjectArrayAssert;
-import org.fest.assertions.api.ObjectArrayAssertBaseTest;
+import org.fest.test.ExpectedException;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 
 /**
- * Tests for <code>{@link org.fest.assertions.api.ObjectArrayAssert#doesNotContainNull()}</code>.
- * 
- * @author Joel Costigliola
- * @author Mikhail Mazursky
+ * Tests for {@link ObjectArrayAssert#doesNotContainNull()}.
+ *
+ * @author Yvonne Wang
  */
-public class ObjectArrayAssert_doesNotContainNull_Test extends ObjectArrayAssertBaseTest {
+public class ObjectArrayAssert_doesNotContainNull_Test {
+  @Rule
+  public ExpectedException thrown = none();
+  private Object[] actual = { 'a', 'b', 'c', 6 };
+  private ObjectArrayAssert assertions;
 
-  @Override
-  protected ObjectArrayAssert<Object> invoke_api_method() {
-    return assertions.doesNotContainNull();
+  @Before
+  public void setUp() {
+    assertions = new ObjectArrayAssert(actual);
   }
 
-  @Override
-  protected void verify_internal_effects() {
-    verify(arrays).assertDoesNotContainNull(getInfo(assertions), getActual(assertions));
+  @Test
+  public void should_pass_if_actual_does_not_contain_null() {
+    assertions.doesNotContainNull();
+  }
+
+  @Test
+  public void should_return_this_if_actual_does_not_contain_null() {
+    assertions.doesNotContainNull();
+  }
+
+  @Test
+  public void should_pass_if_actual_is_empty() {
+    assertions = new ObjectArrayAssert(new Object[0]);
+    assertions.doesNotContainNull();
+  }
+
+  @Test
+  public void should_throw_error_if_actual_is_null() {
+    thrown.expect(AssertionError.class);
+    assertions = new ObjectArrayAssert(null);
+    assertions.doesNotContainNull();
+  }
+
+  @Test
+  public void should_fail_if_actual_contains_null() {
+    thrown.expect(AssertionError.class);
+    actual = new Object[] { 'a', null, 'b', 'c' };
+    assertions = new ObjectArrayAssert(actual);
+    assertions.doesNotContainNull();
   }
 }

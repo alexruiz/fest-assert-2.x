@@ -19,7 +19,7 @@ import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
 import static org.fest.util.Arrays.array;
-import static org.fest.util.Collections.list;
+import static org.fest.util.Lists.newArrayList;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -33,17 +33,15 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Tests for <code>{@link Lists#assertDoesNotContain(Description, List, Object, Index)}</code>.
+ * Tests for {@link Lists#assertDoesNotContain(Description, List, Object, Index)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
 public class Lists_assertDoesNotContain_At_Index_Test {
-
   @Rule
   public ExpectedException thrown = none();
-
-  private final List<String> actual = list("Luke", "Yoda", "Leia");
+  private final List<String> actual = newArrayList("Luke", "Yoda", "Leia");
   private Lists lists;
   private Failures failures;
   private Description description;

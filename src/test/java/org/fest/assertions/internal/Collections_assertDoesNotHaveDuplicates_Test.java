@@ -20,8 +20,8 @@ import static org.fest.assertions.error.ShouldNotHaveDuplicates.shouldNotHaveDup
 import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
-import static org.fest.util.Collections.list;
-import static org.fest.util.Collections.set;
+import static org.fest.util.Lists.newArrayList;
+import static org.fest.util.Sets.newLinkedHashSet;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -35,14 +35,13 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * @author Alex
- * @author Alex
+ * Tests for {@link Collections#assertDoesNotHaveDuplicates(Description, Collection)}.
+ *
+ * @author Yvonne Wang
  */
 public class Collections_assertDoesNotHaveDuplicates_Test {
-
   @Rule
   public ExpectedException thrown = none();
-
   private List<String> actual;
   private Failures failures;
   private Collections collections;
@@ -50,7 +49,7 @@ public class Collections_assertDoesNotHaveDuplicates_Test {
 
   @Before
   public void setUp() {
-    actual = list("Luke", "Yoda", "Leia");
+    actual = newArrayList("Luke", "Yoda", "Leia");
     failures = spy(new Failures());
     collections = Collections.instance();
     collections.failures = failures;
@@ -75,7 +74,7 @@ public class Collections_assertDoesNotHaveDuplicates_Test {
 
   @Test
   public void should_fail_if_actual_contains_duplicates() {
-    Collection<String> duplicates = set("Luke", "Yoda");
+    Collection<String> duplicates = newLinkedHashSet("Luke", "Yoda");
     actual.addAll(duplicates);
     try {
       collections.assertDoesNotHaveDuplicates(description, actual);

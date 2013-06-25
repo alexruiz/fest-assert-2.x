@@ -14,16 +14,16 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
+import java.util.List;
+
 import org.fest.assertions.data.Index;
 import org.fest.test.ExpectedException;
 import org.fest.util.Lists;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.util.List;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link ListAssert#contains(Object, Index)}.
@@ -35,8 +35,8 @@ public class ListAssert_contains_at_Index_Test {
   @Rule
   public ExpectedException thrown = none();
   private List<String> actual = Lists.newArrayList("one", "two");
-  private Object value = "one";
-  private Index index = Index.atIndex(0);
+  private final Object value = "one";
+  private final Index index = Index.atIndex(0);
   private ListAssert assertions;
 
   @Before
@@ -46,17 +46,20 @@ public class ListAssert_contains_at_Index_Test {
 
   @Test
   public void should_throw_error_if_actual_is_null() {
+    thrown.expect(AssertionError.class);
     assertions = new ListAssert(null);
     assertions.contains(value, index);
   }
 
   @Test
   public void should_throw_error_if_expected_is_null() {
+    thrown.expect(AssertionError.class);
     assertions.contains(null, index);
   }
 
   @Test
   public void should_throw_error_if_index_is_null() {
+    thrown.expect(NullPointerException.class);
     assertions.contains(value, null);
   }
 

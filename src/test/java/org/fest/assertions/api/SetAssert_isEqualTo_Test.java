@@ -15,18 +15,18 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
+import java.util.Set;
+
 import org.fest.test.ExpectedException;
 import org.fest.util.Sets;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.Set;
-
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link SetAssert#isEqualTo(Object)}.
+ * Tests for {@link SetAssert#isEqualTo(Set)}.
  *
  * @author Yvonne Wang
  */

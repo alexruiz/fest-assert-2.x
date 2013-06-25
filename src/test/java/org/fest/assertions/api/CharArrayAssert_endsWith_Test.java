@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link CharArrayAssert#endsWith(char...)}.
@@ -30,8 +30,8 @@ import static org.fest.test.ExpectedException.none;
 public class CharArrayAssert_endsWith_Test {
   @Rule
   public ExpectedException thrown = none();
-  private char[] actual = {'a', 'b', 'c', 'd'};
-  private char[] sequence = {'c', 'd'};
+  private final char[] actual = { 'a', 'b', 'c', 'd' };
+  private char[] sequence = { 'c', 'd' };
   private CharArrayAssert assertions;
 
   @Before
@@ -55,7 +55,8 @@ public class CharArrayAssert_endsWith_Test {
   }
 
   @Test
-  public void should_pass_if_actual_ends_with_given_sequence_multiple_times() {
+  public void should_fail_if_actual_ends_with_given_sequence_multiple_times() {
+    thrown.expect(AssertionError.class);
     assertions.endsWith('c', 'd', 'd');
   }
 
@@ -69,20 +70,21 @@ public class CharArrayAssert_endsWith_Test {
   @Test
   public void should_fail_if_actual_is_empty() {
     thrown.expect(AssertionError.class);
-    assertions.endsWith();
+    assertions = new CharArrayAssert(new char[0]);
+    assertions.endsWith(sequence);
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     sequence = null;
     assertions.endsWith(sequence);
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_empty() {
-    thrown.expect(AssertionError.class);
-    assertions.endsWith();
+    thrown.expect(IllegalArgumentException.class);
+    assertions.endsWith(new char[0]);
   }
 
   @Test

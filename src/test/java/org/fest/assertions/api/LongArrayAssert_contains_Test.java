@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link LongArrayAssert#contains(long...)}.
@@ -30,7 +30,7 @@ import static org.fest.test.ExpectedException.none;
 public class LongArrayAssert_contains_Test {
   @Rule
   public ExpectedException thrown = none();
-  private long[] actual = {1, 2, 3, 4, 5, 6};
+  private final long[] actual = {1, 2, 3, 4, 5, 6};
   private long[] values = {5, 6};
   private LongArrayAssert assertions;
 
@@ -51,32 +51,33 @@ public class LongArrayAssert_contains_Test {
   }
 
   @Test
-  public void should_pass_if_both_actual_and_given_values_are_empty() {
-    assertions = new LongArrayAssert(new long[0]);
-    assertions.contains(new long[0]);
+  public void should_return_this_if_actual_contains_given_value() {
+    assertions.contains(values);
   }
 
   @Test
-  public void should_return_this_if_actual_contains_given_value() {
-    assertions.contains(values);
+  public void should_throw_error_if_actual_is_empty() {
+    thrown.expect(IllegalArgumentException.class);
+    assertions = new LongArrayAssert(new long[0]);
+    assertions.contains(new long[0]);
   }
 
   @Test
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     assertions = new LongArrayAssert(null);
-    assertions.contains();
+    assertions.contains(values);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.contains(null);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.contains(new long[0]);
   }
 }

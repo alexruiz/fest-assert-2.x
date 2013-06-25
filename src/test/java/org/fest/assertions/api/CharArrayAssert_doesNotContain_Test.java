@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link CharArrayAssert#doesNotContain(char...)}.
@@ -30,7 +30,7 @@ import static org.fest.test.ExpectedException.none;
 public class CharArrayAssert_doesNotContain_Test {
   @Rule
   public ExpectedException thrown = none();
-  private char[] actual = {'a', 'b', 'c'};
+  private final char[] actual = {'a', 'b', 'c'};
   private char[] values = {'e', 'f'};
   private CharArrayAssert assertions;
 
@@ -69,14 +69,14 @@ public class CharArrayAssert_doesNotContain_Test {
 
   @Test
   public void should_throw_error_if_given_values_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     values = null;
     assertions.doesNotContain(values);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.doesNotContain();
   }
 

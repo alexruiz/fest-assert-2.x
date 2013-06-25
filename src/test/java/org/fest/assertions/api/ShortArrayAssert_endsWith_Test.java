@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link ShortArrayAssert#endsWith(short...)}.
@@ -30,8 +30,8 @@ import static org.fest.test.ExpectedException.none;
 public class ShortArrayAssert_endsWith_Test {
   @Rule
   public ExpectedException thrown = none();
-  private short[] actual = {(short) 6, (short) 8, (short) 10, (short) 16, (short) 18};
-  private short[] sequence = {(short) 16, (short) 18};
+  private final short[] actual = { (short) 6, (short) 8, (short) 10, (short) 16, (short) 18 };
+  private short[] sequence = { (short) 16, (short) 18 };
   private ShortArrayAssert assertions;
 
   @Before
@@ -55,7 +55,8 @@ public class ShortArrayAssert_endsWith_Test {
   }
 
   @Test
-  public void should_pass_if_actual_ends_with_given_sequence_multiple_times() {
+  public void should_throw_error_if_actual_ends_with_given_sequence_multiple_times() {
+    thrown.expect(AssertionError.class);
     assertions.endsWith((short) 16, (short) 16, (short) 18);
   }
 
@@ -75,14 +76,14 @@ public class ShortArrayAssert_endsWith_Test {
 
   @Test
   public void should_throw_error_if_given_sequence_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     sequence = null;
     assertions.endsWith(sequence);
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.endsWith();
   }
 

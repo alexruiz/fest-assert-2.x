@@ -21,13 +21,13 @@ package org.fest.assertions.core;
  *            target="_blank">Emulating 'self types' using Java Generics to simplify fluent API implementation</a>&quot;
  *            for more details.
  * @param <A> the type of the <em>actual</em> value.
+ *
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
 public interface Assert<S, A> {
   /**
    * Verifies that the <em>actual</em> value is equal to the given one.
-   *
    * @param expected the given value to compare the <em>actual</em> value to.
    * @return {@code this} assertion object.
    * @throws AssertionError if the <em>actual</em> value is not equal to the given one.
@@ -36,7 +36,6 @@ public interface Assert<S, A> {
 
   /**
    * Verifies that the <em>actual</em> value is not equal to the given one.
-   *
    * @param other the given value to compare the <em>actual</em> value to.
    * @return {@code this} assertion object.
    * @throws AssertionError if the <em>actual</em> value is equal to the given one.
@@ -45,14 +44,13 @@ public interface Assert<S, A> {
 
   /**
    * Verifies that the <em>actual</em> value is {@code null}.
-   *
+   * @return {@code this} assertion object.
    * @throws AssertionError if the <em>actual</em> value is not {@code null}.
    */
   S isNull();
 
   /**
    * Verifies that the <em>actual</em> value is not {@code null}.
-   *
    * @return {@code this} assertion object.
    * @throws AssertionError if the <em>actual</em> value is {@code null}.
    */

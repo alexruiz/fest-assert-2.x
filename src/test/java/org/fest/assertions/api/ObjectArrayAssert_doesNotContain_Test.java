@@ -14,23 +14,23 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for <code>{@link org.fest.assertions.api.ObjectArrayAssert#doesNotContain(Object...)}</code>.
+ * Tests for <code>{@link ObjectArrayAssert#doesNotContain(Object...)}</code>.
  *
  * @author Alex Ruiz
- * @author Mikhail Mazursky
+ * @author Yvonne Wang
  */
 public class ObjectArrayAssert_doesNotContain_Test {
   @Rule
   public ExpectedException thrown = none();
-  private Object[] actual = {'a', 'b', 'c', 6};
+  private final Object[] actual = {'a', 'b', 'c', 6};
   private Object[] values = {'e', 'f'};
   private ObjectArrayAssert assertions;
 
@@ -69,14 +69,14 @@ public class ObjectArrayAssert_doesNotContain_Test {
 
   @Test
   public void should_throw_error_if_given_values_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     values = null;
     assertions.doesNotContain(values);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.doesNotContain();
   }
 

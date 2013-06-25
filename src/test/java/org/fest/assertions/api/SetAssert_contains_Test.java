@@ -15,19 +15,18 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
+import java.util.Set;
+
 import org.fest.test.ExpectedException;
 import org.fest.util.Sets;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.Collection;
-import java.util.Set;
-
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link ListAssert#contains(Collection[])}.
+ * Tests for {@link SetAssert#contains(Object...)}.
  *
  * @author Yvonne Wang
  */
@@ -35,7 +34,7 @@ public class SetAssert_contains_Test {
   @Rule
   public ExpectedException thrown = none();
   private Set<String> actual = Sets.newLinkedHashSet("one", "two", "three");
-  private Set<String> expected = Sets.newLinkedHashSet("two", "three");
+  private Object[] expected = {"two", "three"};
   private SetAssert assertions;
 
   @Before
@@ -54,20 +53,13 @@ public class SetAssert_contains_Test {
   @Test
   public void should_throw_if_expected_is_null() {
     expected = null;
-    thrown.expect(AssertionError.class);
-    assertions.contains(expected);
-  }
-
-  @Test
-  public void should_throw_if_expected_is_empty() {
-    expected = Sets.newHashSet();
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.contains(expected);
   }
 
   @Test
   public void should_fail_if_actual_does_not_contain_expected() {
-    expected = Sets.newLinkedHashSet("five");
+    Object[] expected = {"two", "five"};
     thrown.expect(AssertionError.class);
     assertions.contains(expected);
   }
@@ -87,12 +79,12 @@ public class SetAssert_contains_Test {
 
   @Test
   public void should_pass_if_actual_contains_itself() {
-    assertions.contains(actual);
+    assertions.contains(actual.toArray());
   }
 
   @Test
   public void should_pass_if_actual_contains_expected_in_different_order() {
-    expected.add("one");
+    Object[] expected = {"three", "two"};
     assertions.contains(expected);
   }
 }

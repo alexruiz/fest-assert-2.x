@@ -20,7 +20,7 @@ import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.Maps.newMap;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
-import static org.fest.util.Collections.set;
+import static org.fest.util.Sets.newLinkedHashSet;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -34,13 +34,13 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
+ * Tests for {@link Maps#assertDoesNotContainDuplicateValues(Description, Map)}.
+ *
  * @author Yvonne Wang
  */
 public class Maps_assertDoesNotHaveDuplicateValues_Test {
-
   @Rule
   public ExpectedException thrown = none();
-
   private Maps maps;
   private Failures failures;
   private Description description;
@@ -68,7 +68,7 @@ public class Maps_assertDoesNotHaveDuplicateValues_Test {
   @Test
   public void should_fail_if_actual_contains_duplicate_values() {
     actual = newMap(entry("name", "Leia"), entry("princess", "Leia"), entry("more", "Leia"));
-    Collection<String> duplicates = set("Leia");
+    Collection<String> duplicates = newLinkedHashSet("Leia");
     try {
       maps.assertDoesNotContainDuplicateValues(description, actual);
     } catch (AssertionError e) {

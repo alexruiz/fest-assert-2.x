@@ -21,7 +21,7 @@ import static org.junit.Assert.assertSame;
 import org.junit.Test;
 
 /**
- * Tests for <code>{@link Assertions#assertThat(Object[])}</code>.
+ * Tests for {@link Assertions#assertThat(Object[])}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang

@@ -10,44 +10,53 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
-import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-import org.fest.assertions.internal.Objects;
+import org.fest.test.ExpectedException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Tests for {@link AbstractObjectAssert#isInstanceOfAny(Class...)}.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class AbstractObjectAssert_isInstanceOfAny_Test {
-  private Objects objects;
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
+  private final Object actual = "Yoda";
   private ConcreteObjectAssert assertions;
 
   @Before
   public void setUp() {
-    objects = mock(Objects.class);
-    assertions = new ConcreteObjectAssert(6L);
-    assertions.objects = objects;
+    assertions = new ConcreteObjectAssert(actual);
   }
 
   @Test
-  public void should_verify_that_actual_is_instance_of_any_type() {
-    Class<?>[] types = { String.class };
-    assertions.isInstanceOfAny(types);
-    verify(objects).assertIsInstanceOfAny(assertions.description, assertions.actual, types);
+  public void should_pass_if_actual_is_instance_of_given_types() {
+    assertions.isInstanceOfAny(String.class, Object.class);
   }
 
   @Test
-  public void should_return_this() {
-    ConcreteObjectAssert returned = assertions.isInstanceOfAny(String.class);
-    assertSame(assertions, returned);
+  public void should_fail_if_actual_is_not_instance_of_any_given_types() {
+    thrown.expect(AssertionError.class);
+    assertions.isInstanceOfAny(Integer.class, Boolean.class);
+  }
+
+  @Test
+  public void should_throw_error_if_actual_is_null() {
+    thrown.expect(AssertionError.class);
+    assertions = new ConcreteObjectAssert(null);
+    assertions.isInstanceOfAny(String.class);
+  }
+
+  @Test
+  public void should_throw_error_if_given_types_are_null() {
+    thrown.expect(NullPointerException.class);
+    assertions.isInstanceOfAny(null, null);
   }
 }

@@ -10,11 +10,12 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.error;
 
 import static junit.framework.Assert.assertEquals;
+
 import static org.fest.assertions.error.ShouldBeEmpty.shouldBeEmpty;
 import static org.fest.util.Lists.newArrayList;
 
@@ -40,6 +41,6 @@ public class ShouldBeEmpty_create_Test {
   @Test
   public void should_create_error_message() {
     String message = factory.create(new TestDescription("Test"));
-    assertEquals("[Test] expecting empty but was:<['Luke', 'Yoda']>", message);
+    assertEquals("[Test] expecting:\n empty but was:<['Luke', 'Yoda']>", message);
   }
 }

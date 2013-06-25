@@ -25,7 +25,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Tests for {@link DoubleArrayAssert#doesNotContain(Double, Index)}.
+ * Tests for {@link DoubleArrayAssert#doesNotContain(double, Index)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
@@ -65,12 +65,6 @@ public class DoubleArrayAssert_doesNotContain_at_Index_Test {
   public void should_pass_if_actual_is_empty() {
     assertions = new DoubleArrayAssert(new double[0]);
     assertions.doesNotContain(value, index);
-  }
-
-  @Test
-  public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(NullPointerException.class);
-    assertions.doesNotContain(null, index);
   }
 
   @Test

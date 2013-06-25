@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link LongArrayAssert#containsOnly(long...)}.
@@ -30,8 +30,8 @@ import static org.fest.test.ExpectedException.none;
 public class LongArrayAssert_containsOnly_Test {
   @Rule
   public ExpectedException thrown = none();
-  private long[] actual = {6, 8, 10};
-  private long[] values = {6, 6, 8, 8, 10, 10};
+  private final long[] actual = {6, 8, 10};
+  private final long[] values = {6, 6, 8, 8, 10, 10};
   private LongArrayAssert assertions;
 
   @Before
@@ -70,13 +70,13 @@ public class LongArrayAssert_containsOnly_Test {
 
   @Test
   public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.containsOnly(null);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.containsOnly(new long[0]);
   }
 

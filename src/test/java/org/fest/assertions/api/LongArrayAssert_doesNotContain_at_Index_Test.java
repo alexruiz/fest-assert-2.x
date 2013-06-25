@@ -14,17 +14,18 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.assertions.data.Index;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link LongArrayAssert#doesNotContain(Long, Index)}.
+ * Tests for {@link LongArrayAssert#doesNotContain(long, Index)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
@@ -32,9 +33,9 @@ import static org.fest.test.ExpectedException.none;
 public class LongArrayAssert_doesNotContain_at_Index_Test {
   @Rule
   public ExpectedException thrown = none();
-  private long[] actual = {1, 2, 3, 4, 5, 6};
-  private Long value = new Long(3);
-  private Index index = Index.atIndex(3);
+  private final long[] actual = { 1, 2, 3, 4, 5, 6 };
+  private final Long value = new Long(3);
+  private final Index index = Index.atIndex(3);
   private LongArrayAssert assertions;
 
   @Before
@@ -61,21 +62,14 @@ public class LongArrayAssert_doesNotContain_at_Index_Test {
   }
 
   @Test
-  public void should_throw_error_if_actual_is_empty() {
-    thrown.expect(AssertionError.class);
+  public void should_pass_if_actual_is_empty() {
     assertions = new LongArrayAssert(new long[0]);
     assertions.doesNotContain(value, index);
   }
 
   @Test
-  public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(AssertionError.class);
-    assertions.doesNotContain(null, index);
-  }
-
-  @Test
   public void should_throw_error_if_given_index_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.doesNotContain(value, null);
   }
 

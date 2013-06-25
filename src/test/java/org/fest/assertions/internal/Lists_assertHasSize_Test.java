@@ -17,7 +17,7 @@ package org.fest.assertions.internal;
 import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
-import static org.fest.util.Collections.list;
+import static org.fest.util.Lists.newArrayList;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -31,13 +31,13 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
+ * Tests for {@link Lists#assertHasSize(Description, List, int)}.
+ *
  * @author Yvonne Wang
  */
 public class Lists_assertHasSize_Test {
-
   @Rule
   public ExpectedException thrown = none();
-
   private Failures failures;
   private Lists lists;
   private Description description;
@@ -52,7 +52,7 @@ public class Lists_assertHasSize_Test {
 
   @Test
   public void should_pass_if_size_of_actual_is_equal_to_expected_size() {
-    lists.assertHasSize(description, list("Luke", "Yoda"), 2);
+    lists.assertHasSize(description, newArrayList("Luke", "Yoda"), 2);
   }
 
   @Test
@@ -63,7 +63,7 @@ public class Lists_assertHasSize_Test {
 
   @Test
   public void should_fail_if_size_of_actual_is_not_equal_to_expected_size() {
-    List<String> actual = list("Yoda");
+    List<String> actual = newArrayList("Yoda");
     try {
       lists.assertHasSize(description, actual, 8);
     } catch (AssertionError e) {

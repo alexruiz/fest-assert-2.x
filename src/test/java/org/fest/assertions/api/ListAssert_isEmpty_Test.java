@@ -15,25 +15,25 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
+import java.util.List;
+
 import org.fest.test.ExpectedException;
 import org.fest.util.Lists;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.List;
-
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link ListAssert}.
+ * Tests for {@link ListAssert#isEmpty()}.
  *
  * @author Yvonne Wang
  */
 public class ListAssert_isEmpty_Test {
   @Rule
   public ExpectedException thrown = none();
-  private List<Object> actual = Lists.emptyList();
+  private List<String> actual = Lists.emptyList();
   private ListAssert assertions;
 
   @Before
@@ -56,7 +56,7 @@ public class ListAssert_isEmpty_Test {
   @Test
   public void should_fail_if_actual_is_not_empty() {
     thrown.expect(AssertionError.class);
-    actual.add("populated list");
+    actual = Lists.newArrayList("one");
     assertions = new ListAssert(actual);
     assertions.isEmpty();
   }

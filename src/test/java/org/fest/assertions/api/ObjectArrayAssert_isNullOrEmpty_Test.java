@@ -14,25 +14,25 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import junit.framework.Assert;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.fest.test.ExpectedException.none;
-
 /**
  * Tests for {@link ObjectArrayAssert#isNullOrEmpty()}.
  *
  * @author Alex Ruiz
- * @author Mikhail Mazursky
  * @author Yvonne Wang
  */
 public class ObjectArrayAssert_isNullOrEmpty_Test {
   @Rule
   public ExpectedException thrown = none();
-  private Object[] actual = new Object[0];
+  private final Object[] actual = new Object[0];
   private ObjectArrayAssert assertions;
 
   @Before

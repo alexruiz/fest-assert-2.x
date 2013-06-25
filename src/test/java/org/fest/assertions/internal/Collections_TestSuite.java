@@ -40,5 +40,4 @@ import org.junit.runners.Suite.SuiteClasses;
   Collections_assertDoesNotHaveDuplicates_Test.class
 })
 public class Collections_TestSuite {
-
 }

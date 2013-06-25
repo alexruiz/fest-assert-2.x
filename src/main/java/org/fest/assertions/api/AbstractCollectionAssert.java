@@ -14,27 +14,27 @@
  */
 package org.fest.assertions.api;
 
+import java.util.Collection;
+
+import javax.annotation.Nonnull;
+
 import org.fest.assertions.core.ObjectEnumerableAssert;
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.Collections;
 import org.fest.util.VisibleForTesting;
 
-import javax.annotation.Nonnull;
-import java.util.Collection;
-
 /**
- * Base class for implementations of {@link ObjectEnumerableAssert} whose actual value type is
- * {@link Collection}.
+ * Base class for implementations of {@link ObjectEnumerableAssert} whose actual value type is {@link Collection}.
  *
  * @param <S> the "self" type of this assertion class. Please read &quot;<a href="http://bit.ly/anMa4g"
- *            target="_blank">Emulating 'self types' using Java Generics to simplify fluent API implementation</a>&quot;
- *            for more details.
+ *          target="_blank">Emulating 'self types' using Java Generics to simplify fluent API implementation</a>&quot;
+ *          for more details.
  * @param <T> the type of the "actual" value.
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
 public abstract class AbstractCollectionAssert<S, T extends Collection<?>> extends AbstractAssert<S, T> implements
-  ObjectEnumerableAssert<S, T> {
+    ObjectEnumerableAssert<S> {
 
   @VisibleForTesting
   Collections collections = Collections.instance();
@@ -89,7 +89,7 @@ public abstract class AbstractCollectionAssert<S, T extends Collection<?>> exten
    * {@inheritDoc}
    */
   @Override
-  public final S contains(T... values) {
+  public final S contains(Object... values) {
     collections.assertContains(description, actual, values);
     return myself;
   }
@@ -98,7 +98,7 @@ public abstract class AbstractCollectionAssert<S, T extends Collection<?>> exten
    * {@inheritDoc}
    */
   @Override
-  public final S containsOnly(T... values) {
+  public final S containsOnly(Object... values) {
     collections.assertContainsOnly(description, actual, values);
     return myself;
   }
@@ -107,7 +107,7 @@ public abstract class AbstractCollectionAssert<S, T extends Collection<?>> exten
    * {@inheritDoc}
    */
   @Override
-  public final S containsSequence(T... sequence) {
+  public final S containsSequence(Object... sequence) {
     collections.assertContainsSequence(description, actual, sequence);
     return myself;
   }
@@ -116,7 +116,7 @@ public abstract class AbstractCollectionAssert<S, T extends Collection<?>> exten
    * {@inheritDoc}
    */
   @Override
-  public final S doesNotContain(T... values) {
+  public final S doesNotContain(Object... values) {
     collections.assertDoesNotContain(description, actual, values);
     return myself;
   }
@@ -134,7 +134,7 @@ public abstract class AbstractCollectionAssert<S, T extends Collection<?>> exten
    * {@inheritDoc}
    */
   @Override
-  public final S startsWith(T... sequence) {
+  public final S startsWith(Object... sequence) {
     collections.assertStartsWith(description, actual, sequence);
     return myself;
   }
@@ -143,7 +143,7 @@ public abstract class AbstractCollectionAssert<S, T extends Collection<?>> exten
    * {@inheritDoc}
    */
   @Override
-  public final S endsWith(T... sequence) {
+  public final S endsWith(Object... sequence) {
     collections.assertEndsWith(description, actual, sequence);
     return myself;
   }

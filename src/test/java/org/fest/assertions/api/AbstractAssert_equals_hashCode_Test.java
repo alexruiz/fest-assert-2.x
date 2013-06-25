@@ -14,16 +14,17 @@
  */
 package org.fest.assertions.api;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for {@link AbstractAssert#equals(Object)} and {@link AbstractAssert#hashCode()}.
  *
  * @author Nicolas François
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class AbstractAssert_equals_hashCode_Test {
   private ConcreteAssert assertions;

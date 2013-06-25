@@ -15,19 +15,18 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
+import java.util.Set;
+
 import org.fest.test.ExpectedException;
 import org.fest.util.Sets;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.Collection;
-import java.util.Set;
-
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link SetAssert#containsSequence(Collection[])}.
+ * Tests for {@link SetAssert#containsSequence(Object...)}.
  *
  * @author Yvonne Wang
  */
@@ -35,7 +34,7 @@ public class SetAssert_containsSequence_Test {
   @Rule
   public ExpectedException thrown = none();
   private Set<String> actual = Sets.newLinkedHashSet("one", "two", "three", "four");
-  private Set<String> sequence = Sets.newLinkedHashSet("two", "three");
+  private Object[] sequence = { "two", "three" };
   private SetAssert assertions;
 
   @Before
@@ -54,14 +53,14 @@ public class SetAssert_containsSequence_Test {
   @Test
   public void should_throw_if_expected_is_null() {
     sequence = null;
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.containsSequence(sequence);
   }
 
   @Test
   public void should_throw_if_expected_is_empty() {
-    sequence = Sets.newHashSet();
-    thrown.expect(AssertionError.class);
+    Object[] sequence = new Object[0];
+    thrown.expect(IllegalArgumentException.class);
     assertions.containsSequence(sequence);
   }
 
@@ -75,14 +74,14 @@ public class SetAssert_containsSequence_Test {
 
   @Test
   public void should_fail_if_actual_does_not_contain_sequence() {
-    sequence = Sets.newLinkedHashSet("five");
+    Object[] sequence = { "two", "three", "five" };
     thrown.expect(AssertionError.class);
     assertions.containsSequence(sequence);
   }
 
   @Test
   public void should_fail_if_size_of_sequence_is_greater_than_size_of_actual() {
-    sequence.addAll(actual);
+    Object[] sequence = { "two", "three", "one", "two", "three", "four" };
     thrown.expect(AssertionError.class);
     assertions.containsSequence(sequence);
   }
@@ -94,6 +93,6 @@ public class SetAssert_containsSequence_Test {
 
   @Test
   public void should_pass_if_actual_contains_itself() {
-    assertions.containsSequence(actual);
+    assertions.containsSequence(actual.toArray());
   }
 }

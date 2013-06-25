@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link ObjectArrayAssert#startsWith(Object...)}.
@@ -30,7 +30,7 @@ import static org.fest.test.ExpectedException.none;
 public class ObjectArrayAssert_startsWith_Test {
   @Rule
   public ExpectedException thrown = none();
-  private Object[] actual = {6, 'b', 'c', 'd'};
+  private final Object[] actual = {6, 'b', 'c', 'd'};
   private Object[] sequence = {6, 'b'};
   private ObjectArrayAssert assertions;
 
@@ -55,7 +55,8 @@ public class ObjectArrayAssert_startsWith_Test {
   }
 
   @Test
-  public void should_pass_if_actual_starts_with_given_sequence_multiple_times() {
+  public void should_fail_if_actual_starts_with_given_sequence_multiple_times() {
+    thrown.expect(AssertionError.class);
     assertions.startsWith(6, 'b', 6, 'b');
   }
 
@@ -75,15 +76,15 @@ public class ObjectArrayAssert_startsWith_Test {
 
   @Test
   public void should_throw_error_if_given_sequence_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     sequence = null;
-    assertions.startsWith();
+    assertions.startsWith(sequence);
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_empty() {
-    thrown.expect(AssertionError.class);
-    assertions.startsWith();
+    thrown.expect(IllegalArgumentException.class);
+    assertions.startsWith(new Object[0]);
   }
 
   @Test

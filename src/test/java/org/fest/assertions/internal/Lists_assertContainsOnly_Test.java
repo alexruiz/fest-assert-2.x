@@ -23,8 +23,8 @@ import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
 import static org.fest.util.Arrays.array;
-import static org.fest.util.Collections.list;
-import static org.fest.util.Collections.set;
+import static org.fest.util.Lists.newArrayList;
+import static org.fest.util.Sets.newLinkedHashSet;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -37,13 +37,13 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
+ * Tests for {@link Lists#assertContainsOnly(Description, List, Object[])}.
+ *
  * @author Yvonne Wang
  */
 public class Lists_assertContainsOnly_Test {
-
   @Rule
   public ExpectedException thrown = none();
-
   private List<String> actual;
   private Failures failures;
   private Lists lists;
@@ -51,7 +51,7 @@ public class Lists_assertContainsOnly_Test {
 
   @Before
   public void setUp() {
-    actual = list("Luke", "Yoda", "Leia");
+    actual = newArrayList("Luke", "Yoda", "Leia");
     failures = spy(new Failures());
     lists = Lists.instance();
     lists.failures = failures;
@@ -70,7 +70,7 @@ public class Lists_assertContainsOnly_Test {
 
   @Test
   public void should_pass_if_actual_with_xtuplicates_contains_given_values_only() {
-    actual.addAll(list("Luke", "Luke"));
+    actual.addAll(newArrayList("Luke", "Luke"));
     lists.assertContainsOnly(description, actual, array("Luke", "Yoda", "Leia"));
   }
 
@@ -104,7 +104,7 @@ public class Lists_assertContainsOnly_Test {
       lists.assertContainsOnly(description, actual, expected);
     } catch (AssertionError e) {
       verify(failures).failure(description,
-          shouldContainOnly(actual, expected, set("Han"), set("Leia")));
+          shouldContainOnly(actual, expected, newLinkedHashSet("Han"), newLinkedHashSet("Leia")));
       return;
     }
     expectedAssertionErrorNotThrown();

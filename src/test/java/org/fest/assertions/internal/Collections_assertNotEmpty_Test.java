@@ -20,24 +20,26 @@ import static org.fest.assertions.error.ShouldNotBeEmpty.shouldNotBeEmpty;
 import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
-import static org.fest.util.Collections.list;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import java.util.Collection;
+
 import org.fest.assertions.description.Description;
+import org.fest.util.Lists;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
+ * Tests for {@link Collections#assertNotEmpty(Description, Collection)}.
+ *
  * @author Alex Ruiz
  * @author Yvonne Wang
  */
 public class Collections_assertNotEmpty_Test {
-
   @Rule
   public org.fest.test.ExpectedException thrown = none();
-
   private Failures failures;
   private Collections collections;
   private Description description;
@@ -51,7 +53,7 @@ public class Collections_assertNotEmpty_Test {
 
   @Test
   public void should_pass_if_actual_is_not_empty() {
-    collections.assertNotEmpty(description, list("Luke"));
+    collections.assertNotEmpty(description, Lists.newArrayList("Luke"));
   }
 
   @Test

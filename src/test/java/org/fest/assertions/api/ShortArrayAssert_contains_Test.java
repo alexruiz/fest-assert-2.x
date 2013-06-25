@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link ShortArrayAssert#contains(short...)}.
@@ -30,8 +30,8 @@ import static org.fest.test.ExpectedException.none;
 public class ShortArrayAssert_contains_Test {
   @Rule
   public ExpectedException thrown = none();
-  private short[] actual = {(short) 1, (short) 2, (short) 3, (short) 4, (short) 5, (short) 6};
-  private short[] values = {(short) 5, (short) 6};
+  private final short[] actual = { (short) 1, (short) 2, (short) 3, (short) 4, (short) 5, (short) 6 };
+  private short[] values = { (short) 5, (short) 6 };
   private ShortArrayAssert assertions;
 
   @Before
@@ -50,8 +50,9 @@ public class ShortArrayAssert_contains_Test {
   }
 
   @Test
-  public void should_pass_if_both_actual_and_given_values_are_empty() {
-    assertions.contains();
+  public void should_fail_if_actual_is_empty() {
+    thrown.expect(IllegalArgumentException.class);
+    assertions.contains(new short[0]);
   }
 
   @Test
@@ -68,14 +69,14 @@ public class ShortArrayAssert_contains_Test {
 
   @Test
   public void should_throw_error_if_given_values_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     values = null;
     assertions.contains(values);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.contains();
   }
 }

@@ -14,14 +14,15 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.assertions.data.Index;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link ObjectArrayAssert#doesNotContain(Object, Index)}.
@@ -32,9 +33,9 @@ import static org.fest.test.ExpectedException.none;
 public class ObjectArrayAssert_doesNotContain_at_Index_Test {
   @Rule
   public ExpectedException thrown = none();
-  private Object[] actual = {'a', 'b', 'c', 'd'};
-  private Object value = 'b';
-  private Index index = Index.atIndex(3);
+  private final Object[] actual = {'a', 'b', 'c', 'd'};
+  private final Object value = 'b';
+  private final Index index = Index.atIndex(3);
   private ObjectArrayAssert assertions;
 
   @Before
@@ -61,21 +62,19 @@ public class ObjectArrayAssert_doesNotContain_at_Index_Test {
   }
 
   @Test
-  public void should_throw_error_if_actual_is_empty() {
-    thrown.expect(AssertionError.class);
+  public void should_pass_if_actual_is_empty() {
     assertions = new ObjectArrayAssert(new Object[0]);
     assertions.doesNotContain(value, index);
   }
 
   @Test
-  public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(AssertionError.class);
+  public void should_pass_if_given_value_is_null() {
     assertions.doesNotContain(null, index);
   }
 
   @Test
   public void should_throw_error_if_given_index_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.doesNotContain(value, null);
   }
 

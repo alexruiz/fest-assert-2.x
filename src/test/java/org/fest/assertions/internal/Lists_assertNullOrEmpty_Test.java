@@ -18,7 +18,7 @@ import static java.util.Collections.emptyList;
 
 import static org.fest.assertions.error.ShouldBeNullOrEmpty.shouldBeNullOrEmpty;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
-import static org.fest.util.Lists.list;
+import static org.fest.util.Lists.newArrayList;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -29,10 +29,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * Tests for {@link Lists#assertNullOrEmpty(Description, List)}.
+ *
  * @author Yvonne Wang
  */
 public class Lists_assertNullOrEmpty_Test {
-
   private Failures failures;
   private Lists lists;
   private Description description;
@@ -57,7 +58,7 @@ public class Lists_assertNullOrEmpty_Test {
 
   @Test
   public void should_fail_if_actual_has_elements() {
-    List<String> actual = list("Yoda");
+    List<String> actual = newArrayList("Yoda");
     try {
       lists.assertNullOrEmpty(description, actual);
     } catch (AssertionError e) {
@@ -66,5 +67,4 @@ public class Lists_assertNullOrEmpty_Test {
     }
     expectedAssertionErrorNotThrown();
   }
-
 }

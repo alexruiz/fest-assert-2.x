@@ -15,27 +15,26 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
+import java.util.Set;
+
 import org.fest.test.ExpectedException;
 import org.fest.util.Sets;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.Collection;
-import java.util.Set;
-
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link SetAssert#startsWith(Collection[])}.
+ * Tests for {@link SetAssert#startsWith(Object...)}.
  *
  * @author Yvonne Wang
  */
 public class SetAssert_startsWith_Test {
   @Rule
   public ExpectedException thrown = none();
-  private Set<String> actual = Sets.newLinkedHashSet("one", "two", "three", "four");
-  private Set<String> sequence = Sets.newLinkedHashSet("one", "two");
+  private final Set<String> actual = Sets.newLinkedHashSet("one", "two", "three", "four");
+  private Object[] sequence = { "one", "two" };
   private SetAssert assertions;
 
   @Before
@@ -47,20 +46,20 @@ public class SetAssert_startsWith_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     assertions = new SetAssert(null);
-    assertions.startsWith();
+    assertions.startsWith(sequence);
   }
 
   @Test
   public void should_throw_error_if_sequence_is_null() {
     sequence = null;
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.startsWith(sequence);
   }
 
   @Test
   public void should_throw_error_if_sequence_is_empty() {
-    sequence = Sets.newHashSet();
-    thrown.expect(AssertionError.class);
+    Object[] sequence = new Object[0];
+    thrown.expect(IllegalArgumentException.class);
     assertions.startsWith(sequence);
   }
 
@@ -72,14 +71,14 @@ public class SetAssert_startsWith_Test {
 
   @Test
   public void should_fail_if_actual_does_not_start_with_sequence() {
-    sequence.add("five");
+    Object[] sequence = { "one", "five" };
     thrown.expect(AssertionError.class);
     assertions.startsWith(sequence);
   }
 
   @Test
   public void should_fail_if_sequence_size_is_larger_than_actual_size() {
-    sequence.addAll(actual);
+    Object[] sequence = { "one", "two", "one", "two", "three", "four" };
     thrown.expect(AssertionError.class);
     assertions.startsWith(sequence);
   }
@@ -91,6 +90,6 @@ public class SetAssert_startsWith_Test {
 
   @Test
   public void should_pass_if_actual_starts_with_itself() {
-    assertions.startsWith(actual);
+    assertions.startsWith(actual.toArray());
   }
 }

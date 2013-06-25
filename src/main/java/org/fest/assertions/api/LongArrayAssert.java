@@ -16,7 +16,6 @@ package org.fest.assertions.api;
 
 import org.fest.assertions.core.ArraySortedAssert;
 import org.fest.assertions.core.EnumerableAssert;
-import org.fest.assertions.core.IndexedObjectEnumerableAssert;
 import org.fest.assertions.data.Index;
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.LongArrays;
@@ -25,7 +24,7 @@ import org.fest.util.VisibleForTesting;
 /**
  * Assertion methods for arrays of {@code long}s.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(long[])}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(long[])}>.
  * </p>
  *
  * @author Yvonne Wang
@@ -35,8 +34,7 @@ import org.fest.util.VisibleForTesting;
  * @author Nicolas François
  */
 public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> implements
-  EnumerableAssert<LongArrayAssert>, IndexedObjectEnumerableAssert<LongArrayAssert, Long>,
-  ArraySortedAssert<LongArrayAssert> {
+    EnumerableAssert<LongArrayAssert>, ArraySortedAssert<LongArrayAssert> {
 
   @VisibleForTesting
   LongArrays arrays = LongArrays.instance();
@@ -91,14 +89,34 @@ public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> imp
     return this;
   }
 
-  @Override
-  public LongArrayAssert contains(Long value, Index index) {
+  /**
+   * Verifies that the given array contains the given value at the given index.
+   *
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the given array is {@code null} or empty.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws IndexOutOfBoundsException if the value of the given {@code Index} is equal to or greater than the size of
+   *           the given array.
+   * @throws AssertionError if the given array does not contain the given value at the given index.
+   */
+  public LongArrayAssert contains(long value, Index index) {
     arrays.assertContains(description, actual, value, index);
     return this;
   }
 
-  @Override
-  public LongArrayAssert doesNotContain(Long value, Index index) {
+  /**
+   * Verifies that the given array does not contain the given value at the given index.
+   *
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the given array is {@code null}.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws AssertionError if the given array contains the given value at the given index.
+   */
+  public LongArrayAssert doesNotContain(long value, Index index) {
     arrays.assertDoesNotContain(description, actual, value, index);
     return this;
   }
@@ -108,10 +126,10 @@ public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> imp
    *
    * @param values the given values.
    * @return {@code this} assertion object.
-   * @throws NullPointerException     if the given argument is {@code null}.
+   * @throws NullPointerException if the given argument is {@code null}.
    * @throws IllegalArgumentException if the given argument is an empty array.
-   * @throws AssertionError           if the actual array is {@code null}.
-   * @throws AssertionError           if the actual array does not contain the given values.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array does not contain the given values.
    */
   public LongArrayAssert contains(long... values) {
     arrays.assertContains(description, actual, values);
@@ -123,11 +141,11 @@ public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> imp
    *
    * @param values the given values.
    * @return {@code this} assertion object.
-   * @throws NullPointerException     if the given argument is {@code null}.
+   * @throws NullPointerException if the given argument is {@code null}.
    * @throws IllegalArgumentException if the given argument is an empty array.
-   * @throws AssertionError           if the actual array is {@code null}.
-   * @throws AssertionError           if the actual array does not contain the given values, i.e. the actual array contains some
-   *                                  or none of the given values, or the actual array contains more values than the given ones.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array does not contain the given values, i.e. the actual array contains some
+   *           or none of the given values, or the actual array contains more values than the given ones.
    */
   public LongArrayAssert containsOnly(long... values) {
     arrays.assertContainsOnly(description, actual, values);
@@ -153,10 +171,10 @@ public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> imp
    *
    * @param values the given values.
    * @return {@code this} assertion object.
-   * @throws NullPointerException     if the given argument is {@code null}.
+   * @throws NullPointerException if the given argument is {@code null}.
    * @throws IllegalArgumentException if the given argument is an empty array.
-   * @throws AssertionError           if the actual array is {@code null}.
-   * @throws AssertionError           if the actual array contains any of the given values.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array contains any of the given values.
    */
   public LongArrayAssert doesNotContain(long... values) {
     arrays.assertDoesNotContain(description, actual, values);
@@ -182,10 +200,10 @@ public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> imp
    *
    * @param sequence the sequence of values to look for.
    * @return this assertion object.
-   * @throws NullPointerException     if the given argument is {@code null}.
+   * @throws NullPointerException if the given argument is {@code null}.
    * @throws IllegalArgumentException if the given argument is an empty array.
-   * @throws AssertionError           if the actual array is {@code null}.
-   * @throws AssertionError           if the actual array does not start with the given sequence.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array does not start with the given sequence.
    */
   public LongArrayAssert startsWith(long... sequence) {
     arrays.assertStartsWith(description, actual, sequence);
@@ -199,10 +217,10 @@ public class LongArrayAssert extends AbstractAssert<LongArrayAssert, long[]> imp
    *
    * @param sequence the sequence of values to look for.
    * @return this assertion object.
-   * @throws NullPointerException     if the given argument is {@code null}.
+   * @throws NullPointerException if the given argument is {@code null}.
    * @throws IllegalArgumentException if the given argument is an empty array.
-   * @throws AssertionError           if the actual array is {@code null}.
-   * @throws AssertionError           if the actual array does not end with the given sequence.
+   * @throws AssertionError if the actual array is {@code null}.
+   * @throws AssertionError if the actual array does not end with the given sequence.
    */
   public LongArrayAssert endsWith(long... sequence) {
     arrays.assertEndsWith(description, actual, sequence);

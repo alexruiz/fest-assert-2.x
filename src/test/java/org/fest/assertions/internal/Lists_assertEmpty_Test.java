@@ -20,7 +20,7 @@ import static org.fest.assertions.error.ShouldBeEmpty.shouldBeEmpty;
 import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
-import static org.fest.util.Collections.list;
+import static org.fest.util.Lists.newArrayList;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -33,13 +33,13 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
+ * Tests for {@link Lists#assertEmpty(Description, List)}.
+ *
  * @author Yvonne Wang
  */
 public class Lists_assertEmpty_Test {
-
   @Rule
   public ExpectedException thrown = none();
-
   private Failures failures;
   private Lists lists;
   private Description description;
@@ -64,7 +64,7 @@ public class Lists_assertEmpty_Test {
 
   @Test
   public void should_fail_if_actual_has_elements() {
-    List<String> actual = list("Yoda");
+    List<String> actual = newArrayList("Yoda");
     try {
       lists.assertEmpty(description, actual);
     } catch (AssertionError e) {

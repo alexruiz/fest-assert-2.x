@@ -17,10 +17,11 @@ package org.fest.assertions.internal;
 import static org.fest.assertions.error.ShouldNotContainNull.shouldNotContainNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
-import static org.fest.util.Collections.list;
+import static org.fest.util.Lists.newArrayList;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.fest.assertions.description.Description;
@@ -31,17 +32,17 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
+ * Tests for {@link Collections#assertDoesNotContainNull(Description, Collection)}.
+ *
  * @author Yvonne Wang
  */
 public class Collections_assertDoesNotContainNull_Test {
-
   @Rule
   public ExpectedException thrown = none();
-
   private Failures failures;
   private Collections collections;
   private Description description;
-  private List<String> actual = list("Luke", "Yoda", "Leia");
+  private List<String> actual = newArrayList("Luke", "Yoda", "Leia");
 
   @Before
   public void setUp() {
@@ -65,7 +66,7 @@ public class Collections_assertDoesNotContainNull_Test {
 
   @Test
   public void should_fail_if_actual_contains_null() {
-    actual = list("Han", null, "Luke");
+    actual = newArrayList("Han", null, "Luke");
     try {
       collections.assertDoesNotContainNull(description, actual);
     } catch (AssertionError e) {

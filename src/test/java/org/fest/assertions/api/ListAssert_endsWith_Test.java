@@ -15,27 +15,26 @@
 
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
+import java.util.List;
+
 import org.fest.test.ExpectedException;
 import org.fest.util.Lists;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.Collection;
-import java.util.List;
-
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link ListAssert#endsWith(Collection[])}.
+ * Tests for {@link ListAssert#endsWith(Object...)}.
  *
  * @author Yvonne Wang
  */
 public class ListAssert_endsWith_Test {
   @Rule
   public ExpectedException thrown = none();
-  private List<String> actual = Lists.newArrayList("one", "two", "three", "four");
-  private List<String> sequence = Lists.newArrayList("three", "four");
+  private final List<String> actual = Lists.newArrayList("one", "two", "three", "four");
+  private Object[] sequence = { "three", "four" };
   private ListAssert assertions;
 
   @Before
@@ -53,14 +52,14 @@ public class ListAssert_endsWith_Test {
   @Test
   public void should_throw_error_if_sequence_is_null() {
     sequence = null;
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.endsWith(sequence);
   }
 
   @Test
   public void should_throw_error_if_sequence_is_empty() {
-    sequence = Lists.emptyList();
-    thrown.expect(AssertionError.class);
+    sequence = new Object[0];
+    thrown.expect(IllegalArgumentException.class);
     assertions.endsWith(sequence);
   }
 
@@ -73,21 +72,20 @@ public class ListAssert_endsWith_Test {
   @Test
   public void should_fail_if_actual_does_not_end_with_sequence() {
     thrown.expect(AssertionError.class);
-    sequence.add("five");
+    Object[] sequence = { "three", "four", "five" };
     assertions.endsWith(sequence);
   }
 
   @Test
   public void should_fail_if_sequence_size_is_larger_than_actual_size() {
-    sequence.addAll(actual);
+    Object[] sequence = { "three", "four", "one", "two", "three", "four" };
     thrown.expect(AssertionError.class);
     assertions.endsWith(sequence);
   }
 
   @Test
   public void should_fail_if_sequence_has_multiple_same_elements_while_actual_does_not() {
-    sequence.add("one");
-    sequence.add("one");
+    Object[] sequence = { "three", "four", "four" };
     thrown.expect(AssertionError.class);
     assertions.endsWith(sequence);
   }
@@ -99,6 +97,6 @@ public class ListAssert_endsWith_Test {
 
   @Test
   public void should_pass_if_actual_ends_with_itself() {
-    assertions.endsWith(actual);
+    assertions.endsWith(actual.toArray());
   }
 }

@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.data;
 
@@ -19,12 +19,14 @@ import static junit.framework.Assert.assertEquals;
 import static org.fest.test.ExpectedException.none;
 
 import org.fest.test.ExpectedException;
-import org.junit.*;
+import org.junit.Rule;
+import org.junit.Test;
 
 /**
  * Tests for {@link Index#atIndex(int)}.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class Index_atIndex_Test {
   @Rule
@@ -32,7 +34,7 @@ public class Index_atIndex_Test {
 
   @Test
   public void should_throw_error_if_value_is_negative() {
-    thrown.expectIllegalArgumentException("The value of the index should not be negative");
+    thrown.expect(IllegalArgumentException.class, "The value of the index should not be negative");
     Index.atIndex(-1);
   }
 

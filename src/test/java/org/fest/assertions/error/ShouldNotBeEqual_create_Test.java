@@ -10,11 +10,12 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.error;
 
 import static junit.framework.Assert.assertEquals;
+
 import static org.fest.assertions.error.ShouldNotBeEqual.shouldNotBeEqual;
 
 import org.fest.assertions.description.Description;
@@ -26,6 +27,7 @@ import org.junit.Test;
  * Tests for {@link ShouldNotBeEqual#create(Description)}.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class ShouldNotBeEqual_create_Test {
   private ErrorMessageFactory factory;
@@ -38,6 +40,6 @@ public class ShouldNotBeEqual_create_Test {
   @Test
   public void should_create_error_message() {
     String message = factory.create(new TestDescription("Jedi"));
-    assertEquals("[Jedi] <'Yoda'> should not be equal to:<'Luke'>", message);
+    assertEquals("[Jedi] expecting:\n<'Yoda'> should not be equal to:<'Luke'>", message);
   }
 }

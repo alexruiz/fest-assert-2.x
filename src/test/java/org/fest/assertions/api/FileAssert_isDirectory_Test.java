@@ -10,19 +10,20 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2011-2012 the original author or authors.
+ * Copyright @2011-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
-import static junit.framework.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.fest.assertions.test.FakeFile.newDirectory;
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
 
 import java.io.File;
 
-import org.fest.assertions.description.Description;
-import org.fest.assertions.internal.Files;
+import org.fest.assertions.test.FakeFile;
+import org.fest.test.ExpectedException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -32,25 +33,39 @@ import org.junit.Test;
  * @author Alex Ruiz
  */
 public class FileAssert_isDirectory_Test {
-  private Files files;
+  @Rule
+  public ExpectedException thrown = none();
+  private File actual = newDirectory("c:\\\tets.txt");
   private FileAssert assertions;
 
   @Before
   public void setUp() {
-    files = mock(Files.class);
-    assertions = new FileAssert(mock(File.class), mock(Description.class));
-    assertions.files = files;
+    assertions = new FileAssert(actual);
   }
 
   @Test
-  public void should_verify_that_actual_is_directory() {
+  public void should_pass_that_actual_is_directory() {
     assertions.isDirectory();
-    verify(files).assertIsDirectory(assertions.description, assertions.actual);
   }
 
   @Test
   public void should_return_this() {
     FileAssert returned = assertions.isDirectory();
     assertSame(assertions, returned);
+  }
+
+  @Test
+  public void should_throw_error_if_actual_is_null() {
+    thrown.expect(AssertionError.class);
+    assertions = new FileAssert(null);
+    assertions.isDirectory();
+  }
+
+  @Test
+  public void should_fail_if_actual_is_not_directory() {
+    thrown.expect(AssertionError.class);
+    actual = FakeFile.newNonExistingResource("none existing file");
+    assertions = new FileAssert(actual);
+    assertions.isDirectory();
   }
 }

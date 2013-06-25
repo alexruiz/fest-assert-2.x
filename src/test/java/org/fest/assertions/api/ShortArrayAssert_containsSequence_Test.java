@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link ShortArrayAssert#containsSequence(short...)}.
@@ -30,8 +30,8 @@ import static org.fest.test.ExpectedException.none;
 public class ShortArrayAssert_containsSequence_Test {
   @Rule
   public ExpectedException thrown = none();
-  private short[] actual = {(short) 6, (short) 8, (short) 10, (short) 16, (short) 18};
-  private short[] sequence = {(short) 6, (short) 8, (short) 10};
+  private final short[] actual = { (short) 6, (short) 8, (short) 10, (short) 16, (short) 18 };
+  private short[] sequence = { (short) 6, (short) 8, (short) 10 };
   private ShortArrayAssert assertions;
 
   @Before
@@ -50,7 +50,8 @@ public class ShortArrayAssert_containsSequence_Test {
   }
 
   @Test
-  public void should_pass_if_actual_contains_given_sequence_multiple_times() {
+  public void should_fail_if_actual_contains_given_sequence_multiple_times() {
+    thrown.expect(AssertionError.class);
     assertions.containsSequence((short) 6, (short) 6, (short) 8, (short) 10, (short) 10);
   }
 
@@ -70,14 +71,14 @@ public class ShortArrayAssert_containsSequence_Test {
 
   @Test
   public void should_throw_error_if_given_sequence_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     sequence = null;
     assertions.containsSequence(sequence);
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.containsSequence();
   }
 

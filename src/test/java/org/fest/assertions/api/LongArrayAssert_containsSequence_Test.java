@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link LongArrayAssert#containsSequence(long...)}.
@@ -30,8 +30,8 @@ import static org.fest.test.ExpectedException.none;
 public class LongArrayAssert_containsSequence_Test {
   @Rule
   public ExpectedException thrown = none();
-  private long[] actual = {6, 8, 10, 16, 18};
-  private long[] sequence = {6, 8, 10};
+  private final long[] actual = { 6, 8, 10, 16, 18 };
+  private final long[] sequence = { 6, 8, 10 };
   private LongArrayAssert assertions;
 
   @Before
@@ -50,8 +50,9 @@ public class LongArrayAssert_containsSequence_Test {
   }
 
   @Test
-  public void should_pass_if_actual_contains_given_sequence_multiple_times() {
-    assertions.containsSequence(new long[]{6, 6, 8, 10, 10});
+  public void should_fail_if_actual_contains_given_sequence_multiple_times() {
+    thrown.expect(AssertionError.class);
+    assertions.containsSequence(new long[] { 6, 6, 8, 10, 10 });
   }
 
   @Test
@@ -70,19 +71,19 @@ public class LongArrayAssert_containsSequence_Test {
 
   @Test
   public void should_throw_error_if_given_sequence_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.containsSequence(null);
   }
 
   @Test
   public void should_throw_error_if_given_sequence_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.containsSequence(new long[0]);
   }
 
   @Test
   public void should_fail_if_actual_does_not_contain_given_sequence() {
     thrown.expect(AssertionError.class);
-    assertions.containsSequence(new long[]{2, 4});
+    assertions.containsSequence(new long[] { 2, 4 });
   }
 }

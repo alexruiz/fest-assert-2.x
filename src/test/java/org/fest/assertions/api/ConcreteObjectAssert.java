@@ -14,15 +14,20 @@
  */
 package org.fest.assertions.api;
 
-import static org.mockito.Mockito.mock;
-
 import org.fest.assertions.description.Description;
 
 /**
+ * Concrete test class for {@link AbstractObjectAssert}.
+ *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class ConcreteObjectAssert extends AbstractObjectAssert<ConcreteObjectAssert, Object> {
   public ConcreteObjectAssert(Object actual) {
-    super(actual, ConcreteObjectAssert.class, mock(Description.class));
+    super(actual, ConcreteObjectAssert.class);
+  }
+
+  public ConcreteObjectAssert(Object actual, Description description) {
+    super(actual, ConcreteObjectAssert.class, description);
   }
 }

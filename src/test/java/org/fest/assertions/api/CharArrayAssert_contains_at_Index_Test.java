@@ -14,17 +14,18 @@
  */
 package org.fest.assertions.api;
 
+import static junit.framework.Assert.assertSame;
+
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.assertions.data.Index;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertSame;
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link CharArrayAssert#contains(Character, Index)}.
+ * Tests for {@link CharArrayAssert#contains(char, Index)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
@@ -32,9 +33,9 @@ import static org.fest.test.ExpectedException.none;
 public class CharArrayAssert_contains_at_Index_Test {
   @Rule
   public ExpectedException thrown = none();
-  private char[] actual = {'a', 'b', 'c'};
-  private Character value = 'b';
-  private Index index = Index.atIndex(2);
+  private final char[] actual = {'a', 'b', 'c'};
+  private final Character value = 'b';
+  private final Index index = Index.atIndex(1);
   private CharArrayAssert assertions;
 
   @Before
@@ -44,12 +45,12 @@ public class CharArrayAssert_contains_at_Index_Test {
 
   @Test
   public void should_pass_if_actual_does_not_contain_given_value_at_given_index() {
-    assertions.doesNotContain(value, index);
+    assertions.contains(value, index);
   }
 
   @Test
   public void should_return_this_if_actual_does_not_contain_given_value_at_given_index() {
-    CharArrayAssert returned = assertions.doesNotContain(value, index);
+    CharArrayAssert returned = assertions.contains(value, index);
     assertSame(returned, assertions);
   }
 
@@ -57,31 +58,25 @@ public class CharArrayAssert_contains_at_Index_Test {
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     assertions = new CharArrayAssert(null);
-    assertions.doesNotContain(value, index);
+    assertions.contains(value, index);
   }
 
   @Test
   public void should_throw_error_if_actual_is_empty() {
     thrown.expect(AssertionError.class);
     assertions = new CharArrayAssert(new char[0]);
-    assertions.doesNotContain(value, index);
-  }
-
-  @Test
-  public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(AssertionError.class);
-    assertions.doesNotContain(null, index);
+    assertions.contains(value, index);
   }
 
   @Test
   public void should_throw_error_if_given_index_is_null() {
-    thrown.expect(AssertionError.class);
-    assertions.doesNotContain(value, null);
+    thrown.expect(NullPointerException.class);
+    assertions.contains(value, null);
   }
 
   @Test
   public void should_fail_if_actual_contains_given_value_at_given_index() {
     thrown.expect(AssertionError.class);
-    assertions.doesNotContain('c', index);
+    assertions.contains('c', index);
   }
 }

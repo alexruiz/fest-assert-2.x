@@ -16,7 +16,6 @@ package org.fest.assertions.api;
 
 import org.fest.assertions.core.ArraySortedAssert;
 import org.fest.assertions.core.EnumerableAssert;
-import org.fest.assertions.core.IndexedObjectEnumerableAssert;
 import org.fest.assertions.data.Index;
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.ByteArrays;
@@ -25,7 +24,7 @@ import org.fest.util.VisibleForTesting;
 /**
  * Assertion methods for arrays of {@code byte}s.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(byte[])}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(byte[])}.
  * </p>
  *
  * @author Yvonne Wang
@@ -33,8 +32,7 @@ import org.fest.util.VisibleForTesting;
  * @author Joel Costigliola
  */
 public class ByteArrayAssert extends AbstractAssert<ByteArrayAssert, byte[]> implements
-    EnumerableAssert<ByteArrayAssert>, IndexedObjectEnumerableAssert<ByteArrayAssert, Byte>,
-    ArraySortedAssert<ByteArrayAssert> {
+    EnumerableAssert<ByteArrayAssert>, ArraySortedAssert<ByteArrayAssert> {
 
   @VisibleForTesting
   ByteArrays arrays = ByteArrays.instance();
@@ -76,18 +74,6 @@ public class ByteArrayAssert extends AbstractAssert<ByteArrayAssert, byte[]> imp
   }
 
   @Override
-  public ByteArrayAssert contains(Byte value, Index index) {
-    arrays.assertContains(description, actual, value, index);
-    return this;
-  }
-
-  @Override
-  public ByteArrayAssert doesNotContain(Byte value, Index index) {
-    arrays.assertDoesNotContain(description, actual, value, index);
-    return this;
-  }
-
-  @Override
   public ByteArrayAssert isSorted() {
     arrays.assertIsSorted(description, actual);
     return this;
@@ -105,6 +91,23 @@ public class ByteArrayAssert extends AbstractAssert<ByteArrayAssert, byte[]> imp
    */
   public ByteArrayAssert contains(byte... values) {
     arrays.assertContains(description, actual, values);
+    return this;
+  }
+
+  /**
+   * Verifies that the given array contains the given value at the given index.
+   *
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the given array is {@code null} or empty.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws IndexOutOfBoundsException if the value of the given {@code Index} is equal to or greater than the size of
+   *           the given array.
+   * @throws AssertionError if the given array does not contain the given value at the given index.
+   */
+  public ByteArrayAssert contains(byte value, Index index) {
+    arrays.assertContains(description, actual, value, index);
     return this;
   }
 
@@ -150,6 +153,21 @@ public class ByteArrayAssert extends AbstractAssert<ByteArrayAssert, byte[]> imp
    */
   public ByteArrayAssert doesNotContain(byte... values) {
     arrays.assertDoesNotContain(description, actual, values);
+    return this;
+  }
+
+  /**
+   * Verifies that the given array does not contain the given value at the given index.
+   *
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the given array is {@code null}.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws AssertionError if the given array contains the given value at the given index.
+   */
+  public ByteArrayAssert doesNotContain(byte value, Index index) {
+    arrays.assertDoesNotContain(description, actual, value, index);
     return this;
   }
 

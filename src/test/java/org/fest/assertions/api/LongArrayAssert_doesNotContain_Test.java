@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link LongArrayAssert#doesNotContain(long...)}.
@@ -30,8 +30,8 @@ import static org.fest.test.ExpectedException.none;
 public class LongArrayAssert_doesNotContain_Test {
   @Rule
   public ExpectedException thrown = none();
-  private long[] actual = {6, 8, 10};
-  private long[] values = {2, 4};
+  private final long[] actual = {6, 8, 10};
+  private final long[] values = {2, 4};
   private LongArrayAssert assertions;
 
   @Before
@@ -69,13 +69,13 @@ public class LongArrayAssert_doesNotContain_Test {
 
   @Test
   public void should_throw_error_if_given_values_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     assertions.doesNotContain(null);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.doesNotContain(new long[0]);
   }
 

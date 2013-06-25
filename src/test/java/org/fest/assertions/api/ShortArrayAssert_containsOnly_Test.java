@@ -14,12 +14,12 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import static org.fest.test.ExpectedException.none;
 
 /**
  * Tests for {@link ShortArrayAssert#containsOnly(short...)}.
@@ -30,7 +30,7 @@ import static org.fest.test.ExpectedException.none;
 public class ShortArrayAssert_containsOnly_Test {
   @Rule
   public ExpectedException thrown = none();
-  private short[] actual = {(short) 6, (short) 8, (short) 10};
+  private final short[] actual = {(short) 6, (short) 8, (short) 10};
   private short[] values = {(short) 6, (short) 6, (short) 8, (short) 8, (short) 10, (short) 10};
   private ShortArrayAssert assertions;
 
@@ -70,14 +70,14 @@ public class ShortArrayAssert_containsOnly_Test {
 
   @Test
   public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(NullPointerException.class);
     values = null;
     assertions.containsOnly(values);
   }
 
   @Test
   public void should_throw_error_if_given_values_is_empty() {
-    thrown.expect(AssertionError.class);
+    thrown.expect(IllegalArgumentException.class);
     assertions.containsOnly();
   }
 

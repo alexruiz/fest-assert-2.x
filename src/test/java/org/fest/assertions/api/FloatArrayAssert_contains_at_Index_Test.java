@@ -25,7 +25,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Tests for {@link FloatArrayAssert#contains(Float, Index)}.
+ * Tests for {@link FloatArrayAssert#contains(float, Index)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
@@ -66,12 +66,6 @@ public class FloatArrayAssert_contains_at_Index_Test {
     thrown.expect(AssertionError.class);
     assertions = new FloatArrayAssert(new float[0]);
     assertions.contains(value, index);
-  }
-
-  @Test
-  public void should_throw_error_if_given_value_is_null() {
-    thrown.expect(NullPointerException.class);
-    assertions.contains(null, index);
   }
 
   @Test
