@@ -69,7 +69,7 @@ public class ByteAssert extends AbstractComparableAssert<ByteAssert, Byte> {
   }
 
   public ByteAssert isNotGreaterThan(byte expected) {
-    bytes.assertGreaterThan(description, actual, expected);
+    bytes.assertNotGreaterThan(description, actual, expected);
     return this;
   }
 }

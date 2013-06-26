@@ -10,16 +10,13 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
-import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-import org.fest.assertions.internal.Comparables;
+import org.fest.test.ExpectedException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -29,25 +26,37 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class AbstractComparableAssert_isNotGreaterThan_Test {
-  private Comparables comparables;
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
+  private final Integer actual = new Integer(6);
+  private final Integer other = new Integer(8);
   private ConcreteComparableAssert assertions;
 
   @Before
   public void setUp() {
-    comparables = mock(Comparables.class);
-    assertions = new ConcreteComparableAssert(6);
-    assertions.comparables = comparables;
+    assertions = new ConcreteComparableAssert(actual);
   }
 
   @Test
-  public void should_verify_that_actual_is_not_greater_than_other() {
-    assertions.isNotGreaterThan(8);
-    verify(comparables).assertNotGreaterThan(assertions.description, assertions.actual, 8);
+  public void should_pass_if_actual_is_less_than_other() {
+    assertions.isNotGreaterThan(other);
   }
 
   @Test
-  public void should_return_this() {
-    ConcreteComparableAssert returned = assertions.isNotGreaterThan(8);
-    assertSame(assertions, returned);
+  public void should_pass_if_actual_is_equal_to_other() {
+    assertions.isNotGreaterThan(actual);
+  }
+
+  @Test
+  public void should_fail_if_actual_is_greater_than_other() {
+    thrown.expect(AssertionError.class);
+    assertions.isNotGreaterThan(new Integer(2));
+  }
+
+  @Test
+  public void should_throw_error_if_actual_is_null() {
+    assertions = new ConcreteComparableAssert(null);
+    thrown.expect(AssertionError.class);
+    assertions.isNotGreaterThan(other);
   }
 }

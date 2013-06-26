@@ -10,16 +10,13 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-import org.fest.assertions.internal.Objects;
-import org.junit.Assert;
+import org.fest.test.ExpectedException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -29,25 +26,43 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class AbstractObjectAssert_isNotSameAs_Test {
-  private Objects objects;
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
+  private final Object actual = "Yoda";
+  private final Object value = "R2-D2";
   private ConcreteObjectAssert assertions;
 
   @Before
   public void setUp() {
-    objects = mock(Objects.class);
-    assertions = new ConcreteObjectAssert(6L);
-    assertions.objects = objects;
+    assertions = new ConcreteObjectAssert(actual);
   }
 
   @Test
-  public void should_verify_that_actual_value_is_not_same_as_expected_value() {
-    assertions.isNotSameAs(8L);
-    verify(objects).assertNotSame(assertions.description, assertions.actual, 8L);
+  public void should_pass_if_actual_is_not_same_as_given_value() {
+    assertions.isNotSameAs(value);
   }
 
   @Test
-  public void should_return_this() {
-    ConcreteObjectAssert returned = assertions.isNotSameAs(8L);
-    Assert.assertSame(assertions, returned);
+  public void should_fail_if_both_actual_and_given_value_are_null() {
+    thrown.expect(AssertionError.class);
+    assertions = new ConcreteObjectAssert(null);
+    assertions.isNotSameAs(null);
+  }
+
+  @Test
+  public void should_fail_if_actual_is_same_as_given_value() {
+    thrown.expect(AssertionError.class);
+    assertions.isNotSameAs("Yoda");
+  }
+
+  @Test
+  public void should_pass_if_actual_is_null_and_given_value_is_not() {
+    assertions = new ConcreteObjectAssert(null);
+    assertions.isNotSameAs(value);
+  }
+
+  @Test
+  public void should_pass_if_given_value_is_null_but_actual_is_not_null() {
+    assertions.isNotSameAs(null);
   }
 }

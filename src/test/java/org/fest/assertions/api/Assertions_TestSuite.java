@@ -19,6 +19,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
+ * All tests for array asserts.
+ *
  * @author Yvonne Wang
  */
 @RunWith(Suite.class)
@@ -45,8 +47,8 @@ import org.junit.runners.Suite.SuiteClasses;
   Assertions_assertThat_with_ObjectArray_Test.class,
   Assertions_assertThat_with_Sets_Test.class,
   Assertions_assertThat_with_Short_Test.class,
-  Assertions_assertThat_with_ShortArray_Test.class
+  Assertions_assertThat_with_ShortArray_Test.class,
+  Assertions_assertThat_with_String_Test.class
 })
 public class Assertions_TestSuite {
-
 }

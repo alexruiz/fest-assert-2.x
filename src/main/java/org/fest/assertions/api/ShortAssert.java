@@ -69,7 +69,7 @@ public class ShortAssert extends AbstractComparableAssert<ShortAssert, Short> {
   }
 
   public ShortAssert isNotGreaterThan(short expected) {
-    shorts.assertGreaterThan(description, actual, expected);
+    shorts.assertNotGreaterThan(description, actual, expected);
     return this;
   }
 }

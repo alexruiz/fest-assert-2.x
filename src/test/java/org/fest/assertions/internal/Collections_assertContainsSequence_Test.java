@@ -21,10 +21,11 @@ import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
 import static org.fest.util.Arrays.array;
-import static org.fest.util.Collections.list;
+import static org.fest.util.Lists.newArrayList;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.fest.assertions.description.Description;
@@ -34,14 +35,13 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * @author Alex
- * @author Alex
+ * Tests for {@link Collections#assertContainsSequence(Description, Collection, Object[])} .
+ *
+ * @author Yvonne Wang
  */
 public class Collections_assertContainsSequence_Test {
-
   @Rule
   public ExpectedException thrown = none();
-
   private List<String> actual;
   private Failures failures;
   private Collections collections;
@@ -49,7 +49,7 @@ public class Collections_assertContainsSequence_Test {
 
   @Before
   public void setUp() {
-    actual = list("Luke", "Yoda", "Leia");
+    actual = newArrayList("Luke", "Yoda", "Leia");
     failures = spy(new Failures());
     collections = Collections.instance();
     collections.failures = failures;

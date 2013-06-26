@@ -17,8 +17,6 @@ package org.fest.assertions.internal;
 import static org.fest.assertions.error.ShouldNotContain.shouldNotContain;
 import static org.fest.assertions.test.ErrorMessages.valuesToLookForIsEmpty;
 import static org.fest.assertions.test.ErrorMessages.valuesToLookForIsNull;
-import static org.fest.assertions.test.FailureMessages.actualIsEmpty;
-import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
 import static org.fest.util.Arrays.array;
@@ -58,13 +56,13 @@ public class Sets_assertDoesNotContain_Test {
 
   @Test
   public void should_fail_if_actual_is_null() {
-    thrown.expect(AssertionError.class, actualIsNull());
+    thrown.expect(AssertionError.class);
     sets.assertDoesNotContain(description, null, array("value"));
   }
 
   @Test
   public void should_fail_if_actual_is_empty() {
-    thrown.expect(AssertionError.class, actualIsEmpty());
+    thrown.expect(AssertionError.class);
     sets.assertDoesNotContain(description, newLinkedHashSet(), array("value"));
   }
 

@@ -10,15 +10,16 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.core;
 
 import static junit.framework.Assert.assertSame;
-import static org.fest.assertions.test.TestData.someDescription;
+
 import static org.fest.test.ExpectedException.none;
 
 import org.fest.assertions.description.Description;
+import org.fest.assertions.internal.TestDescription;
 import org.fest.test.ExpectedException;
 import org.junit.Rule;
 import org.junit.Test;
@@ -35,7 +36,7 @@ public class Matcher_constructor_with_description_Test {
 
   @Test
   public void should_set_description() {
-    Description description = someDescription();
+    Description description = new TestDescription("testing");
     Matcher<Object> matcher = new Matcher<Object>(description) {
       @Override
       public boolean matches(Object value) {

@@ -41,5 +41,4 @@ import org.junit.runners.Suite.SuiteClasses;
   Lists_assertDoesNotHaveDuplicates_Test.class
 })
 public class Lists_TestSuite {
-
 }

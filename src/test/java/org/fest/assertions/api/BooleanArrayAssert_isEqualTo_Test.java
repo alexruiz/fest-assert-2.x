@@ -15,13 +15,14 @@
 package org.fest.assertions.api;
 
 import junit.framework.Assert;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Tests for {@link BooleanArrayAssert#isEqualTo(Object)}.
+ * Tests for {@link BooleanArrayAssert#isEqualTo(boolean...)}.
  *
  * @author Yvonne Wang
  */
@@ -30,7 +31,7 @@ public class BooleanArrayAssert_isEqualTo_Test {
   @Rule
   public ExpectedException thrown = ExpectedException.none();
   private boolean[] actual = {true, false};
-  private boolean[] expected = {true, false};
+  private final boolean[] expected = {true, false};
   private BooleanArrayAssert assertions;
 
   @Before
@@ -41,26 +42,28 @@ public class BooleanArrayAssert_isEqualTo_Test {
   @Test
   public void should_return_this() {
     BooleanArrayAssert returned = assertions.isEqualTo(expected);
-    Assert.assertEquals(returned, assertions);
+    Assert.assertSame(returned, assertions);
   }
 
   @Test
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     actual = null;
+    assertions = new BooleanArrayAssert(actual);
     assertions.isEqualTo(expected);
   }
 
   @Test
   public void should_fail_if_expected_is_null() {
     thrown.expect(AssertionError.class);
-    assertions.isEqualTo(expected);
+    assertions.isEqualTo(null);
   }
 
   @Test
   public void should_fail_if_actual_is_not_equal_to_expected() {
     thrown.expect(AssertionError.class);
     actual = new boolean[]{true, true};
+    assertions = new BooleanArrayAssert(actual);
     assertions.isEqualTo(expected);
   }
 

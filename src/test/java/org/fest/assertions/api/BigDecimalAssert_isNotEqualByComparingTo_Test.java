@@ -14,42 +14,57 @@
  */
 package org.fest.assertions.api;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.fest.test.ExpectedException.none;
+import static org.junit.Assert.assertSame;
 
 import java.math.BigDecimal;
 
 import org.fest.assertions.description.Description;
-import org.fest.assertions.internal.Comparables;
-import org.junit.Assert;
+import org.fest.assertions.internal.TestDescription;
+import org.fest.test.ExpectedException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
+ * Tests for {@link BigDecimalAssert#isNotEqualByComparingTo(BigDecimal)}..
+ *
  * @author Yvonne Wang
  */
 public class BigDecimalAssert_isNotEqualByComparingTo_Test {
-
-  private Comparables comparables;
+  @Rule
+  public ExpectedException thrown = none();
+  private final BigDecimal actual = new BigDecimal(8);
+  private final BigDecimal expected = new BigDecimal(2);
   private BigDecimalAssert assertions;
-  private final BigDecimal expected = new BigDecimal(6);
+  private final Description description = new TestDescription("testing");
 
   @Before
   public void setUp() {
-    comparables = mock(Comparables.class);
-    assertions = new BigDecimalAssert(new BigDecimal(8), mock(Description.class));
-    assertions.comparables = comparables;
+    assertions = new BigDecimalAssert(actual, description);
   }
 
   @Test
-  public void should_return_this_assertion_object() {
+  public void should_return_this() {
     BigDecimalAssert returned = assertions.isNotEqualByComparingTo(expected);
-    Assert.assertSame(returned, assertions);
+    assertSame(assertions, returned);
   }
 
   @Test
-  public void verify_comparables_is_called() {
-    assertions.isNotEqualByComparingTo(new BigDecimal(6));
-    verify(comparables).assertNotEqual(assertions.description, assertions.actual, expected);
+  public void should_pass_if_actual_is_not_equal_to_epxected() {
+    assertions.isNotEqualByComparingTo(expected);
+  }
+
+  @Test
+  public void should_fail_if_actual_is_equal_to_expected() {
+    thrown.expect(AssertionError.class);
+    assertions.isNotEqualByComparingTo(actual);
+  }
+
+  @Test
+  public void should_throw_error_if_actual_is_null() {
+    thrown.expect(AssertionError.class);
+    assertions = new BigDecimalAssert(null, description);
+    assertions.isNotEqualByComparingTo(expected);
   }
 }

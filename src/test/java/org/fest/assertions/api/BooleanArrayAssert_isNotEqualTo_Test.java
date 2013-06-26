@@ -18,13 +18,14 @@
 package org.fest.assertions.api;
 
 import junit.framework.Assert;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Test for {@link BooleanArrayAssert#isNotEqualTo(Object)}.
+ * Test for {@link BooleanArrayAssert#isNotEqualTo(boolean[])}.
  * <p/>
  * Author: Yvonne Wang
  */
@@ -33,7 +34,7 @@ public class BooleanArrayAssert_isNotEqualTo_Test {
   @Rule
   public ExpectedException thrown = ExpectedException.none();
   private boolean[] actual = {true, false};
-  private boolean[] other = {false, false};
+  private final boolean[] other = {false, false};
   private BooleanArrayAssert assertions;
 
   @Before
@@ -44,7 +45,7 @@ public class BooleanArrayAssert_isNotEqualTo_Test {
   @Test
   public void should_return_this() {
     BooleanArrayAssert returned = assertions.isNotEqualTo(other);
-    Assert.assertEquals(returned, assertions);
+    Assert.assertSame(returned, assertions);
   }
 
   @Test
@@ -64,22 +65,28 @@ public class BooleanArrayAssert_isNotEqualTo_Test {
   }
 
   @Test
-  public void should_fail_if_actual_is_equal_to_other() {
-    thrown.expect(AssertionError.class);
-    actual = new boolean[]{false, false};
+  public void should_pass_if_other_is_null() {
+    assertions.isNotEqualTo(null);
+  }
+
+  @Test
+  public void should_pass_if_actual_is_null() {
+    actual = null;
+    assertions = new BooleanArrayAssert(actual);
     assertions.isNotEqualTo(other);
   }
 
   @Test
-  public void should_throw_error_if_actual_is_null() {
+  public void should_throw_error_if_both_actual_and_other_are_null() {
     thrown.expect(AssertionError.class);
     actual = null;
-    assertions.isNotEqualTo(other);
+    assertions = new BooleanArrayAssert(actual);
+    assertions.isNotEqualTo(null);
   }
 
   @Test
-  public void should_throw_error_if_other_is_null() {
+  public void should_fail_if_actual_is_equal_to_other() {
     thrown.expect(AssertionError.class);
-    assertions.isNotEqualTo(null);
+    assertions.isNotEqualTo(actual);
   }
 }

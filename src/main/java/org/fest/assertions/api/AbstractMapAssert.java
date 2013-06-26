@@ -25,8 +25,7 @@ import org.fest.assertions.internal.Maps;
 import org.fest.util.VisibleForTesting;
 
 /**
- * An implementation class of <code>{@link EnumerableAssert}</code> whose actual type is
- * <code>{@link Map}</code>.
+ * An implementation class of {@link EnumerableAssert} whose actual type is {@link Map}.
  *
  * @param <S> the "self" type of this assertion class.
  *
@@ -97,7 +96,7 @@ public abstract class AbstractMapAssert<S> implements EnumerableAssert<S> {
     return myself;
   }
 
-  public <K> S doesNotcontainKey(K key) {
+  public <K> S doesNotContainKey(K key) {
     maps.assertDoesNotContainKey(description, actual, key);
     return myself;
   }

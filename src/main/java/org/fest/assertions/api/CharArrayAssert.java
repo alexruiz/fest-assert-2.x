@@ -16,7 +16,6 @@ package org.fest.assertions.api;
 
 import org.fest.assertions.core.ArraySortedAssert;
 import org.fest.assertions.core.EnumerableAssert;
-import org.fest.assertions.core.IndexedObjectEnumerableAssert;
 import org.fest.assertions.data.Index;
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.CharArrays;
@@ -25,15 +24,14 @@ import org.fest.util.VisibleForTesting;
 /**
  * Assertion methods for arrays of {@code char}s.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(char[])}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(char[])}.
  * </p>
  *
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
 public class CharArrayAssert extends AbstractAssert<CharArrayAssert, char[]> implements
-    EnumerableAssert<CharArrayAssert>, IndexedObjectEnumerableAssert<CharArrayAssert, Character>,
-    ArraySortedAssert<CharArrayAssert> {
+    EnumerableAssert<CharArrayAssert>, ArraySortedAssert<CharArrayAssert> {
 
   @VisibleForTesting
   CharArrays arrays = CharArrays.instance();
@@ -75,20 +73,40 @@ public class CharArrayAssert extends AbstractAssert<CharArrayAssert, char[]> imp
   }
 
   @Override
-  public CharArrayAssert contains(Character value, Index index) {
+  public CharArrayAssert isSorted() {
+    arrays.assertIsSorted(description, actual);
+    return this;
+  }
+
+  /**
+   * Verifies that the given array contains the given value at the given index.
+   *
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the given array is {@code null} or empty.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws IndexOutOfBoundsException if the value of the given {@code Index} is equal to or greater than the size of
+   *           the given array.
+   * @throws AssertionError if the given array does not contain the given value at the given index.
+   */
+  public CharArrayAssert contains(char value, Index index) {
     arrays.assertContains(description, actual, value, index);
     return this;
   }
 
-  @Override
-  public CharArrayAssert doesNotContain(Character value, Index index) {
+  /**
+   * Verifies that the given array does not contain the given value at the given index.
+   *
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the given array is {@code null}.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws AssertionError if the given array contains the given value at the given index.
+   */
+  public CharArrayAssert doesNotContain(char value, Index index) {
     arrays.assertDoesNotContain(description, actual, value, index);
-    return this;
-  }
-
-  @Override
-  public CharArrayAssert isSorted() {
-    arrays.assertIsSorted(description, actual);
     return this;
   }
 

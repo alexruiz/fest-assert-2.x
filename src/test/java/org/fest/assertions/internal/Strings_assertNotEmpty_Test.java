@@ -18,14 +18,10 @@ import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 import org.fest.assertions.description.Description;
-import org.fest.assertions.error.ErrorMessageFactory;
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
@@ -68,8 +64,7 @@ public class Strings_assertNotEmpty_Test {
     try {
       strings.assertNotEmpty(description, "");
     } catch (AssertionError e) {
-      assertEquals("[Testing] expecting: actual not to be empty", e.getMessage());
-      verify(failures).failure(same(description), any(ErrorMessageFactory.class));
+      assertEquals("[Testing] expecting:\n actual not to be empty", e.getMessage());
       return;
     }
     throw expectedAssertionErrorNotThrown();

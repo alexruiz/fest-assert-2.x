@@ -14,8 +14,9 @@
  */
 package org.fest.assertions.api;
 
+import javax.annotation.Nonnull;
+
 import org.fest.assertions.core.EnumerableAssert;
-import org.fest.assertions.core.IndexedObjectEnumerableAssert;
 import org.fest.assertions.data.Index;
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.DoubleArrays;
@@ -24,14 +25,14 @@ import org.fest.util.VisibleForTesting;
 /**
  * Assertion methods for arrays of {@code double}s.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(double[])}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(double[])}.
  * </p>
  *
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
 public class DoubleArrayAssert extends AbstractAssert<DoubleArrayAssert, double[]> implements
-    EnumerableAssert<DoubleArrayAssert>, IndexedObjectEnumerableAssert<DoubleArrayAssert, Double> {
+    EnumerableAssert<DoubleArrayAssert> {
 
   @VisibleForTesting
   DoubleArrays arrays = DoubleArrays.instance();
@@ -59,6 +60,7 @@ public class DoubleArrayAssert extends AbstractAssert<DoubleArrayAssert, double[
   }
 
   /** {@inheritDoc} */
+  @Nonnull
   @Override
   public DoubleArrayAssert isNotEmpty() {
     arrays.assertNotEmpty(description, actual);
@@ -66,20 +68,41 @@ public class DoubleArrayAssert extends AbstractAssert<DoubleArrayAssert, double[
   }
 
   /** {@inheritDoc} */
+  @Nonnull
   @Override
   public DoubleArrayAssert hasSize(int expected) {
     arrays.assertHasSize(description, actual, expected);
     return this;
   }
 
-  @Override
-  public DoubleArrayAssert contains(Double value, Index index) {
+  /**
+   * Verifies that the given array contains the given value at the given index.
+   *
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the given array is {@code null} or empty.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws IndexOutOfBoundsException if the value of the given {@code Index} is equal to or greater than the size of
+   *           the given array.
+   * @throws AssertionError if the given array does not contain the given value at the given index.
+   */
+  public DoubleArrayAssert contains(double value, Index index) {
     arrays.assertContains(description, actual, value, index);
     return this;
   }
 
-  @Override
-  public DoubleArrayAssert doesNotContain(Double value, Index index) {
+  /**
+   * Verifies that the given array does not contain the given value at the given index.
+   *
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+    * @return {@code this} assertion object.
+   * @throws AssertionError if the given array is {@code null}.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws AssertionError if the given array contains the given value at the given index.
+   */
+  public DoubleArrayAssert doesNotContain(double value, Index index) {
     arrays.assertDoesNotContain(description, actual, value, index);
     return this;
   }

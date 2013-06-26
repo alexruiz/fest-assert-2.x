@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2012 Google Inc. and others.
+ * Copyright @2012-2013 Google Inc. and others.
  */
 package org.fest.assertions.api;
 
@@ -22,12 +22,17 @@ import org.junit.runners.Suite.SuiteClasses;
  * All tests for {@link BooleanAssert}.
  *
  * @author alruiz@google.com (Alex Ruiz)
+ * @author Yvonne Wang
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-    BooleanAssert_isEqualTo_Test.class,
-    BooleanAssert_isFalse_Test.class,
-    BooleanAssert_isNotEqualTo_Test.class,
-    BooleanAssert_isTrue_Test.class
+  BooleanArrayAssert_isNull_Test.class,
+  BooleanArrayAssert_isNotNull_Test.class,
+  BooleanAssert_isEqualTo_boolean_Test.class,
+  BooleanAssert_isNotEqualTo_boolean_Test.class,
+  BooleanAssert_isEqualTo_boolean_wrapper_Test.class,
+  BooleanAssert_isNotEqualTo_boolean_wrapper_Test.class,
+  BooleanAssert_isTrue_Test.class,
+  BooleanAssert_isFalse_Test.class
 })
 public class BooleanAssert_TestSuite {}

@@ -17,7 +17,6 @@ package org.fest.assertions.internal;
 import static org.fest.assertions.error.ShouldContainOnly.shouldContainOnly;
 import static org.fest.assertions.test.ErrorMessages.valuesToLookForIsEmpty;
 import static org.fest.assertions.test.ErrorMessages.valuesToLookForIsNull;
-import static org.fest.assertions.test.FailureMessages.actualIsEmpty;
 import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
@@ -64,7 +63,7 @@ public class Sets_assertContainsOnly_Test {
 
   @Test
   public void should_fail_if_actual_is_empty() {
-    thrown.expect(AssertionError.class, actualIsEmpty());
+    thrown.expect(AssertionError.class);
     sets.assertContainsOnly(description, newLinkedHashSet(), values);
   }
 

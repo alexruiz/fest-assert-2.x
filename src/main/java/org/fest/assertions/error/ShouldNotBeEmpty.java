@@ -33,6 +33,6 @@ public class ShouldNotBeEmpty extends BasicErrorMessageFactory {
   }
 
   private ShouldNotBeEmpty() {
-    super("expecting: actual not to be empty");
+    super("expecting:\n actual not to be empty");
   }
 }

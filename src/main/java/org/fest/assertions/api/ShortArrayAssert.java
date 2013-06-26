@@ -16,7 +16,6 @@ package org.fest.assertions.api;
 
 import org.fest.assertions.core.ArraySortedAssert;
 import org.fest.assertions.core.EnumerableAssert;
-import org.fest.assertions.core.IndexedObjectEnumerableAssert;
 import org.fest.assertions.data.Index;
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.ShortArrays;
@@ -25,7 +24,7 @@ import org.fest.util.VisibleForTesting;
 /**
  * Assertion methods for arrays of {@code short}s.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(short[])}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(short[])}.
  * </p>
  *
  * @author Yvonne Wang
@@ -35,8 +34,7 @@ import org.fest.util.VisibleForTesting;
  * @author Nicolas François
  */
 public class ShortArrayAssert extends AbstractAssert<ShortArrayAssert, short[]> implements
-    EnumerableAssert<ShortArrayAssert>, IndexedObjectEnumerableAssert<ShortArrayAssert, Short>,
-    ArraySortedAssert<ShortArrayAssert> {
+    EnumerableAssert<ShortArrayAssert>, ArraySortedAssert<ShortArrayAssert> {
 
   @VisibleForTesting
   ShortArrays arrays = ShortArrays.instance();
@@ -83,14 +81,34 @@ public class ShortArrayAssert extends AbstractAssert<ShortArrayAssert, short[]> 
     return this;
   }
 
-  @Override
-  public ShortArrayAssert contains(Short value, Index index) {
+  /**
+   * Verifies that the given array contains the given value at the given index.
+   *
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the given array is {@code null} or empty.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws IndexOutOfBoundsException if the value of the given {@code Index} is equal to or greater than the size of
+   *           the given array.
+   * @throws AssertionError if the given array does not contain the given value at the given index.
+   */
+  public ShortArrayAssert contains(short value, Index index) {
     arrays.assertContains(description, actual, value, index);
     return this;
   }
 
-  @Override
-  public ShortArrayAssert doesNotContain(Short value, Index index) {
+  /**
+   * Verifies that the given array does not contain the given value at the given index.
+   *
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the given array is {@code null}.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws AssertionError if the given array contains the given value at the given index.
+   */
+  public ShortArrayAssert doesNotContain(short value, Index index) {
     arrays.assertDoesNotContain(description, actual, value, index);
     return this;
   }
@@ -180,7 +198,7 @@ public class ShortArrayAssert extends AbstractAssert<ShortArrayAssert, short[]> 
    * @throws AssertionError if the actual array does not start with the given sequence.
    */
   public ShortArrayAssert startsWith(short... sequence) {
-    arrays.assertEndsWith(description, actual, sequence);
+    arrays.assertStartsWith(description, actual, sequence);
     return this;
   }
 

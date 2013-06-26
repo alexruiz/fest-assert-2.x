@@ -121,6 +121,6 @@ public class BooleanArrays_assertEndsWith_Test {
 
   @Test
   public void should_pass_if_actual_and_sequence_are_equal() {
-    arrays.assertEndsWith(description, actual, newArray(true, false, false, true));
+    arrays.assertEndsWith(description, actual, actual);
   }
 }

@@ -18,13 +18,14 @@
 package org.fest.assertions.api;
 
 import junit.framework.Assert;
+
 import org.fest.test.ExpectedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Tests for {@link ByteArrayAssert#isNotEqualTo(Object)}.
+ * Tests for {@link ByteArrayAssert#isNotEqualTo(byte[])}.
  *
  * @author: Yvonne Wang
  */
@@ -32,7 +33,7 @@ public class ByteArrayAssert_isNotEqualTo_Test {
   @Rule
   public ExpectedException thrown = ExpectedException.none();
   private byte[] actual = {6, 8};
-  private byte[] expected = {1, 2};
+  private final byte[] expected = {1, 2};
   private ByteArrayAssert assertions;
 
   @Before
@@ -43,42 +44,41 @@ public class ByteArrayAssert_isNotEqualTo_Test {
   @Test
   public void should_return_this() {
     ByteArrayAssert returned = assertions.isNotEqualTo(expected);
-    Assert.assertEquals(returned, assertions);
+    Assert.assertSame(returned, assertions);
   }
 
   @Test
-  public void should_pass_if_actual_is_not_equal_to_other() {
+  public void should_pass_if_actual_is_not_equal_to_expected() {
     assertions.isNotEqualTo(expected);
   }
 
   @Test
   public void should_pass_if_actual_is_empty() {
     actual = new byte[0];
+    assertions = new ByteArrayAssert(actual);
     assertions.isNotEqualTo(expected);
   }
 
   @Test
-  public void should_pass_if_other_is_empty() {
+  public void should_pass_if_expected_is_empty() {
     assertions.isNotEqualTo(new byte[0]);
   }
 
   @Test
-  public void should_fail_if_actual_is_equal_to_other() {
+  public void should_fail_if_actual_is_equal_to_expected() {
     thrown.expect(AssertionError.class);
-    actual = new byte[]{6, 8};
-    assertions.isNotEqualTo(expected);
+    assertions.isNotEqualTo(actual);
   }
 
   @Test
-  public void should_throw_error_if_actual_is_null() {
-    thrown.expect(AssertionError.class);
+  public void should_pass_if_actual_is_null() {
     actual = null;
+    assertions = new ByteArrayAssert(actual);
     assertions.isNotEqualTo(expected);
   }
 
   @Test
-  public void should_throw_error_if_other_is_null() {
-    thrown.expect(AssertionError.class);
+  public void should_pass_if_expected_is_null() {
     assertions.isNotEqualTo(null);
   }
 }

@@ -17,7 +17,6 @@ package org.fest.assertions.internal;
 import static org.fest.assertions.data.Index.atIndex;
 import static org.fest.assertions.error.ShouldContainAtIndex.shouldContainAtIndex;
 import static org.fest.assertions.test.BooleanArrays.emptyArray;
-import static org.fest.assertions.test.FailureMessages.actualIsEmpty;
 import static org.fest.assertions.test.FailureMessages.actualIsNull;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.mockito.Mockito.spy;
@@ -31,7 +30,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Tests for <code>{@link BooleanArrays#assertContains(Description, boolean[], boolean, Index)}</code>.
+ * Tests for {@link BooleanArrays#assertContains(Description, boolean[], boolean, Index)}.
  *
  * @author Alex Ruiz
  * @author Joel Costigliola
@@ -64,7 +63,7 @@ public class BooleanArrays_assertContains_at_Index_Test {
 
   @Test
   public void should_fail_if_actual_is_empty() {
-    thrown.expect(AssertionError.class, actualIsEmpty());
+    thrown.expect(AssertionError.class);
     arrays.assertContains(description, emptyArray(), true, Index.atIndex(0));
   }
 

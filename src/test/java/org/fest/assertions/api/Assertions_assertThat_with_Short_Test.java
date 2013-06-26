@@ -20,7 +20,7 @@ import static org.junit.Assert.assertSame;
 import org.junit.Test;
 
 /**
- * Tests for <code>{@link Assertions#assertThat(Short)}</code>.
+ * Tests for {@link Assertions#assertThat(Short)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang

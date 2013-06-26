@@ -1,17 +1,18 @@
 /*
- * Created on Oct 20, 2010
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- * 
+ * Created on Mar 29, 2009
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- * 
- * Copyright @2010-2013 the original author or authors.
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ *
+ * Copyright @2013 the original author or authors.
  */
+
 package org.fest.assertions.api;
 
 import org.fest.test.ExpectedException;
@@ -23,17 +24,15 @@ import static org.fest.test.ExpectedException.none;
 import static org.junit.Assert.assertSame;
 
 /**
- * Tests for <code>{@link IntegerAssert#isNotLessThan(int)}.
+ * Tests for {@link IntegerAssert#isNotLessThan(int)}.
  *
- * @author Alex Ruiz
  * @author Yvonne Wang
  */
 public class IntegerAssert_isNotLessThan_int_Test {
-
   @Rule
   public ExpectedException thrown = none();
   private IntegerAssert assertions;
-  private Integer actual = 8;
+  private Integer actual = new Integer(8);
   private int expected = 6;
 
   @Before
@@ -61,14 +60,13 @@ public class IntegerAssert_isNotLessThan_int_Test {
   @Test
   public void should_throw_error_if_actual_is_null() {
     thrown.expect(AssertionError.class);
-    actual = null;
+    assertions = new IntegerAssert(null);
     assertions.isNotLessThan(expected);
   }
 
   @Test
   public void should_fail_if_actual_is_less_than_expected() {
     thrown.expect(AssertionError.class);
-    expected = 10;
-    assertions.isNotLessThan(expected);
+    assertions.isNotLessThan(10);
   }
 }

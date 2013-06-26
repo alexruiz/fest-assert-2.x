@@ -29,7 +29,6 @@ import org.junit.runners.Suite;
     StringAssert_doesNotContain_Test.class,
     StringAssert_doesNotMatch_Pattern_Test.class,
     StringAssert_doesNotMatch_String_Test.class,
-    StringAssert_endsWith_Test.class,
     StringAssert_hasSize_Test.class,
     StringAssert_isEmpty_Test.class,
     StringAssert_isEqualToIgnoringCase_Test.class,
@@ -37,6 +36,7 @@ import org.junit.runners.Suite;
     StringAssert_isNullOrEmpty_Test.class,
     StringAssert_matches_Pattern_Test.class,
     StringAssert_matches_String_Test.class,
-    StringAssert_startsWith_Test.class
+    StringAssert_startsWith_Test.class,
+    StringAssert_endsWith_Test.class
 })
 public class StringAssert_TestSuite {}

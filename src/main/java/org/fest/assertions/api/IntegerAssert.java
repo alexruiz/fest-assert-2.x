@@ -35,41 +35,89 @@ public class IntegerAssert extends AbstractComparableAssert<IntegerAssert, Integ
   @VisibleForTesting
   Integers integers = Integers.instance();
 
-  protected IntegerAssert(int actual) {
+  protected IntegerAssert(Integer actual) {
     super(actual, IntegerAssert.class);
   }
 
-  protected IntegerAssert(int actual, Description description) {
+  protected IntegerAssert(Integer actual, Description description) {
     super(actual, IntegerAssert.class, description);
   }
 
+  /**
+   * Verifies that the actual value is equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is not equal to the given one.
+   */
   public IntegerAssert isEqualTo(int expected) {
     integers.assertEqualTo(description, actual, expected);
     return this;
   }
 
+  /**
+   * Verifies that the actual value is not equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is equal to the given one.
+   */
   public IntegerAssert isNotEqualTo(int expected) {
     integers.assertNotEqualTo(description, actual, expected);
     return this;
   }
 
+  /**
+   * Verifies that the actual value is less than the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is equal to or greater than the given one.
+   */
   public IntegerAssert isLessThan(int expected) {
     integers.assertLessThan(description, actual, expected);
     return this;
   }
 
+  /**
+   * Verifies that the actual value is greater than or equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is less than the given one.
+   */
   public IntegerAssert isNotLessThan(int expected) {
     integers.assertNotLessThan(description, actual, expected);
     return this;
   }
 
+  /**
+   * Verifies that the actual value is greater than the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is equal to or less than the given one.
+   */
   public IntegerAssert isGreaterThan(int expected) {
     integers.assertGreaterThan(description, actual, expected);
     return this;
   }
 
+  /**
+   * Verifies that the actual value is less than or equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is greater than the given one.
+   */
   public IntegerAssert isNotGreaterThan(int expected) {
-    integers.assertGreaterThan(description, actual, expected);
+    integers.assertNotGreaterThan(description, actual, expected);
     return this;
   }
 }

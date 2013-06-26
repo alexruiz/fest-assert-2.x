@@ -14,6 +14,10 @@
  */
 package org.fest.assertions.api;
 
+import static org.fest.test.ExpectedException.none;
+
+import java.math.BigDecimal;
+
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.TestDescription;
 import org.fest.test.ExpectedException;
@@ -22,12 +26,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
-import static org.fest.test.ExpectedException.none;
-
 /**
- * Tests for {@link BigDecimalAssert#isEqualTo(Comparable)}.
+ * Tests for {@link BigDecimalAssert#isEqualTo(String)}.
  *
  * @author Yvonne Wang
  */
@@ -36,9 +36,8 @@ public class BigDecimalAssert_isEqualTo_Test {
   public ExpectedException thrown = none();
 
   private BigDecimalAssert assertions;
-  private BigDecimal actual =  new BigDecimal(8);
-  private BigDecimal expected = new BigDecimal(8);
-  private Description description = new TestDescription("testing");
+  private BigDecimal actual = new BigDecimal(8);
+  private final Description description = new TestDescription("testing");
 
   @Before
   public void setUp() {
@@ -46,38 +45,33 @@ public class BigDecimalAssert_isEqualTo_Test {
   }
 
   @Test
-  public void should_return_this() {
-    BigDecimalAssert returned = assertions.isEqualTo(expected);
+  public void should_return_this_if_actual_is_equal_to_expected() {
+    BigDecimalAssert returned = assertions.isEqualTo(actual);
     Assert.assertSame(returned, assertions);
   }
 
   @Test
-  public void should_pass_if_actual_is_equal_to_String_expected(){
-      assertions.isEqualTo("8");
-  }
-
-  @Test
   public void should_pass_if_actual_is_equal_to_expected() {
-    assertions.isEqualTo(expected);
+    assertions.isEqualTo(actual);
   }
 
   @Test
-  public void should_pass_if_actual_is_equal_to_expected_with_different_scale(){
-    expected = new BigDecimal(8.00);
-    assertions.isEqualTo(expected);
+  public void should_pass_if_actual_is_equal_to_expected_with_different_scale() {
+    assertions.isEqualTo(new BigDecimal(8.00));
   }
 
   @Test
-  public void should_fail_if_actual_is_null(){
+  public void should_fail_if_actual_is_null() {
     thrown.expect(AssertionError.class);
     actual = null;
-    assertions.isEqualTo(expected);
+    assertions = new BigDecimalAssert(actual);
+    assertions.isEqualTo(actual);
   }
 
   @Test
-  public void should_fail_if_expected_is_null(){
-    thrown.expect(AssertionError.class);
-    expected = null;
+  public void should_fail_if_expected_is_null() {
+    thrown.expect(NullPointerException.class);
+    BigDecimal expected = null;
     assertions.isEqualTo(expected);
   }
 
@@ -85,11 +79,5 @@ public class BigDecimalAssert_isEqualTo_Test {
   public void should_fail_if_actual_is_not_equal_to_expected() {
     thrown.expect(AssertionError.class);
     assertions.isEqualTo(new BigDecimal(2));
-  }
-
-  @Test
-  public void should_fail_if_actual_is_not_equal_to_String_expected() {
-    thrown.expect(AssertionError.class);
-    assertions.isEqualTo("2");
   }
 }

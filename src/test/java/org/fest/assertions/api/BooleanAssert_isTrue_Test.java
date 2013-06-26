@@ -10,44 +10,50 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
-import org.fest.assertions.description.Description;
-import org.fest.assertions.internal.Objects;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Tests for {@link BooleanAssert#isTrue()}.
  *
  * @author Alex Ruiz
+ * @author Yvonne Wang
  */
 public class BooleanAssert_isTrue_Test {
-  private Objects objects;
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
+  private Boolean actual = new Boolean(true);
   private BooleanAssert assertions;
 
   @Before
   public void setUp() {
-    objects = mock(Objects.class);
-    assertions = new BooleanAssert(false, mock(Description.class));
-    assertions.objects = objects;
+    assertions = new BooleanAssert(actual);
   }
 
   @Test
-  public void should_verify_that_actual_is_true() {
+  public void should_pass_that_actual_is_true() {
     assertions.isTrue();
-    verify(objects).assertEqual(assertions.description, assertions.actual, true);
   }
 
   @Test
   public void should_return_this() {
     BooleanAssert returned = assertions.isTrue();
     assertSame(assertions, returned);
+  }
+
+  @Test
+  public void should_fail_if_actual_is_not_true() {
+    thrown.expect(AssertionError.class);
+    actual = new Boolean(false);
+    assertions = new BooleanAssert(actual);
+    assertions.isTrue();
   }
 }

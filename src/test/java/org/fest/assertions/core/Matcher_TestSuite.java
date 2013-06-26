@@ -10,7 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2012 Google Inc. and others.
+ * Copyright @2012-2013 Google Inc. and others.
  */
 package org.fest.assertions.core;
 
@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * All tests for {@link Matcher}.
  *
  * @author alruiz@google.com (Alex Ruiz)
+ * @author Yvonne Wang
  */
 @RunWith(Suite.class)
 @SuiteClasses({

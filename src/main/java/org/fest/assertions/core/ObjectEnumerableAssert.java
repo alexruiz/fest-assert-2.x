@@ -20,12 +20,11 @@ package org.fest.assertions.core;
  * @param <S> the "self" type of this assertion class. Please read &quot;<a href="http://bit.ly/anMa4g"
  *          target="_blank">Emulating 'self types' using Java Generics to simplify fluent API implementation</a>&quot;
  *          for more details.
- * @param <T> the type of the "actual" value.
  *
  * @author Yvonne Wang
  * @author Alex Ruiz
  */
-public interface ObjectEnumerableAssert<S, T> extends EnumerableAssert<S> {
+public interface ObjectEnumerableAssert<S> extends EnumerableAssert<S> {
 
   /**
    * Verifies that the actual group contains the given values, in any order.
@@ -37,7 +36,7 @@ public interface ObjectEnumerableAssert<S, T> extends EnumerableAssert<S> {
    * @throws AssertionError if the actual group is {@code null}.
    * @throws AssertionError if the actual group does not contain the given values.
    */
-  S contains(T... values);
+  S contains(Object... values);
 
   /**
    * Verifies that the actual group contains only the given values and nothing else, in any order.
@@ -50,7 +49,7 @@ public interface ObjectEnumerableAssert<S, T> extends EnumerableAssert<S> {
    * @throws AssertionError if the actual group does not contain the given values, i.e. the actual group contains some
    *           or none of the given values, or the actual group contains more values than the given ones.
    */
-  S containsOnly(T... values);
+  S containsOnly(Object... values);
 
   /**
    * Verifies that the actual group contains the given sequence, without any other values between them.
@@ -61,7 +60,7 @@ public interface ObjectEnumerableAssert<S, T> extends EnumerableAssert<S> {
    * @throws AssertionError if the given array is {@code null}.
    * @throws AssertionError if the actual group does not contain the given sequence.
    */
-  S containsSequence(T... sequence);
+  S containsSequence(Object... sequence);
 
   /**
    * Verifies that the actual group does not contain the given values.
@@ -73,7 +72,7 @@ public interface ObjectEnumerableAssert<S, T> extends EnumerableAssert<S> {
    * @throws AssertionError if the actual group is {@code null}.
    * @throws AssertionError if the actual group contains any of the given values.
    */
-  S doesNotContain(T... values);
+  S doesNotContain(Object... values);
 
   /**
    * Verifies that the actual group does not contain duplicates.
@@ -96,7 +95,7 @@ public interface ObjectEnumerableAssert<S, T> extends EnumerableAssert<S> {
    * @throws AssertionError if the actual group is {@code null}.
    * @throws AssertionError if the actual group does not start with the given sequence of objects.
    */
-  S startsWith(T... sequence);
+  S startsWith(Object... sequence);
 
   /**
    * Verifies that the actual group ends with the given sequence of objects, without any other objects between them.
@@ -110,7 +109,7 @@ public interface ObjectEnumerableAssert<S, T> extends EnumerableAssert<S> {
    * @throws AssertionError if the actual group is {@code null}.
    * @throws AssertionError if the actual group does not end with the given sequence of objects.
    */
-  S endsWith(T... sequence);
+  S endsWith(Object... sequence);
 
   /**
    * Verifies that the actual group contains at least a null element.

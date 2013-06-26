@@ -1,32 +1,35 @@
 /*
  * Created on Jan 15, 2011
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- * 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- * 
- * Copyright @2011 the original author or authors.
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ *
+ * Copyright @2011-2013 the original author or authors.
  */
 package org.fest.assertions.error;
 
 import static junit.framework.Assert.assertFalse;
-import static org.fest.test.EqualsHashCodeContractAssert.*;
 
-import org.junit.*;
+import static org.fest.test.EqualsHashCodeContractAssert.assertEqualsIsReflexive;
+import static org.fest.test.EqualsHashCodeContractAssert.assertEqualsIsSymmetric;
+import static org.fest.test.EqualsHashCodeContractAssert.assertEqualsIsTransitive;
+import static org.fest.test.EqualsHashCodeContractAssert.assertMaintainsEqualsAndHashCodeContract;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
- * Tests for <code>{@link BasicErrorMessageFactory#equals(Object)}</code> and
- * <code>{@link BasicErrorMessageFactory#hashCode()}</code>.
- * 
+ * Tests for {@link BasicErrorMessageFactory#equals(Object)} and {@link BasicErrorMessageFactory#hashCode()}.
+ *
  * @author Yvonne Wang
  */
 public class BasicErrorMessageFactory_equals_hashCode_Test {
-
   private static BasicErrorMessageFactory factory;
 
   @BeforeClass

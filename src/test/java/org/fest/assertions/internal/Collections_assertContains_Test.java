@@ -19,11 +19,12 @@ import static org.fest.assertions.test.ErrorMessages.valuesToLookForIsEmpty;
 import static org.fest.assertions.test.TestFailures.expectedAssertionErrorNotThrown;
 import static org.fest.test.ExpectedException.none;
 import static org.fest.util.Arrays.array;
-import static org.fest.util.Collections.list;
+import static org.fest.util.Lists.newArrayList;
 import static org.fest.util.Sets.newLinkedHashSet;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.fest.assertions.description.Description;
@@ -35,15 +36,15 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
+ * Tests for {@link Collections#assertContains(Description, Collection, Object[])}.
+ *
  * @author Alex Ruiz
  * @author Yvonne Wang
  *
  */
 public class Collections_assertContains_Test {
-
   @Rule
   public ExpectedException thrown = none();
-
   private List<String> actual;
   private Failures failures;
   private Collections collections;
@@ -51,7 +52,7 @@ public class Collections_assertContains_Test {
 
   @Before
   public void setUp() {
-    actual = list("Luke", "Yoda", "Leia");
+    actual = newArrayList("Luke", "Yoda", "Leia");
     failures = spy(new Failures());
     collections = new Collections();
     collections.failures = failures;
@@ -76,7 +77,7 @@ public class Collections_assertContains_Test {
 
   @Test
   public void should_pass_if_actual_contains_given_values_more_than_once() {
-    actual.addAll(list("Luke", "Luke"));
+    actual.addAll(newArrayList("Luke", "Luke"));
     collections.assertContains(description, actual, array("Luke"));
   }
 

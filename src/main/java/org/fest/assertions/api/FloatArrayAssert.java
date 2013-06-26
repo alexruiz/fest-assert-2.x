@@ -15,7 +15,6 @@
 package org.fest.assertions.api;
 
 import org.fest.assertions.core.EnumerableAssert;
-import org.fest.assertions.core.IndexedObjectEnumerableAssert;
 import org.fest.assertions.data.Index;
 import org.fest.assertions.description.Description;
 import org.fest.assertions.internal.FloatArrays;
@@ -24,7 +23,7 @@ import org.fest.util.VisibleForTesting;
 /**
  * Assertion methods for arrays of {@code float}s.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(float[])}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(float[])}.
  * </p>
  *
  * @author Yvonne Wang
@@ -32,7 +31,7 @@ import org.fest.util.VisibleForTesting;
  * @author Joel Costigliola
  */
 public class FloatArrayAssert extends AbstractAssert<FloatArrayAssert, float[]> implements
-    EnumerableAssert<FloatArrayAssert>, IndexedObjectEnumerableAssert<FloatArrayAssert, Float> {
+    EnumerableAssert<FloatArrayAssert> {
 
   @VisibleForTesting
   FloatArrays arrays = FloatArrays.instance();
@@ -73,14 +72,35 @@ public class FloatArrayAssert extends AbstractAssert<FloatArrayAssert, float[]> 
     return this;
   }
 
-  @Override
-  public FloatArrayAssert contains(Float value, Index index) {
+  /**
+   * Verifies that the given array contains the given value at the given index.
+   *
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the given array is {@code null} or empty.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws IndexOutOfBoundsException if the value of the given {@code Index} is equal to or greater than the size of
+   *           the given array.
+   * @throws AssertionError if the given array does not contain the given value at the given index.
+   */
+  public FloatArrayAssert contains(float value, Index index) {
     arrays.assertContains(description, actual, value, index);
     return this;
   }
 
-  @Override
-  public FloatArrayAssert doesNotContain(Float value, Index index) {
+  /**
+   * Verifies that the given array does not contain the given value at the given index.
+   *
+   * @return {@code this} assertion object.
+   * @param value the value to look for.
+   * @param index the index where the value should be stored in the given array.
+   *
+   * @throws AssertionError if the given array is {@code null}.
+   * @throws NullPointerException if the given {@code Index} is {@code null}.
+   * @throws AssertionError if the given array contains the given value at the given index.
+   */
+  public FloatArrayAssert doesNotContain(float value, Index index) {
     arrays.assertDoesNotContain(description, actual, value, index);
     return this;
   }

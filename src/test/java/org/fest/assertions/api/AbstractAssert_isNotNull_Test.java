@@ -10,16 +10,15 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  *
- * Copyright @2010-2012 the original author or authors.
+ * Copyright @2010-2013 the original author or authors.
  */
 package org.fest.assertions.api;
 
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
-import org.fest.assertions.internal.Objects;
+import org.fest.test.ExpectedException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -29,25 +28,32 @@ import org.junit.Test;
  * @author Yvonne Wang
  */
 public class AbstractAssert_isNotNull_Test {
-  private Objects objects;
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
   private ConcreteAssert assertions;
+  private Object actual = "Yoda";
 
   @Before
   public void setUp() {
-    objects = mock(Objects.class);
-    assertions = new ConcreteAssert(6L);
-    assertions.objects = objects;
+    assertions = new ConcreteAssert(actual);
   }
 
   @Test
-  public void should_verify_that_actual_value_is_null() {
+  public void should_pass_that_actual_is_not_null() {
     assertions.isNotNull();
-    verify(objects).assertNotNull(assertions.description, assertions.actual);
   }
 
   @Test
   public void should_return_this() {
     ConcreteAssert returned = assertions.isNotNull();
     assertSame(assertions, returned);
+  }
+
+  @Test
+  public void should_fail_if_actual_is_null() {
+    actual = null;
+    assertions = new ConcreteAssert(actual);
+    thrown.expect(AssertionError.class);
+    assertions.isNotNull();
   }
 }

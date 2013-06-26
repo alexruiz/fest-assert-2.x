@@ -21,8 +21,8 @@ import org.fest.util.VisibleForTesting;
 /**
  * Assertion methods for characters.
  * <p>
- * To create an instance of this class, invoke <code>{@link Assertions#assertThat(Character)}</code> or
- * <code>{@link Assertions#assertThat(char)}</code>.
+ * To create an instance of this class, invoke {@link Assertions#assertThat(Character)} or
+ * {@link Assertions#assertThat(char)}.
  * </p>
  *
  * @author Yvonne Wang
@@ -65,6 +65,84 @@ public class CharacterAssert extends AbstractComparableAssert<CharacterAssert, C
    */
   public CharacterAssert isUpperCase() {
     characters.assertUpperCase(description, actual);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is not equal to the given one.
+   */
+  public CharacterAssert isEqualTo(char expected) {
+    characters.assertEqual(description, actual, expected);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is not equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is equal to the given one.
+   */
+  public CharacterAssert isNotEqualTo(char expected) {
+    characters.assertNotEqual(description, actual, expected);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is less than the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is equal to or greater than the given one.
+   */
+  public CharacterAssert isLessThan(char expected) {
+    characters.assertLessThan(description, actual, expected);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is greater than or equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is less than the given one.
+   */
+  public CharacterAssert isNotLessThan(char expected) {
+    characters.assertNotLessThan(description, actual, expected);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is greater than the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is equal to or less than the given one.
+   */
+  public CharacterAssert isGreaterThan(char expected) {
+    characters.assertGreaterThan(description, actual, expected);
+    return this;
+  }
+
+  /**
+   * Verifies that the actual value is less than or equal to the given one.
+   *
+   * @param expected the given value to compare the actual value to.
+   * @return {@code this} assertion object.
+   * @throws AssertionError if the actual value is {@code null}.
+   * @throws AssertionError if the actual value is greater than the given one.
+   */
+  public CharacterAssert isNotGreaterThan(char expected) {
+    characters.assertNotGreaterThan(description, actual, expected);
     return this;
   }
 }
