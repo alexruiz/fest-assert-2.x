@@ -22,7 +22,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Tests for <code>{@link LongAssert#isEqualTo(long)}</code>.
+ * Tests for {@link LongAssert#isEqualTo(long)}.
  *
  * @author Alex Ruiz
  * @author Yvonne Wang
