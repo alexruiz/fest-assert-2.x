@@ -96,8 +96,22 @@ public abstract class AbstractMapAssert<S> implements EnumerableAssert<S> {
     return myself;
   }
 
+  public <K> S containsKeys(K... keys) {
+    for (K key : keys) {
+      maps.assertContainsKey(description, actual, key);
+    }
+    return myself;
+  }
+
   public <K> S doesNotContainKey(K key) {
     maps.assertDoesNotContainKey(description, actual, key);
+    return myself;
+  }
+
+  public <K> S doesNotContainKeys(K... keys) {
+    for (K key : keys) {
+      maps.assertDoesNotContainKey(description, actual, key);
+    }
     return myself;
   }
 
