@@ -122,7 +122,7 @@ org.junit.ComparisonFailure: expected:<'[Ronaldo]'> but was:<'[Messi]'>
    */
   public void removeFestRelatedElementsFromStackTraceIfNeeded(AssertionError assertionError) {
     if (removeFestRelatedElementsFromStackTrace) {
-      Throwables.removeFestFromStackTrace(assertionError);
+      Throwables.removeFestRelatedElementsFromStackTrace(assertionError);
     }
   }
 
